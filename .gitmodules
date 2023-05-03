@@ -1,0 +1,3 @@
+[submodule "patches/x11-libs/gtk+:3/gtk3-classic"]
+	path = patches/x11-libs/gtk+:3/gtk3-classic
+	url = https://github.com/lah7/gtk3-classic
