@@ -1,0 +1,65 @@
+--- dunst-1.6.1.orig/src/draw.c
++++ dunst-1.6.1/src/draw.c
+@@ -554,6 +554,11 @@ static cairo_surface_t *render_backgroun
+         /* for correct combination of adjacent areas */
+         cairo_set_operator(c, CAIRO_OPERATOR_ADD);
+ 
++        int progress_width = width;
++        if (cl->n->progress >= 0) {
++                progress_width = (width + settings.frame_width) * cl->n->progress / 100;
++        }
++
+         if (first)
+                 height += settings.frame_width;
+         if (last)
+@@ -561,7 +566,11 @@ static cairo_surface_t *render_backgroun
+         else
+                 height += settings.separator_height;
+ 
+-        draw_rounded_rect(c, x, y, width, height, corner_radius, first, last);
++        int o_x = x;
++        int o_y = y;
++        int o_width = width;
++        int o_height = height;
++        int o_progress_width = progress_width;
+ 
+         /* adding frame */
+         x += settings.frame_width;
+@@ -571,6 +580,9 @@ static cairo_surface_t *render_backgroun
+         }
+ 
+         width -= 2 * settings.frame_width;
++        progress_width -= settings.frame_width;
++        if (progress_width < 0) progress_width = 0;
++        if (progress_width > width) progress_width = width;
+ 
+         if (last)
+                 height -= settings.frame_width;
+@@ -579,13 +591,25 @@ static cairo_surface_t *render_backgroun
+ 
+         radius_int = frame_internal_radius(corner_radius, settings.frame_width, height);
+ 
+-        draw_rounded_rect(c, x, y, width, height, radius_int, first, last);
++        draw_rounded_rect(c, o_x, o_y, o_progress_width, o_height, corner_radius, first, last);
++        draw_rounded_rect(c, x, y, progress_width, height, radius_int, first, last);
+         cairo_set_source_rgba(c, cl->frame.r, cl->frame.g, cl->frame.b, cl->frame.a);
+         cairo_fill(c);
++        if (o_progress_width != o_width) {
++                draw_rounded_rect(c, o_x + o_progress_width, o_y, o_width - o_progress_width, o_height, corner_radius, first, last);
++                draw_rounded_rect(c, x + progress_width, y, width - progress_width, height, radius_int, first, last);
++                cairo_set_source_rgba(c, cl->frame.r - 0.2, cl->frame.g - 0.2, cl->frame.b - 0.2, cl->frame.a);
++                cairo_fill(c);
++        }
+ 
+-        draw_rounded_rect(c, x, y, width, height, radius_int, first, last);
++        draw_rounded_rect(c, x, y, progress_width, height, radius_int, first, last);
+         cairo_set_source_rgba(c, cl->bg.r, cl->bg.g, cl->bg.b, cl->bg.a);
+         cairo_fill(c);
++        if (o_progress_width != o_width) {
++                draw_rounded_rect(c, x + progress_width, y, width - progress_width, height, radius_int, first, last);
++                cairo_set_source_rgba(c, cl->bg.r - 0.2, cl->bg.g - 0.2, cl->bg.b - 0.2, cl->bg.a);
++                cairo_fill(c);
++        }
+ 
+         cairo_set_operator(c, CAIRO_OPERATOR_SOURCE);
+ 

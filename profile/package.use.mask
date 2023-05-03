@@ -1,0 +1,15 @@
+dev-lang/rust -system-bootstrap -system-llvm
+
+# These aren't even "upstream", they're just some gentoo dev's build.
+# QEMU itself has a bunch of other prebuilt firmwares
+sys-firmware/edk2-ovmf binary
+sys-firmware/ipxe binary
+sys-firmware/seabios binary
+sys-firmware/sgabios binary
+app-emulation/qemu pin-upstream-blobs
+
+# "required" for bootstrapping multilib, but if you try hard enough you can bootstrap it by building your own gcc + static libgcc first. Downloads a gentoo dev's binaries.
+sys-libs/glibc multilib-bootstrap
+
+# Downloads a chromium binary...
+media-video/obs-studio browser

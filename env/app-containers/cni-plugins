@@ -1,0 +1,12 @@
+post_src_install() {
+	elog "/etc/portage/env: Moving files from /opt/cni/bin to /usr/libexec/cni"
+
+	# Move binaries away from /opt into a different location where they can be found
+	rm -rf "$ED"/opt || die
+	exeinto /usr/libexec/cni
+	doexe bin/*
+
+	# Patch the init script accordingly
+	sed -e 's@/opt/cni/bin@/usr/libexec/cni@' "$FILESDIR/cni-dhcp.initd" > cni-dhcp.initd
+	newinitd cni-dhcp.initd cni-dhcp
+}

@@ -1,0 +1,157 @@
+# Fonts that should (imo) be installed on _any_ desktop system.
+
+# Debian:
+# - X11 project:
+#  - xfonts-scalable
+#  - xfonts-75dpi
+#  - xfonts-100dpi
+#  - xfonts-base
+#  - xfonts-encodings
+#  - xfonts-utils
+# - Type1:
+#  - gsfonts
+# - TTF:
+#  - fonts-symbola
+#   - ancient-scripts/Symbola_hint.ttf
+#  - fonts-opensymbol
+#   - libreoffice/opens___.ttf
+#  - fonts-noto-core
+#  - fonts-noto-mono
+#  - fonts-noto-extra
+#  - fonts-noto-ui-core
+#  - fonts-noto-ui-extra
+#  - fonts-noto-color-emoji
+#  - fonts-noto-cjk
+#  - fonts-noto-cjk-extra
+#   - noto/*.ttf
+#   - noto/*.ttc
+#  - fonts-hack
+#   - hack/Hack-Bold.ttf
+#   - hack/Hack-BoldItalic.ttf
+#   - hack/Hack-Italic.ttf
+#   - hack/Hack-Regular.ttf
+#  - fonts-liberation2
+#   - liberation2/Liberation*.ttf
+#  - fonts-liberation
+#   - liberation/Liberation*.ttf
+#  - fonts-dejavu-core
+#   - dejavu/DejaVu*.ttf
+#  - fonts-droid-fallback
+#   - droid/DroidSansFallbackFull.ttf
+#  - fonts-quicksand
+#   - quicksand/Quicksand-Bold.ttf
+#   - quicksand/Quicksand-Light.ttf
+#   - quicksand/Quicksand-Medium.ttf
+#   - quicksand/Quicksand-Regular.ttf
+# - Mixed:
+#  - fonts-urw-base35
+
+# Linux Mint 21.1 (Diff with debian):
+# - fonts-beng-extra
+# - fonts-dejavu-core
+# - fonts-deva-extra
+# - fonts-droid-fallback
+# - fonts-freefont-ttf
+# - fonts-gargi
+# - fonts-gubbi
+# - fonts-gujr-extra
+# - fonts-guru-extra
+# - fonts-kacst
+# - fonts-kacst-one
+# - fonts-kalapi
+# - fonts-khmeros-core
+# - fonts-lao
+# - fonts-liberation
+# - fonts-liberation2
+# - fonts-lklug-sinhala
+# - fonts-lohit-bemg-assamese
+# - fonts-lohit-beng-bengali
+# - fonts-lohit-deva
+# - fonts-lohit-gujr
+# - fonts-lohit-guru
+# - fonts-lohit-knda
+# - fonts-lohit-mlym
+# - fonts-lohit-orya
+# - fonts-lohit-taml
+# - fonts-lohit-taml-classical
+# - fonts-lohit-telu
+# - fonts-mathjax
+# - fonts-nakula
+# - fonts-navilu
+# - fonts-noto-cjk
+# - fonts-noto-color-emoji
+# - fonts-noto-mono
+# - fonts-opensymbol
+# - fonts-orya-extra
+# - fonts-pagul
+# - fonts-sahadeva
+# - fonts-samyak-deva
+# - fonts-samyak-gujr
+# - fonts-samyak-mlym
+# - fonts-samyak-taml
+# - fonts-sarai
+# - fonts-sil-abyssinica
+# - fonts-sil-padauk
+# - fonts-smc-anjalioldlipi
+# - fonts-smc-chilanka
+# - fonts-smc-dyuthi
+# - fonts-smc-gayathri
+# - fonts-smc-karumbi
+# - fonts-smc-keraleeyam
+# - fonts-smc-manjari
+# - fonts-smc-meera
+# - fonts-smc-rachana
+# - fonts-smc-raghumalayalamsans
+# - fonts-smc-suruma
+# - fonts-smc-uroob
+# - fonts-telu-extra
+# - fonts-teluguvijayam
+# - fonts-tibetan-machine
+# - fonts-tlwg-garuda-ttf
+# - fonts-tlwg-kinnari-ttf
+# - fonts-tlwg-laksaman-ttf
+# - fonts-tlwg-loma-ttf
+# - fonts-tlwg-mono-ttf
+# - fonts-tlwg-norasi-ttf
+# - fonts-tlwg-purisa-ttf
+# - fonts-tlwg-sawasdee-ttf
+# - fonts-tlwg-typewriter-ttf
+# - fonts-tlwg-typist-ttf
+# - fonts-tlwg-typo-ttf
+# - fonts-tlwg-umpush-ttf
+# - fonts-tlwg-waree-ttf
+# - fonts-ubuntu
+# - fonts-urw-base35
+# - fonts-yrsa-rasa
+# - gsfonts
+# - xfonts-base
+# - xfonts-encodings
+# - xfonts-scalable
+# - xfonts-utils
+
+### X11 fonts:
+# Debian xfonts-base package (https://salsa.debian.org/xorg-team/font/xfonts-base):
+media-fonts/font-arabic-misc
+media-fonts/font-cursor-misc
+media-fonts/font-daewoo-misc
+media-fonts/font-dec-misc
+media-fonts/font-isas-misc
+media-fonts/font-jis-misc
+media-fonts/font-micro-misc
+media-fonts/font-misc-misc
+media-fonts/font-mutt-misc
+media-fonts/font-schumacher-misc
+media-fonts/font-sony-misc
+media-fonts/font-sun-misc
+# Debian xfonts-scalable package:
+media-fonts/font-bitstream-type1
+
+### Latin (or mixed) OpenType and TrueType fonts:
+media-fonts/dejavu
+media-fonts/freefont
+media-fonts/liberation-fonts
+media-fonts/noto
+media-fonts/noto-emoji
+
+### Custom additions:
+media-fonts/comic-neue

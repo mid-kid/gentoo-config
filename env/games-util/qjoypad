@@ -1,0 +1,4 @@
+INSTALL_MASK="
+/usr/share/applications/qjoypad-qjoypad.desktop
+/usr/share/pixmaps
+"

@@ -1,0 +1,19 @@
+--- dkms-hid-nintendo-3.0.orig/src/hid-nintendo.c
++++ dkms-hid-nintendo-3.0/src/hid-nintendo.c
+@@ -36,6 +36,7 @@
+ #include <linux/module.h>
+ #include <linux/power_supply.h>
+ #include <linux/spinlock.h>
++#include <linux/prandom.h>
+ 
+ /*
+  * Reference the url below for the following HID report defines:
+@@ -1765,7 +1766,7 @@ static int joycon_leds_create(struct joy
+ 	/* Set the default controller player leds based on controller number */
+ 	mutex_lock(&joycon_input_num_mutex);
+ 	mutex_lock(&ctlr->output_mutex);
+-	ret = joycon_set_player_leds(ctlr, 0, 0xF >> (4 - input_num));
++	ret = joycon_set_player_leds(ctlr, 0, (prandom_u32() % 15) + 1);
+ 	if (ret)
+ 		hid_warn(ctlr->hdev, "Failed to set leds; ret=%d\n", ret);
+ 	mutex_unlock(&ctlr->output_mutex);

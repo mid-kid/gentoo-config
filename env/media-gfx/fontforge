@@ -1,0 +1,9 @@
+# Only install the CLI utilities
+INSTALL_MASK="
+/usr/share/applications
+/usr/share/fontforge
+/usr/share/icons
+/usr/share/metainfo
+/usr/share/mime
+/usr/share/pixmaps
+"

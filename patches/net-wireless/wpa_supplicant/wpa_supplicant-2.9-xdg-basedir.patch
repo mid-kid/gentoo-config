@@ -1,0 +1,35 @@
+--- wpa_supplicant.orig/wpa_cli.c
++++ wpa_supplicant/wpa_cli.c
+@@ -4294,16 +4294,29 @@ static void start_edit(void)
+ 
+ #ifdef CONFIG_WPA_CLI_HISTORY_DIR
+ 	home = CONFIG_WPA_CLI_HISTORY_DIR;
++	const char *fname = ".wpa_cli_history";
++	int hfile_len = os_strlen(home) + 1 + os_strlen(fname) + 1;
++	hfile = os_malloc(hfile_len);
++	if (hfile)
++		os_snprintf(hfile, hfile_len, "%s/%s", home, fname);
+ #else /* CONFIG_WPA_CLI_HISTORY_DIR */
+-	home = getenv("HOME");
+-#endif /* CONFIG_WPA_CLI_HISTORY_DIR */
++	const char *fname = "wpa_cli_history";
++	home = getenv("XDG_CACHE_HOME");
+ 	if (home) {
+-		const char *fname = ".wpa_cli_history";
+ 		int hfile_len = os_strlen(home) + 1 + os_strlen(fname) + 1;
+ 		hfile = os_malloc(hfile_len);
+ 		if (hfile)
+ 			os_snprintf(hfile, hfile_len, "%s/%s", home, fname);
++	} else {
++		home = getenv("HOME");
++		if (home) {
++			int hfile_len = os_strlen(home) + 8 + os_strlen(fname) + 1;
++			hfile = os_malloc(hfile_len);
++			if (hfile)
++				os_snprintf(hfile, hfile_len, "%s/.cache/%s", home, fname);
++		}
+ 	}
++#endif /* CONFIG_WPA_CLI_HISTORY_DIR */
+ 
+ 	if (edit_init(wpa_cli_edit_cmd_cb, wpa_cli_edit_eof_cb,
+ 		      wpa_cli_edit_completion_cb, NULL, hfile, ps) < 0) {

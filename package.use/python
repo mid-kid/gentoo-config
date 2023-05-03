@@ -1,0 +1,18 @@
+*/* PYTHON_TARGETS: -* python3_11
+*/* PYTHON_SINGLE_TARGET: -* python3_11
+
+# Packages without current PYTHON_SINGLE_TARGET
+# quse -Ie python_single_target_python3_10 | grep -v '\bpython_single_target_python3_11\b' | cut -d: -f1 | xargs printf '%s PYTHON_SINGLE_TARGET: python3_10\n'
+
+# Packages without current PYTHON_TARGETS
+# quse -Ie python_targets_python3_10 | grep -v '\bpython_targets_python3_11\b' | cut -d: -f1 | xargs printf '%s PYTHON_TARGETS: python3_10\n'
+
+# Packages with dependents requiring old version (pointed out by portage)
+# emerge -pDN --usepkg=n --autounmask-continue=y --backtrack=100 @world
+
+# Portage is very weird sometimes, and straight up ignores other configuration mistakes
+# eix '-#' --installed-with-use python_targets_python3_10 | grep -Fvf <(grep '^[^#*]*PYTHON_TARGETS:' /etc/portage/package.use/python3_11 | cut -d' ' -f 1)
+
+# Check for potentially removable entries:
+# rm use; eix '-#' --installed-with-use python_targets_python3_10 --installed-with-use python_targets_python3_11 | xargs -P4 -I% sh -c "PYTHON_TARGETS=python3_11 emerge -pD --usepkg=n '%' && { echo '%' | tee -a use; }"
+# qlist -I | grep -Fvf - /etc/portage/package.use/python3_11 | grep -v '^#\|\*' | grep 'PYTHON_TARGETS:'

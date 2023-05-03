@@ -1,0 +1,2 @@
+# Don't build a binary package
+FEATURES="-buildpkg"

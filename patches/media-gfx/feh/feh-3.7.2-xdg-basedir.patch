@@ -1,0 +1,26 @@
+--- feh-3.7.2.orig/src/wallpaper.c
++++ feh-3.7.2/src/wallpaper.c
+@@ -251,8 +251,9 @@
+ */
+ void feh_wm_gen_bg_script(char* fil, int centered, int scaled, int filled, int use_filelist) {
+ 	char * home = getenv("HOME");
++    char * config = getenv("XDG_CONFIG_HOME");
+ 
+-	if (!home)
++	if (!home && !config)
+ 		return;
+ 
+ 	FILE *fp;
+@@ -268,7 +269,11 @@
+ 	else
+ 		exec_method = cmdargv[0];
+ 
+-	path = estrjoin("/", home, ".fehbg", NULL);
++    if (config) {
++        path = estrjoin("/", config, "fehbg", NULL);
++    } else {
++        path = estrjoin("/", home, ".config/fehbg", NULL);
++    }
+ 
+ 	if ((fp = fopen(path, "w")) == NULL) {
+ 		weprintf("Can't write to %s", path);

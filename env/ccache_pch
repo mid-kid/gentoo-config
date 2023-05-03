@@ -1,0 +1,4 @@
+# Support precompiled headers with ccache
+# https://ccache.dev/manual/latest.html#_precompiled_headers (ccache_pch)
+# echo 'sloppiness = pch_defines,time_macros,include_file_mtime,include_file_ctime' >> /var/tmp/ccache/ccache.conf
+CXXFLAGS="$CXXFLAGS -fpch-preprocess"

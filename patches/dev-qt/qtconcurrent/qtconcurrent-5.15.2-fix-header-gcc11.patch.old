@@ -1,0 +1,27 @@
+Remove the unnecessary template parameter from the class specialization
+
+This seems to cause errors when compiling with gcc-11. Although this is
+most likely a compiler bug, specifiying the template parameter type in
+this case isn't necessary.
+
+Fixes: QTBUG-91909
+Fixes: QTBUG-90568
+Pick-to: 6.0 6.1 5.15
+Change-Id: Ib231257ccb2e16cc533f23ca5840d31e26a66d53
+Reviewed-by: Mårten Nordheim <marten.nordheim@qt.io>
+
+Source: https://codereview.qt-project.org/c/qt/qtbase/+/339417
+
+--- qtbase-everywhere-src-5.15.2.orig/src/concurrent/qtconcurrentthreadengine.h
++++ qtbase-everywhere-src-5.15.2/src/concurrent/qtconcurrentthreadengine.h
+@@ -247,8 +247,8 @@
+ class ThreadEngineStarter<void> : public ThreadEngineStarterBase<void>
+ {
+ public:
+-    ThreadEngineStarter<void>(ThreadEngine<void> *_threadEngine)
+-    :ThreadEngineStarterBase<void>(_threadEngine) {}
++    ThreadEngineStarter(ThreadEngine<void> *_threadEngine)
++        : ThreadEngineStarterBase<void>(_threadEngine) {}
+ 
+     void startBlocking()
+     {

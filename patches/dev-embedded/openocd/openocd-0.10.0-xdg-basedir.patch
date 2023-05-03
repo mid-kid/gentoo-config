@@ -1,0 +1,49 @@
+--- openocd-0.10.0.orig/src/server/telnet_server.c
++++ openocd-0.10.0/src/server/telnet_server.c
+@@ -39,7 +39,7 @@ static char *negotiate =
+ 	"\xFF\xFE\x01";			/* IAC DON'T Echo */
+ 
+ #define CTRL(c) (c - '@')
+-#define TELNET_HISTORY	".openocd_history"
++#define TELNET_HISTORY	"openocd_history"
+ 
+ /* The only way we can detect that the socket is closed is the first time
+  * we write to it, we will fail. Subsequent write operations will
+@@ -127,13 +127,27 @@ static void telnet_log_callback(void *pr
+ 		telnet_write(connection, "\b", 1);
+ }
+ 
++static char *get_cache_dir(const char *append_path)
++{
++    char *cache = getenv("XDG_CACHE_HOME");
++    if (cache)
++        return alloc_printf("%s/%s", cache, append_path);
++
++    char *home = get_home_dir(NULL);
++    if (home == NULL)
++        return home;
++    char *cache_dir = alloc_printf("%s/.cache/%s", home, append_path);
++    free(home);
++    return cache_dir;
++}
++
+ static void telnet_load_history(struct telnet_connection *t_con)
+ {
+ 	FILE *histfp;
+ 	char buffer[TELNET_BUFFER_SIZE];
+ 	int i = 0;
+ 
+-	char *history = get_home_dir(TELNET_HISTORY);
++	char *history = get_cache_dir(TELNET_HISTORY);
+ 
+ 	if (history == NULL) {
+ 		LOG_INFO("unable to get user home directory, telnet history will be disabled");
+@@ -169,7 +183,7 @@ static void telnet_save_history(struct t
+ 	int i;
+ 	int num;
+ 
+-	char *history = get_home_dir(TELNET_HISTORY);
++	char *history = get_cache_dir(TELNET_HISTORY);
+ 
+ 	if (history == NULL) {
+ 		LOG_INFO("unable to get user home directory, telnet history will be disabled");

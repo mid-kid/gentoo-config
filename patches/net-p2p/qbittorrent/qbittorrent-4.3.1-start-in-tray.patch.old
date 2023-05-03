@@ -1,0 +1,120 @@
+Adds --tray option, suitable for autostart scripts, to start qbittorrent
+minimized in the tray.
+
+--- qBittorrent-release-4.3.1.orig/src/app/application.cpp
++++ qBittorrent-release-4.3.1/src/app/application.cpp
+@@ -555,6 +555,10 @@ void Application::processParams(const QS
+             continue;
+         }
+ 
++        // Parameter passed to avoid bringing up the window
++        if (param == QLatin1String("@startInTray"))
++            continue;
++
+ #ifndef DISABLE_GUI
+         // There are two circumstances in which we want to show the torrent
+         // dialog. One is when the application settings specify that it should
+@@ -634,7 +638,7 @@ int Application::exec(const QStringList
+ #endif // DISABLE_WEBUI
+ #else
+     UIThemeManager::initInstance();
+-    m_window = new MainWindow;
++    m_window = new MainWindow(nullptr, m_commandLineArgs.startInTray);
+ #endif // DISABLE_GUI
+ 
+     m_running = true;
+--- qBittorrent-release-4.3.1.orig/src/app/cmdoptions.cpp
++++ qBittorrent-release-4.3.1/src/app/cmdoptions.cpp
+@@ -322,6 +322,7 @@ namespace
+     constexpr const BoolOption DAEMON_OPTION {"daemon", 'd'};
+ #else
+     constexpr const BoolOption NO_SPLASH_OPTION {"no-splash"};
++    constexpr const BoolOption START_IN_TRAY_OPTION {"tray"};
+ #endif
+     constexpr const IntOption WEBUI_PORT_OPTION {"webui-port"};
+     constexpr const StringOption PROFILE_OPTION {"profile"};
+@@ -347,6 +348,7 @@ QBtCommandLineParameters::QBtCommandLine
+ #endif
+ #ifndef DISABLE_GUI
+     , noSplash(NO_SPLASH_OPTION.value(env))
++    , startInTray(START_IN_TRAY_OPTION.value(env))
+ #elif !defined(Q_OS_WIN)
+     , shouldDaemonize(DAEMON_OPTION.value(env))
+ #endif
+@@ -404,6 +406,9 @@ QStringList QBtCommandLineParameters::pa
+         result.append(QLatin1String("@skipDialog=0"));
+     }
+ 
++    if (startInTray)
++        result.append(QLatin1String("@startInTray"));
++
+     result += torrents;
+     return result;
+ }
+@@ -442,6 +447,10 @@ QBtCommandLineParameters parseCommandLin
+             {
+                 result.noSplash = true;
+             }
++            else if (arg == START_IN_TRAY_OPTION)
++            {
++                result.startInTray = true;
++            }
+ #elif !defined(Q_OS_WIN)
+             else if (arg == DAEMON_OPTION)
+             {
+@@ -562,6 +571,7 @@ QString makeUsage(const QString &prgName
+            << '\n';
+ #ifndef DISABLE_GUI
+     stream << NO_SPLASH_OPTION.usage() << wrapText(QObject::tr("Disable splash screen")) << '\n';
++    stream << START_IN_TRAY_OPTION.usage() << wrapText(QObject::tr("Start minimized")) << '\n';
+ #elif !defined(Q_OS_WIN)
+     stream << DAEMON_OPTION.usage() << wrapText(QObject::tr("Run in daemon-mode (background)")) << '\n';
+ #endif
+--- qBittorrent-release-4.3.1.orig/src/app/cmdoptions.h
++++ qBittorrent-release-4.3.1/src/app/cmdoptions.h
+@@ -52,6 +52,7 @@ struct QBtCommandLineParameters
+ #endif
+ #ifndef DISABLE_GUI
+     bool noSplash;
++    bool startInTray;
+ #elif !defined(Q_OS_WIN)
+     bool shouldDaemonize;
+ #endif
+--- qBittorrent-release-4.3.1.orig/src/gui/mainwindow.cpp
++++ qBittorrent-release-4.3.1/src/gui/mainwindow.cpp
+@@ -141,7 +141,7 @@ namespace
+     }
+ }
+ 
+-MainWindow::MainWindow(QWidget *parent)
++MainWindow::MainWindow(QWidget *parent, bool startInTray)
+     : QMainWindow(parent)
+     , m_ui(new Ui::MainWindow)
+     , m_posInitialized(false)
+@@ -410,13 +410,13 @@ MainWindow::MainWindow(QWidget *parent)
+ #ifndef Q_OS_MACOS
+     if (m_systrayIcon)
+     {
+-        if (!(pref->startMinimized() || m_uiLocked))
++        if (!(startInTray || pref->startMinimized() || m_uiLocked))
+         {
+             show();
+             activateWindow();
+             raise();
+         }
+-        else if (pref->startMinimized())
++        else if (!startInTray && pref->startMinimized())
+         {
+             showMinimized();
+             if (pref->minimizeToTray())
+--- qBittorrent-release-4.3.1.orig/src/gui/mainwindow.h
++++ qBittorrent-release-4.3.1/src/gui/mainwindow.h
+@@ -77,7 +77,7 @@ class MainWindow final : public QMainWin
+     Q_OBJECT
+ 
+ public:
+-    explicit MainWindow(QWidget *parent = nullptr);
++    explicit MainWindow(QWidget *parent = nullptr, bool startInTray = false);
+     ~MainWindow() override;
+ 
+     QWidget *currentTabWidget() const;

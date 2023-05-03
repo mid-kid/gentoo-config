@@ -1,0 +1,29 @@
+sys-devel/gcc graphite
+
+# Disable security features that affect codegen (not linking)
+sys-devel/gcc -ssp -default-stack-clash-protection -default-znow # -pie
+#sys-devel/clang -pie
+
+# LLD is required for clang LTO
+sys-devel/clang-common default-lld
+
+# -pgo: Super fucking slow, not worth it...
+# clang: GCC is bigtime unsupported upstream, can't LTO across C++ and Rust with GCC.
+www-client/firefox -pgo clang
+mail-client/thunderbird -pgo clang
+
+# Hidden compiler settings that affect output binaries are scattered all over the place...
+# Not including hardening-specific settings.
+# sys-devel/gcc (eclass/toolchain.eclass):
+#  -Wp,-D_FORTIFY_SOURCE=2 (-DGENTOO_FORTIFY_SOURCE_LEVEL=n, no way to disable)
+#  -fPIE (--enable-default-pie, USE=pie)
+#  -fstack-protector-strong (--enable-default-ssp, USE=ssp)
+#  -fstack-clash-protector (-DDEF_GENTOO_SCP, USE=default-stack-clash-protection)
+#  -Wl,-z,now (-DDEF_GENTOO_ZNOW, USE=default-znow)
+# sys-devel/binutils:
+#  -Wl,-z,relro (--enable-relro, no way to disable)
+# profiles/default/linux/make.defaults:
+#  -Wl,-O1 (LDFLAGS)
+#  -Wl,--as-needed (LDFLAGS)
+# profiles/releases/23.0/make.defaults:
+#  -Wl,-z,pack-relative-relocs (LDFLAGS)

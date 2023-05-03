@@ -1,0 +1,3 @@
+# Not a global USE flag, useful for some programs
+media-libs/mesa vulkan
+games-emulation/dolphin vulkan

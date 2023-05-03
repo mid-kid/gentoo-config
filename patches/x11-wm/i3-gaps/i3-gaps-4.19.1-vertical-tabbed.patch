@@ -1,0 +1,15 @@
+--- i3-4.19.1.orig/src/con.c
++++ i3-4.19.1/src/con.c
+@@ -1481,11 +1481,11 @@
+         case L_SPLITV:
+         /* stacking containers behave like they are in vertical orientation */
+         case L_STACKED:
++        case L_TABBED:
+             return VERT;
+ 
+         case L_SPLITH:
+         /* tabbed containers behave like they are in vertical orientation */
+-        case L_TABBED:
+             return HORIZ;
+ 
+         case L_DEFAULT:

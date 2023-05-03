@@ -1,0 +1,86 @@
+--- android-tools.orig/core/adb/adb_utils.cpp
++++ android-tools/core/adb/adb_utils.cpp
+@@ -242,34 +242,52 @@ std::string adb_get_homedir_path() {
+     }
+     return home_str;
+ #else
+-    if (const char* const home = getenv("HOME")) {
+-        return home;
++    std::string *home = nullptr;
++
++    if (const char* const data_home = getenv("XDG_DATA_HOME")) {
++        home = new std::string(data_home);
++        *home = *home + OS_PATH_SEPARATOR + "android";
+     }
+ 
+-    struct passwd pwent;
+-    struct passwd* result;
+-    int pwent_max = sysconf(_SC_GETPW_R_SIZE_MAX);
+-    std::vector<char> buf(pwent_max);
+-    int rc = getpwuid_r(getuid(), &pwent, buf.data(), buf.size(), &result);
+-    if (rc == 0 && result) {
+-        return result->pw_dir;
++    if (!home) if (const char* const home_env = getenv("HOME")) {
++        home = new std::string(home_env);
++        *home = *home + OS_PATH_SEPARATOR + ".local";
++        *home = *home + OS_PATH_SEPARATOR + "share";
++        *home = *home + OS_PATH_SEPARATOR + "android";
+     }
+ 
+-    LOG(FATAL) << "failed to get user home directory";
+-    return {};
+-#endif
+-}
++    if (!home) {
++        struct passwd pwent;
++        struct passwd* result;
++        int pwent_max = sysconf(_SC_GETPW_R_SIZE_MAX);
++        std::vector<char> buf(pwent_max);
++        int rc = getpwuid_r(getuid(), &pwent, buf.data(), buf.size(), &result);
++        if (rc == 0 && result) {
++            home = new std::string(result->pw_dir);
++            *home = *home + OS_PATH_SEPARATOR + ".local";
++            *home = *home + OS_PATH_SEPARATOR + "share";
++            *home = *home + OS_PATH_SEPARATOR + "android";
++        }
++    }
++
++    if (!home) {
++        LOG(FATAL) << "failed to get user home directory";
++        return {};
++    }
+ 
+-std::string adb_get_android_dir_path() {
+-    std::string user_dir = adb_get_homedir_path();
+-    std::string android_dir = user_dir + OS_PATH_SEPARATOR + ".android";
+     struct stat buf;
+-    if (stat(android_dir.c_str(), &buf) == -1) {
+-        if (adb_mkdir(android_dir.c_str(), 0750) == -1) {
+-            PLOG(FATAL) << "Cannot mkdir '" << android_dir << "'";
++    if (stat(home->c_str(), &buf) == -1) {
++        if (adb_mkdir(home->c_str(), 0750) == -1) {
++            PLOG(FATAL) << "Cannot mkdir '" << *home << "'";
+         }
+     }
+-    return android_dir;
++
++    return *home;
++#endif
++}
++
++std::string adb_get_android_dir_path() {
++    return adb_get_homedir_path();
+ }
+ 
+ void AdbCloser::Close(int fd) {
+--- android-tools.orig/core/adb/console.cpp
++++ android-tools/core/adb/console.cpp
+@@ -30,7 +30,7 @@
+ 
+ // Return the console authentication command for the emulator, if needed
+ static std::string adb_construct_auth_command() {
+-    static const char auth_token_filename[] = ".emulator_console_auth_token";
++    static const char auth_token_filename[] = "emulator_console_auth_token";
+ 
+     std::string auth_token_path = adb_get_homedir_path();
+     auth_token_path += OS_PATH_SEPARATOR;

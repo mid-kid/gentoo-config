@@ -1,0 +1,8 @@
+# Build an application with clang
+CC="$CHOST-clang"
+CXX="$CHOST-clang++"
+AR="llvm-ar"
+NM="llvm-nm"
+RANLIB="llvm-ranlib"
+CFLAGS="-pipe -march=znver1 -O3 -flto=thin"
+CXXFLAGS="$CFLAGS"

@@ -1,0 +1,20 @@
+--- wget-1.20.3.orig/src/main.c
++++ wget-1.20.3/src/main.c
+@@ -175,9 +175,16 @@ get_hsts_database (void)
+   if (opt.hsts_file)
+     return xstrdup (opt.hsts_file);
+ 
++  char *cache_dir = getenv("XDG_CACHE_DIR");
++  if (cache_dir)
++    {
++      char *dir = aprintf ("%s/wget-hsts", cache_dir);
++      return dir;
++    }
++
+   if (opt.homedir)
+     {
+-      char *dir = aprintf ("%s/.wget-hsts", opt.homedir);
++      char *dir = aprintf ("%s/.cache/wget-hsts", opt.homedir);
+       return dir;
+     }
+ 

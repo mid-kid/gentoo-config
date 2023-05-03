@@ -1,0 +1,4 @@
+*/* LUA_TARGETS: -* lua5-4
+*/* LUA_SINGLE_TARGET: -* lua5-4
+
+media-video/mpv LUA_SINGLE_TARGET: luajit

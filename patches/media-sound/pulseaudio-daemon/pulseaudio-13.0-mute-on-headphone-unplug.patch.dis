@@ -1,0 +1,22 @@
+--- pulseaudio-13.0.orig/src/modules/module-device-restore.c
++++ pulseaudio-13.0/src/modules/module-device-restore.c
+@@ -823,8 +823,17 @@ static pa_hook_result_t sink_port_hook_c
+         if (u->restore_muted && e->muted_valid) {
+ 
+             pa_log_info("Restoring mute state for sink %s.", sink->name);
+-            pa_sink_set_mute(sink, e->muted, false);
+-            sink->save_muted = true;
++
++            // If we're automatically switching to a speaker (i.e. !save_port)
++            //   mute it.
++            if (!sink->save_port && sink->active_port &&
++                    strcmp(sink->active_port->name, "analog-output-speaker") == 0) {
++                pa_sink_set_mute(sink, true, false);
++                sink->save_muted = false;
++            } else {
++                pa_sink_set_mute(sink, e->muted, false);
++                sink->save_muted = true;
++            }
+         }
+ 
+         perportentry_free(e);

@@ -1,0 +1,13 @@
+sys-apps/openrc sysv-utils
+sys-fs/eudev rule-generator
+app-admin/sysklogd logrotate
+app-admin/sudo offensive
+dev-python/pyyaml libyaml
+media-video/ffmpeg openssl vpx opus x265
+media-fonts/noto cjk
+x11-base/xorg-server xvfb xephyr
+net-misc/dhcpcd privsep
+sys-auth/pambase -passwdqc
+sys-auth/seatd -server
+net-wireless/wpa_supplicant tkip
+app-alternatives/sh -* dash

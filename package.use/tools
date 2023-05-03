@@ -1,0 +1,14 @@
+app-arch/p7zip rar
+sys-block/f3 extra
+games-emulation/mgba ffmpeg debug sdl lua
+media-video/mpv libmpv cplugins
+dev-vcs/git perl
+www-client/w3m imlib
+app-office/libreoffice kde
+games-emulation/desmume gdb
+net-misc/curl adns  # Support for --dns-servers option
+dev-embedded/sdcc device-lib mcs51
+net-misc/aria2 bittorrent
+sys-fs/android-file-transfer-linux fuse
+dev-util/android-tools -udev
+sys-apps/gawk mpfr

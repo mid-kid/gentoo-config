@@ -1,0 +1,9 @@
+# All the programs I use to provide my "core" sway desktop
+
+# Window management/desktop core
+gui-wm/sway
+x11-misc/dunst  # Notification daemon
+kde-plasma/xembed-sni-proxy
+
+# Utilities
+gui-apps/wl-clipboard

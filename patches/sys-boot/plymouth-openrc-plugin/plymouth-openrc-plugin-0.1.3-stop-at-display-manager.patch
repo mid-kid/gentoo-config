@@ -1,0 +1,19 @@
+Plymouth should quit before the display manager is started, so you can see the
+ending animation before the display manager pops up.
+
+Updated to cover display-manager as well.
+
+--- plymouth-openrc-plugin-0.1.3.orig/plymouth.c
++++ plymouth-openrc-plugin-0.1.3/plymouth.c
+@@ -256,6 +256,11 @@ int rc_plugin_hook(RC_HOOK hook, const c
+     case RC_HOOK_SERVICE_START_NOW:
+         if(!ply_message("Starting service", name))
+             rv = 1;
++        if(strcmp(name, "xdm") == 0 || strcmp(name, "display-manager") == 0) {
++            DBG("ply_quit(PLY_MODE_BOOT)");
++            if(!ply_quit(PLY_MODE_BOOT))
++                rv = 1;
++        }
+         break;
+ 
+     case RC_HOOK_SERVICE_START_OUT:

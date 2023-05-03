@@ -1,0 +1,47 @@
++++ ./src/draw.c
+@@ -457,6 +457,11 @@
+ 
+         cairo_t *c = cairo_create(srf);
+ 
++        int progress_width = width;
++        if (cl->n->progress != -1) {
++                progress_width = (width + settings.frame_width) * cl->n->progress / 100;
++        }
++
+         if (first)
+                 height += settings.frame_width;
+         if (last)
+@@ -465,7 +470,10 @@
+                 height += settings.separator_height;
+ 
+         cairo_set_source_rgb(c, cl->frame.r, cl->frame.g, cl->frame.b);
+-        draw_rounded_rect(c, x, y, width, height, corner_radius, first, last);
++        draw_rounded_rect(c, x, y, progress_width, height, corner_radius, first, last);
++        cairo_fill(c);
++        cairo_set_source_rgb(c, cl->frame.r - 0.2, cl->frame.g - 0.2, cl->frame.b - 0.2);
++        draw_rounded_rect(c, x + progress_width, y, width - progress_width, height, corner_radius, first, last);
+         cairo_fill(c);
+ 
+         /* adding frame */
+@@ -476,6 +484,9 @@
+         }
+ 
+         width -= 2 * settings.frame_width;
++        progress_width -= settings.frame_width;
++        if (progress_width < 0) progress_width = 0;
++        if (progress_width > width) progress_width = width;
+ 
+         if (last)
+                 height -= settings.frame_width;
+@@ -483,7 +494,10 @@
+                 height -= settings.separator_height;
+ 
+         cairo_set_source_rgb(c, cl->bg.r, cl->bg.g, cl->bg.b);
+-        draw_rounded_rect(c, x, y, width, height, corner_radius, first, last);
++        draw_rounded_rect(c, x, y, progress_width, height, corner_radius, first, last);
++        cairo_fill(c);
++        cairo_set_source_rgb(c, cl->bg.r - 0.2, cl->bg.g - 0.2, cl->bg.b - 0.2);
++        draw_rounded_rect(c, x + progress_width, y, width - progress_width, height, corner_radius, first, last);
+         cairo_fill(c);
+ 
+         if (   settings.sep_color.type != SEP_FRAME

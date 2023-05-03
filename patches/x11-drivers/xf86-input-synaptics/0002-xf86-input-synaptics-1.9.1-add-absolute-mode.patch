@@ -1,0 +1,94 @@
+Add absolute mode
+
+xinput set-mode 'SynPS/2 Synaptics TouchPad' ABSOLUTE
+
+Reverse patch of: https://cgit.freedesktop.org/xorg/driver/xf86-input-synaptics/commit/?id=a9d247d076b3d0d1df84f013b3733bd6297dd79b
+
+--- xf86-input-synaptics-1.9.1.orig/src/synaptics.c
++++ xf86-input-synaptics-1.9.1/src/synaptics.c
+@@ -1469,6 +1469,9 @@
+ {
+     Bool inside_area = TRUE;
+ 
++    if (priv->absolute_events)
++        return TRUE;
++
+     if ((priv->synpara.area_left_edge != 0) &&
+         (x < priv->synpara.area_left_edge))
+         inside_area = FALSE;
+@@ -3081,7 +3084,7 @@
+         priv->last_button_area = NO_BUTTON_AREA;
+ 
+     ignore_motion = para->touchpad_off == TOUCHPAD_OFF ||
+-        (!using_cumulative_coords && priv->last_button_area != NO_BUTTON_AREA);
++        (!using_cumulative_coords && priv->last_button_area != NO_BUTTON_AREA && !priv->absolute_events);
+ 
+     /* these two just update hw->left, right, etc. */
+     update_hw_button_state(pInfo, hw, now, &delay);
+@@ -3137,8 +3140,10 @@
+ 
+     dx = dy = 0;
+ 
+-    timeleft = ComputeDeltas(priv, hw, edge, &dx, &dy, inside_active_area);
+-    delay = MIN(delay, timeleft);
++    if (!priv->absolute_events) {
++        timeleft = ComputeDeltas(priv, hw, edge, &dx, &dy, inside_active_area);
++        delay = MIN(delay, timeleft);
++    }
+ 
+     buttons = ((hw->left ? 0x01 : 0) |
+                (hw->middle ? 0x02 : 0) |
+@@ -3151,8 +3156,14 @@
+         buttons |= 1 << (priv->tap_button - 1);
+ 
+     /* Post events */
+-    if (finger >= FS_TOUCHED && (dx || dy) && !ignore_motion)
+-        xf86PostMotionEvent(pInfo->dev, 0, 0, 2, dx, dy);
++    if (finger >= FS_TOUCHED && !ignore_motion) {
++        if (priv->absolute_events && inside_active_area) {
++            xf86PostMotionEvent(pInfo->dev, 1, 0, 2, hw->x, hw->y);
++        }
++        else if (dx || dy) {
++            xf86PostMotionEvent(pInfo->dev, 0, 0, 2, dx, dy);
++        }
++    }
+ 
+     if (priv->mid_emu_state == MBE_LEFT_CLICK) {
+         post_button_click(pInfo, 1);
+@@ -3211,9 +3222,25 @@
+ static int
+ SwitchMode(ClientPtr client, DeviceIntPtr dev, int mode)
+ {
++    InputInfoPtr pInfo = (InputInfoPtr) dev->public.devicePrivate;
++    SynapticsPrivate *priv = (SynapticsPrivate *) (pInfo->private);
++
+     DBG(3, "SwitchMode called\n");
+ 
+-    return XI_BadMode;
++    switch (mode) {
++    case Absolute:
++        priv->absolute_events = TRUE;
++        break;
++
++    case Relative:
++        priv->absolute_events = FALSE;
++        break;
++
++    default:
++        return XI_BadMode;
++    }
++
++    return Success;
+ }
+ 
+ static void
+--- xf86-input-synaptics-1.9.1.orig/src/synapticsstr.h
++++ xf86-input-synaptics-1.9.1/src/synapticsstr.h
+@@ -249,6 +249,7 @@
+ 
+     struct SynapticsHwState *local_hw_state;    /* used in place of local hw state variables */
+ 
++    Bool absolute_events;       /* post absolute motion events instead of relative */
+     SynapticsMoveHistRec move_hist[SYNAPTICS_MOVE_HISTORY];     /* movement history */
+     int hist_index;             /* Last added entry in move_hist[] */
+     int hyst_center_x;          /* center x of hysteresis */

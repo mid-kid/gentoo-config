@@ -1,0 +1,9 @@
+# Collection repos
+*/*::guru
+*/*::src_prepare-overlay
+*/*::pf4public
+
+# virtual/udev
+sys-apps/systemd-utils
+
+# Broken

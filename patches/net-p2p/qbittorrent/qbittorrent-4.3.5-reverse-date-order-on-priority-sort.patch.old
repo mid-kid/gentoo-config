@@ -1,0 +1,23 @@
+--- qBittorrent-release-4.3.5.orig/src/gui/transferlistsortmodel.cpp
++++ qBittorrent-release-4.3.5/src/gui/transferlistsortmodel.cpp
+@@ -209,12 +209,19 @@
+     {
+         if (m_lastSortColumn != -1)
+             m_subSortColumn = m_lastSortColumn;
++        if (left.column() == TransferListModel::TR_QUEUE_POSITION)
++            m_subSortColumn = TransferListModel::TR_SEED_DATE;
+         m_lastSortColumn = left.column();
+     }
+ 
+     const int result = compare(left, right);
+-    if (result == 0)
++    if (result == 0) {
++        if (left.column() == TransferListModel::TR_QUEUE_POSITION &&
++                m_subSortColumn == TransferListModel::TR_SEED_DATE) {
++            return compare(right.sibling(right.row(), m_subSortColumn), left.sibling(left.row(), m_subSortColumn)) < 0;
++        }
+         return compare(left.sibling(left.row(), m_subSortColumn), right.sibling(right.row(), m_subSortColumn)) < 0;
++    }
+ 
+     return result < 0;
+ }

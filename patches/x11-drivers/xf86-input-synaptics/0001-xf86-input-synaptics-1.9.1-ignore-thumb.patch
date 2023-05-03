@@ -1,0 +1,63 @@
+Add an untouchable region for resting your thumb on the buttons under the touchpad
+
+Source: https://bugs.freedesktop.org/show_bug.cgi?id=66532#c12 (Kit Westneat)
+
+--- xf86-input-synaptics-1.9.1.orig/src/synaptics.c
++++ xf86-input-synaptics-1.9.1/src/synaptics.c
+@@ -1469,11 +1469,6 @@
+ {
+     Bool inside_area = TRUE;
+ 
+-    /* If a finger is down, then it must have started inside the active_area,
+-       allow the motion to complete using the entire area */
+-    if (priv->finger_state >= FS_TOUCHED)
+-        return TRUE;
+-
+     if ((priv->synpara.area_left_edge != 0) &&
+         (x < priv->synpara.area_left_edge))
+         inside_area = FALSE;
+@@ -3038,7 +3033,43 @@
+      * like flicker in scrolling or noise motion. */
+     filter_jitter(priv, &hw->x, &hw->y);
+ 
+-    inside_active_area = is_inside_active_area(priv, hw->x, hw->y);
++    /* If a finger is down, then it must have started inside the active_area,
++       allow the motion to complete using the entire area */
++    if (priv->finger_state >= FS_TOUCHED)
++        inside_active_area = TRUE;
++    else
++        inside_active_area = is_inside_active_area(priv, hw->x, hw->y);
++
++    if (para->clickpad) {
++        int i;
++        hw->numFingers = 0;
++        for (i = 0; i < hw->num_mt_mask; i++) {
++            ValuatorMask *f1;
++            Bool mt_inside;
++            double x1, y1;
++
++            if (hw->slot_state[i] == SLOTSTATE_EMPTY ||
++                    hw->slot_state[i] == SLOTSTATE_CLOSE ||
++                    hw->slot_state[i] == SLOTSTATE_OPEN) {
++                continue;
++            }
++
++            f1 = hw->mt_mask[i];
++            x1 = valuator_mask_get_double(f1, 0);
++            y1 = valuator_mask_get_double(f1, 1);
++            mt_inside = is_inside_active_area(priv, x1, y1);
++            if (!mt_inside) {
++                hw->slot_state[i] = SLOTSTATE_EMPTY;
++                continue;
++            }
++            if (hw->numFingers == 0) {
++                inside_active_area = TRUE;
++                hw->x = x1;
++                hw->y = y1;
++            }
++            hw->numFingers++;
++        }
++    }
+ 
+     /* Ignore motion *starting* inside softbuttonareas */
+     if (priv->finger_state < FS_TOUCHED)

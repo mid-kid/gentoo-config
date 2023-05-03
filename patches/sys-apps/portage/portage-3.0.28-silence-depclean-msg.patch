@@ -1,0 +1,14 @@
+This should have a flag like --quiet-unmerge-warn.
+I find it a bad user experience to fill the screen up with long messages you've read too many times already.
+
+--- portage-3.0.28.orig/lib/_emerge/actions.py
++++ portage-3.0.28/lib/_emerge/actions.py
+@@ -778,7 +778,7 @@
+         + " prior to depclean.\n"
+     )
+ 
+-    if action == "depclean" and "--quiet" not in myopts and not myfiles:
++    if False:
+         portage.writemsg_stdout("\n")
+         for x in msg:
+             portage.writemsg_stdout(colorize("WARN", " * ") + x)

@@ -1,0 +1,29 @@
+Pass DISPLAY environment variable to pinentry
+
+The display is passed with Qt's -display option, but that doesn't propagate to
+the libqgtk3.so platformstyle. This prevents the pinentry program from running
+when QT_QPA_PLATFORMTHEME=gtk3 or when using qt5ct with the gtk3 dialogs
+option, unless the DISPLAY variable is properly set.
+
+Reproduce with:
+DISPLAY= QT_QPA_PLATFORMTHEME=gtk3 pinentry-qt --display :0
+
+--- gnupg-2.2.27.orig/agent/call-pinentry.c
++++ gnupg-2.2.27/agent/call-pinentry.c
+@@ -202,13 +202,14 @@
+ 
+   while ((name = session_env_list_stdenvnames (&iterator, &assname)))
+     {
+-      /* For all new envvars (!ASSNAME) and the two medium old ones
++      /* For all new envvars (!ASSNAME) and the few medium old ones
+        * which do have an assuan name but are conveyed using
+        * environment variables, update the environment of the forked
+        * process.  */
+       if (!assname
+           || !strcmp (name, "XAUTHORITY")
+-          || !strcmp (name, "PINENTRY_USER_DATA"))
++          || !strcmp (name, "PINENTRY_USER_DATA")
++          || (!opt.keep_display && !strcmp (name, "DISPLAY")))
+         {
+           value = session_env_getenv (ctrl->session_env, name);
+           if (value)

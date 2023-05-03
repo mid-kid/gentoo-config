@@ -1,0 +1,58 @@
+This patch inverts all of the PCB colors, to make them work better on a white background.
+
+--- gerbv-2.7.0.orig/share/glib-2.0/schemas/org.geda-user.gerbv.gschema.xml
++++ gerbv-2.7.0/share/glib-2.0/schemas/org.geda-user.gerbv.gschema.xml
+@@ -16,7 +16,7 @@
+       <description></description>
+     </key>
+     <key name="background-color" type="u">
+-      <default>0</default>
++      <default>0xFFFFFF</default>
+       <summary>Background color in 0xRRGGBB format</summary>
+       <description></description>
+     </key>
+--- gerbv-2.7.0.orig/src/gerbv.c
++++ gerbv-2.7.0/src/gerbv.c
+@@ -124,24 +124,24 @@ static int defaultColorIndex = 0;
+ 
+ /* ------------------------------------------------------------------ */
+ static gerbv_layer_color defaultColors[NUMBER_OF_DEFAULT_COLORS] = {
+-	{115,115,222,177},
+-	{255,127,115,177},
+-	{193,0,224,177},
+-	{117,242,103,177},
+-	{0,195,195,177},
+-	{213,253,51,177},
+-	{209,27,104,177},
+-	{255,197,51,177},
+-	{186,186,186,177},
+-	{211,211,255,177},
+-	{253,210,206,177},
+-	{236,194,242,177},
+-	{208,249,204,177},
+-	{183,255,255,177},
+-	{241,255,183,177},
+-	{255,202,225,177},
+-	{253,238,197,177},
+-	{226,226,226,177}
++	{140,140,33,177},
++	{0,128,140,177},
++	{62,255,31,177},
++	{138,13,152,177},
++	{255,60,60,177},
++	{42,2,204,177},
++	{46,228,151,177},
++	{0,58,204,177},
++	{69,69,69,177},
++	{44,44,0,177},
++	{2,45,49,177},
++	{19,61,13,177},
++	{47,6,51,177},
++	{72,0,0,177},
++	{14,0,72,177},
++	{0,53,30,177},
++	{2,17,58,177},
++	{29,29,29,177}
+ };
+ 
+ /* ------------------------------------------------------------------ */

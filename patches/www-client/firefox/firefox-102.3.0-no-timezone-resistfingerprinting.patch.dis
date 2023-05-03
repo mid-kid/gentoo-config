@@ -1,0 +1,34 @@
+Excempt timezone setting from privacy.resistFingerprinting
+
+It's very easy to tell when a browser has resistFingerprinting enabled, so
+distinguishing myself from this significant crowd probably makes this option
+very ineffective. However, the TZ=UTC override is a *very* significant
+usability issue, so this tradeoff is worth it to me.
+
+A different way to patch this out after building is:
+# r2 -w /usr/lib64/firefox/libxul.so
+> / TZ=UTC
+> s hit0_0
+> w0 1
+> q
+
+--- firefox-102.3.0.orig/toolkit/components/resistfingerprinting/nsRFPService.cpp
++++ firefox-102.3.0/toolkit/components/resistfingerprinting/nsRFPService.cpp
+@@ -693,7 +693,7 @@
+       StaticPrefs::javascript_options_use_fdlibm_for_sin_cos_tan() ||
+       privacyResistFingerprinting);
+ 
+-  if (privacyResistFingerprinting) {
++  if (false) {
+     PR_SetEnv("TZ=UTC");
+   } else if (sInitialized) {
+     // We will not touch the TZ value if 'privacy.resistFingerprinting' is false
+@@ -728,7 +728,7 @@
+ 
+   // If and only if the time zone was changed above, propagate the change to the
+   // <time.h> functions and the JS runtime.
+-  if (privacyResistFingerprinting || sInitialized) {
++  if (false || sInitialized) {
+     // localtime_r (and other functions) may not call tzset, so do this here
+     // after changing TZ to ensure all <time.h> functions use the new time zone.
+ #if defined(XP_WIN)

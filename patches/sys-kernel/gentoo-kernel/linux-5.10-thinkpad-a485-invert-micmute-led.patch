@@ -1,0 +1,13 @@
+--- linux-5.10.orig/drivers/platform/x86/thinkpad_acpi.c
++++ linux-5.10/drivers/platform/x86/thinkpad_acpi.c
+@@ -9216,8 +9216,8 @@ static struct tp_led_table led_tables[TP
+ 	},
+ 	[LED_AUDIO_MICMUTE] = {
+ 		.name = "MMTS",
+-		.on_value = 2,
+-		.off_value = 0,
++		.on_value = 0,
++		.off_value = 2,
+ 	},
+ };
+ 

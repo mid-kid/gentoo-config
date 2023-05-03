@@ -1,0 +1,37 @@
+--- glib-2.60.7.orig/gio/gdesktopappinfo.c
++++ glib-2.60.7/gio/gdesktopappinfo.c
+@@ -2490,6 +2490,7 @@ prepend_terminal_to_vector (int    *argc
+   int i, j;
+   char **term_argv = NULL;
+   int term_argc = 0;
++  char *env_term;
+   char *check;
+   char **the_argv;
+ 
+@@ -2513,6 +2514,18 @@ prepend_terminal_to_vector (int    *argc
+   term_argc = 2;
+   term_argv = g_new0 (char *, 3);
+ 
++  env_term = g_getenv ("TERMINAL");
++  if (env_term)
++    {
++      check = g_find_program_in_path (env_term);
++      if (check != NULL)
++        {
++          term_argv[0] = check;
++          term_argv[1] = g_strdup ("-e");
++          goto found_term;
++        }
++    }
++
+   check = g_find_program_in_path ("gnome-terminal");
+   if (check != NULL)
+     {
+@@ -2540,6 +2553,7 @@ prepend_terminal_to_vector (int    *argc
+       term_argv[1] = g_strdup ("-e");
+     }
+ 
++found_term:
+   real_argc = term_argc + *argc;
+   real_argv = g_new (char *, real_argc + 1);
+ 

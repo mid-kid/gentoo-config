@@ -1,0 +1,14 @@
+For my local repositories I sometimes use category names without dashes.
+
+--- portage-utils-0.90.orig/libq/tree.c
++++ portage-utils-0.90/libq/tree.c
+@@ -223,9 +223,6 @@ tree_filter_cat(const struct dirent *de)
+ 				return 0;
+ 		}
+ 	}
+-	if (!founddash && strcmp(de->d_name, "virtual") != 0)
+-		return 0;
+-
+ 	return i;
+ }
+ 

@@ -1,0 +1,5 @@
+# Huge C++ projects that like using as many rams as possible during build for muh performance
+# I just wanna grill for God's sake!
+MAKEOPTS="-j4 -l5"
+CFLAGS="$CFLAGS -flto=4"
+CXXFLAGS="$CFLAGS -flto=4"

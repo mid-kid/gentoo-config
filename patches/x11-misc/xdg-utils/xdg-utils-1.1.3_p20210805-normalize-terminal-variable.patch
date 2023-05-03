@@ -1,0 +1,21 @@
+Normalize usage of $TERMINAL variable
+
+Run $TERMINAL -e, to standardize the behavior of Terminal=true across file
+openers.
+
+--- xdg-utils-1a58bc28f6844898532daf9ee1bf6da7764955a9.orig/scripts/xdg-open.in
++++ xdg-utils-1a58bc28f6844898532daf9ee1bf6da7764955a9/scripts/xdg-open.in
+@@ -320,7 +320,12 @@
+             args=$(( $args - 1 ))
+         done
+         [ $replaced -eq 1 ] || set -- "$@" "$target"
+-        env "$command" "$@"
++
++        if [ x"$(get_key "${file}" "Terminal")" = x"true" ]; then
++            ${TERMINAL:-xterm} -e env "$command" "$@"
++        else
++            env "$command" "$@"
++        fi
+ 
+         if [ $? -ne 127 ]; then
+             exit_success

@@ -1,0 +1,21 @@
+post_pkg_postinst() {
+	elog "/etc/portage/env: Removing a ton of crap"
+	cd "$EROOT/usr/lib/go" || die
+
+	# Delete anything not necessary for building go programs
+	# Might break some development tools
+
+	# keep: bin pkg src
+	rm -rv api doc lib misc test || die
+
+	find src -type f \( ! -name "*.go" \
+		-a ! -name "*.s" \
+		-a ! -name "*.S" \
+		-a ! -name "*.c" \
+		-a ! -name "*.h" \
+		-a ! -name "p256_asm_table.bin" \
+	\) -print -delete || die
+	find src -type d -empty -print -delete || die
+	find pkg -type f -name "*.a" -print -delete || die
+	find pkg -type d -empty -print -delete || die
+}

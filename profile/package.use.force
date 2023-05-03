@@ -1,0 +1,8 @@
+# Avoid prebuilt binaries and bundled libraries
+dev-lang/rust system-bootstrap system-llvm
+media-fonts/noto-emoji buildfont
+media-fonts/dejavu fontforge
+media-fonts/liberation-fonts fontforge
+
+# Things I want to control
+>=sys-devel/gcc-12.2 -default-znow -default-stack-clash-protection

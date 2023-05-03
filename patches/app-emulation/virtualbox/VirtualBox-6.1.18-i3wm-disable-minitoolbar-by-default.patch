@@ -1,0 +1,16 @@
+Disables the "Mini ToolBar" that appears when making the machine fullscreen by
+default, as this causes i3 to misbehave otherwise.
+
+--- VirtualBox-6.1.18.orig/src/VBox/Frontends/VirtualBox/src/extradata/UIExtraDataManager.cpp
++++ VirtualBox-6.1.18/src/VBox/Frontends/VirtualBox/src/extradata/UIExtraDataManager.cpp
+@@ -3816,8 +3816,8 @@ bool UIExtraDataManager::usePixelFormatA
+ #ifndef VBOX_WS_MAC
+ bool UIExtraDataManager::miniToolbarEnabled(const QUuid &uID)
+ {
+-    /* 'True' unless feature restricted: */
+-    return !isFeatureRestricted(GUI_ShowMiniToolBar, uID);
++    /* 'False' unless feature allowed: */
++    return isFeatureAllowed(GUI_ShowMiniToolBar, uID);
+ }
+ 
+ void UIExtraDataManager::setMiniToolbarEnabled(bool fEnabled, const QUuid &uID)

@@ -1,0 +1,9 @@
+*/*::localrepo nobinpkg
+
+# Kernel modules
+sys-power/acpi_call nobinpkg
+app-emulation/virtualbox-modules nobinpkg
+media-video/v4l2loopback nobinpkg
+
+# Kernel firmwares (binary only anyway)
+sys-kernel/linux-firmware nobinpkg

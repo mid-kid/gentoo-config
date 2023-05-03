@@ -1,0 +1,13 @@
+Restore old-style message bubble corners
+
+--- tdesktop-4.3.1-full.orig/Telegram/SourceFiles/ui/chat/chat.style
++++ tdesktop-4.3.1-full/Telegram/SourceFiles/ui/chat/chat.style
+@@ -704,7 +704,7 @@
+ }
+ 
+ bubbleRadiusSmall: roundRadiusLarge;
+-bubbleRadiusLarge: 16px;
++bubbleRadiusLarge: roundRadiusLarge;
+ 
+ historyPhotoLeft: 14px;
+ historyPhotoBubbleMinWidth: 200px;

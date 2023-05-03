@@ -1,0 +1,157 @@
+Original: https://github.com/ashinkarov/i3-extras/blob/master/i3-desktop-patch/i3-desktop.patch
+
+--- i3-4.21.orig/include/i3-atoms_NET_SUPPORTED.xmacro.h
++++ i3-4.21/include/i3-atoms_NET_SUPPORTED.xmacro.h
+@@ -15,6 +15,7 @@
+ xmacro(_NET_WM_WINDOW_TYPE) \
+ xmacro(_NET_WM_WINDOW_TYPE_NORMAL) \
+ xmacro(_NET_WM_WINDOW_TYPE_DOCK) \
++xmacro(_NET_WM_WINDOW_TYPE_DESKTOP) \
+ xmacro(_NET_WM_WINDOW_TYPE_DIALOG) \
+ xmacro(_NET_WM_WINDOW_TYPE_UTILITY) \
+ xmacro(_NET_WM_WINDOW_TYPE_TOOLBAR) \
+--- i3-4.21.orig/include/x.h
++++ i3-4.21/include/x.h
+@@ -15,6 +15,9 @@
+ /** Stores the X11 window ID of the currently focused window */
+ extern xcb_window_t focused_id;
+ 
++/** Stores window ID of the desktop window */
++extern xcb_window_t desktop_window;
++
+ /**
+  * Initializes the X11 part for the given container. Called exactly once for
+  * every container from con_new().
+--- i3-4.21.orig/src/click.c
++++ i3-4.21/src/click.c
+@@ -374,7 +374,13 @@
+             return;
+         }
+ 
+-        ELOG("Clicked into unknown window?!\n");
++        if (desktop_window != XCB_NONE && event->event == desktop_window) {
++            Con *ws = con_get_workspace(focused);
++            con_focus(ws);
++            return route_click(ws, event, mod_pressed, CLICK_INSIDE);
++        } else {
++            ELOG("Clicked into unknown window?!\n");
++        }
+         xcb_allow_events(conn, XCB_ALLOW_REPLAY_POINTER, event->time);
+         xcb_flush(conn);
+         return;
+--- i3-4.21.orig/src/commands.c
++++ i3-4.21/src/commands.c
+@@ -1399,6 +1399,13 @@
+     Con *ws = con_get_workspace(focused);
+     Con *current;
+     bool success = false;
++
++    if (strcmp(window_mode, "tiling") == 0 && TAILQ_EMPTY(&(ws->nodes_head)) && desktop_window != XCB_NONE) {
++        con_focus(ws);
++        success = true;
++        goto end;
++    }
++
+     TAILQ_FOREACH (current, &(ws->focus_head), focused) {
+         if ((to_floating && current->type != CT_FLOATING_CON) ||
+             (!to_floating && current->type == CT_FLOATING_CON))
+@@ -1409,6 +1416,7 @@
+         break;
+     }
+ 
++end:
+     if (success) {
+         cmd_output->needs_tree_render = true;
+         ysuccess(true);
+--- i3-4.21.orig/src/con.c
++++ i3-4.21/src/con.c
+@@ -1469,6 +1469,9 @@
+         return;
+     }
+ 
++    /*if (focused->type == CT_WORKSPACE && desktop_window != XCB_NONE)
++        return;*/  // Removed to avoid focussing it when using "focus parent"
++
+     Con *target = con_descend_focused(workspace);
+     _con_move_to_con(con, target, true, fix_coordinates, dont_warp, ignore_focus, true);
+ }
+--- i3-4.21.orig/src/handlers.c
++++ i3-4.21/src/handlers.c
+@@ -145,6 +145,18 @@
+         enter_child = true;
+     }
+ 
++    if (desktop_window != XCB_NONE && event->event == desktop_window) {
++        /* This check stops the desktop window from stealing the focus when a
++         * floating window is focused through a command/keybinding but the
++         * pointer is still on the desktop window. */
++        if (event->detail != XCB_NOTIFY_DETAIL_NONLINEAR) return;
++        if (config.disable_focus_follows_mouse == false) {
++            Con *ws = con_get_workspace(focused);
++            con_focus(ws);
++            tree_render();
++        }
++    }
++
+     /* If we cannot find the container, the user moved their cursor to the root
+      * window. In this case and if they used it to a dock, we need to focus the
+      * workspace on the correct output. */
+--- i3-4.21.orig/src/manage.c
++++ i3-4.21/src/manage.c
+@@ -242,6 +242,22 @@
+     /* read the preferred _NET_WM_WINDOW_TYPE atom */
+     cwindow->window_type = xcb_get_preferred_window_type(type_reply);
+ 
++    /* map _NET_WM_WINDOW_TYPE_DESKTOP windows and receive focus events, but
++     * don't manage them */
++    if (xcb_reply_contains_atom(type_reply, A__NET_WM_WINDOW_TYPE_DESKTOP)) {
++        desktop_window = window;
++        xcb_map_window(conn, window);
++
++        values[0] = XCB_STACK_MODE_BELOW;
++        xcb_configure_window(conn, window, XCB_CONFIG_WINDOW_STACK_MODE, values);
++
++        values[0] = XCB_EVENT_MASK_ENTER_WINDOW;
++        xcb_change_window_attributes(conn, window, XCB_CW_EVENT_MASK, values);
++
++        xcb_flush(conn);
++        goto geom_out;
++    }
++
+     /* Where to start searching for a container that swallows the new one? */
+     Con *search_at = croot;
+ 
+--- i3-4.21.orig/src/tree.c
++++ i3-4.21/src/tree.c
+@@ -14,6 +14,8 @@
+ 
+ struct all_cons_head all_cons = TAILQ_HEAD_INITIALIZER(all_cons);
+ 
++xcb_window_t desktop_window = XCB_NONE;
++
+ /*
+  * Create the pseudo-output __i3. Output-independent workspaces such as
+  * __i3_scratch will live there.
+--- i3-4.21.orig/src/x.c
++++ i3-4.21/src/x.c
+@@ -492,6 +492,8 @@
+     /* find out which colors to use */
+     if (con->urgent) {
+         p->color = &config.client.urgent;
++    /*} else if (focused->type == CT_WORKSPACE && desktop_window != XCB_NONE) {
++        p->color = &config.client.focused_inactive;*/  // Removed to avoid focussing it when using "focus parent"
+     } else if (con == focused || con_inside_focused(con)) {
+         p->color = &config.client.focused;
+     } else if (con == TAILQ_FIRST(&(parent->focus_head))) {
+@@ -1309,6 +1311,11 @@
+     if (focused->window != NULL)
+         to_focus = focused->window->id;
+ 
++    /*if (focused->type == CT_WORKSPACE && desktop_window != XCB_NONE) {
++        to_focus = desktop_window;
++        focused->mapped = true;
++    }*/  // Removed to avoid focussing it when using "focus parent"
++
+     if (focused_id != to_focus) {
+         if (!focused->mapped) {
+             DLOG("Not updating focus (to %p / %s), focused window is not mapped.\n", focused, focused->name);

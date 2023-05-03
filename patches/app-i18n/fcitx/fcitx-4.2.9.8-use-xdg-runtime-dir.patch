@@ -1,0 +1,42 @@
+Use XDG_RUNTIME_DIR for the socket
+
+This avoids polluting /tmp, while also making it easier to excempt in firejail
+profiles.
+
+--- fcitx-4.2.9.8.orig/src/module/remote/remote.c
++++ fcitx-4.2.9.8/src/module/remote/remote.c
+@@ -63,12 +63,25 @@
+     FcitxRemote* remote = fcitx_utils_malloc0(sizeof(FcitxRemote));
+     remote->owner = instance;
+ 
++    char *runtime = getenv("XDG_RUNTIME_DIR");
++    if (!runtime) runtime = "/tmp";
++
++    char *dir;
++    asprintf(&dir, "%s/fcitx", runtime);
++    if (mkdir(dir, 0700) != 0) {
++        FcitxLog(ERROR, _("Can't create directory %s: %s"), dir, strerror(errno));
++        free(remote);
++        free(dir);
++        return NULL;
++    }
++
+     char *socketfile;
+-    asprintf(&socketfile, "/tmp/fcitx-socket-:%d", fcitx_utils_get_display_number());
++    asprintf(&socketfile, "%s/socket-:%d", dir, fcitx_utils_get_display_number());
+     remote->socket_fd = CreateSocket(socketfile);
+     if (remote->socket_fd < 0) {
+         FcitxLog(ERROR, _("Can't open socket %s: %s"), socketfile, strerror(errno));
+         free(remote);
++        free(dir);
+         free(socketfile);
+         return NULL;
+     }
+@@ -76,6 +89,7 @@
+     fcntl(remote->socket_fd, F_SETFD, FD_CLOEXEC);
+     fcntl(remote->socket_fd, F_SETFL, O_NONBLOCK);
+     chmod(socketfile, 0600);
++    free(dir);
+     free(socketfile);
+     return remote;
+ }

@@ -1,0 +1,44 @@
+Pass the -q flag to openrc when the "quiet" kernel commandline option is set.
+
+Turns out that running openrc with -q causes issues when unmounting
+filesystems, which leaves the dirty bit set.
+
+--- openrc-0.41.2.orig/src/rc/openrc-init.c
++++ openrc-0.41.2/src/rc/openrc-init.c
+@@ -43,6 +43,8 @@
+ static const char *path_default = "/sbin:/usr/sbin:/bin:/usr/bin";
+ static const char *rc_default_runlevel = "default";
+ 
++static bool quiet = false;
++
+ static void do_openrc(const char *runlevel)
+ {
+ 	pid_t pid;
+@@ -62,8 +64,12 @@ static void do_openrc(const char *runlev
+ 			setsid();
+ 			/* unblock all signals */
+ 			sigprocmask(SIG_UNBLOCK, &all_signals, NULL);
+-			printf("Starting %s runlevel\n", runlevel);
+-			execlp("openrc", "openrc", runlevel, NULL);
++			if (quiet) {
++				execlp("openrc", "openrc", "-q", runlevel, NULL);
++			} else {
++				printf("Starting %s runlevel\n", runlevel);
++				execlp("openrc", "openrc", runlevel, NULL);
++			}
+ 			perror("exec");
+ 			exit(1);
+ 			break;
+@@ -80,7 +86,12 @@ static void do_openrc(const char *runlev
+ static void init(const char *default_runlevel)
+ {
+ 	const char *runlevel = NULL;
++	// The /proc filesystem isn't mounted yet before sysinit...
++	quiet = true;
+ 	do_openrc("sysinit");
++	char *cmdline_quiet = rc_proc_getent("quiet");
++	quiet = cmdline_quiet != NULL;
++	if (cmdline_quiet) free(cmdline_quiet);
+ 	do_openrc("boot");
+ 	if (default_runlevel)
+ 		runlevel = default_runlevel;

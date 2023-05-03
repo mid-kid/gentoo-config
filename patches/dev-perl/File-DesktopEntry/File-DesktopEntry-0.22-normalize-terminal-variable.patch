@@ -1,0 +1,13 @@
+--- File-DesktopEntry-0.22.orig/lib/File/DesktopEntry.pm
++++ File-DesktopEntry-0.22/lib/File/DesktopEntry.pm
+@@ -229,8 +229,8 @@ sub _run {
+ 
+     my $t = $self->get('Terminal');
+     if ($t and $t eq 'true') {
+-        my $term = $ENV{TERMINAL} || 'xterm -e';
+-        unshift @exec, _split($term);
++        my $term = $ENV{TERMINAL} || 'xterm';
++        unshift @exec, _split("$term -e");
+     }
+ 
+     my $cwd;

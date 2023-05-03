@@ -1,0 +1,11 @@
+--- qBittorrent-release-4.3.1.orig/src/gui/transferlistsortmodel.cpp
++++ qBittorrent-release-4.3.1/src/gui/transferlistsortmodel.cpp
+@@ -175,7 +175,7 @@ bool TransferListSortModel::lessThan_imp
+             if (dateL.isValid() && dateR.isValid())
+             {
+                 if (dateL != dateR)
+-                    return dateL < dateR;
++                    return dateL > dateR;
+             }
+             else if (dateL.isValid())
+             {

@@ -1,0 +1,34 @@
+--- feh-3.6.orig/src/wallpaper.c
++++ feh-3.6/src/wallpaper.c
+@@ -322,7 +322,7 @@ void feh_wm_set_bg(char *fil, Imlib_Imag
+ 		unsigned char *data_root = NULL, *data_esetroot = NULL;
+ 		Pixmap pmap_d1, pmap_d2;
+ 
+-		char *home;
++		char *home, *config;
+ 
+ 		/* local display to set closedownmode on */
+ 		Display *disp2;
+@@ -449,15 +449,20 @@ void feh_wm_set_bg(char *fil, Imlib_Imag
+ 		}
+ 
+ 		if (!opt.no_fehbg) {
++			config = getenv("XDG_CONFIG_HOME");
+ 			home = getenv("HOME");
+-			if (home) {
++			if (home || config) {
+ 				FILE *fp;
+ 				int fd;
+ 				char *path;
+ 				char *absolute_path;
+ 				struct stat s;
+ 				gib_list *filelist_pos = filelist;
+-				path = estrjoin("/", home, ".fehbg", NULL);
++				if (config) {
++					path = estrjoin("/", config, "fehbg", NULL);
++				} else {
++					path = estrjoin("/", home, ".config/fehbg", NULL);
++				}
+ 				if ((fp = fopen(path, "w")) == NULL) {
+ 					weprintf("Can't write to %s", path);
+ 				} else {

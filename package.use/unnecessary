@@ -1,0 +1,87 @@
+app-admin/sudo -sendmail
+app-arch/p7zip -wxwidgets
+app-emulation/wine-staging -udisks -faudio -unwind -cups
+app-emulation/wine-vanilla -udisks -faudio -unwind -cups
+dev-java/icedtea -source -gtk
+dev-java/openjdk -source
+media-sound/alsa-utils -libsamplerate
+media-video/mpv -uchardet
+net-analyzer/wireshark -gtk
+net-libs/webkit-gtk -geolocation -libnotify -gstreamer -egl -webgl -seccomp
+sys-apps/smartmontools -daemon
+sys-libs/libcxx -libunwind
+sys-libs/libcxxabi -libunwind
+xfce-base/xfce4-power-manager -panel-plugin
+media-sound/audacity -lv2 -midi -soundtouch
+dev-python/twisted -crypt
+dev-python/passlib -bcrypt -scrypt -totp
+media-gfx/fontforge -X -gtk
+app-crypt/pinentry -gtk
+media-gfx/graphviz -X -gtk
+net-wireless/gnuradio -wxwidgets -utils
+x11-misc/xdg-user-dirs -gtk
+sys-boot/plymouth -gtk
+media-libs/gst-plugins-bad -gtk
+app-text/ghostscript-gpl -gtk
+sys-auth/polkit -gtk
+dev-python/matplotlib -qt5 -gtk3 -cairo -wxwidgets
+net-print/cups-filters -foomatic -pdf
+dev-embedded/openocd -ftdi -jlink -cmsis-dap
+sci-electronics/kicad-meta minimal
+xfce-base/libxfce4ui -gtk2
+media-libs/openal -qt5
+dev-python/PyQt5 -multimedia -network -opengl -printsupport -ssl -svg
+sys-apps/flashrom -ft2232-spi -usbblaster-spi
+media-gfx/pngquant -lcms
+sci-libs/fftw -fortran
+sys-libs/gwenhywfar -qt5
+app-doc/doxygen -qt5
+net-p2p/transmission -gtk
+app-emulation/virtualbox -sdk
+media-gfx/sane-backends -zeroconf -sane_backends_escl
+dev-libs/liborcus -spreadsheet-model
+dev-libs/rasqal -crypt -mhash
+app-portage/gemato -gpg
+media-libs/libcanberra -gtk -sound
+media-video/handbrake -fdk libav-aac
+sys-apps/groff -X
+sci-electronics/ngspice -X
+app-misc/neofetch -X
+media-libs/phonon -vlc gstreamer
+kde-frameworks/kio -kwallet
+kde-frameworks/purpose -kaccounts
+kde-apps/akonadi -kaccounts -mysql sqlite
+kde-apps/libkleo -fancyviewer
+app-accessibility/speech-dispatcher -espeak
+app-crypt/mit-krb5 -keyutils
+sci-mathematics/cgal -gmp
+dev-python/shiboken2 -docstrings
+dev-python/pyside2 -network -xml
+media-libs/simage -qt5
+media-gfx/freecad -fem -mesh -openscad -pcl -addonmgr -arch -inspection -path
+net-im/telegram-desktop -jemalloc
+kde-frameworks/sonnet -hunspell
+x11-libs/agg -gpc
+media-plugins/frei0r-plugins -facedetect -scale0tilt
+app-i18n/fcitx -enchant
+app-editors/vim -crypt
+app-editors/gvim -crypt
+sys-apps/man-db -manpager
+media-libs/mlt -gtk
+kde-apps/okular -crypt
+media-libs/libsndfile minimal
+app-containers/podman -init -fuse
+net-wireless/hostapd -crda
+net-wireless/wpa_supplicant -crda
+media-sound/pulseaudio-daemon -webrtc-aec -asyncns -ssl
+media-libs/libpulse -asyncns -gtk
+media-libs/cubeb -rust
+app-office/lyx -latex
+sci-electronics/kicad -occ -ngspice
+dev-libs/libdbusmenu -gtk
+dev-lang/perl minimal
+dev-perl/* minimal
+media-video/mpv -libplacebo
+app-crypt/gpgme -qt5
+sys-devel/clang-runtime -compiler-rt -sanitize
+net-analyzer/nmap -nse

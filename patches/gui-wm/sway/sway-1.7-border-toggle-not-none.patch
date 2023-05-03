@@ -1,0 +1,15 @@
+Make "border toggle" only toggle between two border styles
+
+I don't like borderless
+
+--- sway-1.7.orig/sway/commands/border.c
++++ sway-1.7/sway/commands/border.c
+@@ -46,7 +46,7 @@
+ 		if (con->view && con->view->xdg_decoration) {
+ 			set_border(con, B_CSD);
+ 		} else {
+-			set_border(con, B_NONE);
++			set_border(con, B_PIXEL);
+ 		}
+ 		break;
+ 	case B_CSD:

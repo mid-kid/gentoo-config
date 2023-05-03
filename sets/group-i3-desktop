@@ -1,0 +1,29 @@
+# All the programs I use to provide my "core" i3 desktop
+
+# Window management/desktop core
+x11-wm/i3
+x11-misc/picom  # Compositor
+x11-misc/polybar  # Status bar
+x11-misc/rofi  # Run dialog, window switcher menu
+xfce-base/xfce4-power-manager  # Power management, lid/idle actions
+media-gfx/feh  # Wallpaper setter
+x11-misc/i3lock-color  # Lock screen
+x11-misc/xss-lock  # Screen lock trigger
+x11-misc/dunst  # Notification daemon
+
+# Auxiliary programs
+media-sound/volumeicon  # Volume keys/control/notification
+sys-fs/udiskie  # Drive mounting/unmounting applet
+x11-misc/redshift  # Screen color temperature adjusting
+#lxqt-base/lxqt-policykit  # PolicyKit agent
+kde-plasma/polkit-kde-agent  # PolicyKit agent
+app-i18n/fcitx-qt5  # Input method
+app-i18n/fcitx-configtool  # Input method
+app-i18n/fcitx-anthy  # Input method
+
+# Utilities for various scripts
+x11-misc/wmctrl  # Control of windows
+x11-misc/xclip  # Clipboard access
+x11-apps/xrandr  # Control of displays
+x11-apps/xwininfo  # Required for picom-trans
+media-sound/playerctl  # Control media players

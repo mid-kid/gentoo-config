@@ -1,0 +1,4 @@
+
+# Older packages have trouble building LTO
+
+# Newer GCC version kills older packages

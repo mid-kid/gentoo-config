@@ -1,0 +1,4 @@
+app-emulation/qemu QEMU_SOFTMMU_TARGETS: x86_64
+app-emulation/qemu spice usbredir  # Required for virt-manager
+app-emulation/qemu virgl  # Graphics acceleration
+app-emulation/qemu virtfs  # 9p file sharing

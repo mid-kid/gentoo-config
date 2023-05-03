@@ -1,0 +1,10 @@
++++ ./src/gui/transferlistsortmodel.cpp
+@@ -226,7 +226,7 @@
+     }
+ 
+     // Sort according to TR_SEED_DATE
+-    return dateLessThan(TransferListModel::TR_SEED_DATE, left, right, false);
++    return dateLessThan(TransferListModel::TR_SEED_DATE, right, left, false);
+ }
+ 
+ // Every time we compare QDateTimes we need a fallback comparison in case both

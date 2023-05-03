@@ -1,0 +1,2 @@
+# See package.{accept_keywords,use}/python3_11
+-python_targets_python3_11

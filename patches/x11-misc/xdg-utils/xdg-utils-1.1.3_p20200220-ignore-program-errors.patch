@@ -1,0 +1,30 @@
+Exit regardless of exit code if program is found
+
+Apparently libreoffice exits with exit code 139 if this was the first file that
+was opened, which breaks this script. Default behavior will open libreoffice
+*again* after closing it, and then launch a browser, which is bizarre behavior.
+
+Assume that if a program is found, this is the same program that will be found
+by any tool, and if the tool fails it'll just fail repeatedly. `mimeopen` exits
+with status 6 if no program is found, here's hoping that's good enough.
+
+--- xdg-utils-9816ebb3e6fd9f23e993b8b7fcbd56f92d9c9197.orig/scripts/xdg-open.in
++++ xdg-utils-9816ebb3e6fd9f23e993b8b7fcbd56f92d9c9197/scripts/xdg-open.in
+@@ -323,7 +323,7 @@
+         [ $replaced -eq 1 ] || set -- "$@" "$target"
+         "$command_exec" "$@"
+ 
+-        if [ $? -eq 0 ]; then
++        if [ $? -ne 127 ]; then
+             exit_success
+         fi
+     fi
+@@ -421,7 +421,7 @@
+ 
+         if has_display && mimeopen -v 2>/dev/null 1>&2; then
+             mimeopen -L -n "$file"
+-            if [ $? -eq 0 ]; then
++            if [ $? -ne 6 ]; then
+                 exit_success
+             fi
+         fi

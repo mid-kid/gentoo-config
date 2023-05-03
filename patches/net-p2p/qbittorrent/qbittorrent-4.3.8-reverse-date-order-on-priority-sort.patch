@@ -1,0 +1,43 @@
+Reverse seed date order when sorting by queue position
+
+This patch is rendered fairly useless these days, but I'm keeping this behavior
+around to make it easier for me to return to my favourite sorting order.
+
+Before qBittorrent 4.3.5, you could sort things in whatever order you wanted,
+but there was always an implicit sub-sort order attached to the sorting order
+you were using. For sorting by queue position this meant that when something
+was already done downloading, it would be sorted by seed date. However, this
+sorting method was odd, as when the queue was sorted in ascending order, it
+would appear at the top, followed by the *oldest* downloaded torrents. The
+newest would appear at the bottom.
+
+So, I wrote a patch to invert this behavior, essentially changing an "<" with
+an ">". This made the queue in ascending order be followed by the newest
+downloaded torrents.
+
+In qBittorrent 4.3.5, the sorting subsystem was reworked to remember your last
+sorting order, and use that for "sub-sorting". This meant that if you first
+sorted by name, and *then* by queue order, it would be sorted by queue order
+and by name when the download was finished. However, this didn't allow for
+flipping the order of the sub-sort. This was fixed in qBittorrent 4.3.8:
+https://github.com/qbittorrent/qBittorrent/issues/15073
+
+So, in essence, the patch is now rendered redundant. But since I don't want to
+keep the "Seed Date" column in my main view, it's inconvenient to restore my
+favourite sorting order when I decide to sort things differently one time. I'd
+much rather have a toggle in settings to specify the sub-sorting order
+regardless of what my last clicked sorting order was...
+
+--- qBittorrent-release-4.3.8.orig/src/gui/transferlistsortmodel.cpp
++++ qBittorrent-release-4.3.8/src/gui/transferlistsortmodel.cpp
+@@ -96,6 +96,10 @@
+         m_subSortColumn = m_lastSortColumn;
+         m_subSortOrder = m_lastSortOrder;
+     }
++    if (column == TransferListModel::TR_QUEUE_POSITION) {
++        m_subSortColumn = TransferListModel::TR_SEED_DATE;
++        m_subSortOrder = Qt::DescendingOrder;
++    }
+     m_lastSortColumn = column;
+     m_lastSortOrder = ((order == Qt::AscendingOrder) ? 0 : 1);
+ 

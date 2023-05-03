@@ -1,0 +1,42 @@
+It's annoying to have many *rc files littered across my ~/.config directory
+Literally no other app stores multiple files without making a subdirectory, yet multiple KDE apps do.
+
+--- kconfig-5.82.0.orig/src/core/kconfig.cpp
++++ kconfig-5.82.0/src/core/kconfig.cpp
+@@ -595,10 +595,13 @@
+     if (name.isEmpty()) {
+         if (wantDefaults()) { // accessing default app-specific config "appnamerc"
+             fileName = KConfig::mainConfigName();
++            if (resourceType == QStandardPaths::GenericConfigLocation) {
++                fileName.prepend(QLatin1String("kde5/"));
++            }
+             file = QStandardPaths::writableLocation(resourceType) + QLatin1Char('/') + fileName;
+         } else if (wantGlobals()) { // accessing "kdeglobals" by specifying no filename and NoCascade - XXX used anywhere?
+             resourceType = QStandardPaths::GenericConfigLocation;
+-            fileName = QStringLiteral("kdeglobals");
++            fileName = QStringLiteral("kde5/kdeglobals");
+             file = *sGlobalFileName;
+         } else {
+             // anonymous config
+@@ -606,12 +609,18 @@
+             return;
+         }
+     } else if (QDir::isAbsolutePath(fileName)) {
+-        fileName = QFileInfo(fileName).canonicalFilePath();
+-        if (fileName.isEmpty()) { // file doesn't exist (yet)
+-            fileName = name;
++        if (resourceType == QStandardPaths::GenericConfigLocation) {
++            QString prefix = QStandardPaths::writableLocation(resourceType) + QLatin1Char('/');
++            QString replace = prefix + QLatin1String("kde5/");
++            if (fileName.startsWith(prefix)) {
++                fileName.replace(0, prefix.size(), replace);
++            }
+         }
+         file = fileName;
+     } else {
++        if (resourceType == QStandardPaths::GenericConfigLocation) {
++            fileName.prepend(QLatin1String("kde5/"));
++        }
+         file = QStandardPaths::writableLocation(resourceType) + QLatin1Char('/') + fileName;
+     }
+ 

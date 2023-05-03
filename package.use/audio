@@ -1,0 +1,13 @@
+media-sound/pulseaudio daemon
+media-sound/pulseaudio-daemon bluetooth
+media-plugins/alsa-plugins pulseaudio
+net-wireless/blueman pulseaudio  # Bluetooth audio
+media-video/obs-studio pulseaudio  # Desktop recording
+
+# ALSA problems when used with pulseaudio plugin
+www-client/firefox pulseaudio
+mail-client/thunderbird pulseaudio
+dev-qt/qtmultimedia pulseaudio  # Specifically, games-emulation/mgba
+games-emulation/dolphin pulseaudio
+media-libs/libsdl2 pulseaudio  # Various emulators, SysDVR-Client, ...
+media-libs/openal pulseaudio  # Literally no output with the alsa backend

@@ -1,0 +1,27 @@
+diff -Nur ../wpa_supplicant-2.5/wpa_supplicant/wpa_gui-qt4/wpagui.cpp ./wpa_supplicant/wpa_gui-qt4/wpagui.cpp
+--- ../wpa_supplicant-2.5/wpa_supplicant/wpa_gui-qt4/wpagui.cpp	2015-09-27 21:02:05.000000000 +0200
++++ wpa_supplicant/wpa_gui-qt4/wpagui.cpp	2016-10-11 21:34:31.043783564 +0200
+@@ -10,6 +10,7 @@
+ #include <windows.h>
+ #endif /* CONFIG_NATIVE_WINDOWS */
+ 
++#include <stdlib.h>
+ #include <cstdio>
+ #include <unistd.h>
+ #include <QMessageBox>
+@@ -1415,13 +1416,10 @@
+ void WpaGui::showTrayMessage(QSystemTrayIcon::MessageIcon type, int sec,
+ 			     const QString & msg)
+ {
+-	if (!QSystemTrayIcon::supportsMessages())
++	if (isVisible() || quietMode)
+ 		return;
+ 
+-	if (isVisible() || !tray_icon || !tray_icon->isVisible() || quietMode)
+-		return;
+-
+-	tray_icon->showMessage(qAppName(), msg, type, sec * 1000);
++ 	system(("notify-send -a " + qAppName() + " -i network-wireless -t " + QString::number(sec * 1000) + " '" + qAppName() + "' '" + msg + "'").toStdString().c_str());
+ }
+ 
+ 

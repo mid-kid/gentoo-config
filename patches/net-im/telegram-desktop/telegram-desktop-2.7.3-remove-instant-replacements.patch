@@ -1,0 +1,27 @@
+--- tdesktop-2.7.3-full.orig/Telegram/lib_ui/ui/widgets/input_fields.cpp
++++ tdesktop-2.7.3-full/Telegram/lib_ui/ui/widgets/input_fields.cpp
+@@ -866,14 +866,9 @@ void InstantReplaces::add(const QString
+ const InstantReplaces &InstantReplaces::Default() {
+ 	static const auto result = [] {
+ 		auto result = InstantReplaces();
+-		result.add("--", QString(1, QChar(8212)));
+-		result.add("<<", QString(1, QChar(171)));
+-		result.add(">>", QString(1, QChar(187)));
+ 		result.add(
+ 			":shrug:",
+ 			QChar(175) + QString("\\_(") + QChar(12484) + ")_/" + QChar(175));
+-		result.add(":o ", QString(1, QChar(0xD83D)) + QChar(0xDE28));
+-		result.add("xD ", QString(1, QChar(0xD83D)) + QChar(0xDE06));
+ 		const auto &replacements = Emoji::internal::GetAllReplacements();
+ 		for (const auto &one : replacements) {
+ 			const auto with = Emoji::QStringFromUTF16(one.emoji);
+@@ -894,9 +889,6 @@ const InstantReplaces &InstantReplaces::
+ const InstantReplaces &InstantReplaces::TextOnly() {
+ 	static const auto result = [] {
+ 		auto result = InstantReplaces();
+-		result.add("--", QString(1, QChar(8212)));
+-		result.add("<<", QString(1, QChar(171)));
+-		result.add(">>", QString(1, QChar(187)));
+ 		result.add(
+ 			":shrug:",
+ 			QChar(175) + QString("\\_(") + QChar(12484) + ")_/" + QChar(175));

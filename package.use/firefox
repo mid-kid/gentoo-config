@@ -1,0 +1,3 @@
+www-client/firefox -gmp-autoupdate eme-free
+mail-client/thunderbird eme-free
+www-plugins/passff-host firefox

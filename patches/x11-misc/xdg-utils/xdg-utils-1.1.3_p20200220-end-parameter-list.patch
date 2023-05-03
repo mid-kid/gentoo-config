@@ -1,0 +1,25 @@
+Allow ending the parameter list
+
+This avoids issues with filenames that start with a -
+
+--- xdg-utils-9816ebb3e6fd9f23e993b8b7fcbd56f92d9c9197.orig/scripts/xdg-open.in
++++ xdg-utils-9816ebb3e6fd9f23e993b8b7fcbd56f92d9c9197/scripts/xdg-open.in
+@@ -485,6 +485,10 @@
+     shift
+ 
+     case "$parm" in
++      --)
++        break
++        ;;
++
+       -*)
+         exit_failure_syntax "unexpected option '$parm'"
+         ;;
+@@ -497,6 +501,7 @@
+         ;;
+     esac
+ done
++url="${url:-$1}"
+ 
+ if [ -z "${url}" ] ; then
+     exit_failure_syntax "file or URL argument missing"

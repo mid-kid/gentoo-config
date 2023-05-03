@@ -1,0 +1,24 @@
+# Compile: error: inlining failed in call to ‘always_inline’ ‘realpath.localalias’: function not inlinable
+app-emulation/libvirt baseflags  # 8.7.0-r1 (GCC 12.2.1_p20221231)
+
+# Compile: undefined symbol: _ZN14G1CMOopClosure9do_oop_nvIjEEvPT_
+dev-java/icedtea baseflags  # 3.21.1 (GCC 12.2.1_p20221231)
+
+# Compile: undefined reference to `void G1RootRegionScanClosure::do_oop_work<oopDesc*>(oopDesc**)'
+dev-java/openjdk:11 baseflags  # 11.0.15_p10-r1 (GCC 12.2.1_p20221231)
+
+# Compile: lto1: internal compiler error: resolution sub id 0x7bafbd0d9f1cfc27 not in object file
+dev-python/libvirt-python baseflags  # 8.7.0 (GCC 12.2.1_p20221231)
+
+# Compile: Missing # define RTSystemIsInsideVM_amd64_x86.cpp.443bd92c      RT_MANGLER(RTSystemIsInsideVM_amd64_x86.cpp.443bd92c)
+# this error is after enabling -ffat-lto-objects
+app-emulation/virtualbox baseflags  # 6.1.40 (GCC 12.2.1_p20221231)
+
+# Runtime: Constant hangs
+sci-electronics/pulseview baseflags  # 0.4.2-r1 (GCC 12.2.1_p20230121-r1)
+
+# Runtime: Hardware drivers not being loaded in sci-electronics/pulseview
+sci-libs/libsigrok baseflags  # 0.5.2-r3 (GCC 12.2.1_p20221231)
+
+# Runtime: Instant segfault
+net-analyzer/wireshark baseflags  # 3.6.10 (GCC 12.2.1_p20221231)

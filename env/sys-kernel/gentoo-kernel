@@ -1,0 +1,17 @@
+LSMOD="${LSMOD:-/etc/kernel/modprobed_db/modprobed_$(ver_cut 1-2).db}"
+
+post_src_configure() {
+	# Run localmodconfig to avoid building *all* the drivers
+	test -n "$NOLOCALMODCONFIG" && return
+	test -f "$LSMOD" || die "/etc/portage/env: LSMOD file not found (required for localmodconfig): $LSMOD"
+
+	elog "/etc/portage/env: localmodconfig LSMOD=$LSMOD"
+	yes '' | emake O="$WORKDIR"/modprep "${MAKEARGS[@]}" \
+		LSMOD="$LSMOD" LOCALMODCONFIG_DEBUG=1 localmodconfig
+
+	# Re-run the last few steps of the original src_configure,
+	#   to make sure the config changes propagate.
+	rm -r "${WORKDIR}"/build || die
+	emake O="${WORKDIR}"/modprep "${MAKEARGS[@]}" modules_prepare
+	cp -pR "${WORKDIR}"/modprep "${WORKDIR}"/build || die
+}

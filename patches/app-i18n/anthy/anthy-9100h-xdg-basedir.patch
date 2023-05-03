@@ -1,0 +1,105 @@
+--- anthy-9100h.orig/src-diclib/conf.c
++++ anthy-9100h/src-diclib/conf.c
+@@ -238,7 +238,16 @@
+       add_val("CONFFILE", CONF_DIR"/anthy-conf");
+     }
+     pw = getpwuid(getuid());
+-    add_val("HOME", pw->pw_dir);
++    char *home = getenv("XDG_DATA_HOME");
++    if (home) {
++        add_val("HOME", home);
++    } else {
++        home = getenv("HOME");
++        char *full = malloc(strlen(home) + 16);
++        sprintf(full, "%s/.local/share", home);
++        add_val("HOME", full);
++        free(full);
++    }
+     alloc_session_id();
+     read_conf_file();
+     confIsInit = 1;
+--- anthy-9100h.orig/src-worddic/priv_dic.c
++++ anthy-9100h/src-worddic/priv_dic.c
+@@ -65,7 +65,7 @@
+   struct stat st;
+   hd = anthy_conf_get_str("HOME");
+   dn = alloca(strlen(hd) + 10);
+-  sprintf(dn, "%s/.anthy", hd);
++  sprintf(dn, "%s/anthy", hd);
+   if (stat(dn, &st) || !S_ISDIR(st.st_mode)) {
+     int r;
+     /*fprintf(stderr, "Anthy: Failed to open anthy directory(%s).\n", dn);*/
+@@ -86,7 +86,7 @@
+ init_lock_fn(const char *home, const char *id)
+ {
+   lock_fn = malloc(strlen(home) + strlen(id) + 40);
+-  sprintf(lock_fn, "%s/.anthy/lock-file_%s", home, id);
++  sprintf(lock_fn, "%s/anthy/lock-file_%s", home, id);
+ }
+ 
+ static struct text_trie *
+@@ -94,7 +94,7 @@
+ {
+   struct text_trie *tt;
+   char *buf = malloc(strlen(home) + strlen(id) + 40);
+-  sprintf(buf, "%s/.anthy/private_dict_%s.tt", home, id);
++  sprintf(buf, "%s/anthy/private_dict_%s.tt", home, id);
+   tt = anthy_trie_open(buf, 0);
+   free(buf);
+   return tt;
+@@ -105,7 +105,7 @@
+ {
+   char *fn = malloc(strlen(home) + strlen(name) + strlen(id) + 10);
+   struct textdict *td;
+-  sprintf(fn, "%s/.anthy/%s%s", home, name, id);
++  sprintf(fn, "%s/anthy/%s%s", home, name, id);
+   td = anthy_textdict_open(fn, 0);
+   free(fn);
+   return td;
+@@ -394,7 +394,7 @@
+   anthy_private_text_dic = open_textdic(home, "private_words_", id);
+   anthy_imported_text_dic = open_textdic(home, "imported_words_", id);
+   imported_dic_dir = malloc(strlen(home) + strlen(id) + 30);
+-  sprintf(imported_dic_dir, "%s/.anthy/imported_words_%s.d/", home, id);
++  sprintf(imported_dic_dir, "%s/anthy/imported_words_%s.d/", home, id);
+ }
+ 
+ void
+--- anthy-9100h.orig/src-worddic/record.c
++++ anthy-9100h/src-worddic/record.c
+@@ -1385,7 +1385,7 @@
+   sid = anthy_conf_get_str("SESSION-ID");
+   hd = anthy_conf_get_str("HOME");
+   pn = alloca(strlen(hd)+strlen(sid) + 10);
+-  sprintf(pn, "%s/.anthy/%s", hd, sid);
++  sprintf(pn, "%s/anthy/%s", hd, sid);
+   return fopen(pn, "w");
+ }
+ 
+@@ -1402,7 +1402,7 @@
+   sid = anthy_conf_get_str("SESSION-ID");
+   tmp_fn = alloca(strlen(hd)+strlen(sid) + 10);
+ 
+-  sprintf(tmp_fn, "%s/.anthy/%s", hd, sid);
++  sprintf(tmp_fn, "%s/anthy/%s", hd, sid);
+   if (rename(tmp_fn, fn)){
+     anthy_log(0, "Failed to update record file %s -> %s.\n", tmp_fn, fn);
+   }
+@@ -2017,13 +2017,13 @@
+ 
+   /* 基本ファイル */
+   rst->base_fn = (char*) malloc(base_len +
+-				strlen("/.anthy/last-record1_"));
+-  sprintf(rst->base_fn, "%s/.anthy/last-record1_%s",
++				strlen("/anthy/last-record1_"));
++  sprintf(rst->base_fn, "%s/anthy/last-record1_%s",
+ 	  home, id);
+   /* 差分ファイル */
+   rst->journal_fn = (char*) malloc(base_len +
+-				   strlen("/.anthy/last-record2_"));
+-  sprintf(rst->journal_fn, "%s/.anthy/last-record2_%s",
++				   strlen("/anthy/last-record2_"));
++  sprintf(rst->journal_fn, "%s/anthy/last-record2_%s",
+ 	  home, id);
+ }
+ 

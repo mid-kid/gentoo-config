@@ -1,0 +1,15 @@
+I will probably never create archives with these formats with atool, but being
+able to extract and list them is pretty useful, and p7zip provides more than
+enough functionality for these.
+
+--- atool-0.39.0.orig/atool
++++ atool-0.39.0/atool
+@@ -422,6 +422,8 @@ sub runcmds($$$;@) {
+     return undef if !defined $format;
+   }
+ 
++  if ($format eq 'rar' || $format eq 'lha') { $format = '7z'; }
++
+   my @cmd;
+   my $outdir;
+   if ($format eq 'tar+bzip2') {

@@ -1,0 +1,14 @@
+Changes the APPNAME for notifications of this app, from "Volume Icon" to just "Volume".
+I think that's significantly nicer...
+
+--- volumeicon-0.5.1.orig/src/volumeicon.c
++++ volumeicon-0.5.1/src/volumeicon.c
+@@ -925,7 +925,7 @@ static void status_icon_update(gboolean
+ 
+         // Always use the current GTK icon theme for notifications.
+         #ifdef COMPILEWITH_NOTIFY
+-        notify_notification_update(m_notification, APPNAME, NULL, icon_name);
++        notify_notification_update(m_notification, "Volume", NULL, icon_name);
+         #endif
+         gtk_image_set_from_icon_name(m_popup_icon, icon_name,
+                                      GTK_ICON_SIZE_LARGE_TOOLBAR);

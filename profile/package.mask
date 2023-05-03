@@ -1,0 +1,27 @@
+# Utilizes prebuilt binaries
+# NOTE: Don't bother masking packages that are masked by the default ACCEPT_LICENSES anyway
+app-editors/vscodium
+app-office/libreoffice-bin
+app-office/libreoffice-bin-debug
+dev-embedded/arduino  # Prebuilt binaries in arduino-core/lib/, not rebuilt
+dev-java/gradle-bin
+dev-java/icedtea-bin
+dev-java/openjdk-bin
+dev-java/openjdk-jre-bin
+dev-java/openjfx  # Downloads gradle-bin
+dev-lang/go-bootstrap
+dev-lang/rust-bin
+net-im/element-desktop-bin
+net-im/telegram-desktop-bin
+www-client/firefox-bin
+
+# Try to avoid rust
+>=media-gfx/libimagequant-4
+
+# Try to avoid systemd-utils...
+sys-apps/systemd-utils
+sys-apps/systemd-tmpfiles
+sys-fs/udev
+
+# opentmpfiles works fine, alledged security issues require active misconfiguration
+-sys-apps/opentmpfiles

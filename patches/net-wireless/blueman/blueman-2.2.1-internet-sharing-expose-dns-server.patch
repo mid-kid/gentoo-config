@@ -1,0 +1,22 @@
+Expose DNS server when using dnsmasq
+
+When you share yout internet connection over bluetooth without networkmanager,
+this connection will be naught useless without setting up a DNS server.
+Dnsmasq, which is already being used anyway, can make one.
+
+--- blueman-2.2.1.orig/blueman/main/NetConf.py
++++ blueman-2.2.1/blueman/main/NetConf.py
+@@ -91,10 +91,11 @@
+             assert self.netconf.ip4_address is not None
+ 
+             ipiface = ipaddress.ip_interface('/'.join((self.netconf.ip4_address, '255.255.255.0')))
+-            cmd = [get_binary("dnsmasq"), "--port=0", "--pid-file=/var/run/dnsmasq.pan1.pid", "--except-interface=lo",
++            cmd = [get_binary("dnsmasq"), "--conf-file=/dev/null", "--pid-file=/var/run/dnsmasq.pan1.pid", "--except-interface=lo",
+                    "--interface=pan1", "--bind-interfaces",
+                    f"--dhcp-range={ipiface.network[2]},{ipiface.network[-2]},60m",
+-                   f"--dhcp-option=option:router,{self.netconf.ip4_address}"]
++                   f"--dhcp-option=option:router,{self.netconf.ip4_address}",
++                   f"--dhcp-option=option:dns-server,{self.netconf.ip4_address}"]
+ 
+             logging.info(cmd)
+             p = Popen(cmd, stderr=PIPE)

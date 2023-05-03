@@ -1,0 +1,16 @@
+--- blueman-2.1.3.orig/blueman/main/NetConf.py
++++ blueman-2.1.3/blueman/main/NetConf.py
+@@ -52,10 +52,11 @@ class DnsMasqHandler(object):
+                 self.do_remove()
+ 
+             ipiface = ipaddress.ip_interface('/'.join((self.netconf.ip4_address, '255.255.255.0')))
+-            cmd = [have("dnsmasq"), "--port=0", "--pid-file=/var/run/dnsmasq.pan1.pid", "--except-interface=lo",
++            cmd = [have("dnsmasq"), "--conf-file=/dev/null", "--pid-file=/var/run/dnsmasq.pan1.pid", "--except-interface=lo",
+                    "--interface=pan1", "--bind-interfaces",
+                    "--dhcp-range=%s,%s,60m" % (ipiface.network[2], ipiface.network[-2]),
+-                   "--dhcp-option=option:router,%s" % self.netconf.ip4_address]
++                   "--dhcp-option=option:router,%s" % self.netconf.ip4_address,
++                   "--dhcp-option=option:dns-server,%s" % self.netconf.ip4_address]
+ 
+             logging.info(cmd)
+             p = Popen(cmd, stderr=PIPE)

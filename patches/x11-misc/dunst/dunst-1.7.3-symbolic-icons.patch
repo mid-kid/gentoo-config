@@ -1,0 +1,15 @@
+Look for symbolic icons
+
+These end with an extension of ".symbolic.png", and should be looked for too.
+
+--- dunst-1.7.3.orig/src/icon.c
++++ dunst-1.7.3/src/icon.c
+@@ -218,7 +218,7 @@
+         if (STR_EMPTY(iconname))
+                 return NULL;
+ 
+-        const char *suffixes[] = { ".svg", ".svgz", ".png", ".xpm", NULL };
++        const char *suffixes[] = { ".svg", ".svgz", ".png", ".symbolic.png", ".xpm", NULL };
+         gchar *uri_path = NULL;
+         char *new_name = NULL;
+ 

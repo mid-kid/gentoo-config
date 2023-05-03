@@ -1,0 +1,18 @@
+This patches the package to follow the XDG Base Directory Specification:
+~/.python_history was moved to $XDG_CACHE_HOME/python_history
+
+--- Python-3.8.3.orig/Lib/site.py
++++ Python-3.8.3/Lib/site.py
+@@ -434,8 +434,10 @@ def enablerlcompleter():
+             # each interpreter exit when readline was already configured
+             # through a PYTHONSTARTUP hook, see:
+             # http://bugs.python.org/issue5845#msg198636
+-            history = os.path.join(os.path.expanduser('~'),
+-                                   '.python_history')
++            cache_dir = os.environ.get('XDG_CACHE_HOME')
++            if cache_dir is None:
++                cache_dir = os.path.join(os.path.expanduser('~'), '.cache')
++            history = os.path.join(cache_dir, 'python_history')
+             try:
+                 readline.read_history_file(history)
+             except OSError:

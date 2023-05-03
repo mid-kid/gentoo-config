@@ -1,0 +1,46 @@
++++ ./src/gui/optionsdialog.h
+@@ -42,6 +42,7 @@
+ {
+     TOGGLE_PAUSE,
+     OPEN_DEST,
++    PREVIEW,
+     NO_ACTION
+ };
+ 
++++ ./src/gui/optionsdialog.ui
+@@ -298,6 +298,11 @@
+                       <string>Open destination folder</string>
+                      </property>
+                     </item>
++		    <item>
++		     <property name="text">
++		      <string>Preview file</string>
++		     </property>
++		    </item>
+                     <item>
+                      <property name="text">
+                       <string>No action</string>
+@@ -324,6 +329,11 @@
+                       <string>Open destination folder</string>
+                      </property>
+                     </item>
++		    <item>
++		     <property name="text">
++		      <string>Preview file</string>
++		     </property>
++		    </item>
+                     <item>
+                      <property name="text">
+                       <string>No action</string>
++++ ./src/gui/transferlistwidget.cpp
+@@ -375,6 +375,10 @@
+             Utils::Misc::openPath(torrent->contentPath(true));
+ #endif
+         break;
++    case PREVIEW:
++        if (torrent->hasMetadata())
++            new PreviewSelectDialog(this, torrent);
++        break;
+     }
+ }
+ 

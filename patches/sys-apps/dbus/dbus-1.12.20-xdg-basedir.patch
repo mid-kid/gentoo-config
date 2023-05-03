@@ -1,0 +1,76 @@
+Respect the XDG Base Directory standard
+
+Make dbus-launch-x11 use XDG basedir paths
+
+--- dbus-1.12.20.orig/tools/dbus-launch-x11.c
++++ dbus-1.12.20/tools/dbus-launch-x11.c
+@@ -88,6 +88,7 @@ get_homedir (void)
+ }
+ 
+ #define DBUS_DIR ".dbus"
++#define DBUS_RUNTIME_DIR "dbus"  // length <= DBUS_DIR
+ #define DBUS_SESSION_BUS_DIR "session-bus"
+ 
+ static char *
+@@ -95,6 +96,7 @@ get_session_file (void)
+ {
+   static const char prefix[] = "/" DBUS_DIR "/" DBUS_SESSION_BUS_DIR "/";
+   const char *machine;
++  const char *runtime;
+   const char *home;
+   char *display;
+   char *result;
+@@ -149,7 +151,11 @@ get_session_file (void)
+         *p = '_';
+     }
+   
+-  home = get_homedir ();
++  runtime = getenv ("XDG_RUNTIME_DIR");
++  if (runtime)
++    home = runtime;
++  else
++    home = get_homedir ();
+   
+   result = malloc (strlen (home) + strlen (prefix) + strlen (machine) +
+                    strlen (display) + 2);
+@@ -161,7 +167,10 @@ get_session_file (void)
+     }
+ 
+   strcpy (result, home);
+-  strcat (result, prefix);
++  if (runtime)
++    strcat (result, "/" DBUS_RUNTIME_DIR "/" DBUS_SESSION_BUS_DIR "/");
++  else
++    strcat (result, prefix);
+   strcat (result, machine);
+   strcat (result, "-");
+   strcat (result, display);
+@@ -174,10 +183,15 @@ get_session_file (void)
+ static void
+ ensure_session_directory (void)
+ {
++  const char *runtime;
+   const char *home;
+   char *dir;
+   
+-  home = get_homedir ();
++  runtime = getenv ("XDG_RUNTIME_DIR");
++  if (runtime)
++    home = runtime;
++  else
++    home = get_homedir ();
+ 
+   /* be sure we have space for / and nul */
+   dir = malloc (strlen (home) + strlen (DBUS_DIR) + strlen (DBUS_SESSION_BUS_DIR) + 3);
+@@ -189,7 +203,10 @@ ensure_session_directory (void)
+   
+   strcpy (dir, home);
+   strcat (dir, "/");
+-  strcat (dir, DBUS_DIR);
++  if (runtime)
++    strcat (dir, DBUS_RUNTIME_DIR);
++  else
++    strcat (dir, DBUS_DIR);
+ 
+   if (mkdir (dir, 0700) < 0)
+     {

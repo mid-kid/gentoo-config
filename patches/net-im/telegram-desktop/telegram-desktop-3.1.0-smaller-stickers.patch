@@ -1,0 +1,28 @@
+Huge stickers are annoying. They break up the flow of the chat filling up a
+huge chunk of your screen. This is especially bad when someone posts multiple
+in succession. This also applies to gifs and animated emojis.
+
+--- tdesktop-3.1.0-full.orig/Telegram/SourceFiles/ui/chat/chat.style
++++ tdesktop-3.1.0-full/Telegram/SourceFiles/ui/chat/chat.style
+@@ -37,9 +37,9 @@
+ minPhotoSize: 100px;
+ minVideoSize: 160px;
+ maxMediaSize: 430px;
+-maxStickerSize: 224px;
+-maxAnimatedEmojiSize: 112px;
+-maxGifSize: 320px;
++maxStickerSize: 114px;
++maxAnimatedEmojiSize: 56px;
++maxGifSize: 160px;
+ maxVideoMessageSize: 240px;
+ maxSignatureSize: 144px;
+ maxWallPaperWidth: 160px;
+@@ -824,7 +824,7 @@
+ historyGroupCallBlobMinRadius: 23px;
+ historyGroupCallBlobMaxRadius: 25px;
+ 
+-largeEmojiSize: 36px;
++largeEmojiSize: 18px;
+ largeEmojiOutline: 1px;
+ largeEmojiPadding: margins(0px, 0px, 0px, 0px);
+ largeEmojiSkip: 4px;

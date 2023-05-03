@@ -1,0 +1,16 @@
+Add the dutch ij ligature to latin keymap
+
+Nobody uses this, but I thought it was neat. More useful than the ĸ or whatever
+at least.
+
+--- xkeyboard-config-2.36.orig/symbols/latin
++++ xkeyboard-config-2.36/symbols/latin
+@@ -36,7 +36,7 @@
+     key <AC05>	{ [         g,          G,          eng,          ENG ]	};
+     key <AC06>	{ [         h,          H,      hstroke,      Hstroke ]	};
+     key <AC07>	{ [         j,          J,    dead_hook,    dead_horn ] };
+-    key <AC08>	{ [         k,          K,          kra,    ampersand ]	};
++    key <AC08>	{ [         k,          K,        U0133,        U0132 ]	};
+     key <AC09>	{ [         l,          L,      lstroke,      Lstroke ]	};
+     key <AC10>	{ [ semicolon,    colon, dead_acute, dead_doubleacute ]	};
+     key <AC11>	{ [apostrophe, quotedbl, dead_circumflex,  dead_caron ]	};

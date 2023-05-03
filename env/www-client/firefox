@@ -1,0 +1,4 @@
+# Clear google API keys, I prefer to not use these services.
+MOZ_API_KEY_GOOGLE=""
+MOZ_API_KEY_LOCATION=""
+MOZ_API_KEY_MOZILLA=""

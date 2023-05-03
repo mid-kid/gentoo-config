@@ -1,0 +1,13 @@
+# Remove flag customizations
+# Default flags for default/linux/amd64/17.1/desktop
+
+# profiles/arch/amd64/make.defaults:
+CFLAGS="-O2 -pipe"
+CXXFLAGS="${CFLAGS}"
+FFLAGS="${CFLAGS}"
+FCFLAGS="${CFLAGS}"
+
+# profiles/default/linux/make.defaults:
+LDFLAGS="-Wl,-O1 -Wl,--as-needed"
+# releases/23.0/make.defaults:
+#LDFLAGS="-Wl,-O1 -Wl,--as-needed -Wl,-z,pack-relative-relocs"
