@@ -11,7 +11,7 @@ https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/video/i386/pc/vbe.c?id
  } __attribute__ ((packed));
  
  #define VESA_MAGIC ('V' + ('E' << 8) + ('S' << 16) + ('A' << 24))
-+#define VBE2_MAGIC ('B' + ('B' << 8) + ('E' << 16) + ('2' << 24))
++#define VBE2_MAGIC ('V' + ('B' << 8) + ('E' << 16) + ('2' << 24))
  
  struct vesa_mode_info {
  	u16 mode_attr;		/* 0 */
