@@ -67,7 +67,7 @@ app-i18n/fcitx -enchant
 app-editors/vim -crypt
 app-editors/gvim -crypt
 sys-apps/man-db -manpager
-media-libs/mlt -gtk
+media-libs/mlt -gtk -qt5
 kde-apps/okular -crypt
 media-libs/libsndfile minimal
 app-containers/podman -init -fuse
@@ -85,3 +85,4 @@ media-video/mpv -libplacebo
 app-crypt/gpgme -qt5
 sys-devel/clang-runtime -compiler-rt -sanitize
 net-analyzer/nmap -nse
+media-gfx/zbar -gtk -qt5
