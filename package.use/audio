@@ -1,13 +1,14 @@
-media-sound/pulseaudio daemon
-media-sound/pulseaudio-daemon bluetooth
-media-plugins/alsa-plugins pulseaudio
+media-video/pipewire sound-server pipewire-alsa bluetooth
+
 net-wireless/blueman pulseaudio  # Bluetooth audio
-media-video/obs-studio pulseaudio  # Desktop recording
+media-video/obs-studio pulseaudio pipewire  # Desktop recording
 
 # ALSA problems when used with pulseaudio plugin
-www-client/firefox pulseaudio
-mail-client/thunderbird pulseaudio
-dev-qt/qtmultimedia pulseaudio  # Specifically, games-emulation/mgba
-games-emulation/dolphin pulseaudio
-media-libs/libsdl2 pulseaudio  # Various emulators, SysDVR-Client, ...
-media-libs/openal pulseaudio  # Literally no output with the alsa backend
+www-client/firefox pulseaudio  # ALSA backend breaks websites
+mail-client/thunderbird pulseaudio  # ALSA backend breaks websites
+
+# Let's see if these things work better with pipewire's alsa plugin
+#dev-qt/qtmultimedia pulseaudio  # Specifically, games-emulation/mgba
+#games-emulation/dolphin pulseaudio
+#media-libs/libsdl2 pulseaudio  # Various emulators, SysDVR-Client, ...
+#media-libs/openal pulseaudio  # Literally no output with the alsa backend
