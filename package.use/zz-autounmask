@@ -50,3 +50,5 @@
 >=dev-python/pillow-9.3.0-r1 webp
 # required by x11-libs/wxGTK-3.2.2.1-r2::gentoo
 >=dev-libs/libpcre2-10.42-r1 pcre32
+# required by kde-apps/kdenlive-22.12.3-1:5/5::gentoo
+>=media-libs/mlt-7.12.0 qt5

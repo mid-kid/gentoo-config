@@ -1,14 +1,16 @@
 app-arch/p7zip rar
 sys-block/f3 extra
 games-emulation/mgba ffmpeg debug sdl lua
-media-video/mpv libmpv cplugins
-dev-vcs/git perl
-www-client/w3m imlib
+dev-vcs/git perl  # Many utility scripts
+www-client/w3m imlib  # Render images in the terminal
 app-office/libreoffice kde
 games-emulation/desmume gdb
 net-misc/curl adns  # Support for --dns-servers option
 dev-embedded/sdcc device-lib mcs51
 net-misc/aria2 bittorrent
 sys-fs/android-file-transfer-linux fuse
-dev-util/android-tools -udev
-sys-apps/gawk mpfr
+dev-util/android-tools -udev  # I use my own udev rules
+sys-apps/gawk mpfr  # Support for -M/--bignum arbitrary-precision numbers
+dev-util/cmake qt5
+x11-libs/gtk+ examples  # Installs gtk3-widget-factory
+gui-libs/gtk examples  # Installs widget factory

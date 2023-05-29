@@ -1,4 +1,3 @@
 x11-terms/rxvt-unicode 256-color unicode3 fading-colors iso14755 xft perl
 media-gfx/feh xinerama
 x11-misc/polybar i3wm network ipc
-x11-libs/gtk+ examples

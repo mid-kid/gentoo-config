@@ -1,8 +1,5 @@
 # Dependencies for external (i.e. non-portage) programs
 
-# Required for fusee-launcher
-dev-python/pyusb
-
 # Required for create_ap
 net-dns/dnsmasq
 net-wireless/hostapd
