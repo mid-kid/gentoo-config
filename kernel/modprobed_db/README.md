@@ -1,0 +1,5 @@
+Keeping track of modprobed modules to build slimmer kernels
+
+`modprobed_db.sh` is a script that gathers the currently loaded kernel modules, filters out blacklisted ones, and writes it back to a file. This file can later be used in the LSMOD= parameter to the kernel's `make localmodconfig` command. The same thing is done for firmwares. The goal here is to build kernels containing only what I actually use. I usually run the script at shutdown through /etc/local.d or periodically with /etc/cron.hourly.
+
+I find that I don't need 90% of the kernel's drivers and firmwares, and since the kernel gets obnoxiously frequent version bumps, a lot of time is wasted building them, and disk space is wasted storing them (looking at you, `drivers/net/wireless`). So, instead, I keep one kernel around with all the modules (usually the latest LTS), and build every minor upgrade using this cache file. I can switch back to the "full" kernel when I buy a new device or use a feature I've never used before, which is really infrequently.

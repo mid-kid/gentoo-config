@@ -1,0 +1,6 @@
+acpi_call
+hid_nintendo
+v4l2loopback
+vboxdrv
+vboxnetadp
+vboxnetflt
