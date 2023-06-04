@@ -1,4 +1,4 @@
-app-emulation/wine-staging gstreamer vkd3d vulkan #themes
+app-emulation/wine-staging gstreamer vkd3d #themes
 #app-emulation/wine-vanilla gstreamer
 
 app-arch/bzip2 ABI_X86: 32

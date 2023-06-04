@@ -11,3 +11,4 @@ sys-auth/pambase -passwdqc
 sys-auth/seatd -server
 net-wireless/wpa_supplicant tkip
 app-alternatives/sh -* dash
+media-libs/freetype harfbuzz  # Recommended by x11-libs/pango ebuild

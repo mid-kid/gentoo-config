@@ -1,0 +1,23 @@
+--- glib-2.76.2.orig/gio/gdesktopappinfo.c
++++ glib-2.76.2/gio/gdesktopappinfo.c
+@@ -2729,7 +2729,19 @@
+         ;
+     }
+ 
+-  for (i = 0, found_terminal = NULL; i < G_N_ELEMENTS (known_terminals); i++)
++  found_terminal = NULL;
++  char *env_term = g_getenv ("TERMINAL");
++  if (env_term)
++    {
++      found_terminal = GLIB_PRIVATE_CALL (g_find_program_for_path) (env_term,
++                                                                    path, working_dir);
++      if (found_terminal != NULL)
++        {
++          term_arg = "-e";
++        }
++    }
++
++  for (i = 0; found_terminal == NULL, i < G_N_ELEMENTS (known_terminals); i++)
+     {
+       found_terminal = GLIB_PRIVATE_CALL (g_find_program_for_path) (known_terminals[i].exec,
+                                                                     path, working_dir);

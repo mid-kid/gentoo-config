@@ -25,7 +25,7 @@ media-libs/gst-plugins-bad -gtk
 app-text/ghostscript-gpl -gtk
 sys-auth/polkit -gtk
 dev-python/matplotlib -qt5 -gtk3 -cairo -wxwidgets
-net-print/cups-filters -foomatic -pdf
+net-print/cups-filters -pdf
 dev-embedded/openocd -ftdi -jlink -cmsis-dap
 sci-electronics/kicad-meta minimal
 xfce-base/libxfce4ui -gtk2
@@ -86,3 +86,4 @@ app-crypt/gpgme -qt5
 sys-devel/clang-runtime -compiler-rt -sanitize
 net-analyzer/nmap -nse
 media-gfx/zbar -gtk -qt5
+media-video/mpv -vulkan

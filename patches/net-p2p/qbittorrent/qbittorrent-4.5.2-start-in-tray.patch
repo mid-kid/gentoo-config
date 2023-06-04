@@ -1,0 +1,106 @@
+Adds --tray option, suitable for autostart scripts, to start qbittorrent
+minimized in the tray.
+
+--- qBittorrent-release-4.5.2.orig/src/app/application.cpp
++++ qBittorrent-release-4.5.2/src/app/application.cpp
+@@ -671,6 +671,9 @@
+             continue;
+         }
+ 
++        // Parameter passed to avoid bringing up the window
++        if (param == QLatin1String("@startInTray")) continue;
++
+         parsedParams.torrentSources.append(param);
+     }
+ 
+@@ -806,8 +809,9 @@
+         });
+ 
+         disconnect(m_desktopIntegration, &DesktopIntegration::activationRequested, this, &Application::createStartupProgressDialog);
+-        const MainWindow::State windowState = (!m_startupProgressDialog || (m_startupProgressDialog->windowState() & Qt::WindowMinimized))
++        MainWindow::State windowState = (!m_startupProgressDialog || (m_startupProgressDialog->windowState() & Qt::WindowMinimized))
+                 ? MainWindow::Minimized : MainWindow::Normal;
++        if (m_commandLineArgs.startInTray) windowState = MainWindow::Tray;
+         m_window = new MainWindow(this, windowState);
+         delete m_startupProgressDialog;
+ #ifdef Q_OS_WIN
+--- qBittorrent-release-4.5.2.orig/src/app/cmdoptions.cpp
++++ qBittorrent-release-4.5.2/src/app/cmdoptions.cpp
+@@ -324,6 +324,7 @@
+     constexpr const BoolOption DAEMON_OPTION {"daemon", 'd'};
+ #else
+     constexpr const BoolOption NO_SPLASH_OPTION {"no-splash"};
++    constexpr const BoolOption START_IN_TRAY_OPTION {"tray"};
+ #endif
+     constexpr const IntOption WEBUI_PORT_OPTION {"webui-port"};
+     constexpr const IntOption TORRENTING_PORT_OPTION {"torrenting-port"};
+@@ -350,6 +351,7 @@
+ #endif
+ #ifndef DISABLE_GUI
+     , noSplash(NO_SPLASH_OPTION.value(env))
++    , startInTray(START_IN_TRAY_OPTION.value(env))
+ #elif !defined(Q_OS_WIN)
+     , shouldDaemonize(DAEMON_OPTION.value(env))
+ #endif
+@@ -396,6 +398,9 @@
+     if (skipDialog.has_value())
+         result.append(*skipDialog ? u"@skipDialog=1"_qs : u"@skipDialog=0"_qs);
+ 
++    if (startInTray)
++        result.append(QLatin1String("@startInTray"));
++
+     result += torrents;
+     return result;
+ }
+@@ -443,6 +448,10 @@
+             {
+                 result.noSplash = true;
+             }
++            else if (arg == START_IN_TRAY_OPTION)
++            {
++                result.startInTray = true;
++            }
+ #elif !defined(Q_OS_WIN)
+             else if (arg == DAEMON_OPTION)
+             {
+@@ -553,6 +562,7 @@
+         + u'\n'
+ #ifndef DISABLE_GUI
+         + NO_SPLASH_OPTION.usage() + wrapText(QObject::tr("Disable splash screen")) + u'\n'
++        + START_IN_TRAY_OPTION.usage() + wrapText(QObject::tr("Start minimized")) + u'\n'
+ #elif !defined(Q_OS_WIN)
+         + DAEMON_OPTION.usage() + wrapText(QObject::tr("Run in daemon-mode (background)")) + u'\n'
+ #endif
+--- qBittorrent-release-4.5.2.orig/src/app/cmdoptions.h
++++ qBittorrent-release-4.5.2/src/app/cmdoptions.h
+@@ -52,6 +52,7 @@
+ #endif
+ #ifndef DISABLE_GUI
+     bool noSplash;
++    bool startInTray;
+ #elif !defined(Q_OS_WIN)
+     bool shouldDaemonize;
+ #endif
+--- qBittorrent-release-4.5.2.orig/src/gui/mainwindow.cpp
++++ qBittorrent-release-4.5.2/src/gui/mainwindow.cpp
+@@ -388,7 +388,7 @@
+ #else
+     if (app->desktopIntegration()->isActive())
+     {
+-        if ((initialState != Minimized) && !m_uiLocked)
++        if ((initialState == Normal) && !m_uiLocked)
+         {
+             show();
+             activateWindow();
+--- qBittorrent-release-4.5.2.orig/src/gui/mainwindow.h
++++ qBittorrent-release-4.5.2/src/gui/mainwindow.h
+@@ -77,7 +77,8 @@
+     enum State
+     {
+         Normal,
+-        Minimized
++        Minimized,
++        Tray
+     };
+ 
+     explicit MainWindow(IGUIApplication *app, State initialState = Normal);
