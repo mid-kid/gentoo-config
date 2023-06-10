@@ -1,0 +1,22 @@
+Follow the XDG Base Directory Specification
+
+--- claws-mail-4.1.1.orig/src/common/utils.c
++++ claws-mail-4.1.1/src/common/utils.c
+@@ -1742,8 +1742,15 @@
+ {
+ 
+ 	if (!claws_rc_dir) {
+-		claws_rc_dir = g_strconcat(get_home_dir(), G_DIR_SEPARATOR_S,
+-				     RC_DIR, NULL);
++		const gchar *home = g_strdup(g_getenv("XDG_DATA_HOME"));
++		if (!home) {
++			home = g_strconcat(get_home_dir(),
++					G_DIR_SEPARATOR_S ".local" G_DIR_SEPARATOR_S "share", NULL);
++		}
++
++		claws_rc_dir = g_strconcat(home, G_DIR_SEPARATOR_S, "claws-mail", NULL);
++		g_free(home);
++
+ 		debug_print("using default rc_dir %s\n", claws_rc_dir);
+ 	}
+ 	return claws_rc_dir;
