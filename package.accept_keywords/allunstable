@@ -26,6 +26,7 @@ media-video/v4l2loopback
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrokdecode
 sci-electronics/pulseview
+sci-electronics/sigrok-cli
 
 app-misc/piper
 dev-libs/libratbag

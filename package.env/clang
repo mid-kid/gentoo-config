@@ -11,3 +11,4 @@ sys-devel/lld clang
 # Rust LTO requires Clang to link (using $CC instead of $RUSTFLAGS to select linker)
 dev-lang/rust clang  # Appends -Clinker=$CC to RUSTFLAGS
 gnome-base/librsvg clang  # Using autotools/libtool, which uses $CC
+dev-python/cryptography clang  # Weird linking issue
