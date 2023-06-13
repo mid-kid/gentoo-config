@@ -1,5 +1,10 @@
 It's annoying to have many *rc files littered across my ~/.config directory
-Literally no other app stores multiple files without making a subdirectory, yet multiple KDE apps do.
+Practically no other app stores multiple files without making a subdirectory, yet multiple KDE apps do.
+
+For MIME associations to work, create a symlink to mimeapps.list:
+    kde="${XDG_CONFIG_HOME:-$HOME/.config}/kde5"
+    mkdir -p "$kde"
+    ln -sf ../mimeapps.list "$kde/mimeapps.list"
 
 --- kconfig-5.82.0.orig/src/core/kconfig.cpp
 +++ kconfig-5.82.0/src/core/kconfig.cpp
