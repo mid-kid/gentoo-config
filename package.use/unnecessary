@@ -87,3 +87,5 @@ sys-devel/clang-runtime -compiler-rt -sanitize
 net-analyzer/nmap -nse
 media-gfx/zbar -gtk -qt5
 media-video/mpv -vulkan
+dev-util/astyle -java
+sys-apps/fwupd -archive -gusb -sqlite

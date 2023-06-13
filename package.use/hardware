@@ -4,3 +4,4 @@ sys-boot/grub GRUB_PLATFORMS: -* efi-64
 media-libs/mesa VIDEO_CARDS: radeonsi
 x11-libs/libdrm VIDEO_CARDS: radeon
 app-laptop/tlp tlp_suggests
+sys-apps/fwupd uefi nvme gnutls
