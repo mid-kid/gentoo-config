@@ -1,14 +1,15 @@
-sys-apps/openrc sysv-utils
-sys-fs/eudev rule-generator
-app-admin/sysklogd logrotate
-app-admin/sudo offensive
-dev-python/pyyaml libyaml
-media-video/ffmpeg openssl vpx opus x265
-media-fonts/noto cjk
-x11-base/xorg-server xvfb xephyr
-net-misc/dhcpcd privsep
-sys-auth/pambase -passwdqc
-sys-auth/seatd -server
-net-wireless/wpa_supplicant tkip
-app-alternatives/sh -* dash
+sys-apps/openrc sysv-utils  # Replace sys-apps/sysvinit
+sys-fs/eudev rule-generator  # Generate 70-persistent-net.rules
+app-admin/sysklogd logrotate  # Install logrotate files
+app-admin/sudo offensive  # Scream at me mommy
+dev-python/pyyaml libyaml  # The C library makes it faster
+media-video/ffmpeg openssl vpx opus x265  # Common formats
+media-fonts/noto cjk  # Big chinese fonts
+x11-base/xorg-server xvfb xephyr  # Nested X servers
+net-misc/dhcpcd privsep  # Run dhcpcd under its own user
+net-dns/dnsmasq dnssec  # Enable DNSSEC support
+sys-auth/pambase -passwdqc  # Don't care about password quality
+sys-auth/seatd -server  # Using elogind as server
+net-wireless/wpa_supplicant tkip  # Compatibility with old routers
+app-alternatives/sh -* dash  # Faster POSIX-compatible shell than bash
 media-libs/freetype harfbuzz  # Recommended by x11-libs/pango ebuild

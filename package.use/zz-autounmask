@@ -52,3 +52,5 @@
 >=dev-libs/libpcre2-10.42-r1 pcre32
 # required by kde-apps/kdenlive-22.12.3-1:5/5::gentoo
 >=media-libs/mlt-7.12.0 qt5
+# required by sys-firmware/sigrok-firmware-fx2lafw-0.1.7-r1::gentoo
+>=dev-embedded/sdcc-3.8.0-r1 device-lib mcs51

@@ -6,4 +6,10 @@
 # virtual/udev
 sys-apps/systemd-utils
 
+# Hold back updates
+>=sys-devel/llvm-16
+>=sys-devel/llvmgold-16
+>=sys-devel/clang-16
+>=sys-devel/lld-16
+
 # Broken

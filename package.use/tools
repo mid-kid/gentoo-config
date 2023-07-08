@@ -1,4 +1,4 @@
-app-arch/p7zip rar
+app-arch/p7zip rar  # Using 7z instead of unrar
 sys-block/f3 extra
 games-emulation/mgba ffmpeg debug sdl lua
 dev-vcs/git perl  # Many utility scripts
@@ -6,7 +6,6 @@ www-client/w3m imlib  # Render images in the terminal
 app-office/libreoffice kde
 games-emulation/desmume gdb
 net-misc/curl adns  # Support for --dns-servers option
-dev-embedded/sdcc device-lib mcs51
 net-misc/aria2 bittorrent
 sys-fs/android-file-transfer-linux fuse
 dev-util/android-tools -udev  # I use my own udev rules
