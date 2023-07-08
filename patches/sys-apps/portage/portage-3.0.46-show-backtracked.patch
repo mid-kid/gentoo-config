@@ -1,0 +1,33 @@
+Show how many times the resolver has backtracked
+
+This is nice statistics to have, as it might clarify why the resolver failed,
+or why it took so damned long.
+
+--- portage-3.0.46.orig/lib/_emerge/depgraph.py
++++ portage-3.0.46/lib/_emerge/depgraph.py
+@@ -11428,6 +11428,7 @@
+     if show_spinner:
+         portage.writemsg_stdout("Calculating dependencies  ")
+     spinner.start_time = time.time()
++    spinner.backtracked = 0
+ 
+ 
+ def _spinner_stop(spinner):
+@@ -11443,7 +11444,7 @@
+ 
+     stop_time = time.time()
+     time_fmt = f"{stop_time - spinner.start_time:.2f}"
+-    portage.writemsg_stdout(f"Dependency resolution took {darkgreen(time_fmt)} s.\n\n")
++    portage.writemsg_stdout(f"Dependency resolution took {darkgreen(time_fmt)} s. (backtracked {spinner.backtracked} times)\n\n")
+ 
+ 
+ def backtrack_depgraph(settings, trees, myopts, myparams, myaction, myfiles, spinner):
+@@ -11511,6 +11512,8 @@
+         elif backtracker:
+             backtracked += 1
+ 
++    spinner.backtracked = backtracked
++
+     if backtracked and not success and not mydepgraph.need_display_problems():
+         if debug:
+             writemsg_level(
