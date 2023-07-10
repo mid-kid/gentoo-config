@@ -1,7 +1,17 @@
+# Prefer using dependencies from the system
+dev-lang/rust system-llvm
+
 # I don't use clang to build 32-bit software
 # See profiles/arch/amd64/package.use
-sys-devel/clang-runtime -abi_x86_32
-sys-libs/libcxxabi -abi_x86_32
-sys-libs/libcxx -abi_x86_32
-sys-libs/libomp -abi_x86_32
-sys-libs/llvm-libunwind -abi_x86_32
+sys-devel/clang-runtime ABI_X86: -32
+sys-libs/libcxxabi ABI_X86: -32
+sys-libs/libcxx ABI_X86: -32
+sys-libs/libomp ABI_X86: -32
+sys-libs/llvm-libunwind ABI_X86: -32
+
+# I want to select the llvm targets on my own
+# See profiles/arch/amd64/package.use
+# See base/package.use
+dev-ml/llvm-ocaml LLVM_TARGETS: -AMDGPU -NVPTX -BPF
+sys-devel/clang LLVM_TARGETS: -AMDGPU -NVPTX -BPF
+sys-devel/llvm LLVM_TARGETS: -AMDGPU -NVPTX -BPF

@@ -1,8 +1,15 @@
 # Avoid prebuilt binaries and bundled libraries
-dev-lang/rust system-bootstrap system-llvm
+dev-lang/rust system-bootstrap
 media-fonts/noto-emoji buildfont
 media-fonts/dejavu fontforge
 media-fonts/liberation-fonts fontforge
 
-# Things I want to control
->=sys-devel/gcc-12.2 -default-znow -default-stack-clash-protection
+# I don't particularly care about costly security features. Gotta go fast.
+# See features/23.0/package.use.force
+sys-devel/gcc -default-znow -default-stack-clash-protection
+
+# Don't build unnecessary architectures, I'm pretty sure I know what I'm using.
+# See base/package.use.force
+# Current architecture: X86
+sys-devel/llvm LLVM_TARGETS: -AArch64 -AMDGPU -ARM -AVR -BPF -Hexagon -Lanai -LoongArch -MSP430 -Mips -NVPTX -PowerPC -RISCV -Sparc -SystemZ -VE -WebAssembly -XCore
+sys-devel/clang LLVM_TARGETS: -AArch64 -AMDGPU -ARM -AVR -BPF -Hexagon -Lanai -LoongArch -MSP430 -Mips -NVPTX -PowerPC -RISCV -Sparc -SystemZ -VE -WebAssembly -XCore
