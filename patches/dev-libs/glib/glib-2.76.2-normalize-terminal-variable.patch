@@ -1,3 +1,9 @@
+Normalize usage of $TERMINAL variable
+
+Run $TERMINAL -e, to standardize the behavior of Terminal=true across file
+openers. This is what various utilities like i3-sensible-terminal and
+rofi-sensible-terminal settled upon.
+
 --- glib-2.76.2.orig/gio/gdesktopappinfo.c
 +++ glib-2.76.2/gio/gdesktopappinfo.c
 @@ -2729,10 +2729,26 @@

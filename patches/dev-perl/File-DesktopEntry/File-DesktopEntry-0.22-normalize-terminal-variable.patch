@@ -1,3 +1,9 @@
+Normalize usage of $TERMINAL variable
+
+Run $TERMINAL -e, to standardize the behavior of Terminal=true across file
+openers. This is what various utilities like i3-sensible-terminal and
+rofi-sensible-terminal settled upon.
+
 --- File-DesktopEntry-0.22.orig/lib/File/DesktopEntry.pm
 +++ File-DesktopEntry-0.22/lib/File/DesktopEntry.pm
 @@ -229,8 +229,8 @@ sub _run {

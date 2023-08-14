@@ -1,7 +1,8 @@
 Normalize usage of $TERMINAL variable
 
 Run $TERMINAL -e, to standardize the behavior of Terminal=true across file
-openers.
+openers. This is what various utilities like i3-sensible-terminal and
+rofi-sensible-terminal settled upon.
 
 --- xdg-utils-1a58bc28f6844898532daf9ee1bf6da7764955a9.orig/scripts/xdg-open.in
 +++ xdg-utils-1a58bc28f6844898532daf9ee1bf6da7764955a9/scripts/xdg-open.in
