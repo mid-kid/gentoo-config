@@ -1,0 +1,23 @@
+Normalize usage of $TERMINAL variable
+
+Run $TERMINAL -e, to standardize the behavior of Terminal=true across file
+openers. This is what various utilities like i3-sensible-terminal and
+rofi-sensible-terminal settled upon.
+
+--- zim-desktop-wiki-0.75.1.orig/zim/gui/applications.py
++++ zim-desktop-wiki-0.75.1/zim/gui/applications.py
+@@ -840,7 +840,13 @@
+ 	# Since there is no spec how to do this lookup, don't add any complexity
+ 	# here other than maybe a switch per OS. Instead pull-in xdg-terminal as
+ 	# dependency if more sophisticated logic is needed.
+-	for cmd in _terminal_commands:
++	cmds = list(_terminal_commands)
++
++	terminal = os.environ.get("TERMINAL")
++	if terminal:
++		cmds.insert(0, (terminal, '-e'))
++
++	for cmd in cmds:
+ 		if Application(cmd).tryexec():
+ 			return cmd + tuple(appcmd)
+ 	else:
