@@ -54,3 +54,9 @@
 >=media-libs/mlt-7.12.0 qt5
 # required by sys-firmware/sigrok-firmware-fx2lafw-0.1.7-r1::gentoo
 >=dev-embedded/sdcc-3.8.0-r1 device-lib mcs51
+# required by kde-misc/kdeconnect-23.04.2-r1::gentoo
+>=dev-qt/qtmultimedia-5.15.10 qml
+# required by kde-misc/kdeconnect-23.04.2-r1::gentoo
+>=kde-frameworks/sonnet-5.108.0 qml
+# required by kde-misc/kdeconnect-23.04.2-r1::gentoo
+>=kde-frameworks/kconfig-5.108.0 qml

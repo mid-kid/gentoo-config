@@ -93,3 +93,4 @@ sys-apps/fwupd -archive -gusb -sqlite
 net-dns/getdns -idn -unbound
 media-tv/v4l-utils -bpf
 media-video/mediainfo -wxwidgets
+app-crypt/swtpm -gnutls
