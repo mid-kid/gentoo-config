@@ -1,0 +1,26 @@
+Use symbolic icons for system tray
+
+This allows using the default GTK icons, while respecting the chosen icon
+foreground color of the system tray. This is especially useful for things like
+the "tray-foreground" setting in polybar.
+
+--- volumeicon-0.5.1.orig/src/volumeicon.c
++++ volumeicon-0.5.1/src/volumeicon.c
+@@ -889,13 +889,13 @@
+         const gchar *icon_name;
+ 
+         if (icon_number == 1)
+-            icon_name = "audio-volume-muted";
++            icon_name = "audio-volume-muted-symbolic";
+         else if (icon_number <= 3)
+-            icon_name = "audio-volume-low";
++            icon_name = "audio-volume-low-symbolic";
+         else if (icon_number <= 6)
+-            icon_name = "audio-volume-medium";
++            icon_name = "audio-volume-medium-symbolic";
+         else
+-            icon_name = "audio-volume-high";
++            icon_name = "audio-volume-high-symbolic";
+ 
+         if(config_get_use_gtk_theme())
+         {
