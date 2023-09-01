@@ -1,0 +1,64 @@
+#!/bin/sh
+set -e
+
+has_update() {
+	emerge -pu1 "$@" | grep -q '^\['
+}
+pre_update() {
+	echo "Checking updates for $@..."
+	updated=false
+	has_update "$@" || return 0
+	updated=true
+	emerge --ask=n -u1 "$@"
+}
+
+# Upgrade portage and related configs
+pre_update \
+	sys-apps/sandbox \
+	sys-apps/portage
+	#sys-config/ltoize
+
+# Upgrade compiler to make sure to use the latest one
+pre_update \
+	sys-devel/binutils \
+	sys-devel/gcc
+if $updated; then
+	eselect binutils set latest
+	eselect gcc set latest
+fi
+
+# Upgrade rust separately since it keeps breaking resolution when --keep-going=y
+# Otherwise a failing package would cause --keep-going=y to stop with a circular dependency
+# Only relevant for USE=system-bootstrap...
+pre_update \
+	virtual/rust \
+	dev-lang/rust
+if $updated; then
+	eselect rust update
+fi
+
+# Upgrade golang first to rebuild everything only once even if it has updates
+# Otherwise only some programs would be upgraded/built during emerge @world but not all
+# TODO: Check for an update for dev-lang/go while considering @golang-rebuild in the graph
+#       This prevents updating when anything in @golang-rebuild can't be built
+if false; then
+pre_update \
+	dev-lang/go
+if $updated; then
+	emerge --ask=n --usepkg=n -p @golang-rebuild
+	emerge --ask=n --usepkg=n @golang-rebuild
+fi
+fi
+
+# Remove packages not part of @world to avoid dependency conflicts
+if false; then
+echo "Checking packages to clean..."
+if emerge -pc | grep -q '^All selected packages:'; then
+	echo "Depcleaning..."
+	emerge --ask=n -c
+fi
+fi
+
+# Upgrade entire rest of the system
+echo "Upgrading @world..."
+emerge -uDU --ask=n --binpkg-changed-deps=y "$@" @world

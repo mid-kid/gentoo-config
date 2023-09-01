@@ -60,3 +60,5 @@
 >=kde-frameworks/sonnet-5.108.0 qml
 # required by kde-misc/kdeconnect-23.04.2-r1::gentoo
 >=kde-frameworks/kconfig-5.108.0 qml
+# required by app-text/xournalpp-1.1.3-r2::gentoo
+>=media-libs/portaudio-19.07.00-r2 cxx

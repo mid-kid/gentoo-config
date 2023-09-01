@@ -1,0 +1,66 @@
+#!/bin/sh
+# Installing: symlink to /etc/cron.hourly/updates
+set -e
+
+dir=/var/spool/updates
+
+# Flags
+force=false
+while test -n "$1"; do
+    if [ "$1" = '-f' ]; then
+	force=true
+    fi
+    shift
+done
+
+# Check whether it was run successfully already
+day=
+if test -r "$dir/timestamp"; then
+    day=`cat "$dir/timestamp"`
+fi
+newday=`date +%Y%m`
+
+# Do not run it when on battery power
+online=1
+for psupply in AC ADP{0..9} ; do
+    sysfile="/sys/class/power_supply/$psupply/online"
+
+    if [ -f $sysfile ] ; then
+        if [ `cat $sysfile 2>/dev/null`x = 1x ]; then
+            online=1
+            break
+        else
+            online=0
+        fi
+    fi
+done
+if ! $force && [ $online = 0 ]; then
+    exit 0
+fi
+
+# Generate upgrade stats
+update() {
+    rm -f "$dir/pending-tree"
+    { emerge -puDU --binpkg-changed-deps=y --color=y @world 2>&1 || return; } | tee "$dir/pending"
+    emerge -puDU --binpkg-changed-deps=y --color=y --tree @world 2>&1 | tee "$dir/pending-tree"
+}
+
+# Force update
+if $force; then
+    rm -f "$dir/pending"
+fi
+
+# If already ran, check if pending needs updating
+if [ "$newday" = "$day" ]; then
+    if [ ! -f "$dir/pending" -o /var/log/emerge.log -nt "$dir/pending" ]; then
+    	update
+    fi
+    exit 0
+fi
+
+# Try to sync
+emerge --ask=n --sync | tee "$dir/sync.log"
+update
+
+# If successful, write it out
+echo "$newday" > "$dir/timestamp"
