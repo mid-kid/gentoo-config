@@ -14,4 +14,4 @@ net-wireless/wpa_supplicant tkip  # Compatibility with old routers
 app-alternatives/sh -* dash  # Faster POSIX-compatible shell than bash
 media-libs/freetype harfbuzz  # Recommended by x11-libs/pango ebuild
 virtual/libudev -sticky-tags eudev  # Always use eudev instead of udev
-app-alternatives/awk -* mawk  # Faster semi-compatible AWK interpreter
+#app-alternatives/awk -* mawk  # Faster semi-compatible AWK interpreter
