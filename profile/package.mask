@@ -22,6 +22,3 @@ www-client/firefox-bin
 sys-apps/systemd-utils
 sys-apps/systemd-tmpfiles
 sys-fs/udev
-
-# opentmpfiles works fine, alledged security issues require active misconfiguration
--sys-apps/opentmpfiles
