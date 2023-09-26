@@ -3,7 +3,7 @@ LSMOD="${LSMOD:-/etc/kernel/modprobed_db/modprobed_$(ver_cut 1-2).db}"
 post_src_configure() {
 	# Run localmodconfig to avoid building *all* the drivers
 	test -n "$NOLOCALMODCONFIG" && return
-	test -f "$LSMOD" || die "/etc/portage/env: LSMOD file not found (required for localmodconfig): $LSMOD"
+	test -f "$LSMOD" || die "/etc/portage/env: LSMOD file not found: $LSMOD"
 
 	elog "/etc/portage/env: localmodconfig LSMOD=$LSMOD"
 	yes '' | emake O="$WORKDIR"/modprep "${MAKEARGS[@]}" \

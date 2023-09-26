@@ -1,0 +1,9 @@
+LSFIRM="${LSFIRM:-/etc/kernel/modprobed_db/firmwared_6.1.db}"
+
+post_src_prepare() {
+	test -n "$NOLOCALFIRMCONFIG" && return
+	test -f "$LSFIRM" || die "/etc/portage/env: LSFIRM file not found: $LSFIRM"
+
+	elog "/etc/portage/env: localfirmconfig LSFIRM=$LSFIRM"
+	cat "$LSFIRM" > $PN.conf
+}

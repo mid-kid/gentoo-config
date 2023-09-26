@@ -1,0 +1,15 @@
+Change default pr remote name from "fork" to "mine"
+
+This is just my muscle memory. There's no way to change it otherwise.
+
+--- cli-2.32.1.orig/pkg/cmd/pr/create/create.go
++++ cli-2.32.1/pkg/cmd/pr/create/create.go
+@@ -766,7 +766,7 @@
+ 		remoteName := "origin"
+ 
+ 		if origin != nil {
+-			remoteName = "fork"
++			remoteName = "mine"
+ 		}
+ 
+ 		if origin != nil && upstream == nil && ghrepo.IsSame(origin, ctx.BaseRepo) {

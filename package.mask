@@ -3,9 +3,9 @@
 */*::src_prepare-overlay
 */*::pf4public
 
-# virtual/udev
-sys-apps/systemd-utils
+# Virtuals
 
 # Hold back updates
+>=dev-libs/libgudev-238  # Requires virtual/libudev USE=sticky-tags
 
 # Broken

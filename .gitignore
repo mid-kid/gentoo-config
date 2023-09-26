@@ -1,5 +1,2 @@
 # Files installed by portage automatically
 /savedconfig/
-
-# Exclusions
-!/savedconfig/sys-kernel/linux-firmware

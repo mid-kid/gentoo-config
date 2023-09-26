@@ -1,2 +1,1 @@
-# Packages that I've configured through /etc/portage/savedconfig...
-sys-kernel/linux-firmware savedconfig
+# Packages that I've configured through /etc/portage/savedconfig
