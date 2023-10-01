@@ -94,3 +94,5 @@ net-dns/getdns -idn -unbound
 media-tv/v4l-utils -bpf
 media-video/mediainfo -wxwidgets
 app-crypt/swtpm -gnutls
+media-gfx/gimp -udev
+media-plugins/gst-plugins-v4l2 -udev
