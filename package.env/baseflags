@@ -14,6 +14,9 @@ dev-python/libvirt-python baseflags  # 8.7.0 (GCC 12.2.1_p20221231)
 # this error is after enabling -ffat-lto-objects
 app-emulation/virtualbox baseflags  # 6.1.40 (GCC 12.2.1_p20221231)
 
+# Compile: internal compiler error: Segmentation fault
+app-office/libreoffice baseflags  # 7.5.5.2 (GCC 13.2.1_p20230826)
+
 # Runtime: Constant hangs
 sci-electronics/pulseview baseflags  # 0.4.2-r1 (GCC 12.2.1_p20230121-r1)
 

@@ -11,3 +11,6 @@ sys-devel/lld clang
 dev-lang/rust clang  # Appends -Clinker=$CC to RUSTFLAGS
 gnome-base/librsvg clang  # Using autotools/libtool, which uses $CC
 dev-python/cryptography clang  # Weird linking issue
+
+# Compile: internal compiler error: Segmentation fault
+net-im/telegram-desktop clang  # 4.10.3 (GCC 13.2.1_p20230826)

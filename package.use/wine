@@ -3,6 +3,7 @@ app-emulation/wine-staging gstreamer vkd3d #themes
 
 app-arch/bzip2 ABI_X86: 32
 app-crypt/libmd ABI_X86: 32
+app-crypt/p11-kit ABI_X86: 32
 app-emulation/wine-gecko ABI_X86: 32
 dev-libs/elfutils ABI_X86: 32
 dev-libs/expat ABI_X86: 32

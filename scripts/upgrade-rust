@@ -1,0 +1,9 @@
+#!/bin/sh
+# When using gentoo stable, sometimes the stabilization of rust will skip a version.
+# Since a rust version can only be built using either the same version, or N-1,
+# this requires manual intevention.
+# Run as ./upgrade-rust 1.xx.0 1.yy.0 1.zz.0
+ARCH="$(portageq envvar ARCH)"
+for ver in "$@"; do
+    ACCEPT_KEYWORDS="~$ARCH" emerge --ask=n -1 "~dev-lang/rust-$ver" "~virtual/rust-$ver"
+done
