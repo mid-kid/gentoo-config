@@ -15,3 +15,4 @@ x11-libs/gtk+ examples  # Installs gtk3-widget-factory
 gui-libs/gtk examples  # Installs widget factory
 mail-client/claws-mail litehtml  # Simple html parser that sometimes works
 kde-apps/okular epub  # I have some epub files here and there
+app-editors/vim terminal  # Testing, may be useful
