@@ -4,3 +4,5 @@
 ~dev-libs/glib-2.78.0
 ~dev-cpp/glibmm-2.78.0
 ~dev-libs/nss-3.92
+~app-editors/vim-9.0.1678
+~app-editors/vim-core-9.0.1678
