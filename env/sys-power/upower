@@ -1,0 +1,4 @@
+# Fix bug currently causing files to install in /usr/hwdb.d
+pre_src_configure() {
+	MYMESONARGS="-Dudevhwdbdir='$EPREFIX$(get_udevdir)/hwdb.d' $MYMESONARGS"
+}

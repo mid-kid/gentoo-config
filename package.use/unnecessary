@@ -100,3 +100,4 @@ dev-python/pyside2 -concurrent -printsupport -sql -testlib -x11extras
 sci-libs/vtk -qt5
 media-gfx/blender -cycles -ffmpeg -openimageio -color-management -openvdb -opensubdiv -openexr -oidn -embree -tbb -fluid -fftw -pdf -potrace -pugixml -sndfile
 media-gfx/imagemagick -svg
+virtual/imagemagick-tools -svg

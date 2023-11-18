@@ -1,6 +1,5 @@
 # I want the latest version, no matter what
 www-client/firefox:esr  # Useless to delay
-~dev-libs/nss-3.92
 
 app-eselect/eselect-wine
 app-emulation/wine-staging

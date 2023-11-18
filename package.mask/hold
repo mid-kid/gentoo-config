@@ -1,0 +1,3 @@
+# Hold back updates
+#>=dev-libs/libgudev-238  # Requires virtual/libudev USE=sticky-tags
+>=sys-power/linux-x86-power-tools-6.4  # Unstable linux-headers
