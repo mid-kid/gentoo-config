@@ -1,3 +1,4 @@
+# Unmasking specific versions when older ones are too old
 ~app-arch/p7zip-17.05
 ~dev-util/poke-3.3
 ~dev-util/gdbus-codegen-2.78.0
@@ -6,3 +7,4 @@
 ~dev-libs/nss-3.92
 ~app-editors/vim-9.0.1678
 ~app-editors/vim-core-9.0.1678
+~sys-kernel/linux-headers-6.4

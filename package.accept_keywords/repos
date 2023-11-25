@@ -1,4 +1,6 @@
 */*::localrepo
+sys-power/linux-x86-power-tools::tlp
+app-laptop/tlp::tlp
 x11-misc/i3lock-color::guru
 mpv-plugin/mpv-mpris::guru
 media-gfx/nsxiv::guru
