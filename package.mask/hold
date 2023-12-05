@@ -1,1 +1,2 @@
 # Hold back updates
+>=media-sound/audacity-3  # Apparently this will be held in ::gentoo for a bit
