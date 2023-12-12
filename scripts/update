@@ -6,9 +6,13 @@ dir=/var/spool/updates
 
 # Flags
 force=false
+nobinpkg=false
 while test -n "$1"; do
     if [ "$1" = '-f' ]; then
-	force=true
+        force=true
+    fi
+    if [ "$1" = '-n' ]; then
+        nobinpkg=true
     fi
     shift
 done
@@ -41,8 +45,10 @@ fi
 # Generate upgrade stats
 update() {
     rm -f "$dir/pending-tree"
-    { emerge -puDU --binpkg-changed-deps=y --color=y @world 2>&1 || return; } | tee "$dir/pending"
-    emerge -puDU --binpkg-changed-deps=y --color=y --tree @world 2>&1 | tee "$dir/pending-tree"
+    opts=
+    $nobinpkg && opts='--usepkg=n'
+    { emerge -puDU --binpkg-changed-deps=y --color=y $opts @world 2>&1 || return; } | tee "$dir/pending"
+    emerge -puDU --binpkg-changed-deps=y --color=y --tree $opts @world 2>&1 | tee "$dir/pending-tree"
 }
 
 # Force update
@@ -53,7 +59,7 @@ fi
 # If already ran, check if pending needs updating
 if [ "$newday" = "$day" ]; then
     if [ ! -f "$dir/pending" -o /var/log/emerge.log -nt "$dir/pending" ]; then
-    	update
+        update
     fi
     exit 0
 fi

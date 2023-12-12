@@ -2,7 +2,6 @@ sys-apps/openrc sysv-utils  # Replace sys-apps/sysvinit
 sys-fs/eudev rule-generator  # Generate 70-persistent-net.rules
 app-admin/sysklogd logrotate  # Install logrotate files
 app-admin/sudo offensive  # Scream at me mommy
-dev-python/pyyaml libyaml  # The C library makes it faster
 media-video/ffmpeg openssl vpx opus x265  # Common formats
 media-fonts/noto cjk  # Big chinese fonts
 x11-base/xorg-server xvfb xephyr  # Nested X servers
@@ -13,5 +12,4 @@ sys-auth/seatd -server  # Using elogind as server
 net-wireless/wpa_supplicant tkip  # Compatibility with old routers
 app-alternatives/sh -* dash  # Faster POSIX-compatible shell than bash
 media-libs/freetype harfbuzz  # Recommended by x11-libs/pango ebuild
-virtual/libudev -sticky-tags eudev  # Always use eudev instead of udev
 #app-alternatives/awk -* mawk  # Faster semi-compatible AWK interpreter

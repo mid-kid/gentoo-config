@@ -1,4 +1,4 @@
-app-emulation/wine-staging gstreamer vkd3d #themes
+app-emulation/wine-staging gstreamer #themes
 #app-emulation/wine-vanilla gstreamer
 
 app-arch/brotli ABI_X86: 32
@@ -40,7 +40,6 @@ sys-apps/util-linux ABI_X86: 32
 sys-devel/gettext ABI_X86: 32
 sys-devel/llvm ABI_X86: 32
 sys-fs/eudev ABI_X86: 32
-sys-fs/udev ABI_X86: 32
 sys-libs/libxcrypt ABI_X86: 32
 sys-libs/ncurses ABI_X86: 32
 sys-libs/zlib ABI_X86: 32
@@ -95,8 +94,6 @@ media-plugins/gst-plugins-meta ABI_X86: 32
 media-plugins/gst-plugins-v4l2 ABI_X86: 32
 media-plugins/gst-plugins-vaapi ABI_X86: 32
 media-plugins/gst-plugins-x264 ABI_X86: 32
-sys-libs/binutils-libs ABI_X86: 32
-sys-libs/db ABI_X86: 32
 sys-libs/libcap ABI_X86: 32
 sys-libs/pam ABI_X86: 32
 virtual/libcrypt ABI_X86: 32
@@ -106,12 +103,8 @@ x11-libs/libXv ABI_X86: 32
 x11-libs/pango ABI_X86: 32
 x11-libs/pixman ABI_X86: 32
 
-# USE=vkd3d
-app-emulation/vkd3d ABI_X86: 32
+# USE=vulkan
 media-libs/vulkan-loader ABI_X86: 32
-x11-libs/xcb-util ABI_X86: 32
-x11-libs/xcb-util-cursor ABI_X86: 32
-x11-libs/xcb-util-image ABI_X86: 32
-x11-libs/xcb-util-keysyms ABI_X86: 32
-x11-libs/xcb-util-renderutil ABI_X86: 32
-x11-libs/xcb-util-wm ABI_X86: 32
+
+# USE=wayland
+x11-libs/libxkbcommon ABI_X86: 32

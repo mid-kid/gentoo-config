@@ -1,5 +1,5 @@
-*/* PYTHON_TARGETS: -* python3_11
-*/* PYTHON_SINGLE_TARGET: -* python3_11
+#*/* PYTHON_TARGETS: -* python3_11
+#*/* PYTHON_SINGLE_TARGET: -* python3_11
 
 # Packages without current PYTHON_SINGLE_TARGET
 # quse -Ie python_single_target_python3_10 | grep -v '\bpython_single_target_python3_11\b' | cut -d: -f1 | xargs printf '%s PYTHON_SINGLE_TARGET: python3_10\n'

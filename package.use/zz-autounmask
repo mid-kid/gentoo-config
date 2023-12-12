@@ -80,3 +80,7 @@
 >=dev-qt/qtquickcontrols2-5.15.10 widgets
 # required by media-gfx/blender-3.3.6-r1::gentoo
 >=media-libs/freetype-2.13.2 brotli
+# required by media-gfx/blender-3.3.6-r1::gentoo[cycles]
+>=media-gfx/blender-3.3.6-r1 tiff
+# required by app-containers/buildah-1.32.2::gentoo
+>=net-firewall/iptables-1.8.9 nftables

@@ -35,7 +35,7 @@ sys-apps/flashrom -ft2232-spi -usbblaster-spi
 media-gfx/pngquant -lcms
 sci-libs/fftw -fortran
 sys-libs/gwenhywfar -qt5
-app-doc/doxygen -qt5
+app-doc/doxygen -gui
 net-p2p/transmission -gtk
 app-emulation/virtualbox -sdk
 media-gfx/sane-backends -zeroconf -sane_backends_escl
@@ -98,6 +98,6 @@ media-gfx/gimp -udev
 media-plugins/gst-plugins-v4l2 -udev
 dev-python/pyside2 -concurrent -printsupport -sql -testlib -x11extras
 sci-libs/vtk -qt5
-media-gfx/blender -cycles -ffmpeg -openimageio -color-management -openvdb -opensubdiv -openexr -oidn -embree -tbb -fluid -fftw -pdf -potrace -pugixml -sndfile
+media-gfx/blender -ffmpeg -color-management -openvdb -opensubdiv -oidn -embree -tbb -fluid -fftw -pdf -potrace -pugixml -sndfile
 media-gfx/imagemagick -svg
 virtual/imagemagick-tools -svg

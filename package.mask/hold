@@ -1,2 +1,3 @@
 # Hold back updates
 >=media-sound/audacity-3  # Apparently this will be held in ::gentoo for a bit
+>=media-video/obs-studio-30  # Requires qt6, holding back for a bit
