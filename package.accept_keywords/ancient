@@ -8,3 +8,4 @@
 ~app-editors/vim-9.0.1678
 ~app-editors/vim-core-9.0.1678
 ~sys-kernel/linux-headers-6.4
+dev-java/openjdk:21
