@@ -4,3 +4,4 @@ app-laptop/tlp::tlp
 x11-misc/i3lock-color::guru
 mpv-plugin/mpv-mpris::guru
 media-gfx/nsxiv::guru
+app-misc/brightnessctl::guru

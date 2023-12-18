@@ -12,10 +12,11 @@ x11-misc/xss-lock  # Screen lock trigger
 x11-misc/dunst  # Notification daemon
 
 # Auxiliary programs
+x11-terms/rxvt-unicode  # Terminal
+x11-misc/urxvt-perls  # Tools for terminal
 media-sound/volumeicon  # Volume keys/control/notification
 sys-fs/udiskie  # Drive mounting/unmounting applet
 x11-misc/redshift  # Screen color temperature adjusting
-#lxqt-base/lxqt-policykit  # PolicyKit agent
 kde-plasma/polkit-kde-agent  # PolicyKit agent
 app-i18n/fcitx-qt5  # Input method
 app-i18n/fcitx-configtool  # Input method

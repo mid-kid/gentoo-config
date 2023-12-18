@@ -3,7 +3,11 @@
 # Window management/desktop core
 gui-wm/sway
 x11-misc/dunst  # Notification daemon
-kde-plasma/xembed-sni-proxy
+gui-apps/swayidle  # Idle detection
+gui-apps/swaylock  # Lock screen
+kde-plasma/xembed-sni-proxy  # Proxy for Xorg-based status icons
+gui-apps/waybar  # Actual good status bar
 
 # Utilities
-gui-apps/wl-clipboard
+app-misc/brightnessctl
+gui-apps/foot

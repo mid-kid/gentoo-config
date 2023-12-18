@@ -9,3 +9,4 @@
 ~app-editors/vim-core-9.0.1678
 ~sys-kernel/linux-headers-6.4
 dev-java/openjdk:21
+~sys-devel/gcc-13.2.1_p20231014

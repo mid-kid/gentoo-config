@@ -101,3 +101,4 @@ sci-libs/vtk -qt5
 media-gfx/blender -ffmpeg -color-management -openvdb -opensubdiv -oidn -embree -tbb -fluid -fftw -pdf -potrace -pugixml -sndfile
 media-gfx/imagemagick -svg
 virtual/imagemagick-tools -svg
+gui-apps/foot -grapheme-clustering
