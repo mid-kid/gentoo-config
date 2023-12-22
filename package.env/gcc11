@@ -1,0 +1,9 @@
+# Issues that aren't fixed by using "baseflags" with the latest compiler
+
+# Compile: internal compiler error: Segmentation fault
+dev-libs/icu gcc11
+media-libs/tg_owt gcc11
+dev-libs/protobuf gcc11
+kde-frameworks/kcoreaddons gcc11
+dev-cpp/glibmm gcc11
+net-im/telegram-desktop gcc11  # 4.12.2 (GCC 13.2.1_p20231014)
