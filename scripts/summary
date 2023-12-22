@@ -1,0 +1,33 @@
+#!/bin/sh
+
+file=/var/spool/updates/pending
+list="$(grep '^\[' "$file")"
+list_nocolor="$(echo "$list" | sed 's/\x1b\[[0-9;]*[JKmsu]//g')"
+
+# grep $list_nocolor, output colored lines
+greplist() {
+    echo "$list_nocolor" | grep -n "$@" | cut -d ':' -f 1 | \
+            while read -r n; do
+        echo "$list" | head -n "$n" | tail -1
+    done
+}
+
+echo
+echo ' ===== World packages ===== '
+echo "$list" | grep "$(printf '^\[\033\[[0-9]*;01m')"
+echo
+echo ' ===== Unstable packages ===== '
+greplist '^\[[^ ]* ......[^ ]]'
+echo
+echo ' ===== New packages ===== '
+greplist '^\[[^ ]* .N.....]'
+echo
+echo ' ===== Downgrades ===== '
+greplist '^\[[^ ]* ....UD.]'
+echo
+echo ' ===== Changed USE ===== '
+greplist '^\[[^ ]* ..R....].*USE='
+echo
+echo ' ===== Estimated time ===== '
+echo "$list_nocolor" | sed -e 's/^[^\x5d]*\] \([^ ]*\).*$/\1/' | xargs qatom -F'%{CATEGORY}/%{PN}' | xargs -L1 qlop -aM | awk '{x+=$2}END{print "Average: " int(x/60/60) ":" int(x/60)%60 ":" x%60}'
+echo "$list_nocolor" | sed -e 's/^[^\x5d]*\] \([^ ]*\).*$/\1/' | xargs -L1 qlop -pM | awk '{x+=$3}END{print "Prediction: " int(x/60/60) ":" int(x/60)%60 ":" x%60}'
