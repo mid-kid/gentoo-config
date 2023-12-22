@@ -1,6 +1,6 @@
---- dkms-hid-nintendo-3.0.orig/src/hid-nintendo.c
-+++ dkms-hid-nintendo-3.0/src/hid-nintendo.c
-@@ -36,6 +36,7 @@
+--- linux-6.1.orig/drivers/hid/hid-nintendo.c
++++ linux-6.1/drivers/hid/hid-nintendo.c
+@@ -34,6 +34,7 @@
  #include <linux/module.h>
  #include <linux/power_supply.h>
  #include <linux/spinlock.h>
@@ -8,7 +8,7 @@
  
  /*
   * Reference the url below for the following HID report defines:
-@@ -1765,7 +1766,7 @@ static int joycon_leds_create(struct joy
+@@ -1850,7 +1851,7 @@
  	/* Set the default controller player leds based on controller number */
  	mutex_lock(&joycon_input_num_mutex);
  	mutex_lock(&ctlr->output_mutex);
