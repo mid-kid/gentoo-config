@@ -1,9 +1,13 @@
 */*::localrepo nobinpkg
 
-# Kernel modules
-sys-power/acpi_call nobinpkg
+# Kernel modules (emerge -p @module-rebuild)
 app-emulation/virtualbox-modules nobinpkg
-media-video/v4l2loopback nobinpkg
+sys-power/acpi_call nobinpkg
 
-# Kernel firmwares (binary only anyway)
+# Big packages that aren't built from source anyway
+app-emulation/wine-gecko nobinpkg
+app-emulation/wine-mono nobinpkg
+media-fonts/noto nobinpkg
+media-fonts/noto-cjk nobinpkg
+media-fonts/noto-emoji nobinpkg
 sys-kernel/linux-firmware nobinpkg
