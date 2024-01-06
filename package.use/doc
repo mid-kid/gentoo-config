@@ -1,13 +1,12 @@
 # USE=doc that include man pages
 x11-misc/polybar doc  # requires dev-python/sphinx
 #dev-util/ccache doc  # requires dev-ruby/asciidoctor (ruby)
+x11-libs/libX11 doc
 
 # Use prebuilt (non-upstream) man pages when USE=doc is disabled
 app-emulation/qemu doc  # requires dev-python/sphinx
 dev-util/cmake doc  # requires dev-python/sphinx
 sys-devel/llvm doc  # requires dev-python/sphinx and dev-python/recommonmark
-#net-misc/iputils  # no way to build manpages from source except for live ebuild
-#net-misc/ntp  # no way to build manpages from source
 
 # USE=doc that include full documentation
 #app-doc/doxygen doc  # requires dev-texlive/texlive-latex
