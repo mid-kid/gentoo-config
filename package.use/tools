@@ -1,6 +1,6 @@
 app-arch/p7zip rar  # Using 7z instead of unrar
 sys-block/f3 extra
-games-emulation/mgba ffmpeg debug sdl lua
+games-emulation/mgba ffmpeg debug lua
 dev-vcs/git perl  # Many utility scripts
 www-client/w3m imlib  # Render images in the terminal
 app-office/libreoffice kde
