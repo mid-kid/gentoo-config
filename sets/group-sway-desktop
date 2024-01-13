@@ -11,3 +11,4 @@ gui-apps/waybar  # Actual good status bar
 # Utilities
 app-misc/brightnessctl
 gui-apps/foot
+x11-misc/dmenu
