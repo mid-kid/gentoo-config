@@ -15,6 +15,3 @@ sys-libs/llvm-libunwind ABI_X86: -32
 dev-ml/llvm-ocaml LLVM_TARGETS: -AMDGPU -NVPTX -BPF
 sys-devel/clang LLVM_TARGETS: -AMDGPU -NVPTX -BPF
 sys-devel/llvm LLVM_TARGETS: -AMDGPU -NVPTX -BPF
-
-# Try to avoid systemd-utils...
-virtual/libudev -sticky-tags eudev
