@@ -6,7 +6,7 @@ post_pkg_postinst() {
 	# Might break some development tools
 
 	# keep: bin pkg src
-	rm -rv api doc lib misc test || die
+	rm -rvf api doc lib misc test || die
 
 	find src -type f \( ! -name '*.go' \
 		-a ! -name '*.c' \
