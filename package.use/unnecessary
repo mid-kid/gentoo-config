@@ -102,3 +102,4 @@ media-gfx/blender -ffmpeg -color-management -openvdb -opensubdiv -oidn -embree -
 media-gfx/imagemagick -svg
 virtual/imagemagick-tools -svg
 gui-apps/foot -grapheme-clustering
+sys-fs/mtools -gui
