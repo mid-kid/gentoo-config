@@ -1,5 +1,5 @@
 post_pkg_postinst() {
-	elog "/etc/portage/env: Removing a ton of crap"
+	elog '/etc/portage/env: Removing a ton of crap'
 	cd "$EROOT/usr/lib/go" || die
 
 	# Delete anything not necessary for building go programs
