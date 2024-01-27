@@ -2,10 +2,12 @@ sys-devel/gcc graphite
 
 # Disable security features that affect codegen (not linking)
 sys-devel/gcc -ssp -default-stack-clash-protection -default-znow # -pie
-#sys-devel/clang -pie
 
 # LLD is required for clang LTO
 sys-devel/clang-common default-lld
+
+# Clang settings handled in /etc/portage/env/sys-devel/clang-common
+# Changes equivalent to: -ssp -default-stack-clash-protection
 
 # -pgo: Super fucking slow, not worth it...
 # clang: GCC is bigtime unsupported upstream, can't LTO across C++ and Rust with GCC.
