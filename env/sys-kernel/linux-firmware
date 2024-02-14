@@ -1,4 +1,4 @@
-LSFIRM="${LSFIRM:-/etc/kernel/modprobed_db/firmwared_6.1.db}"
+LSFIRM="${LSFIRM:-/etc/kernel/modprobed_db/firmwared_6.6.db}"
 
 post_src_prepare() {
 	test -n "$NOLOCALFIRMCONFIG" && return

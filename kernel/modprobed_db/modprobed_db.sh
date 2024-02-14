@@ -1,7 +1,7 @@
 #!/bin/sh
-# Installed in:
-# - /etc/local.d/modprobed_db.stop
-# - /etc/cron.hourly/modprobed_db
+# Installed using:
+# ln -svrfT modprobed_db.sh /etc/local.d/modprobed_db.stop
+# ln -svrfT modprobed_db.sh /etc/cron.hourly/modprobed_db
 dir=/etc/kernel/modprobed_db
 
 # Kernel modules
