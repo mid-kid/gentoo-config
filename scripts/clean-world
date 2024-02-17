@@ -3,5 +3,5 @@
 cat /var/lib/portage/world | \
     xargs -P$(nproc) -I% sh -c '
     	echo ... % >&2
-	emerge -pc % | grep -q "No packages selected" && echo %
+	emerge --with-bdeps=n -pc % | grep -q "No packages selected" && echo %
 '
