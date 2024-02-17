@@ -6,3 +6,4 @@ x11-libs/libdrm VIDEO_CARDS: radeon
 sys-devel/llvm LLVM_TARGETS: AMDGPU
 sys-apps/fwupd uefi nvme gnutls
 sys-apps/memtest86+ -* boot efi64
+sys-kernel/installkernel grub

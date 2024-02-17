@@ -1,5 +1,4 @@
 # All versions are unstable
-www-plugins/passff-host
 sys-boot/plymouth-openrc-plugin
 x11-themes/kvantum
 media-video/obs-studio
@@ -8,17 +7,14 @@ net-misc/megatools
 games-action/teeworlds
 dev-java/icedtea
 games-emulation/desmume
-sys-process/bpytop
 dev-util/radare2
 app-doc/cppman
 games-util/qjoypad
-x11-misc/screenkey
 dev-util/libtree
 app-mobilephone/scrcpy
 x11-misc/snixembed
 games-fps/xonotic
-dev-util/muon
-dev-util/samurai
+dev-build/muon
 dev-util/rgbds
 media-video/droidcam
 media-video/v4l2loopback

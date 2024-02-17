@@ -10,7 +10,7 @@ net-misc/aria2 bittorrent
 sys-fs/android-file-transfer-linux fuse
 dev-util/android-tools -udev  # I use my own udev rules
 sys-apps/gawk mpfr  # Support for -M/--bignum arbitrary-precision numbers
-dev-util/cmake qt5
+dev-build/cmake qt5
 x11-libs/gtk+ examples  # Installs gtk3-widget-factory
 gui-libs/gtk examples  # Installs widget factory
 mail-client/claws-mail litehtml  # Simple html parser that sometimes works

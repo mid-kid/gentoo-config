@@ -16,7 +16,6 @@ pre_update() {
 pre_update \
 	sys-apps/sandbox \
 	sys-apps/portage
-	#sys-config/ltoize
 
 # Upgrade compiler to make sure to use the latest one
 pre_update \
@@ -30,11 +29,13 @@ fi
 # Upgrade rust separately since it keeps breaking resolution when --keep-going=y
 # Otherwise a failing package would cause --keep-going=y to stop with a circular dependency
 # Only relevant for USE=system-bootstrap...
+if false; then
 pre_update \
 	virtual/rust \
 	dev-lang/rust
 if $updated; then
 	eselect rust update
+fi
 fi
 
 # Upgrade golang first to rebuild everything only once even if it has updates

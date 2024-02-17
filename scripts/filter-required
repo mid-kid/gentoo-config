@@ -1,16 +1,20 @@
 #!/bin/sh
 # Shitty script to aid with parsing conflicts in order to perform slot rebuilds independent of @world
 # Example usage (calculate upgrade for qtcore and all its revdeps):
-# emerge -p -1 --usepkg=n --verbose-conflicts dev-qt/qtcore:5 |& tee output.txt
-# /etc/portage/scripts/filter-required < output.txt > packages.txt
-# emerge -p -1 --usepkg=n --verbose-conflicts $(cat packages.txt) |& tee output.txt 
-# /etc/portage/scripts/filter-required < output.txt > packages.txt
-# ... repeat n times until it resolves, then run "emerge -1 $(cat packages.txt)" ...
-sed -n -e 's/.* required by (\([^,]\+\), .*/\1/p' | sed \
+# echo "dev-qt/qtcore:5" > /tmp/pkg.txt
+# emerge -p --usepkg=n --verbose-conflicts $(cat /tmp/pkg.txt) |& tee /tmp/out.txt 
+# /etc/portage/scripts/filter-required /tmp/pkg.txt < /tmp/out.txt
+# ... repeat last two lines n times until it resolves,
+#     then run "emerge -1 $(cat /tmp/pkg.txt)"
+tmp="$(mktemp)"
+grep ' =\|=[ \[]\|:[^ ]\+/' | sed -n -e 's/^.* required by (\([^,]\+\), installed).*$/\1/p' | sed \
     -e 's/::[^:]*$//' \
     -e 's/\/[0-9\.]\+$//' \
     -e 's/-[0-9]\+:/:/' \
     -e 's/-r[0-9]\+:/:/' \
     -e 's/_p[0-9]\+:/:/' \
     -e 's/-[0-9\.]\+:/:/' \
-    | sort | uniq
+    | cat - "$1" | sort | uniq > "$tmp"
+diff "$1" "$tmp"
+cat "$tmp" > "$1"
+rm "$tmp"

@@ -47,8 +47,8 @@ update() {
     rm -f "$dir/pending-tree"
     opts=
     $nobinpkg && opts='--usepkg=n'
-    { emerge -puDU --binpkg-changed-deps=y --color=y $opts @world 2>&1 || return; } | tee "$dir/pending"
-    emerge -puDU --binpkg-changed-deps=y --color=y --tree $opts @world 2>&1 | tee "$dir/pending-tree"
+    { emerge -puDU --package-moves=n --binpkg-changed-deps=y --color=y $opts @world 2>&1 || return; } | tee "$dir/pending"
+    emerge -puDU --package-moves=n --binpkg-changed-deps=y --color=y --tree $opts @world 2>&1 | tee "$dir/pending-tree"
 }
 
 # Force update
@@ -65,7 +65,7 @@ if [ "$newday" = "$day" ]; then
 fi
 
 # Try to sync
-emerge --ask=n --sync | tee "$dir/sync.log"
+emerge --ask=n --package-moves=n --sync | tee "$dir/sync.log"
 update
 
 # If successful, write it out

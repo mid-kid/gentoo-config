@@ -67,6 +67,7 @@ x11-libs/libXxf86vm ABI_X86: 32
 x11-libs/libdrm ABI_X86: 32
 x11-libs/libxcb ABI_X86: 32
 x11-libs/libxshmfence ABI_X86: 32
+x11-libs/xcb-util-keysyms ABI_X86: 32
 
 # USE=gstreamer
 dev-lang/orc ABI_X86: 32

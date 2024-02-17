@@ -3,7 +3,9 @@
 # Since a rust version can only be built using either the same version, or N-1,
 # this requires manual intevention.
 # Run as ./upgrade-rust 1.xx.0 1.yy.0 1.zz.0
+# If a version is missing, get an old snapshot, mount it and set PORTDIR
+# http://distfiles.gentoo.org/snapshots/squashfs/
 ARCH="$(portageq envvar ARCH)"
 for ver in "$@"; do
-    ACCEPT_KEYWORDS="~$ARCH" emerge --ask=n -1 "~dev-lang/rust-$ver" "~virtual/rust-$ver"
+    ACCEPT_KEYWORDS="~$ARCH" emerge --ask=n -1 --package-moves=n "~dev-lang/rust-$ver" "~virtual/rust-$ver"
 done
