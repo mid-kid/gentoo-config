@@ -1,0 +1,4 @@
+# Optional dependencies for portage packages
+
+# app-misc/ranger
+www-client/w3m

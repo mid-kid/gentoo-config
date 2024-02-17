@@ -1,0 +1,7 @@
+#!/bin/sh
+# Script that prints out all the packages that aren't necessary to be listed in @world
+cat /var/lib/portage/world | \
+    xargs -P$(nproc) -I% sh -c '
+    	echo ... % >&2
+	emerge -pc % | grep -q "No packages selected" && echo %
+'
