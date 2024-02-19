@@ -1,5 +1,5 @@
 This patches the package to follow the XDG Base Directory Specification:
-~/.python_history was moved to $XDG_CACHE_HOME/python_history
+~/.python_history was moved to $XDG_DATA_HOME/python_history
 
 --- Python-3.8.3.orig/Lib/site.py
 +++ Python-3.8.3/Lib/site.py
@@ -9,10 +9,10 @@ This patches the package to follow the XDG Base Directory Specification:
              # http://bugs.python.org/issue5845#msg198636
 -            history = os.path.join(os.path.expanduser('~'),
 -                                   '.python_history')
-+            cache_dir = os.environ.get('XDG_CACHE_HOME')
-+            if cache_dir is None:
-+                cache_dir = os.path.join(os.path.expanduser('~'), '.cache')
-+            history = os.path.join(cache_dir, 'python_history')
++            data_dir = os.environ.get('XDG_DATA_HOME')
++            if data_dir is None:
++                data_dir = os.path.join(os.path.expanduser('~'), '.local', 'share')
++            history = os.path.join(data_dir, 'python_history')
              try:
                  readline.read_history_file(history)
              except OSError:

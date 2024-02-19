@@ -4,17 +4,17 @@
    if (opt.hsts_file)
      return xstrdup (opt.hsts_file);
  
-+  char *cache_dir = getenv("XDG_CACHE_DIR");
-+  if (cache_dir)
++  char *data_dir = getenv("XDG_DATA_DIR");
++  if (data_dir)
 +    {
-+      char *dir = aprintf("%s/wget-hsts", cache_dir);
++      char *dir = aprintf("%s/wget-hsts", data_dir);
 +      return dir;
 +    }
 +
    if (opt.homedir)
      {
 -      char *dir = ajoin_dir_file(opt.homedir, ".wget-hsts");
-+      char *dir = aprintf("%s/.cache/wget-hsts", opt.homedir);
++      char *dir = aprintf("%s/.local/share/wget-hsts", opt.homedir);
        return dir;
      }
  

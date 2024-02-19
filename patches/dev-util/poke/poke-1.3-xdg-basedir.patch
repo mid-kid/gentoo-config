@@ -4,11 +4,11 @@
    char *poke_history = NULL;
    /* Load the user's history file ~/.poke_history, if it exists
       in the HOME directory.  */
-+  char *cachedir = getenv ("XDG_CACHE_HOME");
++  char *datadir = getenv ("XDG_DATA_HOME");
    char *homedir = getenv ("HOME");
  
 -  if (homedir != NULL)
-+  if (!poke_history && cachedir != NULL)
++  if (!poke_history && datadir != NULL)
      {
 -      if (asprintf (&poke_history, "%s/.poke_history", homedir) != -1)
 -        {
@@ -16,12 +16,12 @@
 -            read_history (poke_history);
 -        }
 -      else
-+      if (asprintf (&poke_history, "%s/poke_history", cachedir) == -1)
++      if (asprintf (&poke_history, "%s/poke_history", datadir) == -1)
          poke_history = NULL;
      }
 +  if (!poke_history && homedir != NULL)
 +    {
-+      if (asprintf (&poke_history, "%s/.cache/poke_history", homedir) == -1)
++      if (asprintf (&poke_history, "%s/.local/share/poke_history", homedir) == -1)
 +        poke_history = NULL;
 +    }
 +  if (poke_history && access (poke_history, R_OK) == 0)
