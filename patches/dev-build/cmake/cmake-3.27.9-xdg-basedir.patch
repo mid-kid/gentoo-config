@@ -1,0 +1,45 @@
+Respect the XDG Base Directory Specification
+
+~/.cmake was moved to $XDG_DATA_HOME/cmake
+
+--- cmake-3.27.9.orig/Source/cmExportCommand.cxx
++++ cmake-3.27.9/Source/cmExportCommand.cxx
+@@ -373,11 +373,16 @@
+   std::string fname = cmStrCat(dir, "/cmake/packages/", package);
+ #  else
+   std::string fname;
+-  if (!cmSystemTools::GetEnv("HOME", fname)) {
+-    return;
++  if (!cmSystemTools::GetEnv("XDG_DATA_DIR", fname)) {
++    if (!cmSystemTools::GetEnv("HOME", fname)) {
++      return;
++    }
++    cmSystemTools::ConvertToUnixSlashes(fname);
++    fname += "/.local/share";
++  } else {
++    cmSystemTools::ConvertToUnixSlashes(fname);
+   }
+-  cmSystemTools::ConvertToUnixSlashes(fname);
+-  fname += "/.cmake/packages/";
++  fname += "/cmake/packages/";
+   fname += package;
+ #  endif
+   cmSystemTools::MakeDirectory(fname);
+--- cmake-3.27.9.orig/Source/cmFindPackageCommand.cxx
++++ cmake-3.27.9/Source/cmFindPackageCommand.cxx
+@@ -2120,8 +2120,13 @@
+   }
+ #else
+   std::string dir;
+-  if (cmSystemTools::GetEnv("HOME", dir)) {
+-    dir += "/.cmake/packages/";
++  if (cmSystemTools::GetEnv("XDG_DATA_DIR", dir)) {
++    dir += "/cmake/packages/";
++    dir += this->Name;
++    this->LoadPackageRegistryDir(dir,
++            this->LabeledPaths[PathLabel::UserRegistry]);
++  } else if (cmSystemTools::GetEnv("HOME", dir)) {
++    dir += "/.local/share/cmake/packages/";
+     dir += this->Name;
+     this->LoadPackageRegistryDir(dir,
+                                  this->LabeledPaths[PathLabel::UserRegistry]);
