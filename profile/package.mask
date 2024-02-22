@@ -1,5 +1,6 @@
 # Utilizes prebuilt binaries
 # NOTE: Don't bother masking packages that are masked by the default ACCEPT_LICENSES anyway
+#       Don't bother when packages have USE=system-bootstrap to disable binaries either
 app-editors/vscodium
 app-office/libreoffice-bin
 app-office/libreoffice-bin-debug
