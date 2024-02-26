@@ -75,3 +75,7 @@
 >=dev-libs/libxml2-2.12.4 python
 # required by x11-misc/snixembed-0.3.0::gentoo
 >=dev-libs/libdbusmenu-16.04.0-r2 gtk3
+# required by media-sound/pavucontrol-5.0-r2::gentoo
+>=media-libs/libcanberra-0.30-r7 gtk3
+# required by x11-misc/xdg-utils-1.1.3_p20210805-r1:0/0::gentoo
+>=app-text/xmlto-0.0.28-r11 text

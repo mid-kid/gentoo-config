@@ -1,0 +1,4 @@
+#!/bin/sh
+# Checks all installed packages can be installed into a clean root without breakage
+rm -rf /tmp/root
+FEATURES=-news emerge --usepkg=n --root /tmp/root -pe $(qlist -ICF '=%{CATEGORY}/%{PF}')

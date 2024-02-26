@@ -16,7 +16,7 @@ media-sound/audacity -lv2 -midi -soundtouch
 dev-python/twisted -crypt
 dev-python/passlib -bcrypt -scrypt -totp
 media-gfx/fontforge -X -gtk
-app-crypt/pinentry -gtk -qt5
+app-crypt/pinentry -gtk
 net-wireless/gnuradio -wxwidgets -utils
 x11-misc/xdg-user-dirs -gtk
 sys-boot/plymouth -gtk
