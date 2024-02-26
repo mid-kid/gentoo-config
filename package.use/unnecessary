@@ -16,7 +16,7 @@ media-sound/audacity -lv2 -midi -soundtouch
 dev-python/twisted -crypt
 dev-python/passlib -bcrypt -scrypt -totp
 media-gfx/fontforge -X -gtk
-app-crypt/pinentry -gtk
+app-crypt/pinentry -gtk -qt5
 net-wireless/gnuradio -wxwidgets -utils
 x11-misc/xdg-user-dirs -gtk
 sys-boot/plymouth -gtk
@@ -41,7 +41,7 @@ media-gfx/sane-backends -zeroconf -sane_backends_escl
 dev-libs/liborcus -spreadsheet-model
 dev-libs/rasqal -crypt -mhash
 app-portage/gemato -gpg
-media-libs/libcanberra -gtk -sound
+media-libs/libcanberra -gtk2 -gtk3 -sound
 media-video/handbrake -fdk libav-aac
 sys-apps/groff -X
 sci-electronics/ngspice -X
@@ -63,8 +63,8 @@ kde-frameworks/sonnet -hunspell
 x11-libs/agg -gpc
 media-plugins/frei0r-plugins -facedetect -scale0tilt
 app-i18n/fcitx -enchant
-app-editors/vim -crypt
-app-editors/gvim -crypt
+app-editors/vim -crypt -sound
+app-editors/gvim -crypt -sound
 sys-apps/man-db -manpager
 media-libs/mlt -gtk -qt5
 kde-apps/okular -crypt
@@ -103,3 +103,9 @@ virtual/imagemagick-tools -svg
 gui-apps/foot -grapheme-clustering
 sys-fs/mtools -gui
 media-libs/libplacebo -shaderc -xxhash glslang
+sys-apps/debianutils -installkernel
+net-misc/curl -psl -adns
+app-text/xmlto -text
+app-crypt/gnupg -usb
+sys-apps/openrc -netifrc
+media-gfx/fontforge -gif -jpeg -png -readline

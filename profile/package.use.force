@@ -1,6 +1,5 @@
 # Avoid prebuilt binaries and bundled libraries
 dev-lang/rust system-bootstrap
-media-fonts/noto-emoji buildfont
 media-fonts/dejavu fontforge
 media-fonts/liberation-fonts fontforge
 

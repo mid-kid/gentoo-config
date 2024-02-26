@@ -1,0 +1,10 @@
+# Alternative packages required to satisfy @system
+
+# Satisfies virtual/editor
+app-editors/vim
+
+# Satisfies virtual/udev::without-systemd
+sys-fs/eudev
+
+# Dependency of sys-apps/portage for the selected PORTAGE_BZIP2_COMMAND
+app-arch/lbzip2
