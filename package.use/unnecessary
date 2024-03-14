@@ -109,3 +109,4 @@ app-text/xmlto -text
 app-crypt/gnupg -usb
 sys-apps/openrc -netifrc
 media-gfx/fontforge -gif -jpeg -png -readline
+dev-java/openjdk -alsa -cups
