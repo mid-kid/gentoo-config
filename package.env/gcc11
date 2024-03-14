@@ -1,6 +1,7 @@
 # Issues that aren't fixed by using "baseflags" with the latest compiler
 
 # Compile: internal compiler error: Segmentation fault
+media-libs/x265 gcc11
 dev-libs/icu gcc11
 media-libs/tg_owt gcc11
 dev-libs/protobuf gcc11

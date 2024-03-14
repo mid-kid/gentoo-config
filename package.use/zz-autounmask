@@ -79,3 +79,9 @@
 >=media-libs/libcanberra-0.30-r7 gtk3
 # required by x11-misc/xdg-utils-1.1.3_p20210805-r1:0/0::gentoo
 >=app-text/xmlto-0.0.28-r11 text
+# required by net-im/neochat-23.08.4::gentoo
+>=dev-qt/qtmultimedia-5.15.12:5 gstreamer
+# required by net-im/neochat-23.08.4::gentoo
+>=kde-frameworks/kitemmodels-5.113.0 qml
+# required by net-im/neochat-23.08.4::gentoo
+>=kde-frameworks/knotifications-5.113.0 qml

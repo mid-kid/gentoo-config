@@ -2,10 +2,9 @@
 # Shitty script to aid with parsing conflicts in order to perform slot rebuilds independent of @world
 # Example usage (calculate upgrade for qtcore and all its revdeps):
 # echo "dev-qt/qtcore:5" > /tmp/pkg.txt
-# emerge -p --usepkg=n --verbose-conflicts $(cat /tmp/pkg.txt) |& tee /tmp/out.txt 
-# /etc/portage/scripts/filter-required /tmp/pkg.txt < /tmp/out.txt
+# emerge -p --usepkg=n --verbose-conflicts $(cat /tmp/pkg.txt) |& tee /dev/stderr | /etc/portage/scripts/filter-required /tmp/pkg.txt
 # ... repeat last two lines n times until it resolves,
-#     then run "emerge -1 $(cat /tmp/pkg.txt)"
+#     then run "emerge -1u $(cat /tmp/pkg.txt)"
 tmp="$(mktemp)"
 grep ' =\|=[ \[]\|:[^ ]\+/' | sed -n -e 's/^.* required by (\([^,]\+\), installed).*$/\1/p' | sed \
     -e 's/::[^:]*$//' \

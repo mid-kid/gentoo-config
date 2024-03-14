@@ -1,9 +1,12 @@
 LSFIRM="${LSFIRM:-/etc/kernel/modprobed_db/firmwared_6.6.db}"
 
-post_src_prepare() {
+# Trust me, I'm an engineer
+eval "$(declare -f src_install | sed 's/\<use savedconfig\>/true/')"
+
+restore_config() {
 	test -n "$NOLOCALFIRMCONFIG" && return
 	test -f "$LSFIRM" || die "/etc/portage/env: LSFIRM file not found: $LSFIRM"
 
 	elog "/etc/portage/env: localfirmconfig LSFIRM=$LSFIRM"
-	cat "$LSFIRM" > $PN.conf
+	cat "$LSFIRM" > "$1"
 }
