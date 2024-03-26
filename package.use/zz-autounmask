@@ -85,3 +85,7 @@
 >=kde-frameworks/kitemmodels-5.113.0 qml
 # required by net-im/neochat-23.08.4::gentoo
 >=kde-frameworks/knotifications-5.113.0 qml
+# required by app-containers/lxc-5.0.3::gentoo[caps,tools]
+>=sys-libs/libcap-2.69-r1 static-libs
+# required by app-containers/waydroid-1.4.2::guru[python_single_target_python3_11,clipboard]
+>=dev-python/pyclip-0.7.0-r1 wayland

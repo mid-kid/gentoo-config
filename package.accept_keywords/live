@@ -2,3 +2,5 @@
 <media-gfx/gimp-3 **
 >=media-gfx/gimp-3
 ~media-libs/gegl-0.4.46
+
+app-containers/waydroid-images **

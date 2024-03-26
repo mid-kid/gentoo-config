@@ -5,3 +5,9 @@ x11-misc/i3lock-color::guru
 mpv-plugin/mpv-mpris::guru
 media-gfx/nsxiv::guru
 app-misc/brightnessctl::guru
+app-containers/waydroid::guru
+dev-python/gbinder::guru
+dev-libs/gbinder::guru
+dev-libs/libglibutil::guru
+dev-python/pyclip::guru
+app-containers/waydroid-images::guru
