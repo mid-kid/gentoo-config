@@ -104,7 +104,7 @@ gui-apps/foot -grapheme-clustering
 sys-fs/mtools -gui
 media-libs/libplacebo -shaderc -xxhash glslang
 sys-apps/debianutils -installkernel
-net-misc/curl -psl -adns
+net-misc/curl -psl
 app-text/xmlto -text
 app-crypt/gnupg -usb
 sys-apps/openrc -netifrc
