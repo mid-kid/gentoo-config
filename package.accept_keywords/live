@@ -1,6 +1,6 @@
 # Gimp using GTK3
 <media-gfx/gimp-3 **
 >=media-gfx/gimp-3
-~media-libs/gegl-0.4.46
+~media-libs/gegl-0.4.48
 
 app-containers/waydroid-images **

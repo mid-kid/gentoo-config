@@ -89,3 +89,5 @@
 >=sys-libs/libcap-2.69-r1 static-libs
 # required by app-containers/waydroid-1.4.2::guru[python_single_target_python3_11,clipboard]
 >=dev-python/pyclip-0.7.0-r1 wayland
+# required by media-gfx/inkscape-1.3.2-r1::gentoo[python_single_target_python3_11]
+>=dev-python/pillow-10.2.0-r1 tiff
