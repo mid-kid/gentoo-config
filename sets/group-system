@@ -8,3 +8,6 @@ sys-fs/eudev
 
 # Dependency of sys-apps/portage for the selected PORTAGE_BZIP2_COMMAND
 app-arch/lbzip2
+
+# Dependency of ninja-utils.eclass for the selected NINJA
+dev-build/samurai
