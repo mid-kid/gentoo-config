@@ -6,6 +6,9 @@ app-editors/vim
 # Satisfies virtual/udev::without-systemd
 sys-fs/eudev
 
+# Dependency of sys-apps/portage when FEATURES=installsources is on
+dev-util/debugedit
+
 # Dependency of sys-apps/portage for the selected PORTAGE_BZIP2_COMMAND
 app-arch/lbzip2
 
