@@ -1,13 +1,15 @@
 sys-devel/gcc graphite
 
 # Disable security features that impact codegen
-sys-devel/gcc -ssp -default-stack-clash-protection -default-znow # -pie
+sys-devel/binutils -cet
+sys-libs/glibc -cet
+sys-devel/gcc -ssp -default-stack-clash-protection -default-znow -cet # -pie
+# Not decided on -cet yet, pending research
 
 # LLD is required for clang LTO
-sys-devel/clang-common default-lld
-
+sys-devel/clang-common default-lld -cet
 # Clang settings handled in /etc/portage/env/sys-devel/clang-common
-# Changes equivalent to: -ssp -default-stack-clash-protection
+# Changes equivalent to: -ssp -default-stack-clash-protection -default-znow
 
 # -pgo: Super fucking slow, not worth it...
 # clang: GCC is bigtime unsupported upstream, can't LTO across C++ and Rust with GCC.
@@ -22,6 +24,7 @@ mail-client/thunderbird -pgo clang
 #  -fstack-protector-strong (--enable-default-ssp, USE=ssp)
 #  -fstack-clash-protector (-DDEF_GENTOO_SCP, USE=default-stack-clash-protection)
 #  -Wl,-z,now (-DDEF_GENTOO_ZNOW, USE=default-znow)
+#  -fcf-protection=full (-DEXTRA_OPTIONS_CF, USE=cet)
 # sys-devel/binutils:
 #  -Wl,-z,relro (--enable-relro, no way to disable)
 # profiles/default/linux/make.defaults:
