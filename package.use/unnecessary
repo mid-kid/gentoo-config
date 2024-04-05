@@ -112,3 +112,4 @@ media-gfx/fontforge -gif -jpeg -png -readline
 net-dns/avahi -gtk -qt5
 dev-java/openjdk -alsa -cups
 sys-apps/pcsc-tools -gui
+app-text/poppler -boost
