@@ -1,0 +1,4 @@
+#!/bin/sh
+# Makes a list of currently installed packages with all relevant details
+# This makes it easier to "snapshot" and compare the system state before and after a complicated upgrade
+qlist -ISU
