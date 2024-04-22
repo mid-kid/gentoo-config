@@ -1,0 +1,23 @@
+Normalize usage of $TERMINAL variable
+
+Run $TERMINAL -e, to standardize the behavior of Terminal=true across file
+openers. This is what various utilities like i3-sensible-terminal and
+rofi-sensible-terminal settled upon.
+
+--- xdg-utils-v1.2.1.orig/scripts/xdg-open.in
++++ xdg-utils-v1.2.1/scripts/xdg-open.in
+@@ -378,7 +378,13 @@
+                 args=$(( args - 1 ))
+             done
+             [ $replaced -eq 1 ] || set -- "$@" "${target:-$target_uri}"
+-            env "$command" "$@"
++
++            if [ x"$(get_key "${file}" "Terminal")" = xtrue ]; then
++                ${TERMINAL:-xterm} -e env "$command" "$@"
++            else
++                env "$command" "$@"
++            fi
++
+             exit_success
+         fi
+     fi
