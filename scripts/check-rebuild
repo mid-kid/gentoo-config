@@ -1,4 +1,16 @@
 #!/bin/sh
 # Checks all installed packages can be installed into a clean root without breakage
-rm -rf /tmp/root
-FEATURES=-news emerge --usepkg=n --root /tmp/root -pe $(qlist -ICF '=%{CATEGORY}/%{PF}')
+dir=/tmp/root
+rm -rf "$dir"
+mkdir -p "$dir"
+qlist -ICF '=%{CATEGORY}/%{PF}' | sort > "$dir/qlist_inst.txt"
+qlist -ItCF '=%{CATEGORY}/%{PF}' | sort > "$dir/qlist_repo.txt"
+comm -12 "$dir/qlist_inst.txt" "$dir/qlist_repo.txt" > "$dir/list.txt"
+comm -23 "$dir/qlist_inst.txt" "$dir/qlist_repo.txt" > "$dir/gone.txt"
+
+if [ "$(wc -c "$dir/gone.txt" | cut -f1 -d\ )" -ge 1 ]; then
+    echo "Packages not in repositories:"
+    cat "$dir/gone.txt"
+fi
+
+FEATURES=-news emerge --usepkg=n --root "$dir" -pe $(cat "$dir/list.txt")

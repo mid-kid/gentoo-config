@@ -2,6 +2,7 @@ media-video/pipewire sound-server pipewire-alsa bluetooth
 
 net-wireless/blueman pulseaudio  # Bluetooth audio
 media-video/obs-studio pulseaudio pipewire  # Desktop recording
+x11-misc/polybar pulseaudio  # Better device hotplugging
 
 # ALSA problems when used with pulseaudio plugin
 www-client/firefox pulseaudio  # ALSA backend breaks websites

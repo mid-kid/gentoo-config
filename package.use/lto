@@ -1,9 +1,10 @@
 sys-devel/gcc graphite
 
 # Disable security features that impact codegen
+sys-devel/gcc -ssp -default-stack-clash-protection -default-znow -cet # -pie
 sys-devel/binutils -cet
 sys-libs/glibc -cet
-sys-devel/gcc -ssp -default-stack-clash-protection -default-znow -cet # -pie
+dev-debug/gdb -cet
 # Not decided on -cet yet, pending research
 
 # LLD is required for clang LTO

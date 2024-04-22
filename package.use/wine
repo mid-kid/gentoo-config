@@ -3,6 +3,7 @@ app-emulation/wine-staging gstreamer #themes
 
 app-arch/brotli ABI_X86: 32
 app-arch/bzip2 ABI_X86: 32
+app-arch/xz-utils ABI_X86: 32
 app-crypt/p11-kit ABI_X86: 32
 dev-libs/elfutils ABI_X86: 32
 dev-libs/expat ABI_X86: 32
