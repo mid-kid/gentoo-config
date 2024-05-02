@@ -18,6 +18,8 @@ dev-build/muon
 dev-util/rgbds
 media-video/droidcam
 media-video/v4l2loopback
+net-vpn/tailscale
+media-sound/qpwgraph
 
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrokdecode

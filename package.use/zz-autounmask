@@ -93,3 +93,5 @@
 >=dev-python/pillow-10.2.0-r1 tiff
 # required by media-gfx/freecad-0.20.2-r1::gentoo
 >=sci-libs/hdf5-1.14.3-r1 fortran
+# required by media-gfx/krita-5.1.5::gentoo[python_single_target_python3_11]
+>=dev-python/PyQt5-5.15.10-r1 declarative network
