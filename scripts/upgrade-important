@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Gentoo is the only distribution that can deal with partial upgrades just fine
+# This script avoids upgrading everything, only updating the things I *always*
+# want to have up-to-date.
+
+# Upgrade the things that should always be bumped *first*
+/etc/portage/scripts/upgrade -p
+# This also rejects the upgrade if @world can't be satisfied
+
+# Upgrade the sensitive packages
+emerge -1 --update-if-installed \
+	sys-libs/glibc \
+	www-client/firefox

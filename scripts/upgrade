@@ -2,14 +2,14 @@
 set -e
 
 has_update() {
-	emerge -pu1 "$@" | grep -q '^\['
+	emerge -p1 --update-if-installed "$@" | grep -q '^\['
 }
 pre_update() {
 	echo "Checking updates for $@..."
 	updated=false
 	has_update "$@" || return 0
 	updated=true
-	emerge --ask=n -u1 "$@"
+	emerge --ask=n -1 --update-if-installed "$@"
 }
 
 # Upgrade portage and related configs
@@ -26,39 +26,7 @@ if $updated; then
 	eselect gcc set latest
 fi
 
-# Upgrade rust separately since it keeps breaking resolution when --keep-going=y
-# Otherwise a failing package would cause --keep-going=y to stop with a circular dependency
-# Only relevant for USE=system-bootstrap...
-if false; then
-pre_update \
-	virtual/rust \
-	dev-lang/rust
-if $updated; then
-	eselect rust update
-fi
-fi
-
-# Upgrade golang first to rebuild everything only once even if it has updates
-# Otherwise only some programs would be upgraded/built during emerge @world but not all
-# TODO: Check for an update for dev-lang/go while considering @golang-rebuild in the graph
-#       This prevents updating when anything in @golang-rebuild can't be built
-if false; then
-pre_update \
-	dev-lang/go
-if $updated; then
-	emerge --ask=n --usepkg=n -p @golang-rebuild
-	emerge --ask=n --usepkg=n @golang-rebuild
-fi
-fi
-
-# Remove packages not part of @world to avoid dependency conflicts
-if false; then
-echo "Checking packages to clean..."
-if emerge -pc | grep -q '^All selected packages:'; then
-	echo "Depcleaning..."
-	emerge --ask=n -c
-fi
-fi
+# libc is already upgraded first anyway, no need to list separately
 
 # Upgrade entire rest of the system
 echo "Upgrading @world..."
