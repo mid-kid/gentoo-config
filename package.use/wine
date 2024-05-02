@@ -56,6 +56,7 @@ x11-libs/xcb-util-keysyms ABI_X86: 32
 dev-lang/orc ABI_X86: 32
 dev-libs/fribidi ABI_X86: 32
 dev-libs/glib ABI_X86: 32
+dev-libs/libgudev ABI_X86: 32
 dev-libs/libpcre2 ABI_X86: 32
 dev-libs/lzo ABI_X86: 32
 media-gfx/graphite2 ABI_X86: 32

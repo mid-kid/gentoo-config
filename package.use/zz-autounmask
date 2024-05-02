@@ -95,3 +95,5 @@
 >=sci-libs/hdf5-1.14.3-r1 fortran
 # required by media-gfx/krita-5.1.5::gentoo[python_single_target_python3_11]
 >=dev-python/PyQt5-5.15.10-r1 declarative network
+# required by dev-util/pkgcheck-0.10.29::gentoo[-test]
+>=dev-libs/tree-sitter-bash-0.21.0-r1 python
