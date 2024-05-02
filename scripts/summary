@@ -26,7 +26,7 @@ echo ' ===== Downgrades ===== '
 greplist '^\[[^ ]* ....UD.]'
 echo
 echo ' ===== Changed USE ===== '
-greplist '^\[[^ ]* ..R....].*USE='
+greplist '^\[[^ ]* ..\(R..\|..U\)..].*USE='
 echo
 echo ' ===== Estimated time ===== '
 echo "$list_nocolor" | sed -e 's/^[^\x5d]*\] \([^ ]*\).*$/\1/' | xargs qatom -F'%{CATEGORY}/%{PN}' | xargs -L1 qlop -aM | awk '{x+=$2}END{print "Average: " int(x/60/60) ":" int(x/60)%60 ":" x%60}'
