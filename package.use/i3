@@ -1,3 +1,3 @@
-x11-terms/rxvt-unicode 256-color unicode3 fading-colors iso14755 xft perl
+x11-terms/rxvt-unicode 256-color unicode3 fading-colors iso14755 xft perl 24-bit-color wide-glyphs
 media-gfx/feh xinerama
 x11-misc/polybar i3wm network ipc
