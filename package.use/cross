@@ -1,0 +1,3 @@
+# Some tools support enabling additional targets
+dev-debug/gdb multitarget
+sys-devel/binutils multitarget
