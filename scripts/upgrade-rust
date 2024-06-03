@@ -7,5 +7,5 @@
 # http://distfiles.gentoo.org/snapshots/squashfs/
 ARCH="$(portageq envvar ARCH)"
 for ver in "$@"; do
-    ACCEPT_KEYWORDS="~$ARCH" emerge --ask=n -1 --package-moves=n "~dev-lang/rust-$ver" "~virtual/rust-$ver"
+    ACCEPT_KEYWORDS="~$ARCH" emerge --ask=n -u1 --package-moves=n "~dev-lang/rust-$ver" "~virtual/rust-$ver"
 done
