@@ -18,11 +18,12 @@ while test -n "$1"; do
 done
 
 # Check whether it was run successfully already
-day=
+prevsync=
 if test -r "$dir/timestamp"; then
-    day=`cat "$dir/timestamp"`
+    prevsync=`cat "$dir/timestamp"`
 fi
-newday=`date +%Y%m`
+cursync=`date +%Y%m`
+day=`date +%d`
 
 # Do not run it when on battery power
 online=1
@@ -57,7 +58,7 @@ if $force; then
 fi
 
 # If already ran, check if pending needs updating
-if [ "$newday" = "$day" ]; then
+if [ "$cursync" = "$prevsync" -a "$day" -gt 1 ]; then
     if [ ! -f "$dir/pending" -o /var/log/emerge.log -nt "$dir/pending" ]; then
         update
     fi
@@ -69,4 +70,4 @@ emerge --ask=n --package-moves=n --sync | tee "$dir/sync.log"
 update
 
 # If successful, write it out
-echo "$newday" > "$dir/timestamp"
+echo "$cursync" > "$dir/timestamp"

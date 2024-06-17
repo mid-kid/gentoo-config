@@ -8,3 +8,4 @@ media-libs/libsdl2 wayland gles2
 x11-libs/libxkbcommon wayland
 www-client/firefox wayland
 app-emulation/wine-staging wayland
+media-libs/vulkan-loader wayland

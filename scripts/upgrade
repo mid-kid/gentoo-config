@@ -12,10 +12,16 @@ pre_update() {
 	emerge --ask=n -1 --update-if-installed "$@"
 }
 
-# Upgrade portage and related configs
+# Apply package moves
+emerge -pqnO sys-apps/baselayout
+
+# Upgrade portage
 pre_update \
 	sys-apps/sandbox \
 	sys-apps/portage
+
+# Upgrade base configurations that might influence portage
+pre_update sys-apps/baselayout
 
 # Upgrade compiler to make sure to use the latest one
 pre_update \

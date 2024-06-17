@@ -97,7 +97,7 @@ media-gfx/gimp -udev
 media-plugins/gst-plugins-v4l2 -udev
 dev-python/pyside2 -concurrent -printsupport -sql -testlib -x11extras
 sci-libs/vtk -qt5
-media-gfx/blender -ffmpeg -color-management -openvdb -opensubdiv -oidn -embree -tbb -fluid -fftw -pdf -potrace -pugixml -sndfile -openpgl
+media-gfx/blender -ffmpeg -color-management -openvdb -opensubdiv -oidn -embree -fluid -fftw -pdf -potrace -pugixml -sndfile -openpgl -nanovdb
 media-gfx/imagemagick -svg
 virtual/imagemagick-tools -svg
 gui-apps/foot -grapheme-clustering
@@ -117,3 +117,4 @@ kde-frameworks/ktexteditor -editorconfig
 media-gfx/krita -raw -pdf
 media-gfx/graphviz -pdf
 mail-client/claws-mail -pdf
+net-misc/chrony -readline
