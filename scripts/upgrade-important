@@ -12,3 +12,7 @@
 emerge -1 --update-if-installed \
 	sys-libs/glibc \
 	www-client/firefox
+
+# Verify that we're not affected by serious security bugs
+echo "Running 'glsa-check -l affected'..."
+glsa-check -l affected
