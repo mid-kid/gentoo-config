@@ -3,7 +3,7 @@
 # Example usage (calculate upgrade for qtcore and all its revdeps):
 # echo "dev-qt/qtcore:5" > /tmp/pkg.txt
 # emerge -p --usepkg=n --verbose-conflicts $(cat /tmp/pkg.txt) |& tee /dev/stderr | /etc/portage/scripts/filter-required /tmp/pkg.txt
-# ... repeat last two lines n times until it resolves,
+# ... repeat last line a number of times until it resolves,
 #     then run "emerge -1u $(cat /tmp/pkg.txt)"
 tmp="$(mktemp)"
 grep ' =\|=[ \[]\|:[^ ]\+/' | sed -n -e 's/^.* required by (\([^,]\+\), installed).*$/\1/p' | sed \
