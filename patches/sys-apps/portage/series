@@ -1,1 +1,2 @@
 portage-3.0.28-silence-depclean-msg.patch
+portage-3.0.63-store-package-sizes.patch

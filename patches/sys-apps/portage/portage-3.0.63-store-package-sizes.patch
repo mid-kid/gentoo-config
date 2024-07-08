@@ -1,0 +1,16 @@
+Store build and install directory sizes in package metadata
+
+These stats are interesting to aggregate across packages, without having to
+parse build logs, which really weren't made to be kept like this.
+
+--- portage-3.0.63.orig/bin/phase-functions.sh
++++ portage-3.0.63/bin/phase-functions.sh
+@@ -668,6 +668,8 @@
+ 			}
+ 			einfo "Final size of build directory: $(size ${nsz[0]} ${isz[0]})"
+ 			einfo "Final size of installed tree:  $(size ${isz[0]} ${nsz[0]})"
++			printf '%s\n' "${nsz[0]}" > "${PORTAGE_BUILDDIR}"/build-info/NSIZE
++			printf '%s\n' "${isz[0]}" > "${PORTAGE_BUILDDIR}"/build-info/ISIZE
+ 		)
+ 		__vecho
+ 	fi
