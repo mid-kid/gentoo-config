@@ -1,13 +1,12 @@
 #!/bin/sh
 # Shitty script to aid with parsing conflicts in order to perform slot rebuilds independent of @world
 # Example usage (calculate upgrade for qtcore and all its revdeps):
-# echo "dev-qt/qtcore:5" > /tmp/pkg.txt
-# emerge -pu --usepkg=n --verbose-conflicts $(cat /tmp/pkg.txt) 2>&1 | tee /dev/stderr | /etc/portage/scripts/filter-required /tmp/pkg.txt
+# echo 'dev-qt/qtcore:5' > /tmp/pkg.txt
+# emerge -p --usepkg=n --verbose-conflicts --ignore-built-slot-operator-deps=y $(cat /tmp/pkg.txt) 2>&1 | tee /dev/stderr | /etc/portage/scripts/filter-required /tmp/pkg.txt
 # ... repeat last line a number of times until it resolves,
-#     then run "emerge -1u $(cat /tmp/pkg.txt)"
-#     Play with removing/adding the -u flag if facing problems.
+#     then run "emerge -1 $(cat /tmp/pkg.txt)"
 tmp="$(mktemp)"
-grep ' =\|=[ \[]\|:[^ ]\+/' | sed -n -e 's/^.* required by (\([^,]\+\), installed).*$/\1/p' | sed \
+grep ' =' | sed -n -e 's/^.* required by (\([^,]\+\), installed).*$/\1/p' | sed \
     -e 's/::[^:]*$//' \
     -e 's/\/[0-9\.]\+$//' \
     -e 's/-[0-9]\+:/:/' \
