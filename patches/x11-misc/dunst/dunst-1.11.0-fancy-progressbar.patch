@@ -1,0 +1,90 @@
+--- dunst-1.11.0.orig/src/draw.c
++++ dunst-1.11.0/src/draw.c
+@@ -656,7 +656,11 @@
+         else
+                 height += settings.separator_height;
+ 
+-        draw_rounded_rect(c, x, y, width, height, corner_radius, scale, corners);
++        // Save outer (without frame) position values
++        int o_x = x;
++        int o_y = y;
++        int o_width = width;
++        int o_height = height;
+ 
+         /* adding frame */
+         x += settings.frame_width;
+@@ -666,6 +670,8 @@
+         }
+ 
+         width -= 2 * settings.frame_width;
++        if (ret_width)
++                *ret_width = width;
+ 
+         if (corners & (C_BOT | _C_LAST))
+                 height -= settings.frame_width;
+@@ -674,13 +680,41 @@
+ 
+         radius_int = frame_internal_radius(corner_radius, settings.frame_width, height);
+ 
+-        draw_rounded_rect(c, x, y, width, height, radius_int, scale, corners);
++        // Pre-scale everything so we can split the bar on an exact pixel
++        x = round(x * scale);
++        y = round(y * scale);
++        width = round(width * scale);
++        height = round(height * scale);
++        o_x = round(o_x * scale);
++        o_y = round(o_y * scale);
++        o_width = round(o_width * scale);
++        o_height = round(o_height * scale);
++        corner_radius = round(corner_radius * scale);
++
++        // Calculate the position at which to split the bar
++        int o_progress_width = o_width;
++        if (cl->n->progress >= 0) {
++                o_progress_width = o_width * cl->n->progress / 100;
++        }
++        int progress_width = o_progress_width - (x - o_x);
++        if (progress_width < 0) progress_width = 0;
++        if (progress_width > width) progress_width = width;
++
++        draw_rounded_rect(c, o_x, o_y, o_progress_width, o_height, corner_radius, 1, corners);
++        draw_rounded_rect(c, x, y, progress_width, height, radius_int, 1, corners);
+         cairo_set_source_rgba(c, COLOR(cl, frame.r), COLOR(cl, frame.g), COLOR(cl, frame.b), COLOR(cl, frame.a));
+         cairo_fill(c);
++        draw_rounded_rect(c, o_x + o_progress_width, o_y, o_width - o_progress_width, o_height, corner_radius, 1, corners);
++        draw_rounded_rect(c, x + progress_width, y, width - progress_width, height, radius_int, 1, corners);
++        cairo_set_source_rgba(c, COLOR(cl, frame.r) - 0.2, COLOR(cl, frame.g) - 0.2, COLOR(cl, frame.b) - 0.2, COLOR(cl, frame.a));
++        cairo_fill(c);
+ 
+-        draw_rounded_rect(c, x, y, width, height, radius_int, scale, corners);
++        draw_rounded_rect(c, x, y, progress_width, height, radius_int, 1, corners);
+         cairo_set_source_rgba(c, COLOR(cl, bg.r), COLOR(cl, bg.g), COLOR(cl, bg.b), COLOR(cl, bg.a));
+         cairo_fill(c);
++        draw_rounded_rect(c, x + progress_width, y, width - progress_width, height, radius_int, 1, corners);
++        cairo_set_source_rgba(c, COLOR(cl, bg.r) - 0.2, COLOR(cl, bg.g) - 0.2, COLOR(cl, bg.b) - 0.2, COLOR(cl, bg.a));
++        cairo_fill(c);
+ 
+         cairo_set_operator(c, CAIRO_OPERATOR_SOURCE);
+ 
+@@ -690,19 +724,14 @@
+                 struct color sep_color = layout_get_sepcolor(cl, cl_next);
+                 cairo_set_source_rgba(c, sep_color.r, sep_color.g, sep_color.b, sep_color.a);
+ 
+-                draw_rect(c, settings.frame_width, y + height, width, settings.separator_height, scale);
++                draw_rect(c, settings.frame_width, y + height, width, settings.separator_height, 1);
+ 
+                 cairo_fill(c);
+         }
+ 
+         cairo_destroy(c);
+ 
+-        if (ret_width)
+-                *ret_width = width;
+-
+-        return cairo_surface_create_for_rectangle(srf,
+-                                                  round(x * scale), round(y * scale),
+-                                                  round(width * scale), round(height * scale));
++        return cairo_surface_create_for_rectangle(srf, x, y, width, height);
+ }
+ 
+ static void render_content(cairo_t *c, struct colored_layout *cl, int width, double scale)
