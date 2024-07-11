@@ -1,4 +1,4 @@
 # Unmasking specific versions when older ones are too old
 ~app-arch/p7zip-17.05
-~dev-libs/nss-3.99
+~dev-libs/nss-3.101.1
 dev-java/openjdk:21
