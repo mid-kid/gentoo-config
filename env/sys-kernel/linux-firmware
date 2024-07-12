@@ -9,4 +9,9 @@ restore_config() {
 
 	elog "/etc/portage/env: localfirmconfig LSFIRM=$LSFIRM"
 	cat "$LSFIRM" > "$1"
+
+	# Also copy the amd-ucode if necessary
+	if use initramfs && use dist-kernel; then
+		( cd "$S" && echo amd-ucode/*.bin ) >> "$1"
+	fi
 }
