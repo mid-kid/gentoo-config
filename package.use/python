@@ -15,6 +15,7 @@
 
 # Packages with dependents requiring old version (pointed out by portage)
 # emerge -pDN --usepkg=n --autounmask-continue=y --backtrack=100 @world
+dev-libs/boost PYTHON_TARGETS: python3_11
 dev-python/Babel PYTHON_TARGETS: python3_11
 dev-python/PySocks PYTHON_TARGETS: python3_11
 dev-python/alabaster PYTHON_TARGETS: python3_11
