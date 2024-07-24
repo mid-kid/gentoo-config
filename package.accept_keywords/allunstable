@@ -21,6 +21,7 @@ media-video/v4l2loopback
 net-vpn/tailscale
 media-sound/qpwgraph
 app-arch/7zip
+gui-apps/waypipe
 
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrokdecode

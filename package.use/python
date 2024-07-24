@@ -11,7 +11,6 @@
 
 # Packages without current PYTHON_TARGETS
 # quse -Ie python_targets_python3_10 | grep -v '\bpython_targets_python3_11\b' | cut -d: -f1 | xargs printf '%s PYTHON_TARGETS: python3_10\n'
-=sys-fs/udiskie-2.5.2 PYTHON_TARGETS: python3_11
 
 # Packages with dependents requiring old version (pointed out by portage)
 # emerge -pDN --usepkg=n --autounmask-continue=y --backtrack=100 @world
@@ -27,7 +26,6 @@ dev-python/contourpy PYTHON_TARGETS: python3_11
 dev-python/cppy PYTHON_TARGETS: python3_11
 dev-python/cycler PYTHON_TARGETS: python3_11
 dev-python/cython PYTHON_TARGETS: python3_11
-dev-python/docopt PYTHON_TARGETS: python3_11
 dev-python/docutils PYTHON_TARGETS: python3_11
 dev-python/editables PYTHON_TARGETS: python3_11
 dev-python/flit-core PYTHON_TARGETS: python3_11
@@ -86,5 +84,4 @@ dev-python/wxpython PYTHON_TARGETS: python3_11
 # eix '-#' --installed-with-use python_targets_python3_10 | grep -Fvf <(grep '^[^#*]*PYTHON_TARGETS:' /etc/portage/package.use/python3_11 | cut -d' ' -f 1)
 
 # Check for potentially removable entries:
-# rm use; eix '-#' --installed-with-use python_targets_python3_10 --installed-with-use python_targets_python3_11 | xargs -P4 -I% sh -c "PYTHON_TARGETS=python3_11 emerge -pD --usepkg=n '%' && { echo '%' | tee -a use; }"
-# qlist -I | grep -Fvf - /etc/portage/package.use/python3_11 | grep -v '^#\|\*' | grep 'PYTHON_TARGETS:'
+# rm /tmp/use.txt; eix '-#' --installed-with-use python_targets_python3_11 --installed-with-use python_targets_python3_12 | xargs -P4 -I% sh -c "PYTHON_TARGETS=python3_12 emerge -pD --usepkg=n '%' && { echo '%' | tee -a /tmp/use.txt; }"

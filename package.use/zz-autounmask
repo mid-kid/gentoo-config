@@ -97,3 +97,7 @@
 >=dev-python/PyQt5-5.15.10-r1 declarative network
 # required by dev-util/pkgcheck-0.10.29::gentoo[-test]
 >=dev-libs/tree-sitter-bash-0.21.0-r1 python
+# REQUIRED_USE vaapi? ( ffmpeg )
+>=gui-apps/waypipe-0.9.1 ffmpeg
+# required by gui-apps/waypipe-0.9.1::gentoo[vaapi]
+>=media-libs/libva-2.21.0 wayland
