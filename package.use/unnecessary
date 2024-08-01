@@ -118,3 +118,6 @@ media-gfx/krita -raw -pdf
 media-gfx/graphviz -pdf
 mail-client/claws-mail -pdf
 net-misc/chrony -readline
+media-libs/vips -highway
+media-libs/libsixel -gtk
+media-libs/gegl -pdf
