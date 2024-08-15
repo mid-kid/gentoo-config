@@ -1,5 +1,8 @@
 # Alternative packages required to satisfy @system
 
+# Required to fetch repositories
+dev-vcs/git
+
 # Satisfies virtual/editor
 app-editors/vim
 
