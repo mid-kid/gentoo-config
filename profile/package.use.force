@@ -6,6 +6,8 @@ media-fonts/liberation-fonts fontforge
 # I don't particularly care about costly security features. Gotta go fast.
 # See features/23.0/package.use.force
 sys-devel/gcc -default-znow -default-stack-clash-protection
+# arch/amd64/package.use.force
+sys-devel/binutils -cet
 
 # Don't build unnecessary architectures, I'm pretty sure I know what I'm using.
 # See base/package.use.force

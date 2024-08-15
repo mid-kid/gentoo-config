@@ -58,7 +58,7 @@ if $force; then
 fi
 
 # If already ran, check if pending needs updating
-if [ "$cursync" = "$prevsync" -a "$day" -gt 1 ]; then
+if [ "$cursync" = "$prevsync" -o "$day" -le 1 ]; then
     if [ ! -f "$dir/pending" -o /var/log/emerge.log -nt "$dir/pending" ]; then
         update
     fi

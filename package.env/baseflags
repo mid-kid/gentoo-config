@@ -18,7 +18,7 @@ app-office/libreoffice baseflags  # 7.5.5.2 (GCC 13.2.1_p20230826)
 media-gfx/blender baseflags  # 3.3.6 (GCC 13.2.1_p20230826)
 
 # Compile: internal compiler error: Segmentation fault
-dev-libs/boost baseflags  # 1.84.0 (GCC 13.2.1_p20240210)
+dev-libs/boost baseflags  # 1.85.0 (GCC 13.3.1_p20240614)
 
 # Runtime: Constant hangs
 sci-electronics/pulseview baseflags  # 0.4.2-r1 (GCC 12.2.1_p20230121-r1)

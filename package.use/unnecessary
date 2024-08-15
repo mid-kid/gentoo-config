@@ -46,7 +46,7 @@ media-video/handbrake -fdk libav-aac
 sys-apps/groff -X
 sci-electronics/ngspice -X
 app-misc/neofetch -X
-media-libs/phonon -vlc gstreamer
+media-libs/phonon -vlc gstreamer minimal
 kde-frameworks/kio -kwallet
 kde-frameworks/purpose -kaccounts
 kde-apps/akonadi -kaccounts -mysql sqlite
