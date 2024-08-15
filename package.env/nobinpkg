@@ -2,7 +2,6 @@
 
 # Kernel modules (emerge -p @module-rebuild)
 app-emulation/virtualbox-modules nobinpkg
-sys-power/acpi_call nobinpkg
 
 # Big packages that aren't built from source anyway
 app-emulation/wine-gecko nobinpkg
