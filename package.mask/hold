@@ -6,3 +6,4 @@
 # fcitx5 is a huge upgrade a long time in the making
 # It'll likely break my config, so holding back until I have time for it...
 app-i18n/fcitx:5
+app-i18n/fcitx-anthy:5
