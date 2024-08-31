@@ -122,3 +122,7 @@ media-libs/vips -highway
 media-libs/libsixel -gtk
 media-libs/gegl -pdf
 dev-vcs/git -webdav
+sys-boot/grub -fonts -themes
+app-arch/libarchive -e2fsprogs
+app-portage/portage-utils -qmanifest
+dev-libs/libxslt -crypt
