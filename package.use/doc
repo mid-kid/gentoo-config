@@ -6,6 +6,7 @@ x11-libs/libX11 doc
 app-emulation/qemu doc  # requires dev-python/sphinx
 dev-build/cmake doc  # requires dev-python/sphinx
 sys-devel/llvm doc  # requires dev-python/sphinx and dev-python/recommonmark
+sys-devel/clang doc  # requires dev-python/sphinx and dev-python/recommonmark
 media-video/pipewire man  # requires app-text/doxygen
 #dev-util/ccache doc  # requires dev-ruby/asciidoctor (ruby)
 

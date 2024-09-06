@@ -1,3 +1,6 @@
-# Install opentmpfiles manually as needed
+# Install opentmpfiles manually if needed
 virtual/tmpfiles-0-r5
 virtual/tmpfiles-0-r6
+
+# I don't want to use any libsecret provider
+virtual/secret-service-0

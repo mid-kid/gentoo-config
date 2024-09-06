@@ -7,3 +7,19 @@
 # It'll likely break my config, so holding back until I have time for it...
 app-i18n/fcitx:5
 app-i18n/fcitx-anthy:5
+
+# KDE6 is *another* huge upgrade :)
+>=net-im/neochat-24
+>=net-im/tokodon-24
+>=x11-misc/sddm-0.21.0_p20240723-r10
+kde-apps/dolphin:6
+kde-apps/kdenlive:6
+kde-apps/kio-extras:6
+kde-apps/okular:6
+kde-frameworks/breeze-icons:6
+kde-frameworks/kf-env:6
+kde-misc/kdeconnect:6
+kde-plasma/polkit-kde-agent:6
+
+# Firefox is dear to me, requires upgrade attention
+>=www-client/firefox-128

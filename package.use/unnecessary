@@ -126,3 +126,6 @@ sys-boot/grub -fonts -themes
 app-arch/libarchive -e2fsprogs
 app-portage/portage-utils -qmanifest
 dev-libs/libxslt -crypt
+kde-apps/thumbnailers -pdf
+media-gfx/krita -xsimd
+dev-libs/libgit2 -ssh

@@ -1,4 +1,6 @@
 # Unmasking specific versions when older ones are too old
 ~app-arch/p7zip-17.05
-~dev-libs/nss-3.101.1
+~dev-libs/nss-3.101.2
 dev-java/openjdk:21
+~dev-libs/protobuf-27.2
+~sci-libs/opencascade-7.7.2
