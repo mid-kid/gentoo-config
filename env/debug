@@ -1,4 +1,4 @@
 # Include debug info
-CFLAGS="$CFLAGS -ggdb"
-CXXFLAGS="$CXXFLAGS -ggdb"
+CFLAGS="$CFLAGS -ggdb3"
+CXXFLAGS="$CXXFLAGS -ggdb3"
 FEATURES="splitdebug compressdebug installsources"
