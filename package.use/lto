@@ -3,7 +3,7 @@ sys-devel/gcc graphite
 # Disable security features that impact codegen
 sys-devel/gcc -ssp -default-stack-clash-protection -default-znow -cet # -pie
 sys-devel/binutils -cet
-sys-libs/glibc -cet
+sys-libs/glibc -ssp -cet
 dev-debug/gdb -cet
 # Not decided on -cet yet, pending research
 
@@ -23,7 +23,7 @@ mail-client/thunderbird -pgo clang
 #  -Wp,-D_FORTIFY_SOURCE=2 (-DGENTOO_FORTIFY_SOURCE_LEVEL=n, no way to disable)
 #  -fPIE (--enable-default-pie, USE=pie)
 #  -fstack-protector-strong (--enable-default-ssp, USE=ssp)
-#  -fstack-clash-protector (-DDEF_GENTOO_SCP, USE=default-stack-clash-protection)
+#  -fstack-clash-protection (-DDEF_GENTOO_SCP, USE=default-stack-clash-protection)
 #  -Wl,-z,now (-DDEF_GENTOO_ZNOW, USE=default-znow)
 #  -fcf-protection=full (-DEXTRA_OPTIONS_CF, USE=cet)
 # sys-devel/binutils:
