@@ -17,8 +17,10 @@ dev-python/pypy3_10-exe-bin
 dev-python/pypy3_9-exe-bin
 net-im/element-desktop-bin
 net-im/telegram-desktop-bin
-www-client/firefox-bin
+sys-firmware/edk2-ovmf-bin
+sys-firmware/seabios-bin
 sys-kernel/gentoo-kernel-bin
+www-client/firefox-bin
 
 # Try to avoid rust
 >=media-gfx/libimagequant-4
