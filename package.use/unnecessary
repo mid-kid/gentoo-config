@@ -58,7 +58,7 @@ dev-python/shiboken2 -docstrings
 dev-python/pyside2 -network -xml
 media-libs/simage -qt5
 media-gfx/freecad -fem -mesh -openscad -pcl -addonmgr -arch -inspection -path
-net-im/telegram-desktop -jemalloc
+net-im/telegram-desktop -jemalloc -libdispatch
 kde-frameworks/sonnet -hunspell
 x11-libs/agg -gpc
 media-plugins/frei0r-plugins -facedetect -scale0tilt
@@ -129,3 +129,4 @@ dev-libs/libxslt -crypt
 kde-apps/thumbnailers -pdf
 media-gfx/krita -xsimd
 dev-libs/libgit2 -ssh
+dev-util/perf -gtk -libtracefs -libtraceevent
