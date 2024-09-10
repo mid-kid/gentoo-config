@@ -20,6 +20,3 @@ kde-frameworks/breeze-icons:6
 kde-frameworks/kf-env:6
 kde-misc/kdeconnect:6
 kde-plasma/polkit-kde-agent:6
-
-# Firefox is dear to me, requires upgrade attention
->=www-client/firefox-128
