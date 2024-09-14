@@ -1,4 +1,4 @@
-sys-kernel/gentoo-kernel -initramfs modules-compress
+sys-kernel/gentoo-kernel -initramfs
 sys-kernel/linux-firmware initramfs compress-xz
 sys-boot/grub GRUB_PLATFORMS: -* efi-64
 media-libs/mesa VIDEO_CARDS: radeonsi
