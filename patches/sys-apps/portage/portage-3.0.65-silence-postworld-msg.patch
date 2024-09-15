@@ -1,0 +1,13 @@
+Silence depclean suggestion after @world merge
+
+Same rationale as silence-depclean-msg.patch, I know this by now...
+
+--- portage-3.0.65.orig/lib/_emerge/post_emerge.py
++++ portage-3.0.65/lib/_emerge/post_emerge.py
+@@ -167,5 +167,5 @@
+ 
+     clean_logs(settings)
+ 
+-    if "--quiet" not in myopts and myaction is None and "@world" in myfiles:
++    if False:
+         show_depclean_suggestion()
