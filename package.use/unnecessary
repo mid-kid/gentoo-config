@@ -23,17 +23,15 @@ sys-boot/plymouth -gtk
 media-libs/gst-plugins-bad -gtk
 app-text/ghostscript-gpl -gtk
 sys-auth/polkit -gtk
-dev-python/matplotlib -qt5 -gtk3 -cairo -wxwidgets
+dev-python/matplotlib -gtk3 -cairo -wxwidgets
 net-print/cups-filters -pdf
 dev-embedded/openocd -ftdi -jlink -cmsis-dap
 sci-electronics/kicad-meta minimal
 xfce-base/libxfce4ui -gtk2
-media-libs/openal -qt5
 dev-python/PyQt5 -multimedia -network -printsupport
 sys-apps/flashrom -ft2232-spi -usbblaster-spi
 media-gfx/pngquant -lcms
 sci-libs/fftw -fortran
-sys-libs/gwenhywfar -qt5
 app-text/doxygen -gui
 net-p2p/transmission -gtk
 app-emulation/virtualbox -sdk
@@ -55,8 +53,6 @@ app-accessibility/speech-dispatcher -espeak
 app-crypt/mit-krb5 -keyutils
 sci-mathematics/cgal -gmp
 dev-python/shiboken2 -docstrings
-dev-python/pyside2 -network -xml
-media-libs/simage -qt5
 media-gfx/freecad -fem -mesh -openscad -pcl -addonmgr -arch -inspection -path
 net-im/telegram-desktop -jemalloc -libdispatch
 kde-frameworks/sonnet -hunspell
@@ -66,7 +62,7 @@ app-i18n/fcitx -enchant
 app-editors/vim -crypt -sound
 app-editors/gvim -crypt -sound
 sys-apps/man-db -manpager
-media-libs/mlt -gtk -qt5
+media-libs/mlt -gtk
 kde-apps/okular -crypt
 media-libs/libsndfile minimal
 app-containers/podman -init -fuse
@@ -81,11 +77,10 @@ dev-libs/libdbusmenu -gtk
 dev-lang/perl minimal
 dev-perl/* minimal
 media-video/mpv -libplacebo
-app-crypt/gpgme -qt5
 sys-devel/clang-runtime -compiler-rt -sanitize
 sys-devel/llvm -binutils-plugin
 net-analyzer/nmap -nse
-media-gfx/zbar -gtk -qt5
+media-gfx/zbar -gtk
 media-video/mpv -vulkan
 dev-util/astyle -java
 sys-apps/fwupd -archive -gusb -sqlite
@@ -95,8 +90,7 @@ media-video/mediainfo -wxwidgets
 app-crypt/swtpm -gnutls
 media-gfx/gimp -udev
 media-plugins/gst-plugins-v4l2 -udev
-dev-python/pyside2 -concurrent -printsupport -sql -testlib -x11extras
-sci-libs/vtk -qt5
+dev-python/pyside2 -network -xml -concurrent -printsupport -sql -testlib -x11extras
 media-gfx/blender -ffmpeg -color-management -openvdb -opensubdiv -oidn -embree -fluid -fftw -pdf -potrace -pugixml -sndfile -openpgl -nanovdb -gmp
 media-gfx/imagemagick -svg
 virtual/imagemagick-tools -svg
@@ -109,7 +103,7 @@ app-text/xmlto -text
 app-crypt/gnupg -usb
 sys-apps/openrc -netifrc
 media-gfx/fontforge -gif -jpeg -png -readline
-net-dns/avahi -gtk -qt5
+net-dns/avahi -gtk
 dev-java/openjdk -alsa -cups
 sys-apps/pcsc-tools -gui
 app-text/poppler -boost
@@ -130,3 +124,4 @@ kde-apps/thumbnailers -pdf
 media-gfx/krita -xsimd
 dev-libs/libgit2 -ssh
 dev-util/perf -gtk -libtracefs -libtraceevent
+media-libs/openimageio -gui

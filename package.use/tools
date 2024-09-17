@@ -3,14 +3,13 @@ sys-block/f3 extra
 games-emulation/mgba ffmpeg debug lua
 dev-vcs/git perl  # Many utility scripts
 www-client/w3m imlib  # Render images in the terminal
-app-office/libreoffice kde
+app-office/libreoffice kde qt6  # Use the KDE/Qt interfaces
 games-emulation/desmume gdb
 net-misc/curl adns  # Support for --dns-servers option
 net-misc/aria2 bittorrent
 sys-fs/android-file-transfer-linux fuse
 dev-util/android-tools -udev  # I use my own udev rules
 sys-apps/gawk mpfr  # Support for -M/--bignum arbitrary-precision numbers
-dev-build/cmake qt5
 x11-libs/gtk+ examples  # Installs gtk3-widget-factory
 gui-libs/gtk examples  # Installs widget factory
 mail-client/claws-mail litehtml  # Simple html parser that sometimes works

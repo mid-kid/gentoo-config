@@ -42,7 +42,7 @@
 # required by dev-python/matplotlib-3.6.2::gentoo[-test]
 >=dev-python/pillow-9.3.0-r1 webp
 # required by kde-apps/kdenlive-22.12.3-1:5/5::gentoo
->=media-libs/mlt-7.12.0 qt5 frei0r ffmpeg sdl
+>=media-libs/mlt-7.12.0 frei0r ffmpeg sdl
 # required by sys-firmware/sigrok-firmware-fx2lafw-0.1.7-r1::gentoo
 >=dev-embedded/sdcc-3.8.0-r1 device-lib mcs51
 # required by kde-misc/kdeconnect-23.04.2-r1::gentoo
@@ -101,3 +101,31 @@
 >=gui-apps/waypipe-0.9.1 ffmpeg
 # required by gui-apps/waypipe-0.9.1::gentoo[vaapi]
 >=media-libs/libva-2.21.0 wayland
+# required by kde-plasma/polkit-kde-agent-6.1.4::gentoo
+>=dev-qt/qt5compat-6.7.2 qml
+# required by dev-qt/qtbase-6.7.2-r4::gentoo
+>=app-arch/libarchive-3.7.4 zstd
+# required by net-im/neochat-24.05.2::gentoo
+>=kde-frameworks/prison-6.5.0 qml
+# required by dev-qt/qtwebview-6.7.2::gentoo
+>=dev-qt/qtwebengine-6.7.2 qml
+# required by dev-qt/qtwebengine-6.7.2::gentoo
+>=dev-qt/qtwebchannel-6.7.2 qml
+# required by kde-plasma/polkit-kde-agent-6.1.4::gentoo
+>=sys-auth/polkit-qt-0.200.0 qt6
+# required by net-im/neochat-24.05.2::gentoo
+>=dev-libs/qtkeychain-0.14.3 qt6
+# required by net-im/neochat-24.05.2::gentoo
+>=net-libs/libquotient-0.8.2 qt6
+# required by kde-apps/okular-24.05.2::gentoo[pdf]
+>=app-text/poppler-24.06.1 qt6
+# required by kde-frameworks/kwallet-6.5.0::gentoo
+>=app-crypt/qca-2.3.9 qt6
+# required by kde-apps/kdenlive-24.05.2::gentoo
+>=media-libs/mlt-7.24.0 qt6
+# required by kde-apps/dolphin-24.05.2-r1::gentoo
+>=media-libs/phonon-4.12.0-r4 qt6
+# required by kde-frameworks/kauth-6.5.0::gentoo[policykit]
+>=kde-frameworks/kwindowsystem-6.5.0 wayland
+# required by dev-qt/qtwayland-6.7.2-r3::gentoo
+>=dev-qt/qtbase-6.7.2-r4 wayland

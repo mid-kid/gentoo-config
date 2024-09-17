@@ -12,4 +12,4 @@ sys-auth/seatd -server  # Using elogind as server
 net-wireless/wpa_supplicant tkip  # Compatibility with old routers
 app-alternatives/sh -* dash  # Faster POSIX-compatible shell than bash
 media-libs/freetype harfbuzz  # Recommended by x11-libs/pango ebuild
-#app-alternatives/awk -* mawk  # Faster semi-compatible AWK interpreter
+app-crypt/pinentry qt6  # Install a GUI prompt for pinentry

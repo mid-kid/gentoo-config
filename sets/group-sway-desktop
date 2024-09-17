@@ -5,7 +5,6 @@ gui-wm/sway
 x11-misc/dunst  # Notification daemon
 gui-apps/swayidle  # Idle detection
 gui-apps/swaylock  # Lock screen
-kde-plasma/xembed-sni-proxy  # Proxy for Xorg-based status icons
 gui-apps/waybar  # Actual good status bar
 
 # Utilities

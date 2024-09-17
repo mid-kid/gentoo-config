@@ -1,0 +1,6 @@
+# Binary on/off qt6 flags, will use qt5 if disabled
+media-sound/qpwgraph qt6
+net-im/telegram-desktop qt6
+net-analyzer/wireshark qt6
+net-p2p/qbittorrent qt6
+app-text/xpdf qt6 -cups  # bug in ebuild dependencies?
