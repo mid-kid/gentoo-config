@@ -18,9 +18,10 @@ media-sound/volumeicon  # Volume keys/control/notification
 sys-fs/udiskie  # Drive mounting/unmounting applet
 x11-misc/redshift  # Screen color temperature adjusting
 kde-plasma/polkit-kde-agent  # PolicyKit agent
-#app-i18n/fcitx-qt5  # Input method
-#app-i18n/fcitx-configtool  # Input method
-#app-i18n/fcitx-anthy  # Input method
+app-i18n/fcitx-configtool  # Input method
+app-i18n/fcitx-anthy  # Input method
+app-i18n/fcitx-qt  # Input method
+app-i18n/fcitx-gtk  # Input method
 
 # Utilities for various scripts
 x11-misc/wmctrl  # Control of windows
