@@ -1,1 +1,6 @@
+# This sets the default VT for SDDM to spawn in
+# If this is not done, sometimes SDDM will spawn in tty2
+# This is a short-term hack, as the mechanics are subject to change
+# See https://github.com/sddm/sddm/issues/1650
+# And https://github.com/sddm/sddm/pull/1896
 MYCMAKEARGS="-DSDDM_INITIAL_VT=7"
