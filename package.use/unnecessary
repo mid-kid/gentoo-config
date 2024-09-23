@@ -77,7 +77,7 @@ dev-libs/libdbusmenu -gtk
 dev-lang/perl minimal
 dev-perl/* minimal
 media-video/mpv -libplacebo
-sys-devel/clang-runtime -compiler-rt -sanitize
+sys-devel/clang-runtime -compiler-rt -sanitize -openmp
 sys-devel/llvm -binutils-plugin
 net-analyzer/nmap -nse
 media-gfx/zbar -gtk
