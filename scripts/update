@@ -3,6 +3,7 @@
 set -e
 
 dir=/var/spool/updates
+mkdir -p "$dir"
 
 # Flags
 force=false
