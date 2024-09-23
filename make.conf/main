@@ -12,13 +12,6 @@ PORTAGE_BZIP2_COMMAND="lbzip2"
 NINJA_STATUS="[%p %f/%t] "
 CMAKE_MAKEFILE_GENERATOR="ninja"
 
-NPROC="4"
-MAKEOPTS="-j$NPROC -l5"
-
-CPU_FLAGS_X86="aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3"  # cpuid2cpuflags 12
-MARCH="znver1"
-MARCH_FLAGS="-march=$MARCH"  # resolve-march-native 5.0.2
-
 # https://github.com/gentoo-mirror/lto-overlay/blob/master/sys-config/ltoize/files/make.conf.lto.defines
 FLAGS_OPTIM_BASE="-O3 -w"
 FLAGS_OPTIM_LTO="-flto -fuse-linker-plugin"
@@ -40,7 +33,5 @@ USE_GUI="-qt5 -gtk4" # -gui -gtk -gtk2 -gtk3 -wxwidgets  # Common frontends
 USE_TMP=""
 USE="$USE_LANGS $USE_CODECS $USE_FORMATS $USE_SOFTWARE $USE_GUI $USE_TMP -branding -telemetry dist-kernel modules-compress lto pgo vaapi v4l fontconfig vim-syntax zsh-completion"
 INSTALL_MASK="/etc/apparmor.d /etc/systemd /lib/systemd /usr/lib/systemd"
-ACCEPT_LICENSE="@FREE"
+ACCEPT_LICENSE="-* @FREE"
 L10N="ca es-ES es en"
-VIDEO_CARDS="amdgpu"
-INPUT_DEVICES="libinput synaptics"
