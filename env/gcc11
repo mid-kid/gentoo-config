@@ -1,2 +1,0 @@
-CC="$CHOST-gcc-11"
-CXX="$CHOST-g++-11"
