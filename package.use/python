@@ -3,78 +3,13 @@
 
 # Packages without current PYTHON_SINGLE_TARGET
 # quse -Ie python_single_target_python3_10 | grep -v '\bpython_single_target_python3_11\b' | cut -d: -f1 | xargs printf '%s PYTHON_SINGLE_TARGET: python3_10\n'
-=media-gfx/freecad-0.21.2-r3 PYTHON_SINGLE_TARGET: python3_11 -python3_12
 
 # Packages without current PYTHON_TARGETS
 # quse -Ie python_targets_python3_10 | grep -v '\bpython_targets_python3_11\b' | cut -d: -f1 | xargs printf '%s PYTHON_TARGETS: python3_10\n'
 
 # Packages with dependents requiring old version (pointed out by portage)
 # emerge -pDN --usepkg=n --autounmask-continue=y --backtrack=100 @world
-dev-python/Babel PYTHON_TARGETS: python3_11
-dev-python/PySocks PYTHON_TARGETS: python3_11
-dev-python/alabaster PYTHON_TARGETS: python3_11
-dev-python/appdirs PYTHON_TARGETS: python3_11
-dev-python/backports-tarfile PYTHON_TARGETS: python3_11
-dev-python/certifi PYTHON_TARGETS: python3_11
-dev-python/charset-normalizer PYTHON_TARGETS: python3_11
-dev-python/commonmark PYTHON_TARGETS: python3_11
-dev-python/contourpy PYTHON_TARGETS: python3_11
-dev-python/cppy PYTHON_TARGETS: python3_11
-dev-python/cycler PYTHON_TARGETS: python3_11
-dev-python/cython PYTHON_TARGETS: python3_11
-dev-python/docutils PYTHON_TARGETS: python3_11
-dev-python/editables PYTHON_TARGETS: python3_11
-dev-python/flit-core PYTHON_TARGETS: python3_11
-dev-python/fonttools PYTHON_TARGETS: python3_11
-dev-python/fs PYTHON_TARGETS: python3_11
-dev-python/gpep517 PYTHON_TARGETS: python3_11
-dev-python/hatchling PYTHON_TARGETS: python3_11
-dev-python/idna PYTHON_TARGETS: python3_11
-dev-python/imagesize PYTHON_TARGETS: python3_11
-dev-python/installer PYTHON_TARGETS: python3_11
-dev-python/jaraco-context PYTHON_TARGETS: python3_11
-dev-python/jaraco-functools PYTHON_TARGETS: python3_11
-dev-python/jaraco-text PYTHON_TARGETS: python3_11
-dev-python/jinja PYTHON_TARGETS: python3_11
-dev-python/kiwisolver PYTHON_TARGETS: python3_11
-dev-python/markupsafe PYTHON_TARGETS: python3_11
-dev-python/matplotlib PYTHON_TARGETS: python3_11
-dev-python/meson-python PYTHON_TARGETS: python3_11
-dev-python/more-itertools PYTHON_TARGETS: python3_11
-dev-python/numpy PYTHON_TARGETS: python3_11
-dev-python/olefile PYTHON_TARGETS: python3_11
-dev-python/ordered-set PYTHON_TARGETS: python3_11
-dev-python/packaging PYTHON_TARGETS: python3_11
-dev-python/pathspec PYTHON_TARGETS: python3_11
-dev-python/pillow PYTHON_TARGETS: python3_11
-dev-python/pivy PYTHON_TARGETS: python3_11
-dev-python/platformdirs PYTHON_TARGETS: python3_11
-dev-python/pluggy PYTHON_TARGETS: python3_11
-dev-python/pybind11 PYTHON_TARGETS: python3_11
-dev-python/pycairo PYTHON_TARGETS: python3_11
-dev-python/pygments PYTHON_TARGETS: python3_11
-dev-python/pygobject PYTHON_TARGETS: python3_11
-dev-python/pyparsing PYTHON_TARGETS: python3_11
-dev-python/pyproject-metadata PYTHON_TARGETS: python3_11
-dev-python/python-dateutil PYTHON_TARGETS: python3_11
-dev-python/pytz PYTHON_TARGETS: python3_11
-dev-python/pyxdg PYTHON_TARGETS: python3_11
-dev-python/recommonmark PYTHON_TARGETS: python3_11
-dev-python/requests PYTHON_TARGETS: python3_11
-dev-python/setuptools PYTHON_TARGETS: python3_11
-dev-python/setuptools-scm PYTHON_TARGETS: python3_11
-dev-python/six PYTHON_TARGETS: python3_11
-dev-python/snowballstemmer PYTHON_TARGETS: python3_11
-dev-python/sphinx PYTHON_TARGETS: python3_11
-dev-python/sphinxcontrib-applehelp PYTHON_TARGETS: python3_11
-dev-python/sphinxcontrib-devhelp PYTHON_TARGETS: python3_11
-dev-python/sphinxcontrib-htmlhelp PYTHON_TARGETS: python3_11
-dev-python/sphinxcontrib-jsmath PYTHON_TARGETS: python3_11
-dev-python/sphinxcontrib-qthelp PYTHON_TARGETS: python3_11
-dev-python/sphinxcontrib-serializinghtml PYTHON_TARGETS: python3_11
-dev-python/trove-classifiers PYTHON_TARGETS: python3_11
-dev-python/urllib3 PYTHON_TARGETS: python3_11
-dev-python/wheel PYTHON_TARGETS: python3_11
+#dev-python/backports-tarfile PYTHON_TARGETS: python3_11
 
 # Portage is very weird sometimes, and straight up ignores other configuration mistakes
 # eix '-#' --installed-with-use python_targets_python3_10 | grep -Fvf <(grep '^[^#*]*PYTHON_TARGETS:' /etc/portage/package.use/python3_11 | cut -d' ' -f 1)

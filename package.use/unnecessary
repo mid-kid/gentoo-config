@@ -98,7 +98,7 @@ gui-apps/foot -grapheme-clustering
 sys-fs/mtools -gui
 media-libs/libplacebo -shaderc -xxhash glslang
 sys-apps/debianutils -installkernel
-net-misc/curl -psl
+net-misc/curl -psl -http3 -quic -curl_quic_openssl
 app-text/xmlto -text
 app-crypt/gnupg -usb
 sys-apps/openrc -netifrc
@@ -116,7 +116,7 @@ media-libs/vips -highway
 media-libs/libsixel -gtk
 media-libs/gegl -pdf
 dev-vcs/git -webdav
-sys-boot/grub -fonts -themes
+sys-boot/grub -fonts -themes -device-mapper
 app-arch/libarchive -e2fsprogs
 app-portage/portage-utils -qmanifest
 dev-libs/libxslt -crypt
@@ -125,3 +125,5 @@ media-gfx/krita -xsimd
 dev-libs/libgit2 -ssh
 dev-util/perf -gtk -libtracefs -libtraceevent
 media-libs/openimageio -gui
+sys-libs/libblockdev -cryptsetup
+x11-base/xwayland -libei

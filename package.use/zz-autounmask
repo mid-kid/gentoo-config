@@ -45,24 +45,16 @@
 >=media-libs/mlt-7.12.0 frei0r ffmpeg sdl
 # required by sys-firmware/sigrok-firmware-fx2lafw-0.1.7-r1::gentoo
 >=dev-embedded/sdcc-3.8.0-r1 device-lib mcs51
-# required by kde-misc/kdeconnect-23.04.2-r1::gentoo
->=dev-qt/qtmultimedia-5.15.10 qml
-# required by kde-misc/kdeconnect-23.04.2-r1::gentoo
->=kde-frameworks/sonnet-5.108.0 qml
-# required by kde-misc/kdeconnect-23.04.2-r1::gentoo
->=kde-frameworks/kconfig-5.108.0 qml
 # required by app-crypt/swtpm-0.8.0-r2::gentoo
 >=net-libs/gnutls-3.8.0 tools pkcs11
 # required by media-gfx/freecad-0.20.2-r1::gentoo
 >=sci-libs/opencascade-7.6.3-r2 vtk json
 # required by sci-libs/vtk-9.2.5::gentoo
 >=sci-libs/cgnslib-4.3.0-r2 hdf5
-# required by dev-qt/qtwebengine-5.15.10_p20230815::gentoo
->=dev-qt/qtwebchannel-5.15.10:5 qml
 # required by media-gfx/freecad-0.20.2-r1::gentoo[gui]
 >=dev-qt/qtwebengine-5.15.10_p20230815:5 widgets
 # required by media-gfx/freecad-0.20.2-r1::gentoo[gui,python_single_target_python3_11]
->=dev-python/pyside2-5.15.10 webengine webchannel qml network positioning quick printsupport
+>=dev-python/pyside2-5.15.10 webengine webchannel network positioning quick printsupport
 # required by dev-python/pyside2-5.15.10::gentoo[quick]
 >=dev-qt/qtquickcontrols2-5.15.10 widgets
 # required by media-gfx/blender-3.3.6-r1::gentoo
@@ -81,10 +73,6 @@
 >=app-text/xmlto-0.0.28-r11 text
 # required by net-im/neochat-23.08.4::gentoo
 >=dev-qt/qtmultimedia-5.15.12:5 gstreamer
-# required by net-im/neochat-23.08.4::gentoo
->=kde-frameworks/kitemmodels-5.113.0 qml
-# required by net-im/neochat-23.08.4::gentoo
->=kde-frameworks/knotifications-5.113.0 qml
 # required by app-containers/lxc-5.0.3::gentoo[caps,tools]
 >=sys-libs/libcap-2.69-r1 static-libs
 # required by app-containers/waydroid-1.4.2::guru[python_single_target_python3_11,clipboard]
@@ -101,16 +89,8 @@
 >=gui-apps/waypipe-0.9.1 ffmpeg
 # required by gui-apps/waypipe-0.9.1::gentoo[vaapi]
 >=media-libs/libva-2.21.0 wayland
-# required by kde-plasma/polkit-kde-agent-6.1.4::gentoo
->=dev-qt/qt5compat-6.7.2 qml
 # required by dev-qt/qtbase-6.7.2-r4::gentoo
 >=app-arch/libarchive-3.7.4 zstd
-# required by net-im/neochat-24.05.2::gentoo
->=kde-frameworks/prison-6.5.0 qml
-# required by dev-qt/qtwebview-6.7.2::gentoo
->=dev-qt/qtwebengine-6.7.2 qml
-# required by dev-qt/qtwebengine-6.7.2::gentoo
->=dev-qt/qtwebchannel-6.7.2 qml
 # required by kde-plasma/polkit-kde-agent-6.1.4::gentoo
 >=sys-auth/polkit-qt-0.200.0 qt6
 # required by net-im/neochat-24.05.2::gentoo
