@@ -109,3 +109,5 @@
 >=kde-frameworks/kwindowsystem-6.5.0 wayland
 # required by dev-qt/qtwayland-6.7.2-r3::gentoo
 >=dev-qt/qtbase-6.7.2-r4 wayland
+# required by games-action/prismlauncher-8.4::gentoo
+>=dev-libs/quazip-1.4-r1 qt6
