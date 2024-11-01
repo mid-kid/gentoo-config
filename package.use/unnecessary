@@ -110,7 +110,6 @@ app-text/poppler -boost
 kde-frameworks/ktexteditor -editorconfig
 media-gfx/krita -raw -pdf
 media-gfx/graphviz -pdf
-mail-client/claws-mail -pdf
 net-misc/chrony -readline
 media-libs/vips -highway
 media-libs/libsixel -gtk
@@ -127,3 +126,5 @@ dev-util/perf -gtk -libtracefs -libtraceevent
 media-libs/openimageio -gui
 sys-libs/libblockdev -cryptsetup
 x11-base/xwayland -libei
+media-libs/vips -pdf
+net-libs/webkit-gtk -pdf

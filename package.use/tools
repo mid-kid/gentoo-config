@@ -12,6 +12,6 @@ dev-util/android-tools -udev  # I use my own udev rules
 sys-apps/gawk mpfr  # Support for -M/--bignum arbitrary-precision numbers
 x11-libs/gtk+ examples  # Installs gtk3-widget-factory
 gui-libs/gtk examples  # Installs widget factory
-mail-client/claws-mail litehtml  # Simple html parser that sometimes works
+mail-client/claws-mail litehtml pdf  # Enable plugins for claws-mail
 kde-apps/okular epub  # I have some epub files here and there
 app-arch/7zip rar  # Using 7zz instead of unrar
