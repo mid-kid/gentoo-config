@@ -2,7 +2,7 @@ dev-lang/rust -system-bootstrap -system-llvm
 
 # These aren't even "upstream", they're just some gentoo dev's build.
 # QEMU itself has a bunch of other prebuilt firmwares
-sys-firmware/edk2-ovmf binary
+sys-firmware/edk2 binary
 sys-firmware/ipxe binary
 sys-firmware/seabios binary
 sys-firmware/sgabios binary
