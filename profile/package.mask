@@ -25,6 +25,12 @@ www-client/firefox-bin
 # Try to avoid rust
 >=media-gfx/libimagequant-4
 
+# Useful when rust is being a pain
+-<gnome-base/librsvg-2.41
+# To use, put the following in package.mask:
+#>=gnome-base/librsvg-2.41
+#>=x11-themes/adwaita-icon-theme-4
+
 # Try to avoid systemd-utils...
 sys-apps/systemd-utils
 sys-apps/systemd-tmpfiles
