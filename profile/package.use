@@ -11,7 +11,12 @@ sys-libs/llvm-libunwind ABI_X86: -32
 
 # I want to select the llvm targets on my own
 # See profiles/arch/amd64/package.use
-# See base/package.use
+# See profiles/base/package.use
 dev-ml/llvm-ocaml LLVM_TARGETS: -AMDGPU -NVPTX -BPF
 sys-devel/clang LLVM_TARGETS: -AMDGPU -NVPTX -BPF
 sys-devel/llvm LLVM_TARGETS: -AMDGPU -NVPTX -BPF
+
+# Mesa depends on llvm_targets_AMDGPU if USE="llvm"
+# Doing this breaks the default VIDEO_CARDS setting,
+# the user will have to re-enable it if their video card requires.
+media-libs/mesa -llvm
