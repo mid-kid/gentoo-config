@@ -7,3 +7,4 @@ app-text/xpdf qt6 -cups  # bug in ebuild dependencies?
 app-i18n/fcitx-qt qt6
 app-i18n/fcitx-configtool qt6
 games-action/prismlauncher qt6
+games-emulation/mgba qt6
