@@ -128,3 +128,4 @@ sys-libs/libblockdev -cryptsetup
 x11-base/xwayland -libei
 media-libs/vips -pdf
 net-libs/webkit-gtk -pdf
+app-admin/testdisk -gui
