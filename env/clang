@@ -1,9 +1,14 @@
 # Build an application with clang
+
+# include baseflags
+CFLAGS="-O2 -pipe"
+LDFLAGS="-Wl,-O1 -Wl,--as-needed -Wl,-z,pack-relative-relocs"
+
 CC="$CHOST-clang"
 CXX="$CHOST-clang++"
 AR="llvm-ar"
 NM="llvm-nm"
 RANLIB="llvm-ranlib"
-CFLAGS="-pipe $FLAGS_OPTIM_BASE $MARCH_FLAGS -flto=thin"
+CFLAGS="$CFLAGS $FLAGS_OPTIM_BASE $MARCH_FLAGS -flto=thin"
 CXXFLAGS="$CFLAGS"
 LDFLAGS="$LDFLAGS -fuse-ld=lld"

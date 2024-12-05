@@ -1,4 +1,0 @@
-# Some programs need even more rams...
-MAKEOPTS="-j2 -l5"
-CFLAGS="${CFLAGS} -flto=2"
-CXXFLAGS="${CXXFLAGS} -flto=2"

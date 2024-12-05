@@ -6,3 +6,4 @@ dev-java/openjdk:21
 ~sci-libs/opencascade-7.7.2
 ~sys-apps/openrc-0.55.1
 ~games-action/prismlauncher-8.4
+~x11-wm/xpra-6.0.1

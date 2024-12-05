@@ -1,0 +1,3 @@
+MAKEOPTS="-j2 -l3"
+CFLAGS="$CFLAGS -flto=2 --param=lto-max-streaming-parallelism=2"
+CXXFLAGS="$CXXFLAGS -flto=2 --param=lto-max-streaming-parallelism=2"
