@@ -91,7 +91,7 @@ app-crypt/swtpm -gnutls
 media-gfx/gimp -udev
 media-plugins/gst-plugins-v4l2 -udev
 dev-python/pyside2 -network -xml -concurrent -printsupport -sql -testlib -x11extras
-media-gfx/blender -ffmpeg -color-management -openvdb -opensubdiv -oidn -embree -fluid -fftw -pdf -potrace -pugixml -sndfile -openpgl -nanovdb -gmp
+media-gfx/blender -ffmpeg -openvdb -opensubdiv -oidn -embree -fluid -fftw -pdf -potrace -pugixml -sndfile -openpgl -nanovdb -gmp
 media-gfx/imagemagick -svg
 virtual/imagemagick-tools -svg
 gui-apps/foot -grapheme-clustering
