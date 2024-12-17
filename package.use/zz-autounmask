@@ -111,3 +111,5 @@
 >=dev-qt/qtbase-6.7.2-r4 wayland
 # required by games-action/prismlauncher-8.4::gentoo
 >=dev-libs/quazip-1.4-r1 qt6
+# required by games-fps/redeclipse-2.0.0-r1::gentoo[-dedicated]
+>=media-libs/sdl2-mixer-2.6.3-r1 mp3

@@ -15,3 +15,4 @@ gui-libs/gtk examples  # Installs widget factory
 mail-client/claws-mail litehtml pdf  # Enable plugins for claws-mail
 kde-apps/okular epub  # I have some epub files here and there
 app-arch/7zip rar  # Using 7zz instead of unrar
+games-fps/xonotic -X sdl  # SDL is the expected frontend

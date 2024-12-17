@@ -22,6 +22,8 @@ net-vpn/tailscale
 media-sound/qpwgraph
 gui-apps/waypipe
 x11-misc/zim
+games-fps/xonotic
+games-fps/redeclipse
 
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrokdecode
