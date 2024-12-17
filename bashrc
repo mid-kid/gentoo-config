@@ -4,13 +4,11 @@
 	local noulimit=(
 		# v8 engine allocates 8GB virtual memory (kSandboxMinimumReservationSize)
 		dev-qt/qtwebengine
-
-		# Linker runs out of virtual memory even at j1 without lto
-		sys-libs/glibc
 	)
 
 	# Some packages require more memory during link, even at -flto=1
 	local max_16gb=(
+		sys-libs/glibc
 		net-im/telegram-desktop
 	)
 
