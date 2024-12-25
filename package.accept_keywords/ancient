@@ -9,3 +9,4 @@ dev-java/openjdk:21
 ~x11-wm/xpra-6.0.1
 ~sys-firmware/edk2-202408
 ~app-emulation/virt-firmware-24.7
+=sys-apps/ifplugd-0.28-r12
