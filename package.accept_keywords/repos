@@ -11,3 +11,4 @@ dev-libs/gbinder::guru
 dev-libs/libglibutil::guru
 dev-python/pyclip::guru
 app-containers/waydroid-images::guru
+games-engines/nxengine-evo::guru

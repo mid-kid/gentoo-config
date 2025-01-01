@@ -10,3 +10,4 @@ dev-java/openjdk:21
 ~sys-firmware/edk2-202408
 ~app-emulation/virt-firmware-24.7
 =sys-apps/ifplugd-0.28-r12
+~dev-cpp/ms-gsl-4.1.0
