@@ -3,18 +3,18 @@ dev-lang/rust system-llvm
 
 # I don't use clang to build 32-bit software
 # See profiles/arch/amd64/package.use
-sys-devel/clang-runtime ABI_X86: -32
-sys-libs/libcxxabi ABI_X86: -32
-sys-libs/libcxx ABI_X86: -32
-sys-libs/libomp ABI_X86: -32
-sys-libs/llvm-libunwind ABI_X86: -32
+llvm-core/clang-runtime ABI_X86: -32
+llvm-runtimes/libcxxabi ABI_X86: -32
+llvm-runtimes/libcxx ABI_X86: -32
+llvm-runtimes/openmp ABI_X86: -32
+llvm-runtimes/libunwind ABI_X86: -32
 
 # I want to select the llvm targets on my own
 # See profiles/arch/amd64/package.use
 # See profiles/base/package.use
-dev-ml/llvm-ocaml LLVM_TARGETS: -AMDGPU -NVPTX -BPF
-sys-devel/clang LLVM_TARGETS: -AMDGPU -NVPTX -BPF
-sys-devel/llvm LLVM_TARGETS: -AMDGPU -NVPTX -BPF
+dev-ml/llvm LLVM_TARGETS: -AMDGPU -NVPTX -BPF
+llvm-core/clang LLVM_TARGETS: -AMDGPU -NVPTX -BPF
+llvm-core/llvm LLVM_TARGETS: -AMDGPU -NVPTX -BPF
 
 # Mesa depends on llvm_targets_AMDGPU if USE="llvm"
 # Doing this breaks the default VIDEO_CARDS setting,

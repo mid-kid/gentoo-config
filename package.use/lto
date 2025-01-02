@@ -8,8 +8,8 @@ dev-debug/gdb -cet
 # Not decided on -cet yet, pending research
 
 # LLD is required for clang LTO
-sys-devel/clang-common default-lld -cet
-# Clang settings handled in /etc/portage/env/sys-devel/clang-common
+llvm-core/clang-common default-lld -cet
+# Clang settings handled in /etc/portage/env/llvm-core/clang-common
 # Changes equivalent to: -ssp -default-stack-clash-protection -default-znow
 
 # -pgo: Super fucking slow, not worth it...

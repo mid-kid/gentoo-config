@@ -5,8 +5,8 @@ x11-libs/libX11 doc
 # Use prebuilt (non-upstream) man pages when USE=doc or USE=man is disabled
 app-emulation/qemu doc  # requires dev-python/sphinx
 dev-build/cmake doc  # requires dev-python/sphinx
-sys-devel/llvm doc  # requires dev-python/sphinx and dev-python/recommonmark
-sys-devel/clang doc  # requires dev-python/sphinx and dev-python/recommonmark
+llvm-core/llvm doc  # requires dev-python/sphinx and dev-python/recommonmark
+llvm-core/clang doc  # requires dev-python/sphinx and dev-python/recommonmark
 media-video/pipewire man  # requires app-text/doxygen
 #dev-util/ccache doc  # requires dev-ruby/asciidoctor (ruby)
 

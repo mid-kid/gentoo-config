@@ -12,5 +12,5 @@ sys-devel/binutils -cet
 # Don't build unnecessary architectures, I'm pretty sure I know what I'm using.
 # See base/package.use.force
 # Current architecture: X86
-sys-devel/llvm LLVM_TARGETS: -AArch64 -AMDGPU -ARM -AVR -BPF -Hexagon -Lanai -LoongArch -MSP430 -Mips -NVPTX -PowerPC -RISCV -Sparc -SystemZ -VE -WebAssembly -XCore
-sys-devel/clang LLVM_TARGETS: -AArch64 -AMDGPU -ARM -AVR -BPF -Hexagon -Lanai -LoongArch -MSP430 -Mips -NVPTX -PowerPC -RISCV -Sparc -SystemZ -VE -WebAssembly -XCore
+llvm-core/llvm LLVM_TARGETS: -AArch64 -AMDGPU -ARM -AVR -BPF -Hexagon -Lanai -LoongArch -MSP430 -Mips -NVPTX -PowerPC -RISCV -Sparc -SystemZ -VE -WebAssembly -XCore
+llvm-core/clang LLVM_TARGETS: -AArch64 -AMDGPU -ARM -AVR -BPF -Hexagon -Lanai -LoongArch -MSP430 -Mips -NVPTX -PowerPC -RISCV -Sparc -SystemZ -VE -WebAssembly -XCore

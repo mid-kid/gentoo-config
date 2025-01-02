@@ -4,7 +4,7 @@ sys-boot/grub GRUB_PLATFORMS: -* efi-64
 x11-libs/libdrm VIDEO_CARDS: radeon
 media-libs/mesa VIDEO_CARDS: radeonsi
 media-libs/mesa llvm
-sys-devel/llvm LLVM_TARGETS: AMDGPU
+llvm-core/llvm LLVM_TARGETS: AMDGPU
 sys-apps/fwupd nvme
 sys-apps/memtest86+ -* boot efi64
 sys-kernel/installkernel grub

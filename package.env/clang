@@ -1,7 +1,7 @@
 # LLVM stack prone to segfaulting with GCC LTO
-sys-devel/llvm clang
-sys-devel/clang clang
-sys-devel/lld clang
+llvm-core/llvm clang
+llvm-core/clang clang
+llvm-core/lld clang
 
 # In case llvm/clang need to be re-bootstrapped with GCC, do the following:
 # ABI_X86=64 CC=gcc CXX=g++ AR=ar CFLAGS=-O2 CXXFLAGS=-O2 LDFLAGS= emerge -O1 --usepkg=n --buildpkg=n sys-devel/llvm sys-devel/clang sys-devel/lld

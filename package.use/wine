@@ -27,7 +27,7 @@ media-libs/mesa ABI_X86: 32
 net-dns/libidn2 ABI_X86: 32
 net-libs/gnutls ABI_X86: 32
 sys-apps/util-linux ABI_X86: 32
-sys-devel/llvm ABI_X86: 32
+llvm-core/llvm ABI_X86: 32
 sys-fs/eudev ABI_X86: 32
 sys-libs/ncurses ABI_X86: 32
 sys-libs/zlib ABI_X86: 32
