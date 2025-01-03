@@ -1,5 +1,5 @@
 # Files installed by portage automatically
 /kernel/postinst.d/.keep_*
-/kernel/postinst.d/91-grub-mkconfig.install
 /kernel/preinst.d/.keep_*
+/postsync.d/50-eix-postsync
 /savedconfig/
