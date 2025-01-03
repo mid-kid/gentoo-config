@@ -1,0 +1,17 @@
+Look for symbolic icons
+
+These used to end with an extension of ".symbolic.png", now they're
+"-symbolic.svg". The gnome team has been making a mess of the icon standards,
+honestly.
+
+--- dunst-1.12.0.orig/src/icon.c
++++ dunst-1.12.0/src/icon.c
+@@ -235,7 +235,7 @@
+         }
+ 
+         // Search icon_path
+-        const char *suffixes[] = { ".svg", ".svgz", ".png", ".xpm", NULL };
++        const char *suffixes[] = { ".svg", "-symbolic.svg", ".svgz", ".png", ".symbolic.png", ".xpm", NULL };
+         char *start = settings.icon_path, *end, *current_folder, *maybe_icon_path, *path = NULL;
+ 
+         do {
