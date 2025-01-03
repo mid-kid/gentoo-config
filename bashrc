@@ -4,6 +4,9 @@
 	local noulimit=(
 		# v8 engine allocates 8GB virtual memory (kSandboxMinimumReservationSize)
 		dev-qt/qtwebengine
+
+		# Could not allocate compressed class space: 1073741824 bytes
+		dev-java/openjdk
 	)
 
 	# Some packages require more memory during link, even at -flto=1
