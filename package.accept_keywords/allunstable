@@ -5,7 +5,6 @@ media-video/obs-studio
 dev-util/github-cli
 net-misc/megatools
 games-action/teeworlds
-dev-java/icedtea
 games-emulation/desmume
 dev-util/radare2
 app-doc/cppman
@@ -18,11 +17,8 @@ dev-build/muon
 dev-util/rgbds
 media-video/droidcam
 media-video/v4l2loopback
-net-vpn/tailscale
 media-sound/qpwgraph
-gui-apps/waypipe
 x11-misc/zim
-games-fps/xonotic
 games-fps/redeclipse
 
 sys-firmware/sigrok-firmware-fx2lafw
