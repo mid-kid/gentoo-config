@@ -1,0 +1,18 @@
+This patches the package to follow the XDG Base Directory Specification:
+~/.python_history was moved to $XDG_DATA_HOME/python_history
+
+--- Python-3.13.1.orig/Lib/site.py
++++ Python-3.13.1/Lib/site.py
+@@ -473,8 +473,10 @@
+         history = os.environ.get("PYTHON_HISTORY")
+         if history:
+             return history
+-    return os.path.join(os.path.expanduser('~'),
+-        '.python_history')
++    data_dir = os.environ.get("XDG_DATA_HOME")
++    if data_dir is None:
++        data_dir = os.path.join(os.path.expanduser('~'), '.local', 'share')
++    return os.path.join(data_dir, 'python_history')
+ 
+ 
+ def enablerlcompleter():
