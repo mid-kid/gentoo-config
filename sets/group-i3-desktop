@@ -12,6 +12,7 @@ x11-misc/xss-lock  # Screen lock trigger
 x11-misc/dunst  # Notification daemon
 
 # Auxiliary programs
+x11-terms/kitty  # New terminal
 x11-terms/rxvt-unicode  # Terminal
 x11-misc/urxvt-perls  # Tools for terminal
 media-sound/volumeicon  # Volume keys/control/notification
