@@ -4,3 +4,5 @@ dev-java/openjdk:21
 ~sys-firmware/edk2-202408
 ~app-emulation/virt-firmware-24.7
 ~dev-cpp/ms-gsl-4.1.0
+~sys-kernel/gentoo-kernel-6.12.7
+~virtual/dist-kernel-6.12.7

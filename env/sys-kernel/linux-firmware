@@ -1,4 +1,4 @@
-LSFIRM="${LSFIRM:-/etc/kernel/modprobed_db/firmwared_6.6.db}"
+LSFIRM="${LSFIRM:-/etc/kernel/modprobed_db/firmwared_6.12.db}"
 
 # Trust me, I'm an engineer
 eval "$(declare -f src_install | sed 's/\<use savedconfig\>/true/')"
