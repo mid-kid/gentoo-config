@@ -13,6 +13,7 @@
 	local max_16gb=(
 		sys-libs/glibc
 		net-im/telegram-desktop
+		sys-kernel/gentoo-kernel  # Under some configurations...
 	)
 
 	if has "$CATEGORY/$PN" "${noulimit[@]}"; then
