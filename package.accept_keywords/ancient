@@ -1,6 +1,7 @@
 # Unmasking specific versions when older ones are too old
 dev-java/openjdk:21
 virtual/jdk:21
+virtual/jre:21
 ~x11-wm/xpra-6.0.1
 ~sys-firmware/edk2-202408
 ~app-emulation/virt-firmware-24.7
