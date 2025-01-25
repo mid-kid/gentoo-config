@@ -9,3 +9,7 @@ x11-libs/libxkbcommon wayland
 www-client/firefox wayland
 app-emulation/wine-staging wayland
 media-libs/vulkan-loader wayland
+dev-python/pyclip wayland
+media-libs/libva wayland
+kde-frameworks/kwindowsystem wayland
+dev-qt/qtbase wayland

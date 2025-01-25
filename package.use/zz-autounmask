@@ -75,8 +75,6 @@
 >=dev-qt/qtmultimedia-5.15.12:5 gstreamer
 # required by app-containers/lxc-5.0.3::gentoo[caps,tools]
 >=sys-libs/libcap-2.69-r1 static-libs
-# required by app-containers/waydroid-1.4.2::guru[python_single_target_python3_11,clipboard]
->=dev-python/pyclip-0.7.0-r1 wayland
 # required by media-gfx/inkscape-1.3.2-r1::gentoo[python_single_target_python3_11]
 >=dev-python/pillow-10.2.0-r1 tiff
 # required by media-gfx/freecad-0.20.2-r1::gentoo
@@ -87,8 +85,6 @@
 >=dev-libs/tree-sitter-bash-0.21.0-r1 python
 # REQUIRED_USE vaapi? ( ffmpeg )
 >=gui-apps/waypipe-0.9.1 ffmpeg
-# required by gui-apps/waypipe-0.9.1::gentoo[vaapi]
->=media-libs/libva-2.21.0 wayland
 # required by dev-qt/qtbase-6.7.2-r4::gentoo
 >=app-arch/libarchive-3.7.4 zstd
 # required by kde-plasma/polkit-kde-agent-6.1.4::gentoo
@@ -105,10 +101,6 @@
 >=media-libs/mlt-7.24.0 qt6
 # required by kde-apps/dolphin-24.05.2-r1::gentoo
 >=media-libs/phonon-4.12.0-r4 qt6
-# required by kde-frameworks/kauth-6.5.0::gentoo[policykit]
->=kde-frameworks/kwindowsystem-6.5.0 wayland
-# required by dev-qt/qtwayland-6.7.2-r3::gentoo
->=dev-qt/qtbase-6.7.2-r4 wayland
 # required by games-action/prismlauncher-8.4::gentoo
 >=dev-libs/quazip-1.4-r1 qt6
 # required by games-fps/redeclipse-2.0.0-r1::gentoo[-dedicated]
