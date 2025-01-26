@@ -6,3 +6,8 @@
 ~app-emulation/virtualbox-modules-7.1.2
 ~app-emulation/virtualbox-additions-7.1.2
 ~app-i18n/fcitx-configtool-5.1.6
+
+~games-emulation/dolphin-2407
+~dev-libs/libfmt-11.0.2
+~media-libs/libspng-0.7.4
+~sci-libs/vtk-9.3.1

@@ -4,3 +4,4 @@ media-fonts/corefonts MSttfEULA
 sys-apps/man-pages-posix freedist
 games-engines/nxengine-evo freedist
 app-arch/7zip unRAR
+games-emulation/dolphin FatFs
