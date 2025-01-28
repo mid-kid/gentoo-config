@@ -1,5 +1,5 @@
 app-emulation/wine-staging gstreamer #themes
-#app-emulation/wine-vanilla gstreamer
+app-emulation/wine-vanilla gstreamer
 
 app-arch/brotli ABI_X86: 32
 app-arch/bzip2 ABI_X86: 32
