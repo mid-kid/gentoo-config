@@ -1,0 +1,18 @@
+Use foreground color for scroll bar
+
+The scrollbar uses the `selection_background` option by default, but this
+doesn't work well when you want to use `selection_background none`, which turns
+it black. Since I use a black background, this makes the scrollbar invisible.
+I think it makes more sense to use the foreground color.
+
+--- kitty-0.36.4.orig/kitty/shaders.c
++++ kitty-0.36.4/kitty/shaders.c
+@@ -608,7 +608,7 @@
+     glEnable(GL_BLEND);
+     if (premult) { BLEND_PREMULT } else { BLEND_ONTO_OPAQUE }
+     bind_program(TINT_PROGRAM);
+-    const color_type bar_color = colorprofile_to_color(screen->color_profile, screen->color_profile->overridden.highlight_bg, screen->color_profile->configured.highlight_bg).rgb;
++    const color_type bar_color = colorprofile_to_color(screen->color_profile, screen->color_profile->overridden.default_fg, screen->color_profile->configured.default_fg).rgb;
+     GLfloat alpha = OPT(scrollback_indicator_opacity);
+     float frac = (float)screen->scrolled_by / (float)screen->historybuf->count;
+     const GLfloat bar_height = crd->gl.dy;
