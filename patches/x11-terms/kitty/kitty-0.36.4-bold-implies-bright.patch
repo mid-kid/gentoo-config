@@ -26,7 +26,7 @@ darkened instead, in order to make the text visible.
          }
      };
 +    GPUCell *g = (GPUCell *)&s.g;
-+    g->fg += (g->attrs.bold && g->fg < 0x800) * 0x800;
++    g->fg += (g->attrs.bold && (g->fg & 0xff) == 1 && g->fg < 0x800) * 0x800;
      draw_text_loop(self, chars, num_chars, &s);
  }
  
