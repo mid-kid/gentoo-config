@@ -3,8 +3,8 @@ Pass the -q flag to openrc when the "quiet" kernel commandline option is set.
 Turns out that running openrc with -q causes issues when unmounting
 filesystems, which leaves the dirty bit set.
 
---- openrc-0.45.2.orig/src/openrc-init/openrc-init.c
-+++ openrc-0.45.2/src/openrc-init/openrc-init.c
+--- openrc-0.55.1.orig/src/openrc-init/openrc-init.c
++++ openrc-0.55.1/src/openrc-init/openrc-init.c
 @@ -45,6 +45,8 @@
  static const char *path_default = "/sbin:/usr/sbin:/bin:/usr/bin";
  static const char *rc_default_runlevel = "default";
@@ -37,8 +37,16 @@ filesystems, which leaves the dirty bit set.
 +	quiet = true;
  	do_openrc("sysinit");
 +	char *cmdline_quiet = rc_proc_getent("quiet");
++    if (cmdline_quiet) free(cmdline_quiet);
 +	quiet = cmdline_quiet != NULL;
-+	if (cmdline_quiet) free(cmdline_quiet);
  	do_openrc("boot");
  	if (default_runlevel)
  		runlevel = default_runlevel;
+@@ -95,6 +106,7 @@
+ 		runlevel = rc_default_runlevel;
+ 	}
+ 	do_openrc(runlevel);
++    quiet = false;
+ 	log_wtmp("reboot", "~~", 0, RUN_LVL, "~~");
+ }
+ 
