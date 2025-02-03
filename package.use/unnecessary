@@ -131,3 +131,4 @@ net-libs/webkit-gtk -pdf
 app-admin/testdisk -gui
 x11-wm/xpra -client -gtk3 -clipboard -crypt -cups -opengl -sound -trayicon -lz4
 kde-frameworks/kauth -policykit
+dev-python/pyqt6 -qml -svg -xml

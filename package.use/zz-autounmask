@@ -79,8 +79,6 @@
 >=dev-python/pillow-10.2.0-r1 tiff
 # required by media-gfx/freecad-0.20.2-r1::gentoo
 >=sci-libs/hdf5-1.14.3-r1 fortran
-# required by media-gfx/krita-5.1.5::gentoo[python_single_target_python3_11]
->=dev-python/PyQt5-5.15.10-r1 declarative network
 # required by dev-util/pkgcheck-0.10.29::gentoo[-test]
 >=dev-libs/tree-sitter-bash-0.21.0-r1 python
 # REQUIRED_USE vaapi? ( ffmpeg )
@@ -105,3 +103,5 @@
 >=dev-libs/quazip-1.4-r1 qt6
 # required by games-fps/redeclipse-2.0.0-r1::gentoo[-dedicated]
 >=media-libs/sdl2-mixer-2.6.3-r1 mp3
+# required by dev-python/pyqt6-webengine-6.8.0::gentoo
+>=dev-python/pyqt6-6.8.0 webchannel
