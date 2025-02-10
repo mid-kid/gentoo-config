@@ -1,0 +1,13 @@
+# Don't publish ssh services by default. This follows many distro's defaults:
+# - Debian
+# - Arch
+# - Fedora
+# - OpenSUSE
+# The only distributions I checked that don't do this are Alpine and Gentoo
+
+post_src_install() {
+	elog '/etc/portage/env: Install default services in docdir instead'
+	dodoc "$ED"/etc/avahi/services/*.service
+	rm -f "$ED"/etc/avahi/services/*.service
+	keepdir /etc/avahi/services
+}
