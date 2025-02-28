@@ -1,0 +1,7 @@
+# HUGE files, not sure if they're ever used at all.
+INSTALL_MASK="
+/usr/share/proj/*.tif
+/usr/share/proj/fi_nls_*.json
+/usr/share/proj/no_kv_*.json
+/usr/share/proj/nz_linz_*.json
+"
