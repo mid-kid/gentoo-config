@@ -1,0 +1,27 @@
+From 04bb5cc67c8c8d71ff66367a2b4becd0b20a5d8a Mon Sep 17 00:00:00 2001
+From: Zac Medico <zmedico@gentoo.org>
+Date: Fri, 24 Jan 2025 13:23:13 -0800
+Subject: getname: Handle None remotepkgs
+
+Bug: https://bugs.gentoo.org/948643
+Signed-off-by: Zac Medico <zmedico@gentoo.org>
+---
+ lib/portage/dbapi/bintree.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/portage/dbapi/bintree.py b/lib/portage/dbapi/bintree.py
+index 812a7af8e..9da789856 100644
+--- a/lib/portage/dbapi/bintree.py
++++ b/lib/portage/dbapi/bintree.py
+@@ -2278,7 +2278,7 @@ class binarytree:
+             path = self._pkg_paths.get(instance_key)
+             if path is not None:
+                 filename = os.path.join(self.pkgdir, path)
+-            elif instance_key in self._remotepkgs:
++            elif self._remotepkgs and instance_key in self._remotepkgs:
+                 remote_metadata = self._remotepkgs[instance_key]
+                 location = self.get_local_repo_location(cpv)
+                 if location:
+-- 
+cgit v1.2.3-65-gdbad
+
