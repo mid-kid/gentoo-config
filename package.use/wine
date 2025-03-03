@@ -90,3 +90,7 @@ media-libs/vulkan-loader ABI_X86: 32
 
 # USE=wayland
 x11-libs/libxkbcommon ABI_X86: 32
+
+# For the pipewire-alsa plugin
+media-video/pipewire ABI_X86: 32
+sys-apps/dbus ABI_X86: 32
