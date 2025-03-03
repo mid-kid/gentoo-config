@@ -53,7 +53,7 @@ app-accessibility/speech-dispatcher -espeak
 app-crypt/mit-krb5 -keyutils
 sci-mathematics/cgal -gmp
 dev-python/shiboken2 -docstrings
-media-gfx/freecad -fem -mesh -openscad -pcl -addonmgr -arch -inspection -path
+media-gfx/freecad -fem -openscad -pcl -addonmgr -arch -inspection -path
 net-im/telegram-desktop -jemalloc -libdispatch
 kde-frameworks/sonnet -hunspell
 x11-libs/agg -gpc
@@ -90,7 +90,7 @@ media-video/mediainfo -wxwidgets
 app-crypt/swtpm -gnutls
 media-gfx/gimp -udev
 media-plugins/gst-plugins-v4l2 -udev
-dev-python/pyside2 -network -xml -concurrent -printsupport -sql -testlib -x11extras
+dev-python/pyside2 -xml -concurrent -printsupport -sql -testlib -x11extras
 media-gfx/blender -ffmpeg -openvdb -opensubdiv -oidn -embree -fluid -fftw -pdf -potrace -pugixml -sndfile -openpgl -nanovdb -gmp
 media-gfx/imagemagick -svg
 virtual/imagemagick-tools -svg
@@ -132,3 +132,4 @@ app-admin/testdisk -gui
 x11-wm/xpra -client -gtk3 -clipboard -crypt -cups -opengl -sound -trayicon -lz4
 kde-frameworks/kauth -policykit
 dev-python/pyqt6 -qml -svg -xml
+dev-python/pyside6 -concurrent -network -qml -sql -xml
