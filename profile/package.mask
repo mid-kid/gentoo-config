@@ -18,7 +18,7 @@ dev-python/pypy3_9-exe-bin
 net-im/element-desktop-bin
 net-im/signal-desktop-bin
 net-im/telegram-desktop-bin
-sys-firmware/edk2-ovmf-bin
+sys-firmware/edk2-bin
 sys-firmware/seabios-bin
 sys-kernel/gentoo-kernel-bin
 www-client/firefox-bin
