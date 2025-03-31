@@ -4,8 +4,8 @@ llvm-core/clang clang
 llvm-core/lld clang
 
 # In case llvm/clang need to be re-bootstrapped with GCC, do the following:
-# ABI_X86=64 CC=gcc CXX=g++ AR=ar CFLAGS=-O2 CXXFLAGS=-O2 LDFLAGS= emerge -O1 --usepkg=n --buildpkg=n sys-devel/llvm sys-devel/clang sys-devel/lld
-# emerge -1 --usepkg=n sys-devel/llvm sys-devel/clang sys-devel/lld
+# ABI_X86=64 CC=gcc CXX=g++ AR=ar CFLAGS=-O2 CXXFLAGS=-O2 LDFLAGS= emerge -1 --usepkg=n --buildpkg=n llvm-core/llvm llvm-core/clang llvm-core/lld
+# emerge -1 --usepkg=n llvm-core/llvm llvm-core/clang llvm-core/lld
 
 # Rust LTO requires Clang to link (using $CC instead of $RUSTFLAGS to select linker)
 dev-lang/rust clang  # Appends -Clinker=$CC to RUSTFLAGS
