@@ -20,6 +20,7 @@ media-video/v4l2loopback
 media-sound/qpwgraph
 x11-misc/zim
 games-fps/redeclipse
+games-misc/ponysay
 
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrokdecode
