@@ -1,0 +1,27 @@
+### TODO: Unsure about these instructions, will require fixing later
+### Rough steps to bootstrapping this configuration from a vanilla stage3:
+# Yes, this configuration needs bootstrapping...
+
+mkdir -p /gentoo/etc
+git clone --recursive https://github.com/mid-kid/gentoo-config /gentoo/etc/portage
+# edit /gentoo/etc/portage/make.conf/aa-hardware
+
+# Make sure graphite optimizations are available in the compiler
+USE=graphite emerge -1Un sys-devel/gcc
+
+# Temporary config modifications
+cat > /gentoo/etc/portage/make.profile/package.use.force << EOF
+app-alternatives/bzip2 reference
+app-alternatives/gzip reference
+app-alternatives/lex flex
+app-alternatives/tar gnu
+app-alternatives/yacc bison
+sys-devel/gcc graphite openmp
+EOF
+
+build_pkgs="$(PORTAGE_CONFIGROOT=/gentoo python3 -c 'import portage
+print(*portage.util.stack_lists([portage.util.grabfile_package("%s/packages.build"%x)for x in portage.settings.profiles],incremental=1))')"
+build_use="$(PORTAGE_CONFIGROOT=/gentoo portageq envvar BOOTSTRAP_USE)"
+USE="-* build $build_use" PORTAGE_CONFIGROOT=/gentoo ROOT=/gentoo emerge -1Dn $build_pkgs
+
+echo 'C.UTF8 UTF-8' > /gentoo/etc/locale.gen
