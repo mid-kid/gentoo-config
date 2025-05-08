@@ -1,0 +1,2 @@
+# Hold back gtk4 for now
+>=media-video/handbrake-1.8 -gui

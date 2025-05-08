@@ -3,8 +3,5 @@ dev-java/openjdk:21
 virtual/jdk:21
 virtual/jre:21
 ~x11-wm/xpra-6.0.1
-~sys-firmware/edk2-202408
-~app-emulation/virt-firmware-24.7
-~dev-cpp/ms-gsl-4.1.0
-~sys-kernel/gentoo-kernel-6.12.7
-~virtual/dist-kernel-6.12.7
+<media-gfx/gimp-3.1
+<sys-apps/openrc-0.66  # navi-desu is doing big things

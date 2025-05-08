@@ -1,0 +1,34 @@
+Make bold text imply higher brightness
+
+The SGI 1 control code[1] is described as "bold or increased intensity". A lot
+of terminals, including xterm, weston-terminal, the linux framebuffer, and
+others, seem to have agreed that this control code *also* implies picking the
+brighter variant of the 4-bit ANSI colors.  In kitty, this "bright intensity"
+flag is stored as "bold", as it's only used to pick a bold text font.
+
+To test, use the following command:
+$ printf '\x1b[32;01mtest \x1b[92;01mtest \x1b[01;42mtest \x1b[01;102mtest\n'
+Tested terminals:
+konsole, rxvt-unicode, weston-terminal, xterm, linux framebuffer
+
+In all of the tested terminals, the first "test" appears exactly as bright as
+the second "test". The third "test" is visible on the darker background, while
+the fourth "test" is invisible (bright foreground on bright background). On
+the linux framebuffer, exclusively, the background of the fourth "test" is
+darkened instead, in order to make the text visible.
+
+[1]: https://en.wikipedia.org/wiki/ANSI_escape_code#Select_Graphic_Rendition_parameters
+
+--- kitty-0.41.1.orig/kitty/screen.c
++++ kitty-0.41.1/kitty/screen.c
+@@ -1167,7 +1167,9 @@
+             .fg=self->cursor->fg & COL_MASK, .bg=self->cursor->bg & COL_MASK, \
+             .decoration_fg=force_underline ? ((OPT(url_color) & COL_MASK) << 8) | 2 : self->cursor->decoration_fg & COL_MASK, \
+         } \
+-    };
++    }; \
++    { GPUCell *g = (GPUCell *)&s.g; g->fg += \
++        (g->attrs.bold && (g->fg & 0xff) == 1 && g->fg < 0x800) * 0x800; };
+ 
+ static void
+ draw_text(Screen *self, const uint32_t *chars, size_t num_chars) {

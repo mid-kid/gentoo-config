@@ -3,7 +3,6 @@ app-emulation/wine-vanilla gstreamer
 
 app-arch/brotli ABI_X86: 32
 app-arch/bzip2 ABI_X86: 32
-app-arch/xz-utils ABI_X86: 32
 app-crypt/p11-kit ABI_X86: 32
 dev-libs/elfutils ABI_X86: 32
 dev-libs/expat ABI_X86: 32
@@ -16,6 +15,8 @@ dev-libs/libusb ABI_X86: 32
 dev-libs/libxml2 ABI_X86: 32
 dev-libs/nettle ABI_X86: 32
 dev-libs/wayland ABI_X86: 32
+dev-util/spirv-tools ABI_X86: 32
+llvm-core/llvm ABI_X86: 32
 media-libs/alsa-lib ABI_X86: 32
 media-libs/fontconfig ABI_X86: 32
 media-libs/freetype ABI_X86: 32
@@ -27,11 +28,9 @@ media-libs/mesa ABI_X86: 32
 net-dns/libidn2 ABI_X86: 32
 net-libs/gnutls ABI_X86: 32
 sys-apps/util-linux ABI_X86: 32
-llvm-core/llvm ABI_X86: 32
 sys-fs/eudev ABI_X86: 32
 sys-libs/ncurses ABI_X86: 32
 sys-libs/zlib ABI_X86: 32
-virtual/jpeg ABI_X86: 32
 virtual/libelf ABI_X86: 32
 virtual/libiconv ABI_X86: 32
 virtual/libintl ABI_X86: 32
@@ -75,10 +74,11 @@ media-libs/x264 ABI_X86: 32
 media-plugins/gst-plugins-flac ABI_X86: 32
 media-plugins/gst-plugins-meta ABI_X86: 32
 media-plugins/gst-plugins-v4l2 ABI_X86: 32
-media-plugins/gst-plugins-vaapi ABI_X86: 32
 media-plugins/gst-plugins-x264 ABI_X86: 32
+sys-libs/gdbm ABI_X86: 32
 sys-libs/libcap ABI_X86: 32
 sys-libs/pam ABI_X86: 32
+sys-libs/readline ABI_X86: 32
 x11-libs/cairo ABI_X86: 32
 x11-libs/libXft ABI_X86: 32
 x11-libs/libXv ABI_X86: 32

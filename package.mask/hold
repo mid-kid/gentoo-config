@@ -1,2 +1,9 @@
 # Hold back updates
->=media-sound/audacity-3  # Apparently this will be held in ::gentoo for a bit
+
+# Hold back gtk4 for now
+>=gui-libs/gtk-4
+#>=media-video/handbrake-1.8
+>=media-sound/pavucontrol-6.1
+
+# Try to avoid downgraded ffmpeg
+media-video/ffmpeg-compat

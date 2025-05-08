@@ -1,5 +1,0 @@
-post_src_install() {
-	elog '/etc/portage/env: Stop network interfaces when connection is lost'
-	sed -e 's/EXEC="false ${EXEC}/EXEC="${EXEC}/' \
-		-i "$ED/etc/wpa_supplicant/wpa_cli.sh" || die
-}

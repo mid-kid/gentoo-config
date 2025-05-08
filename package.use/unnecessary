@@ -76,7 +76,6 @@ sci-electronics/kicad -occ -ngspice
 dev-libs/libdbusmenu -gtk
 dev-lang/perl minimal
 dev-perl/* minimal
-media-video/mpv -libplacebo
 llvm-core/clang-runtime -compiler-rt -sanitize -openmp
 llvm-core/llvm -binutils-plugin
 net-analyzer/nmap -nse
@@ -96,9 +95,9 @@ media-gfx/imagemagick -svg
 virtual/imagemagick-tools -svg
 gui-apps/foot -grapheme-clustering
 sys-fs/mtools -gui
-media-libs/libplacebo -shaderc -xxhash glslang
+media-libs/libplacebo -xxhash
 sys-apps/debianutils -installkernel
-net-misc/curl -psl -http3 -quic -curl_quic_openssl
+net-misc/curl -psl
 app-text/xmlto -text
 app-crypt/gnupg -usb
 sys-apps/openrc -netifrc
@@ -133,3 +132,4 @@ x11-wm/xpra -client -gtk3 -clipboard -crypt -cups -opengl -sound -trayicon -lz4
 kde-frameworks/kauth -policykit
 dev-python/pyqt6 -qml -svg -xml
 dev-python/pyside6 -concurrent -network -qml -sql -xml
+net-misc/freerdp -ffmpeg
