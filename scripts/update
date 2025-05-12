@@ -67,7 +67,7 @@ if [ "$cursync" = "$prevsync" -o "$day" -le 1 ]; then
 fi
 
 # Try to sync
-emerge --ask=n --package-moves=n --sync > "$dir/sync.log"
+emerge --ask=n --package-moves=n --sync | tee "$dir/sync.log"
 update
 
 # If successful, write it out
