@@ -1,0 +1,19 @@
+Remove telegram ads
+
+I'm not removing the network request for the ads, just in case the server ever
+decides to ban accounts based on network behavior like that.
+
+--- tdesktop-5.13.1-full.orig/Telegram/SourceFiles/data/components/sponsored_messages.cpp
++++ tdesktop-5.13.1-full/Telegram/SourceFiles/data/components/sponsored_messages.cpp
+@@ -265,10 +265,7 @@
+ 	request.requestId = _session->api().request(
+ 		MTPmessages_GetSponsoredMessages(history->peer->input)
+ 	).done([=](const MTPmessages_sponsoredMessages &result) {
+-		parse(history, result);
+-		if (done) {
+-			done();
+-		}
++		_requests.remove(history);
+ 	}).fail([=] {
+ 		_requests.remove(history);
+ 	}).send();

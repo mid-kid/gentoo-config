@@ -1,3 +1,5 @@
 telegram-desktop-3.1.0-smaller-stickers.patch
 telegram-desktop-4.10.0-remove-instant-replacements.patch
 telegram-desktop-4.3.1-restore-bubble-corners.patch
+telegram-desktop-5.13.1-disable-link-confirmation.patch
+telegram-desktop-5.13.1-remove-ads.patch
