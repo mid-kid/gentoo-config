@@ -1,5 +1,9 @@
 LSFIRM="${LSFIRM:-/etc/kernel/modprobed_db/firmwared_6.12.db}"
 
+# Take the ebuild's src_install function, patch it to always evaluate the
+# USE=savedconfig flag as true, and re-evaluate it. We need this so
+# our firmware list generated in restore_config is actually used.
+# (This overrides USE=savedconfig behavior, making it unusable)
 # Trust me, I'm an engineer
 eval "$(declare -f src_install | sed 's/\<use savedconfig\>/true/')"
 

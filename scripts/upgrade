@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+# This is a slightly beefed up version of "emerge -uDU @world", that makes sure
+# important pacakges are upgraded first, regardless of what portage thinks.
+
 has_update() {
 	emerge -p1 --update-if-installed "$@" | grep -q '^\['
 }

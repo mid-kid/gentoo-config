@@ -2,6 +2,11 @@
 # Installing: symlink to /etc/cron.hourly/updates
 set -e
 
+# This script updates the portage tree at least once a month, and generates an
+# update report after any emerge action, to make sure I don't forget about any
+# pending updates. I have a ticker in my desktop environment displaying if
+# there's updates pending.
+
 dir=/var/spool/updates
 mkdir -p "$dir"
 
