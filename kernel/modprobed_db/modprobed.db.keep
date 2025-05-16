@@ -1,0 +1,5 @@
+# Modules for devices I don't use regularly, but still want to have
+ftdi_sio  # FTDI USB serial chips
+hid_nintendo  # Joycons
+ntfs3  # The new NTFS driver
+usblp  # The epson thermal printer that I own
