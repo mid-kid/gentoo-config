@@ -1,0 +1,8 @@
+post_src_configure() {
+	if use lto && tc-is-clang; then
+		# https://bugs.gentoo.org/956021
+		elog '/etc/portage/env: Make sure default-linker is clang for LTO'
+		sed -e '/^default-linker =/cdefault-linker = "'"${CHOST}-clang"'"' \
+			-i "$S/config.toml"
+	fi
+}
