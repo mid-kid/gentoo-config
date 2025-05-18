@@ -1,6 +1,9 @@
 # Prefer using dependencies from the system
 dev-lang/rust system-llvm
 
+# Allow rust to be bootstapped without rust-bin
+dev-lang/rust mrustc-bootstrap
+
 # I don't use clang to build 32-bit software
 # See profiles/arch/amd64/package.use
 llvm-core/clang-runtime ABI_X86: -32
