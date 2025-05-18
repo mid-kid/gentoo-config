@@ -1,0 +1,4 @@
+# Enable --ask and quiet down some noisy features.
+# I want these to be the defaults, really.
+CLEAN_DELAY=0
+EMERGE_DEFAULT_OPTS="--ask --nospinner --quiet-unmerge-warn"
