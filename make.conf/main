@@ -4,8 +4,8 @@ PKGDIR="/usr/portage/packages"
 
 LC_MESSAGES=C
 CLEAN_DELAY=0
-EMERGE_DEFAULT_OPTS="--ask --nospinner --quiet-unmerge-warn --keep-going --usepkg --with-bdeps=y --binpkg-respect-use=n --binpkg-changed-deps=n"
-FEATURES="buildpkg -buildpkg-live pkgdir-index-trusted"
+EMERGE_DEFAULT_OPTS="$EMERGE_DEFAULT_OPTS --ask --nospinner --quiet-unmerge-warn --keep-going --with-bdeps=y --binpkg-respect-use=n --binpkg-changed-deps=n"
+FEATURES="$FEATURES pkgdir-index-trusted"
 BINPKG_COMPRESS="bzip2"
 PORTAGE_BZIP2_COMMAND="lbzip2"
 
