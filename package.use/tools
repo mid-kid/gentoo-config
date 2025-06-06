@@ -5,7 +5,6 @@ dev-vcs/git perl  # Many utility scripts
 www-client/w3m imlib  # Render images in the terminal
 app-office/libreoffice kde qt6  # Use the KDE/Qt interfaces
 games-emulation/desmume gdb
-net-misc/curl adns  # Support for --dns-servers option
 net-misc/aria2 bittorrent
 sys-fs/android-file-transfer-linux fuse
 dev-util/android-tools -udev  # I use my own udev rules

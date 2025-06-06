@@ -9,8 +9,6 @@ media-video/mpv -uchardet
 net-analyzer/wireshark -gtk
 net-libs/webkit-gtk -geolocation -libnotify -gstreamer -egl -webgl -seccomp
 sys-apps/smartmontools -daemon
-sys-libs/libcxx -libunwind
-sys-libs/libcxxabi -libunwind
 xfce-base/xfce4-power-manager -panel-plugin
 media-sound/audacity -lv2 -midi -soundtouch
 dev-python/twisted -crypt
@@ -90,7 +88,7 @@ app-crypt/swtpm -gnutls
 media-gfx/gimp -udev
 media-plugins/gst-plugins-v4l2 -udev
 dev-python/pyside2 -xml -concurrent -printsupport -sql -testlib -x11extras
-media-gfx/blender -ffmpeg -openvdb -opensubdiv -oidn -embree -fluid -fftw -pdf -potrace -pugixml -sndfile -openpgl -nanovdb -gmp
+media-gfx/blender -ffmpeg -openvdb -opensubdiv -oidn -embree -fluid -fftw -pdf -potrace -pugixml -sndfile -openpgl -nanovdb -gmp -bullet
 media-gfx/imagemagick -svg
 virtual/imagemagick-tools -svg
 gui-apps/foot -grapheme-clustering

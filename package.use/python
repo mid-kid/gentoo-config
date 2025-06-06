@@ -17,10 +17,8 @@
 # Check for potentially removable entries:
 # rm -f /tmp/use.txt; eix '-#' --installed-with-use python_targets_python3_11 --installed-with-use python_targets_python3_12 | xargs -P4 -I% sh -c "PYTHON_TARGETS=python3_12 emerge -pD --usepkg=n '%' && { echo '%' | tee -a /tmp/use.txt; }"
 
-media-gfx/blender PYTHON_SINGLE_TARGET: python3_12
 sci-electronics/kicad PYTHON_SINGLE_TARGET: python3_12
 
-app-emulation/virt-firmware PYTHON_TARGETS: python3_12
 dev-libs/boost PYTHON_TARGETS: python3_12
 dev-python/certifi PYTHON_TARGETS: python3_12
 dev-python/cffi PYTHON_TARGETS: python3_12

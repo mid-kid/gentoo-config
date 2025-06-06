@@ -97,3 +97,5 @@
 >=dev-python/pyqt6-6.8.0 webchannel
 # required by media-gfx/freecad-1.0.0-r2::gentoo[python_single_target_python3_12,gui]
 >=dev-python/pyside6-6.8.1 uitools
+# required by custom/serialplot-0.13.0::localrepo
+>=x11-libs/qwt-6.2.0-r4 qt6

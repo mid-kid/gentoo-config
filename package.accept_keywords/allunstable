@@ -21,6 +21,7 @@ media-sound/qpwgraph
 x11-misc/zim
 games-fps/redeclipse
 games-misc/ponysay
+games-action/armagetronad
 
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrokdecode

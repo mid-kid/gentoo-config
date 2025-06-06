@@ -6,3 +6,7 @@ virtual/jre:21
 <media-gfx/gimp-3.1
 <sys-apps/openrc-0.66  # navi-desu is doing big things
 ~sys-auth/pambase-20250228  # required for openrc-user
+~dev-util/android-tools-35.0.2
+~x11-terms/kitty-0.42.1
+~x11-terms/kitty-shell-integration-0.42.1
+~x11-terms/kitty-terminfo-0.42.1
