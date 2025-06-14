@@ -1,0 +1,4 @@
+# Thumbnail generator infrastructure
+xfce-base/tumbler  # D-Bus service used by many file managers
+media-video/ffmpegthumbnailer  # Video file thumbnailer for XDG
+kde-apps/ffmpegthumbs  # Video file thumbnailer for KDE apps

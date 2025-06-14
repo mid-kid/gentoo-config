@@ -13,5 +13,5 @@ net-wireless/wpa_supplicant tkip  # Compatibility with old routers
 app-alternatives/sh -* dash  # Faster POSIX-compatible shell than bash
 media-libs/freetype harfbuzz  # Recommended by x11-libs/pango ebuild
 app-crypt/pinentry qt6  # Install a GUI prompt for pinentry
-media-libs/libv4l qt6  # Install GUIs for testing
 app-arch/7zip symlink  # Use this version instead of p7zip
+media-video/ffmpegthumbnailer gnome  # Actually install the thumbnailer service
