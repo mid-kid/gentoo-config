@@ -1,0 +1,19 @@
+Respect the XDG Base Directory standard
+
+This is so very close, except it doesn't try to create the directory if it
+doesn't exist yet, and XDG_DATA_HOME isn't set, falling back to ~/.tig_history.
+
+--- tig-2.5.12.orig/src/prompt.c
++++ tig-2.5.12/src/prompt.c
+@@ -537,6 +537,11 @@
+ 	if (!xdg_data_home || !*xdg_data_home) {
+ 		if (!string_format(path, "%s/.local/share/tig/history", home))
+ 			die("Failed to expand $HOME");
++		else {
++			char path_copy[SIZEOF_STR];
++			strncpy(path_copy, path, SIZEOF_STR);
++			mkdir(dirname(path_copy), 0777);
++		}
+ 	} else if (!string_format(path, "%s/tig/history", xdg_data_home))
+ 		die("Failed to expand $XDG_DATA_HOME");
+ 	else {
