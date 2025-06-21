@@ -16,10 +16,45 @@ index 386e50cc8..2abcff5e3 100755
  fi
 
 diff --git a/bin/phase-functions.sh b/bin/phase-functions.sh
-index c68f3c5fc..17bdffb90 100644
+index b0654533c..32851c384 100644
 --- a/bin/phase-functions.sh
 +++ b/bin/phase-functions.sh
-@@ -1136,7 +1136,10 @@ __ebuild_main() {
+@@ -216,7 +216,7 @@ __preprocess_ebuild_env() {
+ __ebuild_phase() {
+ 	local __EBEGIN_EEND_COUNT=0
+
+-	declare -F "$1" >/dev/null && __qa_call $1
++	declare -F "$1" >/dev/null && { __EBUILD_UPDATE_ENV=1; __qa_call $1; }
+ 	if (( __EBEGIN_EEND_COUNT > 0 )); then
+ 		eqawarn "QA Notice: ebegin called without eend in $1"
+ 	fi
+@@ -996,6 +996,7 @@ __ebuild_main() {
+
+ 	__source_all_bashrcs
+
++	__EBUILD_UPDATE_ENV=0
+ 	case ${1} in
+ 	nofetch)
+ 		__ebuild_phase_with_hooks pkg_nofetch
+@@ -1013,7 +1014,7 @@ __ebuild_main() {
+ 			__ebuild_phase_with_hooks pkg_${1}
+ 			set +x
+ 		fi
+-		if [[ -n ${PORTAGE_UPDATE_ENV} ]] ; then
++		if [[ ${__EBUILD_UPDATE_ENV} = 1 && -n ${PORTAGE_UPDATE_ENV} ]] ; then
+ 			# Update environment.bz2 in case installation phases
+ 			# need to pass some variables to uninstallation phases.
+ 			# Use safe cwd, avoiding unsafe import for bug #469338.
+@@ -1107,7 +1108,7 @@ __ebuild_main() {
+ 	esac
+
+ 	# Save the env only for relevant phases.
+-	if ! has "${1}" clean help info nofetch ; then
++	if [[ ${__EBUILD_UPDATE_ENV} = 1 && $1 != @(clean|help|info|nofetch) ]]; then
+ 		umask 002
+
+ 		# Use safe cwd, avoiding unsafe import for bug #469338.
+@@ -1123,7 +1124,10 @@ __ebuild_main() {
  	[[ -n ${PORTAGE_EBUILD_EXIT_FILE} ]] && > "${PORTAGE_EBUILD_EXIT_FILE}"
  	if [[ -n ${PORTAGE_IPC_DAEMON} ]] ; then
  		[[ ! -s ${SANDBOX_LOG} ]]
