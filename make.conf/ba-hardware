@@ -1,9 +1,9 @@
 NPROC="4"
 MAKEOPTS="-j$NPROC -l5"
 
-CPU_FLAGS_X86="aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3"  # cpuid2cpuflags 12
+CPU_FLAGS_X86="aes avx avx2 bmi1 bmi2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3"  # cpuid2cpuflags 16
 MARCH="znver1"
-MARCH_FLAGS="-march=$MARCH"  # resolve-march-native 5.0.2
+MARCH_FLAGS="-march=$MARCH"  # resolve-march-native 6.0.1
 
 VIDEO_CARDS="amdgpu"
 INPUT_DEVICES="libinput synaptics"

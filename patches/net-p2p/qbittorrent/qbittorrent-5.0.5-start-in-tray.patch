@@ -1,0 +1,100 @@
+Adds --tray option, suitable for autostart scripts, to start qbittorrent
+minimized in the tray.
+
+--- qbittorrent-5.0.5.orig/src/app/application.cpp
++++ qbittorrent-5.0.5/src/app/application.cpp
+@@ -180,6 +180,9 @@
+         if (params.skipDialog.has_value())
+             result.append(bindParamValue(PARAM_SKIPDIALOG, (*params.skipDialog ? u"1" : u"0")));
+ 
++        if (params.startInTray)
++            result.append(QLatin1String("@startInTray"));
++
+         result += params.torrentSources;
+ 
+         return result.join(PARAMS_SEPARATOR);
+@@ -239,6 +242,10 @@
+                 continue;
+             }
+ 
++            // Parameter passed to avoid bringing up the window
++            if (param == QLatin1String("@startInTray"))
++                continue;
++
+             parsedParams.torrentSources.append(param.toString());
+         }
+ 
+@@ -928,13 +935,14 @@
+ 
+         disconnect(m_desktopIntegration, &DesktopIntegration::activationRequested, this, &Application::createStartupProgressDialog);
+ #ifndef Q_OS_MACOS
+-        const WindowState windowState = !m_startupProgressDialog ? WindowState::Hidden
++        WindowState windowState = !m_startupProgressDialog ? WindowState::Hidden
+                 : (m_startupProgressDialog->windowState() & Qt::WindowMinimized) ? WindowState::Minimized
+                         : WindowState::Normal;
+ #else
+-        const WindowState windowState = (m_startupProgressDialog->windowState() & Qt::WindowMinimized)
++        WindowState windowState = (m_startupProgressDialog->windowState() & Qt::WindowMinimized)
+                 ? WindowState::Minimized : WindowState::Normal;
+ #endif
++        if (m_commandLineArgs.startInTray) windowState = WindowState::Tray;
+         m_window = new MainWindow(this, windowState, instanceName());
+ 
+         delete m_startupProgressDialog;
+--- qbittorrent-5.0.5.orig/src/app/cmdoptions.cpp
++++ qbittorrent-5.0.5/src/app/cmdoptions.cpp
+@@ -311,6 +311,7 @@
+     constexpr const BoolOption DAEMON_OPTION {"daemon", 'd'};
+ #else
+     constexpr const BoolOption NO_SPLASH_OPTION {"no-splash"};
++    constexpr const BoolOption START_IN_TRAY_OPTION {"tray"};
+ #endif
+     constexpr const IntOption WEBUI_PORT_OPTION {"webui-port"};
+     constexpr const IntOption TORRENTING_PORT_OPTION {"torrenting-port"};
+@@ -331,6 +332,7 @@
+     , relativeFastresumePaths(RELATIVE_FASTRESUME.value(env))
+ #ifndef DISABLE_GUI
+     , noSplash(NO_SPLASH_OPTION.value(env))
++    , startInTray(START_IN_TRAY_OPTION.value(env))
+ #elif !defined(Q_OS_WIN)
+     , shouldDaemonize(DAEMON_OPTION.value(env))
+ #endif
+@@ -395,6 +397,10 @@
+             {
+                 result.noSplash = true;
+             }
++            else if (arg == START_IN_TRAY_OPTION)
++            {
++                result.startInTray = true;
++            }
+ #elif !defined(Q_OS_WIN)
+             else if (arg == DAEMON_OPTION)
+             {
+@@ -506,6 +512,7 @@
+         + u'\n'
+ #ifndef DISABLE_GUI
+         + NO_SPLASH_OPTION.usage() + wrapText(QCoreApplication::translate("CMD Options", "Disable splash screen")) + u'\n'
++        + START_IN_TRAY_OPTION.usage() + wrapText(QCoreApplication::translate("CMD Options", "Start minimized")) + u'\n'
+ #elif !defined(Q_OS_WIN)
+         + DAEMON_OPTION.usage() + wrapText(QCoreApplication::translate("CMD Options", "Run in daemon-mode (background)")) + u'\n'
+ #endif
+--- qbittorrent-5.0.5.orig/src/app/cmdoptions.h
++++ qbittorrent-5.0.5/src/app/cmdoptions.h
+@@ -51,6 +51,7 @@
+     bool relativeFastresumePaths = false;
+ #ifndef DISABLE_GUI
+     bool noSplash = false;
++    bool startInTray = false;
+ #elif !defined(Q_OS_WIN)
+     bool shouldDaemonize = false;
+ #endif
+--- qbittorrent-5.0.5.orig/src/gui/windowstate.h
++++ qbittorrent-5.0.5/src/gui/windowstate.h
+@@ -38,6 +38,7 @@
+     {
+         Normal,
+         Minimized,
++        Tray,
+ #ifndef Q_OS_MACOS
+         Hidden
+ #endif

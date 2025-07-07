@@ -35,6 +35,12 @@ if $updated; then
 	eselect gcc set latest
 fi
 
+# I use CC=clang to link in a few places, and llvm has a tendency to update
+# before lld/clang, producing incompatible object files in e.g. rust
+pre_update \
+	llvm-core/clang \
+	llvm-core/lld
+
 # libc is already upgraded first anyway, no need to list separately
 
 # Upgrade entire rest of the system

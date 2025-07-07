@@ -3,7 +3,7 @@ sys-block/f3 extra
 games-emulation/mgba ffmpeg debug lua
 dev-vcs/git perl  # Many utility scripts
 www-client/w3m imlib  # Render images in the terminal
-app-office/libreoffice kde qt6  # Use the KDE/Qt interfaces
+app-office/libreoffice -gtk3 -gtk4 kde qt6  # Use the KDE/Qt interfaces
 games-emulation/desmume gdb
 net-misc/aria2 bittorrent
 sys-fs/android-file-transfer-linux fuse

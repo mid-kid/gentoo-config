@@ -16,7 +16,6 @@ games-fps/xonotic
 dev-build/muon
 dev-util/rgbds
 media-video/droidcam
-media-video/v4l2loopback
 media-sound/qpwgraph
 x11-misc/zim
 games-fps/redeclipse
@@ -24,6 +23,7 @@ games-misc/ponysay
 games-action/armagetronad
 
 sys-firmware/sigrok-firmware-fx2lafw
+sci-libs/libsigrok
 sci-libs/libsigrokdecode
 sci-electronics/pulseview
 sci-electronics/sigrok-cli

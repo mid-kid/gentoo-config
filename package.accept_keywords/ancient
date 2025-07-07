@@ -1,12 +1,12 @@
 # Unmasking specific versions when older ones are too old
-dev-java/openjdk:21
-virtual/jdk:21
-virtual/jre:21
-~x11-wm/xpra-6.0.1
 <media-gfx/gimp-3.1
 <sys-apps/openrc-0.66  # navi-desu is doing big things
 ~sys-auth/pambase-20250228  # required for openrc-user
-~dev-util/android-tools-35.0.2
 ~x11-terms/kitty-0.42.1
 ~x11-terms/kitty-shell-integration-0.42.1
 ~x11-terms/kitty-terminfo-0.42.1
+~net-libs/mbedtls-3.6.3.1
+~sys-devel/gcc-15.1.0
+~sys-auth/elogind-255.17
+~app-misc/vifm-0.14.2
+~dev-cpp/expected-1.1.0
