@@ -8,6 +8,11 @@ Changes since the PR:
 - Improved is_pixel_visible, to properly read the bitmap, although I haven't
   encountered a single time it's called.
 
+This patch enables the subpixel rendering option by default, avoiding having to
+add it to your personal configuration (making it incompatible with upstream).
+In a final version of this patch, it should either be disabled by default, or
+inferred from your freetype configuration.
+
 --- kitty-0.41.1.orig/kitty/cell_defines.glsl
 +++ kitty-0.41.1/kitty/cell_defines.glsl
 @@ -9,6 +9,7 @@
@@ -492,7 +497,7 @@ Changes since the PR:
  described above instead of the :code:`%` mode of operation.
  ''')
  
-+opt('subpixel_rendering', 'no',
++opt('subpixel_rendering', 'yes',
 +    option_type='to_bool', ctype='bool',
 +    long_text='''
 +Use subpixel rendering instead of grayscale in freetype. Impacts performance,
@@ -561,7 +566,7 @@ Changes since the PR:
      single_window_padding_width: FloatEdges = FloatEdges(left=-1.0, top=-1.0, right=-1.0, bottom=-1.0)
      startup_session: str | None = None
      strip_trailing_spaces: choices_for_strip_trailing_spaces = 'never'
-+    subpixel_rendering: bool = False
++    subpixel_rendering: bool = True
      sync_to_monitor: bool = True
      tab_activity_symbol: str = ''
      tab_bar_align: choices_for_tab_bar_align = 'left'
