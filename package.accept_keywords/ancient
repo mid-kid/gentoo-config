@@ -10,3 +10,4 @@
 ~sys-auth/elogind-255.17
 ~app-misc/vifm-0.14.2
 ~dev-cpp/expected-1.1.0
+~dev-libs/qr-code-generator-1.8.0
