@@ -99,3 +99,5 @@
 >=dev-python/pyside6-6.8.1 uitools
 # required by custom/serialplot-0.13.0::localrepo
 >=x11-libs/qwt-6.2.0-r4 qt6
+# required by www-client/firefox-140.1.0::gentoo[system-png]
+>=media-libs/libpng-1.6.47 apng

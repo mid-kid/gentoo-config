@@ -8,6 +8,6 @@
 post_src_install() {
 	elog '/etc/portage/env: Install default services in docdir instead'
 	dodoc "$ED"/etc/avahi/services/*.service
-	rm -f "$ED"/etc/avahi/services/*.service
+	rm "$ED"/etc/avahi/services/*.service || die
 	keepdir /etc/avahi/services
 }

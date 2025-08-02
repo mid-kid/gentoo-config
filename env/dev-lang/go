@@ -1,10 +1,10 @@
-post_pkg_postinst() {
+post_pkg_preinst() {
 	# Delete anything not necessary for building go programs
 	# Might break some development tools, although in all these years I haven't
 	#   had any problems with it.
 
 	elog '/etc/portage/env: Deleting files that aren'\''t needed for building programs'
-	cd "$EROOT/usr/lib/go" || die
+	cd "$ED/usr/lib/go" || die
 
 	# keep: bin pkg src
 	rm -rvf api doc lib misc test || die
