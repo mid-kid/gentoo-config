@@ -15,3 +15,5 @@ media-libs/freetype harfbuzz  # Recommended by x11-libs/pango ebuild
 app-crypt/pinentry qt6  # Install a GUI prompt for pinentry
 app-arch/7zip symlink  # Use this version instead of p7zip
 media-video/ffmpegthumbnailer gnome  # Actually install the thumbnailer service
+xfce-base/tumbler ffmpeg  # Install thumbnailer for video
+kde-apps/thumbnailers video  # Install thumbnailer for video
