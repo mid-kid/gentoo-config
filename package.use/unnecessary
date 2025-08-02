@@ -116,7 +116,6 @@ sys-boot/grub -fonts -themes -device-mapper
 app-arch/libarchive -e2fsprogs
 app-portage/portage-utils -qmanifest
 dev-libs/libxslt -crypt
-kde-apps/thumbnailers -pdf
 media-gfx/krita -xsimd
 dev-libs/libgit2 -ssh
 dev-util/perf -gtk -libtracefs -libtraceevent
