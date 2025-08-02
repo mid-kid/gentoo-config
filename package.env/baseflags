@@ -1,6 +1,14 @@
 # Compile: infinite loop in datatoc_icon, hangs the build
 media-gfx/blender baseflags  # 4.2.4-r2 (GCC 14.2.1_p20241221)
 
+# Compile: fatal error: Terminated signal terminated program lto1
+# https://bugs.gentoo.org/960257
+dev-java/openjdk:17 baseflags  # 17.0.16_p8 (GCC 15.1.0)
+
+# Compile: error: unrecognized options: --with-jvm-features
+# https://bugs.gentoo.org/961026
+dev-java/openjdk:8 baseflags  # 8.462_p08 (GCC 15.1.0)
+
 # Runtime: Constant hangs
 sci-electronics/pulseview baseflags  # 0.4.2-r1 (GCC 12.2.1_p20230121-r1)
 
