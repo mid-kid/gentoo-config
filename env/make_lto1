@@ -1,2 +1,2 @@
-CFLAGS="$CFLAGS -flto=1 --param=lto-max-streaming-parallelism=1"
-CXXFLAGS="$CXXFLAGS -flto=1 --param=lto-max-streaming-parallelism=1"
+CFLAGS="$CFLAGS -flto=1"
+CXXFLAGS="$CXXFLAGS -flto=1"

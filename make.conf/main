@@ -14,7 +14,7 @@ CMAKE_MAKEFILE_GENERATOR="ninja"
 # https://github.com/gentoo-mirror/lto-overlay/blob/master/sys-config/ltoize/files/make.conf.lto.defines
 FLAGS_OPTIM_BASE="-O3 -w"
 FLAGS_OPTIM_LTO="-flto -fuse-linker-plugin"
-FLAGS_OPTIM_PARALLEL="-flto=$NPROC --param=lto-max-streaming-parallelism=$NPROC"
+FLAGS_OPTIM_PARALLEL="-flto=$NPROC"  # --param=lto-max-streaming-parallelism=$NPROC" (deprecated, WPA stage now supports jobserver)
 FLAGS_OPTIM_MORE="-fgraphite-identity -floop-nest-optimize -fdevirtualize-at-ltrans -fipa-pta -fno-semantic-interposition"
 FLAGS_COMMON="$FLAGS_OPTIM_BASE $MARCH_FLAGS $FLAGS_OPTIM_LTO $FLAGS_OPTIM_PARALLEL $FLAGS_OPTIM_MORE"
 RUSTFLAGS="-Copt-level=3 -Ctarget-cpu=$MARCH -Clinker-plugin-lto -Clinker=$CHOST-clang -Clink-arg=-fuse-ld=lld"
