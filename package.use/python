@@ -15,7 +15,7 @@
 # eix '-#' --installed-with-use python_targets_python3_10 | grep -Fvf <(grep '^[^#*]*PYTHON_TARGETS:' /etc/portage/package.use/python3_11 | cut -d' ' -f 1)
 
 # Check for potentially removable entries:
-# rm -f /tmp/use.txt; eix '-#' --installed-with-use python_targets_python3_11 --installed-with-use python_targets_python3_12 | xargs -P4 -I% sh -c "PYTHON_TARGETS=python3_12 emerge -pD --usepkg=n '%' && { echo '%' | tee -a /tmp/use.txt; }"
+# rm -f /tmp/use.txt; eix '-#' --installed-with-use python_targets_python3_12 --installed-with-use python_targets_python3_13 | xargs -P4 -I% sh -c "PYTHON_TARGETS=python3_13 emerge -pD --usepkg=n '%' && { echo '%' | tee -a /tmp/use.txt; }"
 
 sci-electronics/kicad PYTHON_SINGLE_TARGET: python3_12
 
@@ -23,7 +23,6 @@ dev-libs/boost PYTHON_TARGETS: python3_12
 dev-python/certifi PYTHON_TARGETS: python3_12
 dev-python/cffi PYTHON_TARGETS: python3_12
 dev-python/charset-normalizer PYTHON_TARGETS: python3_12
-dev-python/cryptography PYTHON_TARGETS: python3_12
 dev-python/cython PYTHON_TARGETS: python3_12
 dev-python/docopt PYTHON_TARGETS: python3_12
 dev-python/editables PYTHON_TARGETS: python3_12
@@ -37,9 +36,7 @@ dev-python/jaraco-collections PYTHON_TARGETS: python3_12
 dev-python/jaraco-context PYTHON_TARGETS: python3_12
 dev-python/jaraco-functools PYTHON_TARGETS: python3_12
 dev-python/jaraco-text PYTHON_TARGETS: python3_12
-dev-python/meson-python PYTHON_TARGETS: python3_12
 dev-python/more-itertools PYTHON_TARGETS: python3_12
-dev-python/numpy PYTHON_TARGETS: python3_12
 dev-python/packaging PYTHON_TARGETS: python3_12
 dev-python/pathspec PYTHON_TARGETS: python3_12
 dev-python/platformdirs PYTHON_TARGETS: python3_12
@@ -51,15 +48,9 @@ dev-python/pygobject PYTHON_TARGETS: python3_12
 dev-python/pyproject-metadata PYTHON_TARGETS: python3_12
 dev-python/pysocks PYTHON_TARGETS: python3_12
 dev-python/pyyaml PYTHON_TARGETS: python3_12
-dev-python/requests PYTHON_TARGETS: python3_12
 dev-python/setuptools PYTHON_TARGETS: python3_12
 dev-python/setuptools-scm PYTHON_TARGETS: python3_12
-dev-python/sip PYTHON_TARGETS: python3_12
-dev-python/six PYTHON_TARGETS: python3_12
 dev-python/trove-classifiers PYTHON_TARGETS: python3_12
 dev-python/urllib3 PYTHON_TARGETS: python3_12
 dev-python/wheel PYTHON_TARGETS: python3_12
 dev-python/wxpython PYTHON_TARGETS: python3_12
-dev-python/zstandard PYTHON_TARGETS: python3_12
-dev-util/maturin PYTHON_TARGETS: python3_12
-sys-fs/udiskie PYTHON_TARGETS: python3_12
