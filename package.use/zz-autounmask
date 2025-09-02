@@ -101,3 +101,5 @@
 >=x11-libs/qwt-6.2.0-r4 qt6
 # required by www-client/firefox-140.1.0::gentoo[system-png]
 >=media-libs/libpng-1.6.47 apng
+# required by custom/mkchromecast-0.3.8.1_p20250601::localrepo
+>=media-video/ffmpeg-7.1.1-r2 lame
