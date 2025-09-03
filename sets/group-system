@@ -17,4 +17,3 @@ app-arch/lbzip2
 
 # Used to build llvm, which is required by mesa, rust, firefox, ...
 llvm-core/clang
-llvm-core/lld

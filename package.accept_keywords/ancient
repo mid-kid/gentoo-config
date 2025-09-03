@@ -6,7 +6,7 @@
 ~x11-terms/kitty-shell-integration-0.42.2
 ~x11-terms/kitty-terminfo-0.42.2
 ~net-libs/mbedtls-3.6.3.1
-~sys-devel/gcc-15.1.0
+~sys-devel/gcc-15.2.0
 ~sys-auth/elogind-255.17
 ~app-misc/vifm-0.14.2
 ~dev-cpp/expected-1.1.0

@@ -30,3 +30,4 @@ x11-misc/xclip  # Clipboard access
 x11-apps/xrandr  # Control of displays
 x11-apps/xwininfo  # Required for picom-trans
 media-sound/playerctl  # Control media players
+media-gfx/zbar  # Used in i3-screenshot for qr code scanning

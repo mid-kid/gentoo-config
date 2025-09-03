@@ -10,6 +10,3 @@ app-arch/cabextract
 
 # Required by AppImages
 sys-fs/fuse:0
-
-# Required for mobile-gbridge
-dev-libs/libserialport

@@ -130,3 +130,4 @@ kde-frameworks/kauth -policykit
 dev-python/pyqt6 -qml -svg -xml
 dev-python/pyside6 -concurrent -network -qml -sql -xml
 net-misc/freerdp -ffmpeg
+kde-frameworks/kwallet minimal

@@ -19,6 +19,9 @@ llvm-runtimes/libunwind ABI_X86: -32
 dev-ml/llvm LLVM_TARGETS: -AMDGPU -NVPTX -BPF
 llvm-core/clang LLVM_TARGETS: -AMDGPU -NVPTX -BPF
 llvm-core/llvm LLVM_TARGETS: -AMDGPU -NVPTX -BPF
+llvm-core/lld LLVM_TARGETS: -AMDGPU -NVPTX -BPF
+llvm-core/flang LLVM_TARGETS: -AMDGPU -NVPTX -BPF
+llvm-core/lldb LLVM_TARGETS: -AMDGPU -NVPTX -BPF
 
 # Mesa depends on llvm_targets_AMDGPU if USE="llvm"
 # Doing this breaks the default VIDEO_CARDS setting,

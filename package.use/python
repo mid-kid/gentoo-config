@@ -50,6 +50,7 @@ dev-python/pysocks PYTHON_TARGETS: python3_12
 dev-python/pyyaml PYTHON_TARGETS: python3_12
 dev-python/setuptools PYTHON_TARGETS: python3_12
 dev-python/setuptools-scm PYTHON_TARGETS: python3_12
+dev-python/sip PYTHON_TARGETS: python3_12
 dev-python/trove-classifiers PYTHON_TARGETS: python3_12
 dev-python/urllib3 PYTHON_TARGETS: python3_12
 dev-python/wheel PYTHON_TARGETS: python3_12
