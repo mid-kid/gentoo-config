@@ -2,8 +2,10 @@
 
 # Hold back gtk4 for now
 >=gui-libs/gtk-4
-#>=media-video/handbrake-1.8
 >=media-sound/pavucontrol-6.1
+
+# Avoid zig for now
+>=sys-fs/ncdu-2
 
 # Try to avoid downgraded ffmpeg
 media-video/ffmpeg-compat

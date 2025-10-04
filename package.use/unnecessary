@@ -74,7 +74,7 @@ sci-electronics/kicad -occ -ngspice
 dev-libs/libdbusmenu -gtk
 dev-lang/perl minimal
 dev-perl/* minimal
-llvm-core/clang-runtime -compiler-rt -sanitize -openmp
+llvm-runtimes/clang-runtime -compiler-rt -sanitize -openmp
 llvm-core/llvm -binutils-plugin
 net-analyzer/nmap -nse
 media-gfx/zbar -gtk

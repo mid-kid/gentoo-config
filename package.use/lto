@@ -6,7 +6,7 @@ sys-libs/glibc -ssp
 
 # LLD is required for clang LTO
 llvm-core/clang-common default-lld
-llvm-core/clang-runtime default-lld
+llvm-runtimes/clang-runtime default-lld
 # Clang settings handled in /etc/portage/env/llvm-core/clang-common
 # Changes equivalent to: -ssp -default-stack-clash-protection -default-znow
 

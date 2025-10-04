@@ -7,7 +7,7 @@ dev-lang/rust mrustc-bootstrap
 
 # I don't use clang to build 32-bit software
 # See profiles/arch/amd64/package.use
-llvm-core/clang-runtime ABI_X86: -32
+llvm-runtimes/clang-runtime ABI_X86: -32
 llvm-runtimes/libcxxabi ABI_X86: -32
 llvm-runtimes/libcxx ABI_X86: -32
 llvm-runtimes/openmp ABI_X86: -32
