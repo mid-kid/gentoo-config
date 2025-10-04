@@ -1,6 +1,6 @@
-post_src_install() {
+post_pkg_preinst() {
 	# Create dirs when lacking tmpfiles
-	diropts -m0755 -o ntp -g ntp
 	keepdir /var/lib/ntp
-	diropts
+	fowners ntp:ntp /var/lib/ntp
+	fperms 0755 /var/lib/ntp
 }

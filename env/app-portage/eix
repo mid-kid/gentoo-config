@@ -1,4 +1,6 @@
-post_pkg_postinst() {
+post_pkg_preinst() {
 	# Create dirs when lacking tmpfiles
-	install -m0775 -o portage -g portage -d "$ROOT/var/cache/eix"
+	keepdir /var/cache/eix
+	fowners portage:portage /var/cache/eix
+	fperms 0755 /var/cache/eix
 }

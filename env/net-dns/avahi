@@ -5,7 +5,7 @@
 # - OpenSUSE
 # The only distributions I checked that don't do this are Alpine and Gentoo
 
-post_src_install() {
+post_src_preinst() {
 	elog '/etc/portage/env: Install default services in docdir instead'
 	dodoc "$ED"/etc/avahi/services/*.service
 	rm "$ED"/etc/avahi/services/*.service || die

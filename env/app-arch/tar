@@ -1,4 +1,3 @@
-post_src_install() {
-	rm -f "$ED/etc/rmt" || die
-	rmdir --ignore-fail-on-non-empty "$ED/etc" || die
-}
+INSTALL_MASK="
+/etc/rmt
+"

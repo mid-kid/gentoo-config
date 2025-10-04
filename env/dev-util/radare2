@@ -1,5 +1,0 @@
-post_src_prepare() {
-	elog '/etc/portage/env: Working around broken /dev/stderr (https://bugs.gentoo.org/922960)'
-	# Fixed upstream as of https://github.com/radareorg/acr/pull/32 (not in radare2 yet)
-	sed -e 's|/dev/stderr|2|g' -i configure || die
-}

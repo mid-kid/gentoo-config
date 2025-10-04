@@ -1,4 +1,4 @@
-post_src_install() {
+post_pkg_preinst() {
 	# See also: /etc/portage/package.use/lto
 	elog '/etc/portage/env: Patching config due to lack of USE flags'
 	# USE=-ssp
