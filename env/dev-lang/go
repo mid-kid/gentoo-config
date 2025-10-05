@@ -1,4 +1,4 @@
-post_pkg_preinst() {
+env-post_pkg_preinst() {
 	# Delete anything not necessary for building go programs
 	# Might break some development tools, although in all these years I haven't
 	#   had any problems with it.

@@ -1,4 +1,4 @@
-post_pkg_preinst() {
+env-post_pkg_preinst() {
 	if use grub; then
 		elog '/etc/portage/env: Creating grub-update symlink'
 		dosym ../lib/kernel/postinst.d/91-grub-mkconfig.install /usr/sbin/grub-update

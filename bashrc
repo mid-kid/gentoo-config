@@ -26,3 +26,16 @@
 		ulimit -v 8388608
 	fi
 }
+
+bashrc_symlink_docdir() {
+	local dest="$PN"
+	test "$SLOT" = 0 || dest="$PN:$SLOT"
+	test -e "$ED/usr/share/doc/$P" -a ! -e "$ED/usr/share/doc/$dest" || return
+	einfo '/etc/portage/bashrc: Symlinking version-agnostic docdir'
+	dosym "$P" "/usr/share/doc/$dest"
+}
+
+post_pkg_preinst() {
+	#bashrc_symlink_docdir
+	declare -F env-post_pkg_preinst > /dev/null && env-post_pkg_preinst
+}

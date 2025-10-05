@@ -1,4 +1,4 @@
-post_pkg_preinst() {
+env-post_pkg_preinst() {
 	# Create dirs when lacking tmpfiles
 	keepdir /var/lib/ntp
 	fowners ntp:ntp /var/lib/ntp
