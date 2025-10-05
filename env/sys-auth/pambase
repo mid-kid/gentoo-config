@@ -1,0 +1,6 @@
+declare -F post_pkg_preinst > /dev/null || post_pkg_preinst() { env-post_pkg_preinst; }
+env-post_pkg_preinst() {
+	# https://bugs.gentoo.org/938574
+	elog '/etc/portage/env: Allow PAM to set the system umask'
+	printf 'session\t\toptional\tpam_umask.so\n' >> "$ED/etc/pam.d/system-login" || die
+}
