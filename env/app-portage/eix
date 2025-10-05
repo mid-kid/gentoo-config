@@ -1,3 +1,4 @@
+declare -F post_pkg_preinst > /dev/null || post_pkg_preinst() { env-post_pkg_preinst; }
 env-post_pkg_preinst() {
 	# Create dirs when lacking tmpfiles
 	keepdir /var/cache/eix

@@ -1,4 +1,5 @@
-post_src_install() {
+declare -F post_src_install > /dev/null || post_src_install() { env-post_src_install; }
+env-post_src_install() {
 	elog '/etc/portage/env: Moving files from /opt/cni/bin to /usr/libexec/cni'
 
 	# Move binaries away from /opt into a different location where they can be found

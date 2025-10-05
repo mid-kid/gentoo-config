@@ -1,4 +1,5 @@
-post_src_configure() {
+declare -F post_src_configure > /dev/null || post_src_configure() { env-post_src_configure; }
+env-post_src_configure() {
 	if use lto && tc-is-clang; then
 		# https://bugs.gentoo.org/956021
 		elog '/etc/portage/env: Make sure default-linker is clang for LTO'

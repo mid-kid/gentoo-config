@@ -1,6 +1,7 @@
 LSMOD="${LSMOD:-/etc/kernel/modprobed_db/modprobed_$(ver_cut 1-2).db}"
 
-post_src_configure() {
+declare -F post_src_configure > /dev/null || post_src_configure() { env-post_src_configure; }
+env-post_src_configure() {
 	# Run localmodconfig to avoid building *all* the drivers
 	test -n "$NOLOCALMODCONFIG" && return
 	test -f "$LSMOD" || die "/etc/portage/env: LSMOD file not found: $LSMOD"

@@ -1,3 +1,4 @@
+declare -F post_pkg_preinst > /dev/null || post_pkg_preinst() { env-post_pkg_preinst; }
 env-post_pkg_preinst() {
 	# See also: /etc/portage/package.use/lto
 	elog '/etc/portage/env: Patching config due to lack of USE flags'
