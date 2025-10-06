@@ -30,9 +30,9 @@
 bashrc_symlink_docdir() {
 	local dest="$PN"
 	test "$SLOT" = 0 || dest="$PN:$SLOT"
-	test -e "$ED/usr/share/doc/$P" -a ! -e "$ED/usr/share/doc/$dest" || return
+	test -e "$ED/usr/share/doc/$PF" -a ! -e "$ED/usr/share/doc/$dest" || return
 	einfo '/etc/portage/bashrc: Symlinking version-agnostic docdir'
-	dosym "$P" "/usr/share/doc/$dest"
+	dosym "$PF" "/usr/share/doc/$dest"
 }
 
 post_pkg_preinst() {
