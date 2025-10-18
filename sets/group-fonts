@@ -151,6 +151,7 @@ media-fonts/dejavu
 media-fonts/freefont
 media-fonts/liberation-fonts
 media-fonts/noto
+media-fonts/noto-cjk
 media-fonts/noto-emoji
 
 ### Custom additions:

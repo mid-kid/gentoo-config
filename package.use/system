@@ -3,7 +3,6 @@ sys-fs/eudev rule-generator  # Generate 70-persistent-net.rules
 app-admin/sysklogd logrotate  # Install logrotate files
 app-admin/sudo offensive  # Scream at me mommy
 media-video/ffmpeg openssl vpx opus x264 x265  # Common formats
-media-fonts/noto cjk  # Big chinese fonts
 x11-base/xorg-server xvfb xephyr  # Nested X servers
 net-misc/dhcpcd privsep  # Run dhcpcd under its own user
 net-dns/dnsmasq dnssec  # Enable DNSSEC support
