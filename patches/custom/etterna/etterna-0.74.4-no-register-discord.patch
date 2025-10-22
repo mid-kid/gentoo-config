@@ -1,0 +1,15 @@
+Disable discord rich presence registration
+
+This clobbers my mimeapps.list for no reason
+
+--- etterna-0.74.4.orig/src/Etterna/Singletons/GameState.cpp
++++ etterna-0.74.4/src/Etterna/Singletons/GameState.cpp
+@@ -1271,7 +1271,7 @@
+ {
+ 	DiscordEventHandlers handlers;
+ 	memset(&handlers, 0, sizeof(handlers));
+-	Discord_Initialize("378543094531883009", &handlers, 1, nullptr);
++	Discord_Initialize("378543094531883009", &handlers, 0, nullptr);
+ }
+ 
+ void
