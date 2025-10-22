@@ -18,3 +18,4 @@ games-fps/xonotic -X sdl  # SDL is the expected frontend
 sys-fs/squashfs-tools lzma  # Support XZ compression
 app-containers/waydroid-images -system-vanilla system-gapps  # I mainly use waydroid to test proprietary garbage...
 media-libs/libv4l qt6  # Install GUIs for testing
+media-sound/tenacity ffmpeg  # Allow importing arbitrary sound formats
