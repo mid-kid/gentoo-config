@@ -1,0 +1,586 @@
+Implement RGB subpixel rendering in kitty
+
+Based on the PR by nightuser: https://github.com/kovidgoyal/kitty/pull/1604
+
+Changes since the PR:
+- Split FT_Load_Glyph and FT_Render_Glyph, in order to use the exact same
+  hinting style for both RGB and monochrome renders.
+- Improved is_pixel_visible, to properly read the bitmap, although I haven't
+  encountered a single time it's called.
+
+This patch enables the subpixel rendering option by default, avoiding having to
+add it to your personal configuration (making it incompatible with upstream).
+In a final version of this patch, it should either be disabled by default, or
+inferred from your freetype configuration.
+
+--- kitty-0.43.1.orig/kitty/cell_defines.glsl
++++ kitty-0.43.1/kitty/cell_defines.glsl
+@@ -2,6 +2,7 @@
+ #define FG_OVERRIDE_THRESHOLD {FG_OVERRIDE_THRESHOLD}
+ #define FG_OVERRIDE_ALGO {FG_OVERRIDE_ALGO}
+ #define TEXT_NEW_GAMMA {TEXT_NEW_GAMMA}
++#define HAS_SUBPIXEL {SUBPIXEL}
+ 
+ #define DECORATION_SHIFT {DECORATION_SHIFT}
+ #define REVERSE_SHIFT {REVERSE_SHIFT}
+--- kitty-0.43.1.orig/kitty/cell_fragment.glsl
++++ kitty-0.43.1/kitty/cell_fragment.glsl
+@@ -20,6 +20,7 @@
+ in vec4 cursor_color_premult;
+ in vec3 decoration_fg;
+ in float colored_sprite;
++in float subpixel;
+ #endif
+ 
+ out vec4 output_color;
+@@ -62,7 +63,17 @@
+     // For colored sprites use the color from the sprite rather than the text foreground
+     // Return non-premultiplied foreground color
+     vec4 text_fg = texture(sprites, sprite_pos);
++#if HAS_SUBPIXEL
++    vec3 unblended_fg = mix(cell_foreground, text_fg.rgb, colored_sprite);
++    float alpha = text_fg.g; // Cairo uses green channel to convert FreeType's subpixel buffer to ARGB
++    float scale_coeff = mix(1, alpha, alpha > 0);
++    vec3 scaled_mask = text_fg.rgb / scale_coeff;
++    vec3 blended_fg = cell_foreground * scaled_mask;
++    float text_alpha = mix(text_fg.a, alpha, subpixel);
++    return vec4(mix(unblended_fg, blended_fg, subpixel), text_alpha);
++#else
+     return vec4(mix(cell_foreground, text_fg.rgb, colored_sprite), text_fg.a);
++#endif
+ }
+ 
+ vec4 calculate_premul_foreground_from_sprites(vec4 text_fg) {
+--- kitty-0.43.1.orig/kitty/cell_vertex.glsl
++++ kitty-0.43.1/kitty/cell_vertex.glsl
+@@ -57,14 +57,17 @@
+ out vec4 cursor_color_premult;
+ out vec3 decoration_fg;
+ out float colored_sprite;
++out float subpixel;
+ #endif
+ 
+ 
+ // Utility functions {{{
+ const uint BYTE_MASK = uint(0xFF);
+-const uint SPRITE_INDEX_MASK = uint(0x7fffffff);
++const uint SPRITE_INDEX_MASK = uint(0x3fffffff);
+ const uint SPRITE_COLORED_MASK = uint(0x80000000);
+ const uint SPRITE_COLORED_SHIFT = 31u;
++const uint SPRITE_SUBPIXEL_MASK = uint(0x40000000);
++const uint SPRITE_SUBPIXEL_SHIFT = 30u;
+ const uint BIT_MASK = 1u;
+ const uint DECORATION_MASK = uint({DECORATION_MASK});
+ 
+@@ -215,6 +218,7 @@
+ #ifndef ONLY_BACKGROUND
+     sprite_pos = to_sprite_pos(pos, sprite_idx[0] & SPRITE_INDEX_MASK);
+     colored_sprite = float((sprite_idx[0] & SPRITE_COLORED_MASK) >> SPRITE_COLORED_SHIFT);
++    subpixel = float((sprite_idx[0] & SPRITE_SUBPIXEL_MASK) >> SPRITE_SUBPIXEL_SHIFT);
+ #endif
+     // Cursor shape and colors
+     float has_main_cursor = is_cursor(column, row);
+--- kitty-0.43.1.orig/kitty/core_text.m
++++ kitty-0.43.1/kitty/core_text.m
+@@ -1046,7 +1046,7 @@
+ }
+ 
+ bool
+-render_glyphs_in_cells(PyObject *s, bool bold, bool italic, hb_glyph_info_t *info, hb_glyph_position_t *hb_positions, unsigned int num_glyphs, pixel *canvas, unsigned int cell_width, unsigned int cell_height, unsigned int num_cells, unsigned int baseline, bool *was_colored, FONTS_DATA_HANDLE fg, GlyphRenderInfo *ri) {
++render_glyphs_in_cells(PyObject *s, bool bold, bool italic, hb_glyph_info_t *info, hb_glyph_position_t *hb_positions, unsigned int num_glyphs, pixel *canvas, unsigned int cell_width, unsigned int cell_height, unsigned int num_cells, unsigned int baseline, bool *was_colored, bool *was_subpixel, FONTS_DATA_HANDLE fg, GlyphRenderInfo *ri) {
+     CTFace *self = (CTFace*)s;
+     ensure_render_space(128, 128, num_glyphs);
+     for (unsigned i=0; i < num_glyphs; i++) buffers.glyphs[i] = info[i].codepoint;
+--- kitty-0.43.1.orig/kitty/fontconfig.c
++++ kitty-0.43.1/kitty/fontconfig.c
+@@ -203,7 +203,7 @@
+     I(FC_SLANT, slant);
+     I(FC_HINT_STYLE, hint_style);
+     I(FC_INDEX, index);
+-    I(FC_RGBA, subpixel);
++    I(FC_RGBA, rgba);
+     I(FC_LCD_FILTER, lcdfilter);
+     B(FC_HINTING, hinting);
+     B(FC_SCALABLE, scalable);
+--- kitty-0.43.1.orig/kitty/fonts.c
++++ kitty-0.43.1/kitty/fonts.c
+@@ -949,8 +949,9 @@
+ 
+ static void
+ set_cell_sprite(GPUCell *cell, const SpritePosition *sp) {
+-    cell->sprite_idx = sp->idx & 0x7fffffff;
++    cell->sprite_idx = sp->idx & 0x3fffffff;
+     if (sp->colored) cell->sprite_idx |= 0x80000000;
++    if (sp->subpixel) cell->sprite_idx |= 0x40000000;
+ }
+ 
+ static Region
+@@ -1051,6 +1052,7 @@
+         sp[ligature_index] = sprite_position_for(fg, rf, global_glyph_render_scratch.glyphs, num_glyphs, ligature_index, num_cells);
+         if (sp[ligature_index] == NULL) failed;
+         sp[ligature_index]->colored = false;
++        sp[ligature_index]->subpixel = false;
+         if (!sp[ligature_index]->rendered) all_rendered = false;
+     }
+     if (all_rendered) {
+@@ -1092,7 +1094,7 @@
+             sp[i]->idx = current_send_sprite_to_gpu(fg, b, dm, scaled_metrics);
+             if (!sp[i]->idx) failed;
+             /*dump_sprite(b, unscaled_metrics.cell_width, unscaled_metrics.cell_height);*/
+-            sp[i]->rendered = true; sp[i]->colored = false;
++            sp[i]->rendered = true; sp[i]->colored = false; sp[i]->subpixel = false;
+         }
+         set_cell_sprite(gpu_cell + i, sp[i]);
+         /*printf("Sprite %u: pos: %u sz: (%u, %u)\n", i, sp[i]->idx, fg->fcm.cell_width, fg->fcm.cell_height); dump_sprite(b, fg->fcm.cell_width, fg->fcm.cell_height);*/
+@@ -1187,6 +1189,7 @@
+     text_in_cell(cpu_cells, tc, global_glyph_render_scratch.lc);
+     bool is_only_filled_boxes = false;
+     bool was_colored = has_emoji_presentation(cpu_cells, global_glyph_render_scratch.lc);
++    bool was_subpixel = false;
+     if (global_glyph_render_scratch.lc->chars[0] == 0x2588) {
+         glyph_index box_glyph_id = global_glyph_render_scratch.glyphs[0];
+         is_only_filled_boxes = true;
+@@ -1200,7 +1203,7 @@
+         ri.canvas_width = num_cells * unscaled_metrics.cell_width; ri.rendered_width = num_glyphs * scaled_metrics.cell_width;
+         /*dump_sprite(fg->canvas.buf, scaled_metrics.cell_width * num_scaled_cells, scaled_metrics.cell_height);*/
+     } else {
+-        render_glyphs_in_cells(font->face, font->bold, font->italic, info, positions, num_glyphs, fg->canvas.buf, scaled_metrics.cell_width, scaled_metrics.cell_height, num_scaled_cells, scaled_metrics.baseline, &was_colored, (FONTS_DATA_HANDLE)fg, &ri);
++        render_glyphs_in_cells(font->face, font->bold, font->italic, info, positions, num_glyphs, fg->canvas.buf, scaled_metrics.cell_width, scaled_metrics.cell_height, num_scaled_cells, scaled_metrics.baseline, &was_colored, &was_subpixel, (FONTS_DATA_HANDLE)fg, &ri);
+     }
+     apply_horizontal_alignment(fg->canvas.buf, rf, center_glyph, ri, scaled_metrics.cell_height, num_scaled_cells, num_glyphs, was_colored);
+     if (PyErr_Occurred()) PyErr_Print();
+@@ -1218,7 +1221,7 @@
+                     sp[i]->idx = current_send_sprite_to_gpu(fg, b, dm, scaled_metrics);
+                     if (!sp[i]->idx) failed;
+                 } else sp[i]->idx = sp[i-1]->idx;
+-                sp[i]->rendered = true; sp[i]->colored = was_colored;
++                sp[i]->rendered = true; sp[i]->colored = was_colored; sp[i]->subpixel = was_subpixel;
+             }
+             set_cell_sprite(gpu_cells + i, sp[i]);
+         }
+@@ -1234,7 +1237,7 @@
+                 sp[i]->idx = current_send_sprite_to_gpu(fg, b, dm, scaled_metrics);
+                 if (!sp[i]->idx) failed;
+                 /*dump_sprite(b, unscaled_metrics.cell_width, unscaled_metrics.cell_height);*/
+-                sp[i]->rendered = true; sp[i]->colored = was_colored;
++                sp[i]->rendered = true; sp[i]->colored = was_colored; sp[i]->subpixel = was_subpixel;
+             }
+             set_cell_sprite(gpu_cells + i, sp[i]);
+         }
+--- kitty-0.43.1.orig/kitty/fonts.h
++++ kitty-0.43.1/kitty/fonts.h
+@@ -45,7 +45,7 @@
+ hb_font_t* harfbuzz_font_for_face(PyObject*);
+ bool set_size_for_face(PyObject*, unsigned int, bool, FONTS_DATA_HANDLE);
+ FontCellMetrics cell_metrics(PyObject*);
+-bool render_glyphs_in_cells(PyObject *f, bool bold, bool italic, hb_glyph_info_t *info, hb_glyph_position_t *positions, unsigned int num_glyphs, pixel *canvas, unsigned int cell_width, unsigned int cell_height, unsigned int num_cells, unsigned int baseline, bool *was_colored, FONTS_DATA_HANDLE, GlyphRenderInfo*);
++bool render_glyphs_in_cells(PyObject *f, bool bold, bool italic, hb_glyph_info_t *info, hb_glyph_position_t *positions, unsigned int num_glyphs, pixel *canvas, unsigned int cell_width, unsigned int cell_height, unsigned int num_cells, unsigned int baseline, bool *was_colored, bool *was_subpixel, FONTS_DATA_HANDLE, GlyphRenderInfo*);
+ PyObject* create_fallback_face(PyObject *base_face, const ListOfChars *lc, bool bold, bool italic, bool emoji_presentation, FONTS_DATA_HANDLE fg);
+ PyObject* specialize_font_descriptor(PyObject *base_descriptor, double, double, double);
+ PyObject* face_from_path(const char *path, int index, FONTS_DATA_HANDLE);
+--- kitty-0.43.1.orig/kitty/freetype.c
++++ kitty-0.43.1/kitty/freetype.c
+@@ -46,6 +46,7 @@
+     FT_Face face, face_for_cairo;
+     FaceMetrics metrics;
+     int hinting, hintstyle;
++    int rgba;
+     bool is_scalable, has_color, is_variable, has_svg;
+     FT_F26Dot6 char_width, char_height;
+     double xdpi, ydpi;
+@@ -247,7 +248,7 @@
+ }
+ 
+ static bool
+-init_ft_face(Face *self, PyObject *path, int hinting, int hintstyle, long index, FONTS_DATA_HANDLE fg) {
++init_ft_face(Face *self, PyObject *path, int hinting, int hintstyle, int rgba, long index, FONTS_DATA_HANDLE fg) {
+     copy_face_metrics(self);
+     self->index = index;
+     self->is_scalable = FT_IS_SCALABLE(self->face);
+@@ -259,6 +260,7 @@
+     self->has_svg = false;
+ #endif
+     self->hinting = hinting; self->hintstyle = hintstyle;
++    self->rgba = rgba;
+     if (fg && !set_size_for_face((PyObject*)self, 0, false, fg)) return false;
+     self->harfbuzz_font = hb_ft_font_create(self->face, NULL);
+     if (self->harfbuzz_font == NULL) { PyErr_NoMemory(); return false; }
+@@ -309,17 +311,19 @@
+     long index = 0;
+     bool hinting = false;
+     long hint_style = 0;
++    long rgba = 0;
+     D(path, PyUnicode_AsUTF8, false);
+     D(index, PyLong_AsLong, true);
+     D(hinting, PyObject_IsTrue, true);
+     D(hint_style, PyLong_AsLong, true);
++    D(rgba, PyLong_AsLong, true);
+ #undef D
+     RAII_PyObject(retval, Face_Type.tp_alloc(&Face_Type, 0));
+     Face *self = (Face *)retval;
+     if (retval != NULL) {
+         int error;
+         if ((error = FT_New_Face(library, path, index, &(self->face)))) { self->face = NULL; return set_load_error(path, error); }
+-        if (!init_ft_face(self, PyDict_GetItemString(descriptor, "path"), hinting, hint_style, index, fg)) { Py_CLEAR(retval); return NULL; }
++        if (!init_ft_face(self, PyDict_GetItemString(descriptor, "path"), hinting, hint_style, rgba, index, fg)) { Py_CLEAR(retval); return NULL; }
+         PyObject *ns = PyDict_GetItemString(descriptor, "named_style");
+         if (ns) {
+             unsigned long index = PyLong_AsUnsignedLong(ns);
+@@ -381,7 +385,7 @@
+     if (error) { ans->face = NULL; return set_load_error(path, error); }
+     RAII_PyObject(pypath, PyUnicode_FromString(path));
+     if (!pypath) return NULL;
+-    if (!init_ft_face(ans, pypath, true, 3, index, fg)) { Py_CLEAR(ans); return NULL; }
++    if (!init_ft_face(ans, pypath, true, 3, 1, index, fg)) { Py_CLEAR(ans); return NULL; }
+     return (PyObject*)ans;
+ }
+ 
+@@ -538,6 +542,7 @@
+     size_t start_x, width, stride;
+     size_t rows;
+     FT_Pixel_Mode pixel_mode;
++    bool bgr;
+     bool needs_free;
+     unsigned int factor, right_edge;
+     int bitmap_left, bitmap_top;
+@@ -551,6 +556,37 @@
+     }
+ }
+ 
++static inline bool
++is_pixel_visible(ProcessedBitmap *ans, size_t x, size_t y) {
++    double color;
++    unsigned char *s;
++    switch (ans->pixel_mode) {
++        case FT_PIXEL_MODE_GRAY:
++            return ans->buf[x + y * ans->stride] > 200;
++        case FT_PIXEL_MODE_LCD:
++            s = ans->buf + 3 * x + y * ans->stride;
++#define C(red, green, blue) s[red]*0.3 + s[green]*0.59 + s[blue]*0.11
++            if (!ans->bgr)
++                color = C(0, 1, 2);
++            else
++                color = C(2, 1, 0);
++#undef C
++            break;
++        case FT_PIXEL_MODE_LCD_V:
++            s = ans->buf + x + 3 * y * ans->stride;
++#define C(red, green, blue) s[red * ans->stride]*0.3 + s[green * ans->stride]*0.59 + s[blue * ans->stride]*0.11
++            if (!ans->bgr)
++                color = C(0, 1, 2);
++            else
++                color = C(2, 1, 0);
++#undef C
++            break;
++        default:
++            return true;
++    }
++    return color > 0.5; // TODO: tweak this value
++}
++
+ static void
+ trim_borders(ProcessedBitmap *ans, size_t extra) {
+     bool column_has_text = false;
+@@ -558,7 +594,7 @@
+     // Trim empty columns from the right side of the bitmap
+     for (ssize_t x = ans->width - 1; !column_has_text && x > -1 && extra > 0; x--) {
+         for (size_t y = 0; y < ans->rows && !column_has_text; y++) {
+-            if (ans->buf[x + y * ans->stride] > 200) column_has_text = true;
++            if (is_pixel_visible(ans, x, y)) column_has_text = true;
+         }
+         if (!column_has_text) { ans->width--; extra--; }
+     }
+@@ -571,16 +607,19 @@
+ static void
+ populate_processed_bitmap(FT_GlyphSlotRec *slot, FT_Bitmap *bitmap, ProcessedBitmap *ans, bool copy_buf) {
+     ans->stride = bitmap->pitch < 0 ? -bitmap->pitch : bitmap->pitch;
+-    ans->rows = bitmap->rows;
+     if (copy_buf) {
+-        ans->buf = malloc(ans->rows * ans->stride);
++        ans->buf = malloc(bitmap->rows * ans->stride);
+         if (!ans->buf) fatal("Out of memory");
+         ans->needs_free = true;
+-        memcpy(ans->buf, bitmap->buffer, ans->rows * ans->stride);
++        memcpy(ans->buf, bitmap->buffer, bitmap->rows * ans->stride);
+     } else ans->buf = bitmap->buffer;
+-    ans->start_x = 0; ans->width = bitmap->width;
++    ans->start_x = 0; ans->width = bitmap->width; ans->rows = bitmap->rows;
+     ans->pixel_mode = bitmap->pixel_mode;
+     ans->bitmap_top = slot->bitmap_top; ans->bitmap_left = slot->bitmap_left;
++    if (ans->pixel_mode == FT_PIXEL_MODE_LCD)
++        ans->width /= 3;
++    else if (ans->pixel_mode == FT_PIXEL_MODE_LCD_V)
++        ans->rows /= 3;
+ }
+ 
+ bool
+@@ -601,7 +640,22 @@
+ 
+ static bool
+ render_bitmap(Face *self, int glyph_id, ProcessedBitmap *ans, unsigned int cell_width, unsigned int cell_height, unsigned int num_cells, bool bold, bool italic, bool rescale, FONTS_DATA_HANDLE fg) {
+-    if (!load_glyph(self, glyph_id, FT_LOAD_RENDER)) return false;
++    if (!load_glyph(self, glyph_id, FT_LOAD_DEFAULT)) return false;
++    int render = FT_RENDER_MODE_NORMAL;
++    if (OPT(subpixel_rendering)) {
++        switch (self->rgba) {
++            case FC_RGBA_RGB:
++            case FC_RGBA_BGR:
++                render = FT_RENDER_MODE_LCD;
++                break;
++            case FC_RGBA_VRGB:
++            case FC_RGBA_VBGR:
++                render = FT_RENDER_MODE_LCD_V;
++                break;
++        }
++    }
++    if (FT_Render_Glyph(self->face->glyph, render)) return false;
++
+     unsigned int max_width = cell_width * num_cells;
+ 
+     // Embedded bitmap glyph?
+@@ -917,6 +971,40 @@
+     }
+ }
+ 
++static inline void
++copy_lcd_bitmap(uint8_t *src, pixel* dest, Region *src_rect, Region *dest_rect, size_t src_stride, size_t dest_stride, bool bgr) {
++    for (size_t sr = src_rect->top, dr = dest_rect->top; sr < src_rect->bottom && dr < dest_rect->bottom; sr++, dr++) {
++        pixel *d = dest + dest_stride * dr;
++        uint8_t *s = src + src_stride * sr;
++        for(size_t sc = src_rect->left, dc = dest_rect->left; sc < src_rect->right && dc <dest_rect->right; sc++, dc++) {
++            uint8_t *rgb = s + 3 * sc;
++#define C(idx, shift) ( rgb[idx] << shift)
++            if (!bgr)
++              d[dc] = C(0, 24) | C(1, 16) | C(2, 8) | 0xff;
++            else
++              d[dc] = C(2, 24) | C(1, 16) | C(0, 8) | 0xff;
++#undef C
++        }
++    }
++}
++
++static inline void
++copy_lcd_v_bitmap(uint8_t *src, pixel* dest, Region *src_rect, Region *dest_rect, size_t src_stride, size_t dest_stride, bool bgr) {
++    for (size_t sr = src_rect->top, dr = dest_rect->top; sr < src_rect->bottom && dr < dest_rect->bottom; sr++, dr++) {
++        pixel *d = dest + dest_stride * dr;
++        uint8_t *s = src + 3 * src_stride * sr;
++        for(size_t sc = src_rect->left, dc = dest_rect->left; sc < src_rect->right && dc <dest_rect->right; sc++, dc++) {
++            uint8_t *rgb = s + sc;
++#define C(idx, shift) ( rgb[src_stride * idx] << shift)
++            if (!bgr)
++              d[dc] = C(0, 24) | C(1, 16) | C(2, 8) | 0xff;
++            else
++              d[dc] = C(2, 24) | C(1, 16) | C(0, 8) | 0xff;
++#undef C
++        }
++    }
++}
++
+ 
+ static const bool debug_placement = false;
+ 
+@@ -953,6 +1041,8 @@
+     switch (bm->pixel_mode) {
+         case FT_PIXEL_MODE_BGRA: copy_color_bitmap_bgra(bm->buf, cell, &src, &dest, bm->stride, cell_width); break;
+         case FT_PIXEL_MODE_MAX: copy_color_bitmap_argb(bm->buf, cell, &src, &dest, bm->stride, cell_width); break;
++        case FT_PIXEL_MODE_LCD: copy_lcd_bitmap(bm->buf, cell, &src, &dest, bm->stride, cell_width, bm->bgr); break;
++        case FT_PIXEL_MODE_LCD_V: copy_lcd_v_bitmap(bm->buf, cell, &src, &dest, bm->stride, cell_width, bm->bgr); break;
+         default: render_alpha_mask(bm->buf, cell, &src, &dest, bm->stride, cell_width, fg_rgb); break;
+     }
+ }
+@@ -960,7 +1050,7 @@
+ static const ProcessedBitmap EMPTY_PBM = {.factor = 1};
+ 
+ bool
+-render_glyphs_in_cells(PyObject *f, bool bold, bool italic, hb_glyph_info_t *info, hb_glyph_position_t *positions, unsigned int num_glyphs, pixel *canvas, unsigned int cell_width, unsigned int cell_height, unsigned int num_cells, unsigned int baseline, bool *was_colored, FONTS_DATA_HANDLE fg, GlyphRenderInfo *ri) {
++render_glyphs_in_cells(PyObject *f, bool bold, bool italic, hb_glyph_info_t *info, hb_glyph_position_t *positions, unsigned int num_glyphs, pixel *canvas, unsigned int cell_width, unsigned int cell_height, unsigned int num_cells, unsigned int baseline, bool *was_colored, bool *was_subpixel, FONTS_DATA_HANDLE fg, GlyphRenderInfo *ri) {
+     Face *self = (Face*)f;
+     bool is_emoji = *was_colored; *was_colored = is_emoji && self->has_color;
+     float x = 0.f, y = 0.f, x_offset = 0.f;
+@@ -969,6 +1059,7 @@
+     GlyphColorType colored;
+     for (unsigned int i = 0; i < num_glyphs; i++) {
+         bm = EMPTY_PBM;
++        bm.bgr = self->rgba == FC_RGBA_BGR || self->rgba == FC_RGBA_VBGR;
+         // dont load the space glyph since loading it fails for some fonts/sizes and it is anyway to be rendered as a blank
+         if (info[i].codepoint != self->space_glyph_id) {
+             if (*was_colored && (colored = glyph_color_type(self, info[i].codepoint)) != NOT_COLORED) {
+@@ -987,6 +1078,7 @@
+                 }
+             }
+         }
++        *was_subpixel = bm.pixel_mode == FT_PIXEL_MODE_LCD || bm.pixel_mode == FT_PIXEL_MODE_LCD_V;
+         x_offset = x + (float)positions[i].x_offset / 64.0f;
+         y = (float)positions[i].y_offset / 64.0f;
+         if (debug_placement) printf("%d: x=%f canvas: %u", i, x_offset, canvas_width);
+@@ -1209,10 +1301,24 @@
+         FT_UInt glyph_index = FT_Get_Char_Index(self->face, text[n]);
+         int error = FT_Load_Glyph(self->face, glyph_index, FT_LOAD_DEFAULT);
+         if (error) continue;
+-        error = FT_Render_Glyph(self->face->glyph, FT_RENDER_MODE_NORMAL);
++        int render = FT_RENDER_MODE_NORMAL;
++        if (OPT(subpixel_rendering)) {
++            switch (self->rgba) {
++                case FC_RGBA_RGB:
++                case FC_RGBA_BGR:
++                    render = FT_RENDER_MODE_LCD;
++                    break;
++                case FC_RGBA_VRGB:
++                case FC_RGBA_VBGR:
++                    render = FT_RENDER_MODE_LCD_V;
++                    break;
++            }
++        }
++        error = FT_Render_Glyph(self->face->glyph, render);
+         if (error) continue;
+         FT_Bitmap *bitmap = &self->face->glyph->bitmap;
+         pbm = EMPTY_PBM;
++        pbm.bgr = self->rgba == FC_RGBA_BGR || self->rgba == FC_RGBA_VBGR;
+         populate_processed_bitmap(self->face->glyph, bitmap, &pbm, false);
+         place_bitmap_in_canvas(canvas, &pbm, canvas_width, canvas_height, 0, 0, baseline, n, 0xffffff, pen_x, 0);
+         pen_x += self->face->glyph->advance.x >> 6;
+--- kitty-0.43.1.orig/kitty/glfw.c
++++ kitty-0.43.1/kitty/glfw.c
+@@ -1472,7 +1472,7 @@
+         }
+     }
+     if (is_first_window) {
+-        PyObject *ret = PyObject_CallNoArgs(load_programs);
++        PyObject *ret = PyObject_CallFunction(load_programs, "O", OPT(subpixel_rendering) ? Py_True : Py_False);
+         if (ret == NULL) return NULL;
+         Py_DECREF(ret);
+         get_platform_dependent_config_values(glfw_window);
+--- kitty-0.43.1.orig/kitty/glyph-cache.h
++++ kitty-0.43.1/kitty/glyph-cache.h
+@@ -13,7 +13,8 @@
+         sprite_index idx : sizeof(sprite_index) * 8;
+         bool rendered : 1;
+         bool colored : 1;
+-        uint32_t : 30;
++        bool subpixel : 1;
++        uint32_t : 29;
+     };
+     uint64_t val;
+ } SpritePosition;
+--- kitty-0.43.1.orig/kitty/main.py
++++ kitty-0.43.1/kitty/main.py
+@@ -87,9 +87,9 @@
+         log_error(f'Failed to set custom beam cursor with error: {e}')
+ 
+ 
+-def load_all_shaders() -> None:
++def load_all_shaders(subpixel_rendering: bool = False) -> None:
+     try:
+-        load_shader_programs()
++        load_shader_programs(subpixel_rendering)
+         load_borders_program()
+     except CompileError as err:
+         raise SystemExit(err)
+--- kitty-0.43.1.orig/kitty/options/definition.py
++++ kitty-0.43.1/kitty/options/definition.py
+@@ -294,6 +294,15 @@
+ described above instead of the :code:`%` mode of operation.
+ ''')
+ 
++opt('subpixel_rendering', 'yes',
++    option_type='to_bool', ctype='bool',
++    long_text='''
++Use subpixel rendering instead of grayscale in freetype. Impacts performance,
++but may look better on low DPI screens. Possible values are :code:`none`,
++:code:`lcd`, and :code:`lcd_v`.
++'''
++    )
++
+ egr()  # }}}
+ 
+ 
+--- kitty-0.43.1.orig/kitty/options/parse.py
++++ kitty-0.43.1/kitty/options/parse.py
+@@ -1291,6 +1291,9 @@
+ 
+     choices_for_strip_trailing_spaces = frozenset(('always', 'never', 'smart'))
+ 
++    def subpixel_rendering(self, val: str, ans: dict[str, typing.Any]) -> None:
++        ans['subpixel_rendering'] = to_bool(val)
++
+     def symbol_map(self, val: str, ans: dict[str, typing.Any]) -> None:
+         for k, v in symbol_map(val):
+             ans["symbol_map"][k] = v
+--- kitty-0.43.1.orig/kitty/options/to-c-generated.h
++++ kitty-0.43.1/kitty/options/to-c-generated.h
+@@ -123,6 +123,19 @@
+ }
+ 
+ static void
++convert_from_python_subpixel_rendering(PyObject *val, Options *opts) {
++    opts->subpixel_rendering = PyObject_IsTrue(val);
++}
++
++static void
++convert_from_opts_subpixel_rendering(PyObject *py_opts, Options *opts) {
++    PyObject *ret = PyObject_GetAttrString(py_opts, "subpixel_rendering");
++    if (ret == NULL) return;
++    convert_from_python_subpixel_rendering(ret, opts);
++    Py_DECREF(ret);
++}
++
++static void
+ convert_from_python_cursor_shape(PyObject *val, Options *opts) {
+     opts->cursor_shape = PyLong_AsLong(val);
+ }
+@@ -1377,6 +1390,8 @@
+     if (PyErr_Occurred()) return false;
+     convert_from_opts_text_composition_strategy(py_opts, opts);
+     if (PyErr_Occurred()) return false;
++    convert_from_opts_subpixel_rendering(py_opts, opts);
++    if (PyErr_Occurred()) return false;
+     convert_from_opts_cursor_shape(py_opts, opts);
+     if (PyErr_Occurred()) return false;
+     convert_from_opts_cursor_shape_unfocused(py_opts, opts);
+--- kitty-0.43.1.orig/kitty/options/types.py
++++ kitty-0.43.1/kitty/options/types.py
+@@ -440,6 +440,7 @@
+     'single_window_padding_width',
+     'startup_session',
+     'strip_trailing_spaces',
++    'subpixel_rendering',
+     'symbol_map',
+     'sync_to_monitor',
+     'tab_activity_symbol',
+@@ -627,6 +628,7 @@
+     single_window_padding_width: FloatEdges = FloatEdges(left=-1.0, top=-1.0, right=-1.0, bottom=-1.0)
+     startup_session: str | None = None
+     strip_trailing_spaces: choices_for_strip_trailing_spaces = 'never'
++    subpixel_rendering: bool = True
+     sync_to_monitor: bool = True
+     tab_activity_symbol: str = ''
+     tab_bar_align: choices_for_tab_bar_align = 'left'
+--- kitty-0.43.1.orig/kitty/shaders.py
++++ kitty-0.43.1/kitty/shaders.py
+@@ -158,7 +158,7 @@
+         if self.needs_recompile:
+             self(allow_recompile=True)
+ 
+-    def __call__(self, allow_recompile: bool = False) -> None:
++    def __call__(self, subpixel_rendering: bool = False, allow_recompile: bool = False) -> None:
+         opts = get_options()
+         self.text_old_gamma = opts.text_composition_strategy == 'legacy'
+ 
+@@ -196,6 +196,7 @@
+             r['FG_OVERRIDE_ALGO'] = '1' if self.text_fg_override_threshold.unit == '%' else '2'
+             r['FG_OVERRIDE_THRESHOLD'] = str(self.text_fg_override_threshold.scaled_value)
+             r['TEXT_NEW_GAMMA'] = '0' if self.text_old_gamma else '1'
++            r['SUBPIXEL'] = '1' if subpixel_rendering else '0'
+             return self.cell_program_replacer(src)
+         for prog, (only_fg, only_bg) in {
+                 CELL_PROGRAM: (0, 0), CELL_FG_PROGRAM: (1, 0), CELL_BG_PROGRAM: (0, 1),
+--- kitty-0.43.1.orig/kitty/state.h
++++ kitty-0.43.1/kitty/state.h
+@@ -66,6 +66,7 @@
+     bool focus_follows_mouse;
+     unsigned int hide_window_decorations;
+     bool macos_hide_from_tasks, macos_quit_when_last_window_closed, macos_window_resizable, macos_traditional_fullscreen;
++    bool subpixel_rendering;
+     unsigned int macos_option_as_alt;
+     float macos_thicken_font;
+     WindowTitleIn macos_show_window_title_in;
