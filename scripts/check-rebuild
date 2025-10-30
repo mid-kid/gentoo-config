@@ -13,4 +13,4 @@ if [ "$(wc -c "$dir/gone.txt" | cut -f1 -d\ )" -ge 1 ]; then
     cat "$dir/gone.txt"
 fi
 
-FEATURES=-news emerge --usepkg=n --root "$dir" -pe $(cat "$dir/list.txt")
+FEATURES=-news emerge --package-moves=n --usepkg=n --root "$dir" -pe $(cat "$dir/list.txt")

@@ -101,3 +101,5 @@
 >=media-libs/libpng-1.6.47 apng
 # required by custom/mkchromecast-0.3.8.1_p20250601::localrepo
 >=media-video/ffmpeg-7.1.1-r2 lame
+# required by app-text/xournalpp-1.2.5-r1::gentoo
+>=media-libs/portaudio-19.07.00-r2 cxx
