@@ -35,7 +35,36 @@ bashrc_symlink_docdir() {
 	dosym "$PF" "/usr/share/doc/$dest"
 }
 
+bashrc_update_docdir() {
+	test "$SLOT" != 0 || return
+	local link="$EROOT/usr/share/doc/$PN"
+	test -h "$link" -o ! -e "$link" || return
+	test -e "$EROOT/usr/share/doc/$PN:$SLOT" || return
+	einfo '/etc/portage/bashrc: Update no-slot docdir symlink'
+	test ! -h "$link" || rm "$link" || die
+	ln -s "$PN:$SLOT" "$EROOT/usr/share/doc/$PN" || die
+}
+
+bashrc_cleanup_docdir() {
+	test "$SLOT" != 0 || return
+	local link="$EROOT/usr/share/doc/$PN"
+	test ! -h "$link" -o -e "$link" || rm "$link" || die
+}
+
+# NOTE: If a version with a symlink is installed, then removed, the symlink disappears,
+# 	 	even if there's other valid versions that could supply the symlink.
+
 post_pkg_preinst() {
-	#bashrc_symlink_docdir
+	test -h "$EROOT/usr/share/doc/portage" && bashrc_symlink_docdir
 	declare -F env-post_pkg_preinst > /dev/null && env-post_pkg_preinst
+}
+
+post_pkg_postinst() {
+	test -h "$EROOT/usr/share/doc/portage" && bashrc_update_docdir
+	declare -F env-post_pkg_postinst > /dev/null && env-post_pkg_postinst
+}
+
+post_pkg_postrm() {
+	test -h "$EROOT/usr/share/doc/portage" && bashrc_cleanup_docdir
+	declare -F env-post_pkg_postrm > /dev/null && env-post_pkg_postrm
 }
