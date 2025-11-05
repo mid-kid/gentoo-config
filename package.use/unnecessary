@@ -132,3 +132,5 @@ dev-python/pyside6 -concurrent -network -qml -sql -xml
 net-misc/freerdp -ffmpeg
 kde-frameworks/kwallet minimal
 media-sound/tenacity -lv2 -midi -soundtouch -id3tag -lame -sbsms
+kde-frameworks/kimageformats -avif
+kde-frameworks/kwallet-runtime -keyring

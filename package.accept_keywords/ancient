@@ -11,8 +11,6 @@
 ~app-misc/vifm-0.14.2
 ~dev-cpp/expected-1.1.0
 ~dev-libs/qr-code-generator-1.8.0
-~dev-libs/nss-3.114  # www-client/firefox:esr
-~dev-libs/nspr-4.37  # www-client/firefox:esr
 ~media-video/pipewire-1.4.7  # www-client/firefox:esr
 ~media-libs/babl-0.1.114  # media-gfx/gimp-3
 ~media-libs/gegl-0.4.62  # media-gfx/gimp-3

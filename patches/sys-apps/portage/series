@@ -1,3 +1,4 @@
 portage-3.0.28-silence-depclean-msg.patch
-portage-3.0.63-store-package-sizes.patch
+portage-3.0.69.3-store-package-sizes.patch
 portage-3.0.65-silence-postworld-msg.patch
+portage-3.0.69.3-binpkg-optim.patch

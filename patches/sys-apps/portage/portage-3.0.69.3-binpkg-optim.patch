@@ -1,0 +1,65 @@
+--- portage-3.0.69.3.orig/bin/misc-functions.sh
++++ portage-3.0.69.3/bin/misc-functions.sh
+@@ -693,7 +693,11 @@
+ 
+ 	if [[ -n ${PORTAGE_IPC_DAEMON} ]] ; then
+ 		[[ ! -s ${SANDBOX_LOG} ]]
+-		"${PORTAGE_BIN_PATH}"/ebuild-ipc exit $?
++		# Signal the EbuildIpcDaemon to exit, without using ebuild-ipc.
++		# This is significantly faster, as it avoids python's startup time.
++		dd < "${PORTAGE_BUILDDIR}/.ipc/out" \
++			| printf '](V%s\nV%s\ne.' exit $? \
++			| dd > "${PORTAGE_BUILDDIR}/.ipc/in" 2> /dev/null
+ 	fi
+ fi
+ 
+--- portage-3.0.69.3.orig/bin/phase-functions.sh
++++ portage-3.0.69.3/bin/phase-functions.sh
+@@ -247,7 +247,7 @@
+ __ebuild_phase() {
+ 	local __EBEGIN_EEND_COUNT=0
+ 
+-	declare -F "$1" >/dev/null && __qa_call $1
++	declare -F "$1" >/dev/null && { ___EBUILD_UPDATE_ENV=1; __qa_call $1; }
+ 	if (( __EBEGIN_EEND_COUNT > 0 )); then
+ 		eqawarn "QA Notice: ebegin called without eend in $1"
+ 	fi
+@@ -1049,6 +1049,7 @@
+ 
+ 	__source_all_bashrcs
+ 
++	___EBUILD_UPDATE_ENV=0
+ 	case ${1} in
+ 	nofetch)
+ 		__ebuild_phase_with_hooks pkg_nofetch
+@@ -1065,7 +1066,7 @@
+ 			__ebuild_phase_with_hooks pkg_${1}
+ 			set +x
+ 		fi
+-		if [[ -n ${PORTAGE_UPDATE_ENV} ]] ; then
++		if [[ ${___EBUILD_UPDATE_ENV} = 1 && -n ${PORTAGE_UPDATE_ENV} ]] ; then
+ 			# Update environment.bz2 in case installation phases
+ 			# need to pass some variables to uninstallation phases.
+ 			# Use safe cwd, avoiding unsafe import for bug #469338.
+@@ -1161,7 +1162,7 @@
+ 	esac
+ 
+ 	# Save the env only for relevant phases.
+-	if [[ $1 != @(clean|help|info|nofetch) ]]; then
++	if [[ ${___EBUILD_UPDATE_ENV} = 1 && $1 != @(clean|help|info|nofetch) ]]; then
+ 		umask 002
+ 
+ 		# Use safe cwd, avoiding unsafe import for bug #469338.
+@@ -1177,7 +1178,10 @@
+ 	[[ -n ${PORTAGE_EBUILD_EXIT_FILE} ]] && : > "${PORTAGE_EBUILD_EXIT_FILE}"
+ 	if [[ -n ${PORTAGE_IPC_DAEMON} ]] ; then
+ 		[[ ! -s ${SANDBOX_LOG} ]]
+-
+-		"${PORTAGE_BIN_PATH}"/ebuild-ipc exit $?
++		# Signal the EbuildIpcDaemon to exit, without using ebuild-ipc
++		# This is significantly faster, as it avoids python's startup time
++		dd < "${PORTAGE_BUILDDIR}/.ipc/out" \
++			| printf '](V%s\nV%s\ne.' exit $? \
++			| dd > "${PORTAGE_BUILDDIR}/.ipc/in" 2> /dev/null
+ 	fi
+ }

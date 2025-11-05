@@ -8,3 +8,6 @@ app-i18n/fcitx-qt qt6
 app-i18n/fcitx-configtool qt6
 games-action/prismlauncher qt6
 games-emulation/mgba qt6
+net-p2p/syncthingtray qt6
+gui-libs/qtforkawesome qt6
+gui-libs/qtutilities qt6
