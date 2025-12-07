@@ -13,3 +13,6 @@ sys-libs/glibc multilib-bootstrap
 
 # Downloads a chromium binary...
 media-video/obs-studio browser
+
+# Deno is currently only available as binary
+net-misc/yt-dlp deno

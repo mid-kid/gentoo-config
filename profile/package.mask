@@ -22,6 +22,7 @@ sys-firmware/edk2-bin
 sys-firmware/seabios-bin
 sys-kernel/gentoo-kernel-bin
 www-client/firefox-bin
+dev-lang/deno-bin
 
 # Try to avoid rust
 >=media-gfx/libimagequant-4

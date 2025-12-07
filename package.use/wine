@@ -36,6 +36,7 @@ virtual/libelf ABI_X86: 32
 virtual/libiconv ABI_X86: 32
 virtual/libintl ABI_X86: 32
 virtual/libudev ABI_X86: 32
+virtual/zlib ABI_X86: 32
 x11-libs/libX11 ABI_X86: 32
 x11-libs/libXau ABI_X86: 32
 x11-libs/libXcomposite ABI_X86: 32

@@ -37,8 +37,6 @@
 >=media-gfx/imagemagick-7.1.0.13 tiff
 # required by kde-apps/kdenlive-22.08.3::gentoo
 >=media-video/ffmpeg-4.4.3 libass
-# required by dev-python/matplotlib-3.6.2::gentoo[-test]
->=dev-python/pillow-9.3.0-r1 webp
 # required by kde-apps/kdenlive-22.12.3-1:5/5::gentoo
 >=media-libs/mlt-7.12.0 frei0r ffmpeg sdl
 # required by sys-firmware/sigrok-firmware-fx2lafw-0.1.7-r1::gentoo
@@ -103,3 +101,5 @@
 >=media-video/ffmpeg-7.1.1-r2 lame
 # required by app-text/xournalpp-1.2.5-r1::gentoo
 >=media-libs/portaudio-19.07.00-r2 cxx
+# required by media-gfx/inkscape-1.4.2:0/0::gentoo
+>=dev-python/pillow-11.3.0 webp

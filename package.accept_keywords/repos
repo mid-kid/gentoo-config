@@ -15,3 +15,4 @@ games-engines/nxengine-evo::guru
 net-dialup/tio::guru
 media-sound/tenacity::guru
 dev-python/internetarchive::guru
+dev-python/pillow-heif::guru
