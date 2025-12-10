@@ -10,6 +10,3 @@
 
 # Try to avoid downgraded ffmpeg
 media-video/ffmpeg-compat
-
-# Bootstrapping the new version takes a while, don't have time right now
-dev-java/openjdk:25
