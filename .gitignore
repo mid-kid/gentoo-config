@@ -3,3 +3,4 @@
 /kernel/preinst.d/.keep_*
 /postsync.d/50-eix-postsync
 /savedconfig/
+/smart-live-rebuild.conf
