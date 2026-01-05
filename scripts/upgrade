@@ -19,6 +19,7 @@ pre_update() {
 emerge -pqnO sys-apps/baselayout
 
 # Upgrade portage
+smart-live-rebuild -q -f sys-apps/portage -- --ask=n
 pre_update \
 	sys-apps/sandbox \
 	sys-apps/portage

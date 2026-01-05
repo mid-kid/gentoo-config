@@ -9,6 +9,11 @@ dev-java/openjdk:17 baseflags  # 17.0.16_p8 (GCC 15.1.0)
 # https://bugs.gentoo.org/961026
 dev-java/openjdk:8 baseflags  # 8.462_p08 (GCC 15.1.0)
 
+# Compile: ld.lld: error: undefined symbol: rustc_driver_impl::main
+# https://bugs.gentoo.org/964380
+>=dev-lang/rust-1.90 clang baseflags  # 1.91.1 (Clang 21.1.8)
+# Moved from package.env/clang
+
 # Runtime: Constant hangs
 sci-electronics/pulseview baseflags  # 0.4.2-r1 (GCC 12.2.1_p20230121-r1)
 

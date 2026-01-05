@@ -9,3 +9,5 @@ FCFLAGS="${CFLAGS}"
 
 # profiles/default/linux/amd64/23.0/make.defaults:
 LDFLAGS="-Wl,-O1 -Wl,--as-needed -Wl,-z,pack-relative-relocs"
+
+RUSTFLAGS=""

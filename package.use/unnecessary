@@ -133,3 +133,5 @@ net-misc/freerdp -ffmpeg
 kde-frameworks/kwallet minimal
 media-sound/tenacity -lv2 -midi -soundtouch -id3tag -lame -sbsms
 kde-frameworks/kwallet-runtime -keyring
+media-libs/kquickimageeditor -opencv
+media-libs/libheif -kvazaar -de265

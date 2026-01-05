@@ -2,7 +2,6 @@
 sys-boot/plymouth-openrc-plugin
 x11-themes/kvantum
 media-video/obs-studio
-dev-util/github-cli
 net-misc/megatools
 games-action/teeworlds
 games-emulation/desmume

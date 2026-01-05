@@ -1,5 +1,3 @@
 # Unmasking specific versions when older ones are too old
-<media-gfx/gimp-3.1
 <sys-apps/openrc-0.66  # navi-desu is doing big things
-~media-libs/babl-0.1.114  # media-gfx/gimp-3
-~media-libs/gegl-0.4.62  # media-gfx/gimp-3
+~dev-util/github-cli-2.81.0
