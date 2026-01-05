@@ -4,4 +4,8 @@ env-post_pkg_preinst() {
 		elog '/etc/portage/env: Creating grub-update symlink'
 		dosym ../lib/kernel/postinst.d/91-grub-mkconfig.install /usr/sbin/grub-update
 	fi
+	elog '/etc/portage/env: Linking /etc/kernel to /etc/portage/kernel'
+	dodir /etc/portage
+	mv -T "$ED/etc/kernel" "$ED/etc/portage/kernel" || die
+	dosym portage/kernel /etc/kernel
 }
