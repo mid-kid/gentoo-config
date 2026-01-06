@@ -28,25 +28,28 @@
 }
 
 bashrc_symlink_docdir() {
+	local slot="${SLOT%%/*}"
 	local dest="$PN"
-	test "$SLOT" = 0 || dest="$PN:$SLOT"
+	test "$slot" = 0 || dest="$PN:$slot"
 	test -e "$ED/usr/share/doc/$PF" -a ! -e "$ED/usr/share/doc/$dest" || return
 	einfo '/etc/portage/bashrc: Symlinking version-agnostic docdir'
 	dosym "$PF" "/usr/share/doc/$dest"
 }
 
 bashrc_update_docdir() {
-	test "$SLOT" != 0 || return
+	local slot="${SLOT%%/*}"
+	test "$slot" != 0 || return
 	local link="$EROOT/usr/share/doc/$PN"
 	test -h "$link" -o ! -e "$link" || return
-	test -e "$EROOT/usr/share/doc/$PN:$SLOT" || return
+	test -e "$EROOT/usr/share/doc/$PN:$slot" || return
 	einfo '/etc/portage/bashrc: Update no-slot docdir symlink'
 	test ! -h "$link" || rm "$link" || die
-	ln -s "$PN:$SLOT" "$EROOT/usr/share/doc/$PN" || die
+	ln -s "$PN:$slot" "$EROOT/usr/share/doc/$PN" || die
 }
 
 bashrc_cleanup_docdir() {
-	test "$SLOT" != 0 || return
+	local slot="${SLOT%%/*}"
+	test "$slot" != 0 || return
 	local link="$EROOT/usr/share/doc/$PN"
 	test ! -h "$link" -o -e "$link" || rm "$link" || die
 }
