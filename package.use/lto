@@ -12,9 +12,11 @@ llvm-runtimes/clang-runtime default-lld
 # Changes equivalent to: -ssp -default-stack-clash-protection -default-znow
 
 # -pgo: Super fucking slow, not worth it...
+## 2026 update: It turned out to be worth it, unfortunately
+##              https://fosstodon.org/@mid_kid/115849131012881212
 # clang: GCC is bigtime unsupported upstream, can't LTO across C++ and Rust with GCC.
-www-client/firefox -pgo clang
-mail-client/thunderbird -pgo clang
+www-client/firefox clang
+mail-client/thunderbird clang
 
 # Hidden compiler settings that affect output binaries are scattered all over the place...
 # Not including hardening-specific settings.
