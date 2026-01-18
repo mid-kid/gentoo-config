@@ -18,5 +18,7 @@ llvm-core/flang LLVM_TARGETS: -AArch64 -AMDGPU -ARM -AVR -BPF -Hexagon -Lanai -M
 llvm-core/lldb LLVM_TARGETS: -AArch64 -AMDGPU -ARM -AVR -BPF -Hexagon -Lanai -MSP430 -Mips -NVPTX -PowerPC -RISCV -Sparc -SystemZ -WebAssembly -XCore -VE -LoongArch -SPIRV
 
 # ABI compatibility be damned.
+# To find things that must be rebuilt, use:
+# find /usr/sbin /usr/bin /sbin /bin /usr/lib /usr/lib64 -type f | xargs -P0 ldd -r 2>/dev/null | grep qt_resourceFeatureZstd
 dev-qt/qtbase -zstd
 dev-qt/qttools -zstd
