@@ -13,8 +13,7 @@ dev-java/openjfx  # Downloads gradle-bin
 dev-lang/go-bootstrap
 dev-lang/rust-bin
 dev-python/pypy-exe-bin
-dev-python/pypy3_10-exe-bin
-dev-python/pypy3_9-exe-bin
+dev-python/pypy3-exe-bin
 net-im/element-desktop-bin
 net-im/signal-desktop-bin
 net-im/telegram-desktop-bin
