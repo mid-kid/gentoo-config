@@ -5,11 +5,5 @@ media-video/obs-studio pulseaudio pipewire  # Desktop recording
 x11-misc/polybar pulseaudio  # Better device hotplugging
 
 # ALSA problems when used with pulseaudio plugin
-www-client/firefox pulseaudio  # ALSA backend breaks websites
-mail-client/thunderbird pulseaudio  # ALSA backend breaks websites
-
-# Let's see if these things work better with pipewire's alsa plugin
-#dev-qt/qtmultimedia pulseaudio  # Specifically, games-emulation/mgba
-#games-emulation/dolphin pulseaudio
-#media-libs/libsdl2 pulseaudio  # Various emulators, SysDVR-Client, ...
-#media-libs/openal pulseaudio  # Literally no output with the alsa backend
+www-client/firefox pulseaudio  # ALSA backend breaks websites (https://bugs.gentoo.org/716840)
+mail-client/thunderbird pulseaudio  # ALSA backend breaks websites (https://bugs.gentoo.org/716840)

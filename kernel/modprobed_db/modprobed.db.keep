@@ -3,3 +3,5 @@ ftdi_sio  # FTDI USB serial chips
 hid_nintendo  # Joycons
 ntfs3  # The new NTFS driver
 usblp  # The epson thermal printer that I own
+crypto_user  # net-wireless/bluez
+hidp  # net-wireless/bluez

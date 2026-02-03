@@ -1,3 +1,3 @@
-x11-terms/rxvt-unicode 24-bit-color 256-color blink fading-colors iso14755 perl unicode3 wide-glyphs
+x11-terms/rxvt-unicode 24-bit-color 256-color blink fading-colors gdk-pixbuf iso14755 perl unicode3 wide-glyphs
 media-gfx/feh xinerama
 x11-misc/polybar i3wm network ipc

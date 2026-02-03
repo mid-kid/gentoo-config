@@ -1,0 +1,6 @@
+declare -F post_pkg_preinst > /dev/null || post_pkg_preinst() { env-post_pkg_preinst; }
+env-post_pkg_preinst() {
+	elog '/etc/portage/env: Set default js runtime to nodejs'
+	dodir /etc
+	echo '--js-runtimes node' >> "$ED/etc/yt-dlp.conf" || die
+}

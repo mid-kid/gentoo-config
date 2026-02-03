@@ -27,7 +27,7 @@ dev-embedded/openocd -ftdi -jlink -cmsis-dap
 sci-electronics/kicad-meta minimal
 xfce-base/libxfce4ui -gtk2
 dev-python/PyQt5 -multimedia -network -printsupport
-sys-apps/flashrom -ft2232-spi -usbblaster-spi
+sys-apps/flashrom -ft2232-spi -usbblaster-spi -jlink-spi
 media-gfx/pngquant -lcms
 sci-libs/fftw -fortran
 app-text/doxygen -gui
