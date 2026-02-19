@@ -21,6 +21,8 @@ games-fps/redeclipse
 games-misc/ponysay
 games-action/armagetronad
 dev-python/schema
+dev-build/autoconf-vanilla
+dev-build/automake-vanilla
 
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrok
