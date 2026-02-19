@@ -5,6 +5,6 @@ x11-libs/libdrm VIDEO_CARDS: radeon
 media-libs/mesa VIDEO_CARDS: radeonsi
 media-libs/mesa llvm
 llvm-core/llvm LLVM_TARGETS: AMDGPU
-sys-apps/fwupd nvme
+sys-apps/fwupd gnutls uefi
 sys-apps/memtest86+ -* boot efi64
 sys-kernel/installkernel grub
