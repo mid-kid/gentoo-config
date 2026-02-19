@@ -16,3 +16,5 @@ app-arch/7zip symlink  # Use this version instead of p7zip
 media-video/ffmpegthumbnailer gnome  # Actually install the thumbnailer service
 xfce-base/tumbler ffmpeg  # Install thumbnailer for video
 kde-apps/thumbnailers video  # Install thumbnailer for video
+sys-libs/zlib-ng compat  # Use instead of zlib
+sys-libs/minizip-ng compat  # Use instead of zlib
