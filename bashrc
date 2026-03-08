@@ -7,6 +7,9 @@
 
 		# Could not allocate compressed class space: 1073741824 bytes
 		dev-java/openjdk
+
+		# OpenBLAS error: Memory allocation still failed after 10 retries, giving up.
+		dev-python/pybind11
 	)
 
 	# Some packages require more memory during link, even at -flto=1

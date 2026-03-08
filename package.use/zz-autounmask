@@ -103,3 +103,5 @@
 >=media-libs/portaudio-19.07.00-r2 cxx
 # required by media-gfx/inkscape-1.4.2:0/0::gentoo
 >=dev-python/pillow-11.3.0 webp
+# required by kde-frameworks/kdnssd-6.22.0-r1::gentoo[-minimal]
+>=net-dns/avahi-0.9_rc2-r3 mdnsresponder-compat

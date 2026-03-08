@@ -1,0 +1,11 @@
+--- linux-6.18.orig/drivers/platform/x86/lenovo/thinkpad_acpi.c
++++ linux-6.18/drivers/platform/x86/lenovo/thinkpad_acpi.c
+@@ -9380,7 +9380,7 @@
+ static int tpacpi_led_micmute_set(struct led_classdev *led_cdev,
+ 				  enum led_brightness brightness)
+ {
+-	return tpacpi_led_set(LED_AUDIO_MICMUTE, brightness != LED_OFF);
++	return tpacpi_led_set(LED_AUDIO_MICMUTE, brightness == LED_OFF);
+ }
+ 
+ static struct led_classdev mute_led_cdev[TPACPI_LED_MAX] = {

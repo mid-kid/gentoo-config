@@ -1,0 +1,6 @@
+declare -F post_pkg_preinst > /dev/null || post_pkg_preinst() { env-post_pkg_preinst; }
+env-post_pkg_preinst() {
+	elog '/etc/portage/env: Allow resolving mDNS domains'
+	sed -e '/^hosts:/s/files dns/mdns_minimal [NOTFOUND=return] &/' \
+		-i "$ED/etc/nsswitch.conf" || die
+}

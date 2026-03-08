@@ -46,4 +46,4 @@ pre_update \
 
 # Upgrade entire rest of the system
 echo "Upgrading @world..."
-emerge -uDU --ask=n --binpkg-changed-deps=y "$@" @world
+emerge -uDU --ask=n --binpkg-changed-deps=y --backtrack=100 "$@" @world

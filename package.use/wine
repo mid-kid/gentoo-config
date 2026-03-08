@@ -23,6 +23,7 @@ llvm-core/llvm ABI_X86: 32
 media-libs/alsa-lib ABI_X86: 32
 media-libs/fontconfig ABI_X86: 32
 media-libs/freetype ABI_X86: 32
+media-libs/libdisplay-info ABI_X86: 32
 media-libs/libglvnd ABI_X86: 32
 media-libs/libjpeg-turbo ABI_X86: 32
 media-libs/libpng ABI_X86: 32

@@ -23,6 +23,7 @@ games-action/armagetronad
 dev-python/schema
 dev-build/autoconf-vanilla
 dev-build/automake-vanilla
+media-gfx/krita
 
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrok

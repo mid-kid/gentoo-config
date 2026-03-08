@@ -17,7 +17,6 @@ while test -n "$1"; do
     case "$1" in
         -f) force=true ;;
         -n) nobinpkg=true ;;
-        -b) backtrack=true ;;
     esac
     shift
 done
@@ -53,9 +52,8 @@ update() {
     rm -f "$dir/pending-tree"
     opts=
     $nobinpkg && opts="$opts --usepkg=n"
-    $backtrack && opts="$opts --backtrack=100"
-    { emerge -puDU --package-moves=n --binpkg-changed-deps=y --color=y $opts @world 2>&1 || return; } | tee "$dir/pending"
-    emerge -puDU --package-moves=n --binpkg-changed-deps=y --color=y --tree $opts @world 2>&1 | tee "$dir/pending-tree"
+    { emerge -puDU --package-moves=n --binpkg-changed-deps=y --backtrack=100 --color=y $opts @world 2>&1 || return; } | tee "$dir/pending"
+    emerge -puDU --package-moves=n --binpkg-changed-deps=y --backtrack=100 --color=y --tree $opts @world 2>&1 | tee "$dir/pending-tree"
 }
 
 # Force update

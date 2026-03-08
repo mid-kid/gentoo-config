@@ -2,3 +2,6 @@
 
 # app-misc/ranger
 www-client/w3m
+
+# net-misc/yt-dlp
+dev-lang/quickjs-ng
