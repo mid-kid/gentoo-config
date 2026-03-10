@@ -8,10 +8,11 @@ dev-build/cmake doc  # requires dev-python/sphinx
 llvm-core/llvm doc  # requires dev-python/sphinx and dev-python/recommonmark
 llvm-core/clang doc  # requires dev-python/sphinx and dev-python/recommonmark
 media-video/pipewire man  # requires app-text/doxygen
-#dev-util/ccache doc  # requires dev-ruby/asciidoctor (ruby)
+dev-util/ccache doc  # requires dev-ruby/asciidoctor (ruby)
+media-video/wireplumber doc  # requires dev-python/sphinx
+dev-util/libabigail doc  # requires dev-python/sphinx
+#sys-libs/libunwind doc  # requires app-text/texlive-core
 
 # USE=doc that include full documentation
-#app-doc/doxygen doc  # requires dev-texlive/texlive-latex
 x11-wm/i3 doc
 dev-db/sqlite doc
-#dev-libs/glib gtk-doc
