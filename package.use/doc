@@ -9,7 +9,7 @@ llvm-core/llvm doc  # requires dev-python/sphinx and dev-python/recommonmark
 llvm-core/clang doc  # requires dev-python/sphinx and dev-python/recommonmark
 media-video/pipewire man  # requires app-text/doxygen
 dev-util/ccache doc  # requires dev-ruby/asciidoctor (ruby)
-media-video/wireplumber doc  # requires dev-python/sphinx
+#media-video/wireplumber doc  # requires dev-python/breathe (https://bugs.gentoo.org/971074)
 dev-util/libabigail doc  # requires dev-python/sphinx
 #sys-libs/libunwind doc  # requires app-text/texlive-core
 
