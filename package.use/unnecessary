@@ -22,7 +22,6 @@ media-libs/gst-plugins-bad -gtk
 app-text/ghostscript-gpl -gtk
 sys-auth/polkit -gtk
 dev-python/matplotlib -gtk3 -cairo -wxwidgets
-net-print/cups-filters -pdf
 dev-embedded/openocd -ftdi -jlink -cmsis-dap
 sci-electronics/kicad-meta minimal
 xfce-base/libxfce4ui -gtk2
@@ -88,7 +87,7 @@ app-crypt/swtpm -gnutls
 media-gfx/gimp -udev
 media-plugins/gst-plugins-v4l2 -udev
 dev-python/pyside2 -xml -concurrent -printsupport -sql -testlib -x11extras
-media-gfx/blender -ffmpeg -openvdb -opensubdiv -oidn -embree -fluid -fftw -pdf -potrace -pugixml -sndfile -openpgl -nanovdb -gmp -bullet
+media-gfx/blender -ffmpeg -openvdb -opensubdiv -oidn -embree -fluid -fftw -potrace -pugixml -sndfile -openpgl -nanovdb -gmp -bullet
 gui-apps/foot -grapheme-clustering
 sys-fs/mtools -gui
 media-libs/libplacebo -xxhash
@@ -103,12 +102,10 @@ dev-java/openjdk -alsa -cups
 sys-apps/pcsc-tools -gui
 app-text/poppler -boost
 kde-frameworks/ktexteditor -editorconfig
-media-gfx/krita -raw -pdf
-media-gfx/graphviz -pdf
+media-gfx/krita -raw
 net-misc/chrony -readline
 media-libs/vips -highway
 media-libs/libsixel -gtk
-media-libs/gegl -pdf
 dev-vcs/git -webdav
 sys-boot/grub -themes -device-mapper
 app-arch/libarchive -e2fsprogs
@@ -120,8 +117,6 @@ dev-util/perf -gtk -libtracefs -libtraceevent
 media-libs/openimageio -gui
 sys-libs/libblockdev -cryptsetup
 x11-base/xwayland -libei
-media-libs/vips -pdf
-net-libs/webkit-gtk -pdf
 app-admin/testdisk -gui
 x11-wm/xpra -client -gtk3 -clipboard -crypt -cups -opengl -sound -trayicon -lz4
 kde-frameworks/kauth -policykit
