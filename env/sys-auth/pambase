@@ -1,6 +1,7 @@
-declare -F post_pkg_preinst > /dev/null || post_pkg_preinst() { env-post_pkg_preinst; }
-env-post_pkg_preinst() {
+declare -F post_src_prepare > /dev/null || post_src_prepare() { env-post_src_prepare; }
+env-post_src_prepare() {
 	# https://bugs.gentoo.org/938574
 	elog '/etc/portage/env: Allow PAM to set the system umask'
-	printf 'session\t\toptional\tpam_umask.so\n' >> "$ED/etc/pam.d/system-login" || die
+	sed -e '/^session\t\toptional\tpam_loginuid.so/asession\t\toptional\tpam_umask.so' \
+		-i templates/system-login.tpl || die
 }
