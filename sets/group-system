@@ -1,19 +1,16 @@
 # Alternative packages required to satisfy @system
 
-# Required to fetch repositories
-dev-vcs/git
+# Dependencies of sys-apps/portage
+app-arch/lbzip2  # PORTAGE_BZIP2_COMMAND
+dev-build/steve  # FEATURES=jobserver-token
+dev-util/debugedit  # FEATURES=installsources
+dev-vcs/git  # repos.conf
 
 # Satisfies virtual/editor
 app-editors/vim
 
 # Satisfies virtual/udev::without-systemd
 sys-fs/eudev
-
-# Dependency of sys-apps/portage when FEATURES=installsources is on
-dev-util/debugedit
-
-# Dependency of sys-apps/portage for the selected PORTAGE_BZIP2_COMMAND
-app-arch/lbzip2
 
 # Used to build llvm, which is required by mesa, rust, firefox, ...
 llvm-core/clang
