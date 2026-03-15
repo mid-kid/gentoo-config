@@ -1,0 +1,9 @@
+declare -F post_pkg_preinst > /dev/null || post_pkg_preinst() { env-post_pkg_preinst; }
+env-post_pkg_preinst() {
+	elog '/etc/portage/env: Make sure the cuse module is loaded'
+	cat >> "$ED/etc/init.d/steve" << 'EOF'
+start_pre() {
+	grep -qw cuse /proc/misc || modprobe -q cuse || eerror $? "Error loading cuse module"
+}
+EOF
+}
