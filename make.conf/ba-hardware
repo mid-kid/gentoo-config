@@ -1,8 +1,8 @@
-NPROC="4"
-LPROC="5"  # GNU Make's --load-average option
+__NPROC="4"
+__LPROC="5"  # GNU Make's --load-average option
 
-MARCH="znver1"
-MARCH_FLAGS="-march=$MARCH"  # resolve-march-native 6.0.1
+__MARCH="znver1"
+__MARCH_FLAGS="-march=$__MARCH"  # resolve-march-native 6.0.1
 CPU_FLAGS_X86="aes avx avx2 bmi1 bmi2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3"  # cpuid2cpuflags 17
 
 VIDEO_CARDS="amdgpu"

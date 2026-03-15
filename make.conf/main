@@ -9,31 +9,31 @@ EMERGE_DEFAULT_OPTS="$EMERGE_DEFAULT_OPTS --keep-going --with-bdeps=y --binpkg-r
 FEATURES="$FEATURES jobserver-token"
 
 # ebuild/eclass variables
-MAKEOPTS="-j$NPROC -l$LPROC"
-NINJAOPTS="-l$LPROC"  # If left empty, the -jN from MAKEOPTS would be passed
-MAKEFLAGS="-l$LPROC --jobserver-auth=fifo:/dev/steve"
+MAKEOPTS="-j$__NPROC -l$__LPROC"
+NINJAOPTS="-l$__LPROC"  # If left empty, the -jN from MAKEOPTS would be passed
+MAKEFLAGS="-l$__LPROC --jobserver-auth=fifo:/dev/steve"
 NINJA_STATUS="[%p %f/%t] "
 CMAKE_MAKEFILE_GENERATOR="ninja"
 EGIT_CLONE_TYPE="shallow"
 
 # https://github.com/gentoo-mirror/lto-overlay/blob/master/sys-config/ltoize/files/make.conf.lto.defines
-FLAGS_OPTIM_BASE="-O3 -w"
-FLAGS_OPTIM_LTO="-flto -fuse-linker-plugin"
-FLAGS_OPTIM_PARALLEL="-flto=$NPROC"  # --param=lto-max-streaming-parallelism=$NPROC" (deprecated, WPA stage now supports jobserver)
-FLAGS_OPTIM_MORE="-fgraphite-identity -floop-nest-optimize -fdevirtualize-at-ltrans -fipa-pta -fno-semantic-interposition"
-FLAGS_COMMON="$FLAGS_OPTIM_BASE $MARCH_FLAGS $FLAGS_OPTIM_LTO $FLAGS_OPTIM_PARALLEL $FLAGS_OPTIM_MORE"
-RUSTFLAGS="-Copt-level=3 -Ctarget-cpu=$MARCH -Clinker-plugin-lto -Clinker=$CHOST-clang -Clink-arg=-fuse-ld=lld"
-CFLAGS="$CFLAGS $FLAGS_COMMON"
-CXXFLAGS="$CXXFLAGS $FLAGS_COMMON"
-FCFLAGS="$FCFLAGS $FLAGS_COMMON"
-FFLAGS="$FFLAGS $FLAGS_COMMON"
+__FLAGS_OPTIM_BASE="-O3 -w"
+__FLAGS_OPTIM_LTO="-flto -fuse-linker-plugin"
+__FLAGS_OPTIM_PARALLEL="-flto=$__NPROC"  # --param=lto-max-streaming-parallelism=$__NPROC" (deprecated, WPA stage now supports jobserver)
+__FLAGS_OPTIM_MORE="-fgraphite-identity -floop-nest-optimize -fdevirtualize-at-ltrans -fipa-pta -fno-semantic-interposition"
+__FLAGS_COMMON="$__FLAGS_OPTIM_BASE $__MARCH_FLAGS $__FLAGS_OPTIM_LTO $__FLAGS_OPTIM_PARALLEL $__FLAGS_OPTIM_MORE"
+RUSTFLAGS="-Copt-level=3 -Ctarget-cpu=$__MARCH -Clinker-plugin-lto -Clinker=$CHOST-clang -Clink-arg=-fuse-ld=lld"
+CFLAGS="$CFLAGS $__FLAGS_COMMON"
+CXXFLAGS="$CXXFLAGS $__FLAGS_COMMON"
+FCFLAGS="$FCFLAGS $__FLAGS_COMMON"
+FFLAGS="$FFLAGS $__FLAGS_COMMON"
 
-USE_LANGS="-cxx -perl -ruby -python -vala"
-USE_CODECS="-a52 -aac -cdda -dts -mad -mp3 -mpeg -xvid -cdr -dvdr -dvd"
-USE_FORMATS="-mng -tiff -webp -avif -zstd -svg -pdf"
-USE_SOFTWARE="-networkmanager -systemd -gpm -cryptsetup -bluetooth -spell -sdl -btrfs -ldap -pulseaudio -pipewire -screencast"
-USE_GUI="-wayland -qt5 -qt6 -gtk4" # -gui -gtk -gtk2 -gtk3 -wxwidgets  # Common frontends
-USE="$USE_LANGS $USE_CODECS $USE_FORMATS $USE_SOFTWARE $USE_GUI -branding -telemetry -cet dist-kernel modules-compress lto pgo vaapi io-uring v4l fontconfig vim-syntax zsh-completion"
+__USE_LANGS="-cxx -perl -ruby -python -vala"
+__USE_CODECS="-a52 -aac -cdda -dts -mad -mp3 -mpeg -xvid -cdr -dvdr -dvd"
+__USE_FORMATS="-mng -tiff -webp -avif -zstd -svg -pdf"
+__USE_SOFTWARE="-networkmanager -systemd -gpm -cryptsetup -bluetooth -spell -sdl -btrfs -ldap -pulseaudio -pipewire -screencast"
+__USE_GUI="-wayland -qt5 -qt6 -gtk4" # -gui -gtk -gtk2 -gtk3 -wxwidgets  # Common frontends
+USE="$__USE_LANGS $__USE_CODECS $__USE_FORMATS $__USE_SOFTWARE $__USE_GUI -branding -telemetry -cet dist-kernel modules-compress lto pgo vaapi io-uring v4l fontconfig vim-syntax zsh-completion"
 BOOTSTRAP_USE="$BOOTSTRAP_USE -zstd -cet"
 INSTALL_MASK="/etc/apparmor.d /etc/systemd /lib/systemd /usr/lib/systemd"
 ACCEPT_LICENSE="-* @FREE"
