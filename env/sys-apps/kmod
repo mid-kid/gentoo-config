@@ -1,0 +1,57 @@
+declare -F post_pkg_preinst > /dev/null || post_pkg_preinst() { env-post_pkg_preinst; }
+env-post_pkg_preinst() {
+	# tmpfiles has always been a curious case.
+	# Apparently gentoo's supported them since at least 2013, if not earlier.
+	# Yet other non-systemd distributions seem to have mostly ignored it.
+	# Still, creating these device nodes is important for things that expect
+	# the relevant kernel modules to automatically load, to function correctly.
+	# Since my setup is not using tmpfiles, I decided to look into what others are doing.
+	#
+	# Survey results of other non-systemd distributions in march 2026:
+	# - Slackware has a minimal tmpfiles parser in /etc/rc.d/rc.udev, creating
+	#   the nodes on boot. User/group permissions are applied by udev.
+	#   https://mirror.koddos.net/slackware/slackware64-current/source/a/eudev/config/rc.d/rc.udev.new
+	# - Devuan/Debian also implement a minimal tmpfiles parser in
+	#   /etc/init.d/{e,}udev, creating the nodes on boot.
+	#   https://salsa.debian.org/debian/sysvinit/-/blob/master/debian/src/initscripts/etc/init.d/udev
+	#   https://git.devuan.org/devuan/eudev/src/branch/suites/unstable/debian/eudev.init
+	# - Void Linux just modprobes all the modules on boot, avoiding further shenanigans.
+	# 	https://github.com/void-linux/void-runit/blob/master/core-services/01-static-devnodes.sh
+	# - Alpine is oblivious, installing a fresh KDE plasma revealed that the
+	#   nodes aren't created. The FUSE module was loaded on boot as part of the
+	#   kio-fuse package.
+	#   https://gitlab.alpinelinux.org/alpine/aports/-/blob/master/community/kio-fuse/modules-load.conf
+	# - CRUX seems to also not care. I haven't installed it to verify.
+	# - Gentoo and Artix both use systemd-tmpfiles by default.
+	# I'm not aware of other non-systemd distributions at the time of writing
+
+	einfo '/etc/portage/env: Actually create the static nodes'
+	cat >> "$ED/etc/init.d/kmod-static-nodes" << 'EOF' || die
+
+# https://git.devuan.org/devuan/eudev/src/branch/suites/unstable/debian/eudev.init
+make_static_nodes() {
+  [ -e /lib/modules/$(uname -r)/modules.devname ] || return 0
+  [ -x /bin/kmod ] || return 0
+
+  /bin/kmod static-nodes --format=tmpfiles --output=/proc/self/fd/1 | \
+  while read type name mode uid gid age arg; do
+    [ -e $name ] && continue
+    case "$type" in
+      c|b|c!|b!) mknod -m $mode $name $type $(echo $arg | sed 's/:/ /') ;;
+      d|d!) mkdir $name ;;
+      *) echo "unparseable line ($type $name $mode $uid $gid $age $arg)" >&2 ;;
+    esac
+
+    if [ -x /sbin/restorecon ]; then
+      /sbin/restorecon $name
+    fi
+  done
+}
+
+start() {
+	ebegin "Creating required static device nodes for the current kernel"
+	make_static_nodes
+	eend $?
+}
+EOF
+}
