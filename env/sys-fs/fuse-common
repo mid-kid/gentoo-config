@@ -1,0 +1,10 @@
+declare -F post_pkg_preinst > /dev/null || post_pkg_preinst() { env-post_pkg_preinst; }
+env-post_pkg_preinst() {
+	# Allow the default /dev/cuse permissions to apply despite not using tmpfiles
+	# https://codeberg.org/gentoo/gentoo/pulls/4
+
+	# https://bugs.gentoo.org/971207
+	einfo '/etc/portage/env: Fix /dev/cuse permissions'
+	sed -e 's/^KERNEL=="cuse",.*$/&, OPTIONS+="static_node=cuse"/' \
+		-i "$ED/$(get_udevdir)/rules.d/99-cuse.rules"
+}
