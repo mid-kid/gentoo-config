@@ -3,12 +3,15 @@ DISTDIR="/usr/portage/distfiles"
 PKGDIR="/usr/portage/packages"
 
 LC_MESSAGES=C
-EMERGE_DEFAULT_OPTS="$EMERGE_DEFAULT_OPTS --keep-going --with-bdeps=y --binpkg-respect-use=n --binpkg-changed-deps=n"
-FEATURES="$FEATURES pkgdir-index-trusted"
 BINPKG_COMPRESS="bzip2"
 PORTAGE_BZIP2_COMMAND="lbzip2"
+EMERGE_DEFAULT_OPTS="$EMERGE_DEFAULT_OPTS --keep-going --with-bdeps=y --binpkg-respect-use=n --binpkg-changed-deps=n"
+FEATURES="$FEATURES jobserver-token"
 
-# eclass variables
+# ebuild/eclass variables
+MAKEOPTS="-j$NPROC -l$LPROC"
+NINJAOPTS="-l$LPROC"  # If left empty, the -jN from MAKEOPTS would be passed
+MAKEFLAGS="-l$LPROC --jobserver-auth=fifo:/dev/steve"
 NINJA_STATUS="[%p %f/%t] "
 CMAKE_MAKEFILE_GENERATOR="ninja"
 EGIT_CLONE_TYPE="shallow"
