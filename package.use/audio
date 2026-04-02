@@ -4,6 +4,10 @@ net-wireless/blueman pulseaudio  # Bluetooth audio
 media-video/obs-studio pulseaudio pipewire  # Desktop recording
 x11-misc/polybar pulseaudio  # Better device hotplugging
 
+# Terrible crackling with the ALSA backend
+media-sound/qsynth pulseaudio
+media-sound/fluidsynth pulseaudio
+
 # ALSA problems when used with pulseaudio plugin
 www-client/firefox pulseaudio  # ALSA backend breaks websites (https://bugs.gentoo.org/716840)
 mail-client/thunderbird pulseaudio  # ALSA backend breaks websites (https://bugs.gentoo.org/716840)
