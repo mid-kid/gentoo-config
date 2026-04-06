@@ -18,3 +18,4 @@ xfce-base/tumbler ffmpeg pdf  # Install additional thumbnailers
 kde-apps/thumbnailers video pdf  # Install additional thumbnailers
 sys-libs/zlib-ng compat  # Use instead of zlib
 sys-libs/minizip-ng compat  # Use instead of zlib
+sys-power/tlp -rdw  # I'm not using networkmanager
