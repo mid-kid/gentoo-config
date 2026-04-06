@@ -3,5 +3,6 @@
 ~x11-terms/kitty-0.46.2  # Fix in icat, smooth scrolling
 ~x11-terms/kitty-shell-integration-0.46.2
 ~x11-terms/kitty-terminfo-0.46.2
-~dev-lang/go-1.26.1
+~dev-lang/go-1.26.1  # needed for kitty
 ~sys-power/tlp-1.9.1  # Way new system
+~dev-python/myst-parser-5.0.0  # unblock new sphinx and speed up dep resolution
