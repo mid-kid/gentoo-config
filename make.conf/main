@@ -16,7 +16,7 @@ NINJA_STATUS="[%p %f/%t] "
 CMAKE_MAKEFILE_GENERATOR="ninja"
 EGIT_CLONE_TYPE="shallow"
 
-# https://github.com/gentoo-mirror/lto-overlay/blob/master/sys-config/ltoize/files/make.conf.lto.defines
+# https://github.com/InBetweenNames/gentooLTO/blob/master/sys-config/ltoize/files/make.conf.lto.defines
 __FLAGS_OPTIM_BASE="-O3 -w"
 __FLAGS_OPTIM_LTO="-flto -fuse-linker-plugin"
 __FLAGS_OPTIM_PARALLEL="-flto=$__NPROC"  # --param=lto-max-streaming-parallelism=$__NPROC" (deprecated, WPA stage now supports jobserver)
