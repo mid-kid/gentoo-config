@@ -1,0 +1,54 @@
+It's annoying to have many *rc files littered across my ~/.config directory
+Practically no other app stores multiple files without making a subdirectory,
+yet multiple KDE apps do.
+
+This patch uses ~/.config/kconfig for all the KDE configuration. You may have
+to manually mkdir it.
+
+--- kconfig-6.23.0.orig/src/core/kconfig.cpp
++++ kconfig-6.23.0/src/core/kconfig.cpp
+@@ -663,14 +663,21 @@
+ {
+     fileName = name;
+ 
++#define PREFIX_RESOURCE(x) ( \
++    x == QStandardPaths::GenericConfigLocation || \
++    x == QStandardPaths::GenericStateLocation)
++
+     QString file;
+     if (name.isEmpty()) {
+         if (wantDefaults()) { // accessing default app-specific config "appnamerc"
+             fileName = KConfig::mainConfigName();
++            if (PREFIX_RESOURCE(resourceType)) {
++                fileName.prepend(QLatin1String("kconfig/"));
++            }
+             file = QStandardPaths::writableLocation(resourceType) + QLatin1Char('/') + fileName;
+         } else if (wantGlobals()) { // accessing "kdeglobals" by specifying no filename and NoCascade - XXX used anywhere?
+             resourceType = QStandardPaths::GenericConfigLocation;
+-            fileName = QStringLiteral("kdeglobals");
++            fileName = QStringLiteral("kconfig/kdeglobals");
+             file = *sGlobalFileName;
+         } else {
+             // anonymous config
+@@ -678,12 +685,18 @@
+             return;
+         }
+     } else if (QDir::isAbsolutePath(fileName)) {
+-        fileName = QFileInfo(fileName).canonicalFilePath();
+-        if (fileName.isEmpty()) { // file doesn't exist (yet)
+-            fileName = name;
++        if (PREFIX_RESOURCE(resourceType)) {
++            QString prefix = QStandardPaths::writableLocation(resourceType) + QLatin1Char('/');
++            QString replace = prefix + QLatin1String("kconfig/");
++            if (fileName.startsWith(prefix)) {
++                fileName.replace(0, prefix.size(), replace);
++            }
+         }
+         file = fileName;
+     } else {
++        if (PREFIX_RESOURCE(resourceType)) {
++            fileName.prepend(QLatin1String("kconfig/"));
++        }
+         file = QStandardPaths::writableLocation(resourceType) + QLatin1Char('/') + fileName;
+     }
+ 
