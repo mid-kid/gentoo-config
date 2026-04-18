@@ -1,0 +1,47 @@
+Normalize usage of $TERMINAL variable
+
+Uses the $TERMINAL variable as a fallback from kde-specific configuration,
+instead of hardcoding konsole and xterm. Like i3-sensible-terminal, it already
+uses the "-e" option to execute any files with this given terminal.
+
+--- kio-6.23.0.orig/src/core/desktopexecparser.cpp
++++ kio-6.23.0/src/core/desktopexecparser.cpp
+@@ -498,13 +498,20 @@
+         KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("General"));
+         QString terminal = cg.readPathEntry("TerminalApplication", QStringLiteral("konsole"));
+ 
+-        const bool isKonsole = (terminal == QLatin1String("konsole"));
++        bool isKonsole = (terminal == QLatin1String("konsole"));
+         QStringList terminalParts = KShell::splitArgs(terminal);
+         QString terminalPath;
+         if (!terminalParts.isEmpty()) {
+             terminalPath = QStandardPaths::findExecutable(terminalParts.at(0));
+         }
+ 
++        const QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
++        if (terminalPath.isEmpty() && env.contains(QStringLiteral("TERMINAL"))) {
++            QString terminal = env.value(QStringLiteral("TERMINAL"));
++            isKonsole = (terminal == QLatin1String("konsole"));
++            terminalPath = QStandardPaths::findExecutable(terminal);
++        }
++
+         if (terminalPath.isEmpty()) {
+             d->m_errorString = i18n("Terminal %1 not found while trying to run %2", terminal, d->service.entryPath());
+             qCWarning(KIO_CORE) << "Terminal" << terminal << "not found, service" << d->service.name();
+--- kio-6.23.0.orig/src/gui/kterminallauncherjob.cpp
++++ kio-6.23.0/src/gui/kterminallauncherjob.cpp
+@@ -93,11 +93,14 @@
+     const KConfigGroup confGroup(KSharedConfig::openConfig(), QStringLiteral("General"));
+     const QString terminalExec = confGroup.readEntry("TerminalApplication");
+     const QString terminalService = confGroup.readEntry("TerminalService");
++    const QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+     KServicePtr service;
+     if (!terminalService.isEmpty()) {
+         service = KService::serviceByStorageId(terminalService);
+     } else if (!terminalExec.isEmpty()) {
+         service = new KService(QStringLiteral("terminal"), terminalExec, QStringLiteral("utilities-terminal"));
++    } else if (env.contains(QStringLiteral("TERMINAL"))) {
++        service = new KService(QStringLiteral("terminal"), env.value(QStringLiteral("TERMINAL")), QStringLiteral("utilities-terminal"));
+     }
+     if (!service && fallbackToKonsoleService) {
+         service = KService::serviceByStorageId(QStringLiteral("org.kde.konsole"));
