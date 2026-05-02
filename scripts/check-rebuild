@@ -3,8 +3,8 @@
 dir=/tmp/root
 rm -rf "$dir"
 mkdir -p "$dir"
-qlist -ICF '=%{CATEGORY}/%{PF}' | sort > "$dir/qlist_inst.txt"
-qlist -ItCF '=%{CATEGORY}/%{PF}' | sort > "$dir/qlist_repo.txt"
+qlist -ICF '%{CATEGORY}/%{PN}:%{SLOT}' | sort > "$dir/qlist_inst.txt"
+qlist -ItCF '%{CATEGORY}/%{PN}:%{SLOT}' | sort > "$dir/qlist_repo.txt"
 comm -12 "$dir/qlist_inst.txt" "$dir/qlist_repo.txt" > "$dir/list.txt"
 comm -23 "$dir/qlist_inst.txt" "$dir/qlist_repo.txt" > "$dir/gone.txt"
 

@@ -10,6 +10,9 @@
 
 		# OpenBLAS error: Memory allocation still failed after 10 retries, giving up.
 		dev-python/pybind11
+
+		# [RangeError: WebAssembly.instantiate(): Out of memory: Cannot allocate Wasm memory for new instance]
+		custom/hister
 	)
 
 	# Some packages require more memory during link, even at -flto=1
