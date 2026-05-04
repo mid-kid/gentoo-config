@@ -18,10 +18,12 @@ x11-misc/polybar PYTHON_SINGLE_TARGET: python3_13
 x11-misc/zim PYTHON_SINGLE_TARGET: python3_13
 
 # emerge -puDU --backtrack=100 --autounmask-backtrack=y
+# /etc/portage/scripts/check-rebuild
 
 custom/mkchromecast PYTHON_TARGETS: python3_13 -python3_14
 dev-libs/boost PYTHON_TARGETS: python3_13
 dev-python/blinker PYTHON_TARGETS: python3_13
+dev-python/casttube PYTHON_TARGETS: python3_13
 dev-python/cbor2 PYTHON_TARGETS: python3_13
 dev-python/certifi PYTHON_TARGETS: python3_13
 dev-python/cffi PYTHON_TARGETS: python3_13
@@ -32,6 +34,7 @@ dev-python/editables PYTHON_TARGETS: python3_13
 dev-python/fastjsonschema PYTHON_TARGETS: python3_13
 dev-python/flask PYTHON_TARGETS: python3_13
 dev-python/flit-core PYTHON_TARGETS: python3_13
+dev-python/fonttools PYTHON_TARGETS: python3_13
 dev-python/gpep517 PYTHON_TARGETS: python3_13
 dev-python/hatch-vcs PYTHON_TARGETS: python3_13
 dev-python/hatchling PYTHON_TARGETS: python3_13
@@ -70,10 +73,12 @@ dev-python/pygobject PYTHON_TARGETS: python3_13
 dev-python/pyparsing PYTHON_TARGETS: python3_13
 dev-python/pyproject-metadata PYTHON_TARGETS: python3_13
 dev-python/pysocks PYTHON_TARGETS: python3_13
+dev-python/pyxdg PYTHON_TARGETS: python3_13
 dev-python/rdflib PYTHON_TARGETS: python3_13
 dev-python/requests PYTHON_TARGETS: python3_13
 dev-python/setuptools PYTHON_TARGETS: python3_13
 dev-python/setuptools-scm PYTHON_TARGETS: python3_13
+dev-python/sip PYTHON_TARGETS: python3_13
 dev-python/six PYTHON_TARGETS: python3_13
 dev-python/trove-classifiers PYTHON_TARGETS: python3_13
 dev-python/typing-extensions PYTHON_TARGETS: python3_13
@@ -81,6 +86,8 @@ dev-python/urllib3 PYTHON_TARGETS: python3_13
 dev-python/webencodings PYTHON_TARGETS: python3_13
 dev-python/werkzeug PYTHON_TARGETS: python3_13
 dev-python/wheel PYTHON_TARGETS: python3_13
+dev-python/wxpython PYTHON_TARGETS: python3_13
+dev-python/zeroconf PYTHON_TARGETS: python3_13
 dev-python/zstandard PYTHON_TARGETS: python3_13
 sys-apps/uswid PYTHON_TARGETS: python3_13
 x11-base/xcb-proto PYTHON_TARGETS: python3_13
