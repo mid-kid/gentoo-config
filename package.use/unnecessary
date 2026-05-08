@@ -130,3 +130,5 @@ media-libs/libheif -kvazaar -de265
 dev-libs/elfutils -debuginfod
 sys-devel/binutils -debuginfod
 dev-debug/gdb -debuginfod
+sys-power/tlp -rdw
+mail-client/mutt -lmdb
