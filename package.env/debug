@@ -1,2 +1,2 @@
 sys-libs/glibc debug
-sys-devel/gcc debug
+#sys-devel/gcc debug  # No relevant compiler crashes as of recent
