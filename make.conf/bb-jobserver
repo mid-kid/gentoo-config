@@ -1,0 +1,4 @@
+# Enable steve jobserver support
+FEATURES="$FEATURES jobserver-token"
+NINJAOPTS="-l$__LPROC"  # If left empty, the -jN from MAKEOPTS would be passed
+MAKEFLAGS="-l$__LPROC --jobserver-auth=fifo:/dev/steve"
