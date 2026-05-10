@@ -6,6 +6,9 @@ dev-build/steve  # FEATURES=jobserver-token
 dev-util/debugedit  # FEATURES=installsources
 dev-vcs/git  # repos.conf
 
+# Satisfies virtual/zlib
+sys-libs/zlib-ng
+
 # Satisfies virtual/editor
 app-editors/vim
 
