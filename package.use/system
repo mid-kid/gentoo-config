@@ -5,6 +5,7 @@ app-admin/sudo offensive  # Scream at me mommy
 media-video/ffmpeg openssl vpx opus x264 x265  # Common formats
 x11-base/xorg-server xvfb xephyr  # Nested X servers
 net-misc/dhcpcd privsep  # Run dhcpcd under its own user
+net-dns/dnsmasq dbus  # Propagate changes from net-dns/openresolv
 net-dns/dnsmasq dnssec  # Enable DNSSEC support
 sys-auth/pambase -passwdqc  # Don't care about password quality
 sys-auth/seatd -server  # Using elogind as server
