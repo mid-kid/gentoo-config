@@ -8,4 +8,7 @@ env-post_pkg_preinst() {
 	dodir /etc/portage
 	mv -T "$ED/etc/kernel" "$ED/etc/portage/kernel" || die
 	dosym portage/kernel /etc/kernel
+	# Cope with INSTALL_MASK not being applied after this phase
+	# https://bugs.gentoo.org/975397
+	! has /etc/portage $INSTALL_MASK || rm -r "$ED/etc/portage" || die
 }
