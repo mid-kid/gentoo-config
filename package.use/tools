@@ -20,3 +20,4 @@ app-containers/waydroid-images -system-vanilla system-gapps  # I mainly use wayd
 media-libs/libv4l qt6  # Install GUIs for testing
 media-sound/tenacity ffmpeg  # Allow importing arbitrary sound formats
 net-wireless/bluez extra-tools deprecated  # These deprecated tools are somehow still relevant
+dev-util/xdelta lzma  # Some patches are compressed
