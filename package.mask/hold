@@ -10,3 +10,7 @@
 
 # Try to avoid downgraded ffmpeg
 media-video/ffmpeg-compat
+
+# Don't pull in breakage from sloppy rsync
+# https://github.com/RsyncProject/rsync/issues/915
+>=net-misc/rsync-3.4.2
