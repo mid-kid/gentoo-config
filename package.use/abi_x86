@@ -1,0 +1,35 @@
+# Required by steam:
+# - libGL.so.1
+media-libs/libglvnd ABI_X86: 32
+# - libdrm.so.2
+x11-libs/libdrm ABI_X86: 32
+# - libGLX_mesa.so.0
+media-libs/mesa ABI_X86: 32
+
+# Dependencies
+app-arch/bzip2 ABI_X86: 32
+app-arch/xz-utils ABI_X86: 32
+dev-libs/elfutils ABI_X86: 32
+dev-libs/expat ABI_X86: 32
+dev-libs/icu ABI_X86: 32
+dev-libs/libffi ABI_X86: 32
+dev-libs/libxml2 ABI_X86: 32
+dev-libs/wayland ABI_X86: 32
+dev-util/spirv-tools ABI_X86: 32
+llvm-core/llvm ABI_X86: 32
+media-libs/libdisplay-info ABI_X86: 32
+media-libs/libva ABI_X86: 32
+sys-libs/zlib-ng ABI_X86: 32
+virtual/libelf ABI_X86: 32
+virtual/zlib ABI_X86: 32
+x11-libs/libX11 ABI_X86: 32
+x11-libs/libXau ABI_X86: 32
+x11-libs/libXdmcp ABI_X86: 32
+x11-libs/libXext ABI_X86: 32
+x11-libs/libXfixes ABI_X86: 32
+x11-libs/libXrandr ABI_X86: 32
+x11-libs/libXrender ABI_X86: 32
+x11-libs/libXxf86vm ABI_X86: 32
+x11-libs/libxcb ABI_X86: 32
+x11-libs/libxshmfence ABI_X86: 32
+x11-libs/xcb-util-keysyms ABI_X86: 32
