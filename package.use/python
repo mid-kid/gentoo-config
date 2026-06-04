@@ -51,7 +51,6 @@ dev-python/ply PYTHON_TARGETS: python3_13
 dev-python/pycairo PYTHON_TARGETS: python3_13
 dev-python/pycparser PYTHON_TARGETS: python3_13
 dev-python/pygobject PYTHON_TARGETS: python3_13
-dev-python/pyproject-metadata PYTHON_TARGETS: python3_13
 dev-python/pysocks PYTHON_TARGETS: python3_13
 dev-python/pyxdg PYTHON_TARGETS: python3_13
 dev-python/requests PYTHON_TARGETS: python3_13
