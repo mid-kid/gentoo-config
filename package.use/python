@@ -29,6 +29,7 @@ dev-python/editables PYTHON_TARGETS: python3_13
 dev-python/flit-core PYTHON_TARGETS: python3_13
 dev-python/fonttools PYTHON_TARGETS: python3_13
 dev-python/gpep517 PYTHON_TARGETS: python3_13
+dev-python/hatch-fancy-pypi-readme PYTHON_TARGETS: python3_13
 dev-python/hatch-vcs PYTHON_TARGETS: python3_13
 dev-python/hatchling PYTHON_TARGETS: python3_13
 dev-python/idna PYTHON_TARGETS: python3_13
@@ -38,6 +39,7 @@ dev-python/jaraco-functools PYTHON_TARGETS: python3_13
 dev-python/jaraco-text PYTHON_TARGETS: python3_13
 dev-python/librt PYTHON_TARGETS: python3_13
 dev-python/lxml PYTHON_TARGETS: python3_13
+dev-python/meson-python PYTHON_TARGETS: python3_13
 dev-python/more-itertools PYTHON_TARGETS: python3_13
 dev-python/mypy PYTHON_TARGETS: python3_13
 dev-python/mypy-extensions PYTHON_TARGETS: python3_13
@@ -51,11 +53,13 @@ dev-python/ply PYTHON_TARGETS: python3_13
 dev-python/pycairo PYTHON_TARGETS: python3_13
 dev-python/pycparser PYTHON_TARGETS: python3_13
 dev-python/pygobject PYTHON_TARGETS: python3_13
+dev-python/pyproject-metadata PYTHON_TARGETS: python3_13
 dev-python/pysocks PYTHON_TARGETS: python3_13
 dev-python/pyxdg PYTHON_TARGETS: python3_13
 dev-python/requests PYTHON_TARGETS: python3_13
 dev-python/setuptools PYTHON_TARGETS: python3_13
 dev-python/setuptools-scm PYTHON_TARGETS: python3_13
+dev-python/sip PYTHON_TARGETS: python3_13
 dev-python/trove-classifiers PYTHON_TARGETS: python3_13
 dev-python/typing-extensions PYTHON_TARGETS: python3_13
 dev-python/urllib3 PYTHON_TARGETS: python3_13
