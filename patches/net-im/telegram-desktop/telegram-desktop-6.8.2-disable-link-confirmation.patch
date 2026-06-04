@@ -1,0 +1,15 @@
+Disable "open this link" confirmation box
+
+This is one of those trends in security that ends up being annoying and nothing
+else.
+
+--- tdesktop-6.8.2-full.orig/Telegram/SourceFiles/core/click_handler_types.cpp
++++ tdesktop-6.8.2-full/Telegram/SourceFiles/core/click_handler_types.cpp
+@@ -84,6 +84,7 @@
+ }
+ 
+ [[nodiscard]] bool HiddenUrlRequiresConfirmation(const QUrl &url) {
++    return false;
+ 	return UrlRequiresConfirmation(url) || IsTelegramShortLinkHost(url);
+ }
+ 

@@ -87,7 +87,7 @@ app-crypt/swtpm -gnutls
 media-gfx/gimp -udev
 media-plugins/gst-plugins-v4l2 -udev
 dev-python/pyside2 -xml -concurrent -printsupport -sql -testlib -x11extras
-media-gfx/blender -ffmpeg -openvdb -opensubdiv -oidn -embree -fluid -fftw -potrace -pugixml -sndfile -openpgl -nanovdb -gmp -bullet
+media-gfx/blender -ffmpeg -openvdb -opensubdiv -oidn -embree -fluid -fftw -potrace -pugixml -sndfile -openpgl -nanovdb -gmp -bullet -manifold
 gui-apps/foot -grapheme-clustering
 sys-fs/mtools -gui
 media-libs/libplacebo -xxhash

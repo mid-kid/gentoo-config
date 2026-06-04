@@ -10,6 +10,7 @@ dev-libs/elfutils ABI_X86: 32
 dev-libs/expat ABI_X86: 32
 dev-libs/gmp ABI_X86: 32
 dev-libs/icu ABI_X86: 32
+dev-libs/leancrypto ABI_X86: 32
 dev-libs/libbsd ABI_X86: 32
 dev-libs/libffi ABI_X86: 32
 dev-libs/libtasn1 ABI_X86: 32
