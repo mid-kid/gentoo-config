@@ -14,7 +14,3 @@ media-video/ffmpeg-compat
 # Don't pull in breakage from sloppy rsync
 # https://github.com/RsyncProject/rsync/issues/915
 >=net-misc/rsync-3.4.2
-
-# Avoid direct dependency on systemd-utils[udev]
-# (I will need to solve this one soon...)
->=sys-auth/elogind-255.18

@@ -36,3 +36,4 @@ dev-lang/deno-bin
 sys-apps/systemd-utils
 sys-apps/systemd-tmpfiles
 sys-fs/udev
+>=sys-auth/elogind-255.18::gentoo  # Worked around by ebuild in ::without-systemd repo
