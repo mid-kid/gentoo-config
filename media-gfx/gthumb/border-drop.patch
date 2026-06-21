@@ -1,0 +1,27 @@
+diff --git i/gthumb/gth-grid-view.c w/gthumb/gth-grid-view.c
+index 63b10f5e..2fa3c9e6 100644
+--- i/gthumb/gth-grid-view.c
++++ w/gthumb/gth-grid-view.c
+@@ -40,21 +40,21 @@
+ #include "gtk-utils.h"
+ 
+ 
+ #define GTH_GRID_VIEW_ITEM(x)      ((GthGridViewItem *)(x))
+ #define GTH_GRID_VIEW_LINE(x)      ((GthGridViewLine *)(x))
+ #define CAPTION_LINE_SPACING       4
+ #define DEFAULT_CAPTION_SPACING    4
+ #define DEFAULT_CAPTION_PADDING    2
+ #define DEFAULT_CELL_SPACING       16
+ #define DEFAULT_CELL_PADDING       5
+-#define DEFAULT_THUMBNAIL_BORDER   3
++#define DEFAULT_THUMBNAIL_BORDER   0
+ #define SCROLL_DELAY               30
+ #define LAYOUT_DELAY               20
+ #define RUBBERBAND_BORDER          2
+ #define STEP_INCREMENT             0.10
+ #define PAGE_INCREMENT             0.33
+ 
+ 
+ static void gth_grid_view_gth_file_selection_interface_init (GthFileSelectionInterface *iface);
+ static void gth_grid_view_gth_file_view_interface_init (GthFileViewInterface *iface);
+ static void gth_grid_view_gtk_scrollable_interface_init (GtkScrollableInterface *iface);
