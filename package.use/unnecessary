@@ -133,3 +133,9 @@ dev-debug/gdb -debuginfod
 sys-power/tlp -rdw
 mail-client/mutt -lmdb
 dev-qt/qtspeech -speechd
+dev-qt/qtbase -concurrent -dbus -gui -libinput -libproxy -network -sql -sqlite -widgets -xml
+dev-qt/qttools -assistant -linguist -qdbus -widgets
+dev-qt/qtdeclarative -network -sql -widgets
+dev-python/pyside -concurrent -dbus -gui -network -opengl -printsupport -qml -sql -testlib -widgets -xml
+dev-python/pyqt6 -dbus -gui -network -printsupport -sql -widgets -xml -qml
+sci-libs/vtk -cgns -logging -netcdf -openmp -rendering -threads -truetype -views minimal

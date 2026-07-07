@@ -1,29 +1,16 @@
-# required by net-im/telegram-desktop-2.4.7-r1:0/0::gentoo
-# required by games-emulation/mgba-0.7.0::gentoo
-# required by net-analyzer/wireshark-3.2.1:0/3.2.1::gentoo
-# required by games-emulation/dolphin-5.0_p20220520-r2-2:0/0::gentoo
->=sys-libs/zlib-1.2.11-r2 minizip
+# emerge -peU --usepkg=n --backtrack=100 --autounmask-backtrack=y @world
+
 # required by www-client/firefox-78.4.1::gentoo[system-libvpx]
 >=media-libs/libvpx-1.9.0 postproc
-# required by sci-electronics/kicad-5.1.7::gentoo
->=dev-libs/boost-1.72.0-r2 context
 # required by sys-fs/udisks-2.9.0:2/2::gentoo
 # required by sys-apps/fwupd-1.9.6::gentoo[uefi]
 >=sys-libs/libblockdev-2.24 cryptsetup
 # required by sci-electronics/pulseview-0.4.2::gentoo
 >=sci-libs/libsigrok-0.5.2-r1 cxx
-# required by app-text/pdfgrep-2.0.1::gentoo
->=dev-libs/libpcre-8.44 cxx
 # required by net-print/cups-filters-1.28.7::gentoo
 >=app-text/poppler-21.02.0 cxx
-# required by app-office/libreoffice-6.4.7.2::gentoo
->=app-crypt/gpgme-1.14.0 cxx
 # required by kde-apps/kdenlive-20.12.3::gentoo
 >=media-video/ffmpeg-4.4-r1 sdl
-# required by media-gfx/gimp-2.99.6::gentoo
->=media-libs/babl-0.1.86 introspection
-# required by media-gfx/gimp-2.99.6::gentoo
->=media-libs/gegl-0.4.30 introspection
 # required by app-emulation/libvirt-7.7.0::gentoo[virt-network]
 >=net-dns/dnsmasq-2.85 script
 # required by app-emulation/virt-manager-3.2.0::gentoo[gtk]
@@ -35,66 +22,36 @@
 # required by dev-python/matplotlib-3.5.2-r3::gentoo[-test]
 >=virtual/imagemagick-tools-0-r1 tiff
 >=media-gfx/imagemagick-7.1.0.13 tiff
-# required by kde-apps/kdenlive-22.08.3::gentoo
->=media-video/ffmpeg-4.4.3 libass
 # required by kde-apps/kdenlive-22.12.3-1:5/5::gentoo
 >=media-libs/mlt-7.12.0 frei0r ffmpeg sdl
 # required by sys-firmware/sigrok-firmware-fx2lafw-0.1.7-r1::gentoo
 >=dev-embedded/sdcc-3.8.0-r1 device-lib mcs51
 # required by app-crypt/swtpm-0.8.0-r2::gentoo
 >=net-libs/gnutls-3.8.0 tools pkcs11
-# required by sci-libs/vtk-9.2.5::gentoo
->=sci-libs/cgnslib-4.3.0-r2 hdf5
 # required by media-gfx/blender-3.3.6-r1::gentoo
 >=media-libs/freetype-2.13.2 brotli
 # required by media-gfx/blender-3.3.6-r1::gentoo[cycles]
 >=media-gfx/blender-3.3.6-r1 tiff
 # required by app-containers/containers-common-0.57.0-1:0/0::gentoo
 >=net-firewall/iptables-1.8.9 nftables
-# required by app-emulation/virt-manager-4.1.0:0/0::gentoo
->=dev-libs/libxml2-2.12.4 python
 # required by x11-misc/snixembed-0.3.0::gentoo
 >=dev-libs/libdbusmenu-16.04.0-r2 gtk3
-# required by media-sound/pavucontrol-5.0-r2::gentoo
->=media-libs/libcanberra-0.30-r7 gtk3
 # required by x11-misc/xdg-utils-1.1.3_p20210805-r1:0/0::gentoo
 >=app-text/xmlto-0.0.28-r11 text
-# required by net-im/neochat-23.08.4::gentoo
->=dev-qt/qtmultimedia-5.15.12:5 gstreamer
 # required by app-containers/lxc-5.0.3::gentoo[caps,tools]
 >=sys-libs/libcap-2.69-r1 static-libs
 # required by media-gfx/inkscape-1.3.2-r1::gentoo[python_single_target_python3_11]
 >=dev-python/pillow-10.2.0-r1 tiff
 # required by dev-util/pkgcheck-0.10.29::gentoo[-test]
 >=dev-libs/tree-sitter-bash-0.21.0-r1 python
-# REQUIRED_USE vaapi? ( ffmpeg )
->=gui-apps/waypipe-0.9.1 ffmpeg
 # required by dev-qt/qtbase-6.7.2-r4::gentoo
 >=app-arch/libarchive-3.7.4 zstd
-# required by kde-plasma/polkit-kde-agent-6.1.4::gentoo
->=sys-auth/polkit-qt-0.200.0 qt6
-# required by net-im/neochat-24.05.2::gentoo
->=dev-libs/qtkeychain-0.14.3 qt6
-# required by net-im/neochat-24.05.2::gentoo
->=net-libs/libquotient-0.8.2 qt6
 # required by kde-apps/okular-24.05.2::gentoo[pdf]
 >=app-text/poppler-24.06.1 qt6
-# required by kde-frameworks/kwallet-6.5.0::gentoo
->=app-crypt/qca-2.3.9 qt6
 # required by kde-apps/kdenlive-24.05.2::gentoo
 >=media-libs/mlt-7.24.0 qt6
-# required by kde-apps/dolphin-24.05.2-r1::gentoo
->=media-libs/phonon-4.12.0-r4 qt6
-# required by games-action/prismlauncher-8.4::gentoo
->=dev-libs/quazip-1.4-r1 qt6
-# required by games-fps/redeclipse-2.0.0-r1::gentoo[-dedicated]
->=media-libs/sdl2-mixer-2.6.3-r1 mp3
 # required by dev-python/pyqt6-webengine-6.8.0::gentoo
->=dev-python/pyqt6-6.8.0 webchannel
-# required by media-gfx/freecad-1.0.0-r2::gentoo[python_single_target_python3_12,gui]
->=dev-python/pyside6-6.8.1 uitools
-# required by custom/serialplot-0.13.0::localrepo
->=x11-libs/qwt-6.2.0-r4 qt6
+>=dev-python/pyqt6-6.8.0 webchannel network printsupport
 # required by www-client/firefox-140.1.0::gentoo[system-png]
 >=media-libs/libpng-1.6.47 apng
 # required by custom/mkchromecast-0.3.8.1_p20250601::localrepo
@@ -105,3 +62,26 @@
 >=dev-python/pillow-11.3.0 webp
 # required by kde-frameworks/kdnssd-6.22.0-r1::gentoo[-minimal]
 >=net-dns/avahi-0.9_rc2-r3 mdnsresponder-compat
+# required by sci-electronics/kicad-10.0.0-r1::gentoo
+>=x11-libs/wxGTK-3.2.8.1-r2 webkit
+# required by media-gfx/freecad-1.0.2-r2::gentoo
+>=sci-libs/opencascade-7.8.1-r1 json
+# required by dev-qt/qtmultimedia-6.11.1-1:6/6.11.1::gentoo
+>=dev-qt/qtbase-6.11.1 concurrent gui network widgets
+>=dev-qt/qtdeclarative-6.11.1 network widgets
+# required by dev-qt/qttools-6.11.1-1:6/6.11.1::gentoo
+>=dev-qt/qtbase-6.11.1 dbus xml sql sqlite
+# required by kde-frameworks/kio-6.25.0-2:6/6.25::gentoo
+>=dev-qt/qtbase-6.11.1 libproxy
+# required by kde-misc/kdeconnect-26.04.1-r1-1:6/6::gentoo
+>=dev-qt/qttools-6.11.1 qdbus
+# required by app-emulation/virtualbox-7.2.8-1:0/7.2::gentoo
+>=dev-qt/qttools-6.11.1 assistant linguist
+# required by media-gfx/freecad-1.0.2-r2-1:0/0::gentoo
+>=dev-qt/qttools-6.11.1 widgets
+# required by media-gfx/freecad-1.0.2-r2::gentoo[gui,python_single_target_python3_14]
+>=dev-python/pyside-6.11.1-r1 svg uitools gui widgets opengl
+# required by media-gfx/krita-6.0.2.1-1:0/0::gentoo
+>=dev-python/pyqt6-6.11.0 gui qml widgets xml
+# required by net-im/zapzap-6.3.4.1:0/0::guru
+>=dev-python/pyqt6-6.11.0 dbus

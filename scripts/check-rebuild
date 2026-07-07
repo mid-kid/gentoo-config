@@ -14,4 +14,4 @@ if [ "$(wc -c "$dir/gone.txt" | cut -f1 -d\ )" -ge 1 ]; then
     cat "$dir/gone.txt"
 fi
 
-FEATURES=-news emerge --package-moves=n --usepkg=n --root "$dir" --autounmask-backtrack=y -pe $(cat "$dir/list.txt")
+FEATURES=-news emerge --package-moves=n --usepkg=n --root "$dir" --backtrack=100 --autounmask-backtrack=y -pe $(cat "$dir/list.txt")

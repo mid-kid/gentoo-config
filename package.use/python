@@ -3,70 +3,11 @@
 # I've tried a few different methods over the years to generate the contents of
 # this file, but nothing is ideal. I end up doing it differently every time.
 
-*/* PYTHON_TARGETS: -* python3_14
-*/* PYTHON_SINGLE_TARGET: -* python3_14
+#*/* PYTHON_TARGETS: -* python3_14
+#*/* PYTHON_SINGLE_TARGET: -* python3_14
 
 # Check for potentially removable entries:
 # rm -f /tmp/use.txt; eix '-#' --installed-with-use python_targets_python3_13 --installed-with-use python_targets_python3_14 | xargs -P4 -I% sh -c "PYTHON_TARGETS=python3_14 emerge -pD --usepkg=n '%' && { echo '%' | tee -a /tmp/use.txt; }"
 
-media-gfx/blender PYTHON_SINGLE_TARGET: python3_13
-sci-electronics/kicad PYTHON_SINGLE_TARGET: python3_13
-sci-libs/libsigrokdecode PYTHON_SINGLE_TARGET: python3_13
-x11-misc/polybar PYTHON_SINGLE_TARGET: python3_13
-
-# emerge -puDU --backtrack=100 --autounmask-backtrack=y @world
+# emerge -peU --usepkg=n --backtrack=100 --autounmask-backtrack=y @world
 # /etc/portage/scripts/check-rebuild
-
-dev-libs/boost PYTHON_TARGETS: python3_13
-dev-python/attrs PYTHON_TARGETS: python3_13
-dev-python/cattrs PYTHON_TARGETS: python3_13
-dev-python/cbor2 PYTHON_TARGETS: python3_13
-dev-python/certifi PYTHON_TARGETS: python3_13
-dev-python/cffi PYTHON_TARGETS: python3_13
-dev-python/charset-normalizer PYTHON_TARGETS: python3_13
-dev-python/cython PYTHON_TARGETS: python3_13
-dev-python/editables PYTHON_TARGETS: python3_13
-dev-python/flit-core PYTHON_TARGETS: python3_13
-dev-python/fonttools PYTHON_TARGETS: python3_13
-dev-python/gpep517 PYTHON_TARGETS: python3_13
-dev-python/hatch-fancy-pypi-readme PYTHON_TARGETS: python3_13
-dev-python/hatch-vcs PYTHON_TARGETS: python3_13
-dev-python/hatchling PYTHON_TARGETS: python3_13
-dev-python/idna PYTHON_TARGETS: python3_13
-dev-python/installer PYTHON_TARGETS: python3_13
-dev-python/jaraco-context PYTHON_TARGETS: python3_13
-dev-python/jaraco-functools PYTHON_TARGETS: python3_13
-dev-python/jaraco-text PYTHON_TARGETS: python3_13
-dev-python/librt PYTHON_TARGETS: python3_13
-dev-python/lxml PYTHON_TARGETS: python3_13
-dev-python/meson-python PYTHON_TARGETS: python3_13
-dev-python/more-itertools PYTHON_TARGETS: python3_13
-dev-python/mypy PYTHON_TARGETS: python3_13
-dev-python/mypy-extensions PYTHON_TARGETS: python3_13
-dev-python/numpy PYTHON_TARGETS: python3_13
-dev-python/packaging PYTHON_TARGETS: python3_13
-dev-python/pathspec PYTHON_TARGETS: python3_13
-dev-python/pefile PYTHON_TARGETS: python3_13
-dev-python/platformdirs PYTHON_TARGETS: python3_13
-dev-python/pluggy PYTHON_TARGETS: python3_13
-dev-python/ply PYTHON_TARGETS: python3_13
-dev-python/pycairo PYTHON_TARGETS: python3_13
-dev-python/pycparser PYTHON_TARGETS: python3_13
-dev-python/pygobject PYTHON_TARGETS: python3_13
-dev-python/pyproject-metadata PYTHON_TARGETS: python3_13
-dev-python/pysocks PYTHON_TARGETS: python3_13
-dev-python/pyxdg PYTHON_TARGETS: python3_13
-dev-python/requests PYTHON_TARGETS: python3_13
-dev-python/setuptools PYTHON_TARGETS: python3_13
-dev-python/setuptools-scm PYTHON_TARGETS: python3_13
-dev-python/sip PYTHON_TARGETS: python3_13
-dev-python/trove-classifiers PYTHON_TARGETS: python3_13
-dev-python/typing-extensions PYTHON_TARGETS: python3_13
-dev-python/urllib3 PYTHON_TARGETS: python3_13
-dev-python/vcs-versioning PYTHON_TARGETS: python3_13
-dev-python/wheel PYTHON_TARGETS: python3_13
-dev-python/wxpython PYTHON_TARGETS: python3_13
-dev-python/zstandard PYTHON_TARGETS: python3_13
-sys-apps/uswid PYTHON_TARGETS: python3_13
-x11-base/xcb-proto PYTHON_TARGETS: python3_13
-x11-misc/redshift PYTHON_TARGETS: python3_13
