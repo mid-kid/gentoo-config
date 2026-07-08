@@ -138,4 +138,4 @@ dev-qt/qttools -assistant -linguist -qdbus -widgets
 dev-qt/qtdeclarative -network -sql -widgets
 dev-python/pyside -concurrent -dbus -gui -network -opengl -printsupport -qml -sql -testlib -widgets -xml
 dev-python/pyqt6 -dbus -gui -network -printsupport -sql -widgets -xml -qml
-sci-libs/vtk -cgns -logging -netcdf -openmp -rendering -threads -truetype -views minimal
+sci-libs/vtk -cgns -netcdf -rendering -truetype -views minimal
