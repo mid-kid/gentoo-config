@@ -1,6 +1,6 @@
 #!/bin/sh
 # Merge staging modprobed.db with currently installed one
-ver=6.18
-cur="modprobed_$ver.db"
+ver=$(uname -r | cut -d. -f-2)
+cur=modprobed_$ver.db
 cat modprobed.db "$cur" | sort | uniq > ".$cur"
 mv ".$cur" "$cur"
