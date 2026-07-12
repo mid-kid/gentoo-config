@@ -5,8 +5,8 @@ www-client/firefox system-png system-pipewire
 # Allow rust to be bootstapped without rust-bin
 dev-lang/rust mrustc-bootstrap
 
-# Avoid pulling rust into @system, making bootstrapping annoying
-dev-python/charset-normalizer -native-extensions
+# Avoid rust in a few places
+dev-python/charset-normalizer -native-extensions  # pulled into @system by dev-build/cmake USE=doc
 
 # I don't use clang to build 32-bit software
 # See profiles/arch/amd64/package.use
