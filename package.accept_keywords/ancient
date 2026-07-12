@@ -6,3 +6,5 @@
 ~dev-lang/go-1.26.1  # needed for kitty
 ~sys-power/tlp-1.9.1  # Way new system
 ~dev-python/myst-parser-5.0.0  # unblock new sphinx and speed up dep resolution
+~x11-misc/sddm-0.21.0_p20251101
+~gui-apps/sddm-gentoo-config-0
