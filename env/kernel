@@ -2,8 +2,9 @@
 # actually picking the target CPU, so passing it here instead.
 # Adding -mtune as upstream defaults -mtune=generic except when -march=native
 # is enabled...
-KCFLAGS="-march=$__MARCH -mtune=$__MARCH"
-KRUSTFLAGS="-Ctarget-cpu=$__MARCH -Ztune-cpu=$__MARCH"
+__MTUNE="$__MARCH"
+KCFLAGS="-march=$__MARCH -mtune=$__MTUNE"
+KRUSTFLAGS="-Ctarget-cpu=$__MARCH -Ztune-cpu=$__MTUNE"
 # Not passing entire resolve-march-native output, as some of them may override
 # the kernel's safeguards:
 # https://github.com/graysky2/kernel_compiler_patch/issues/95#issuecomment-1962423198
