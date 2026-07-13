@@ -1,3 +1,6 @@
+# USE=man includes man pages
+app-containers/lxc man
+
 # USE=doc that include man pages
 x11-misc/polybar doc  # requires dev-python/sphinx
 x11-libs/libX11 doc
