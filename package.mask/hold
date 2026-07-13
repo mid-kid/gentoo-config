@@ -13,4 +13,8 @@ media-video/ffmpeg-compat
 
 # Don't pull in breakage from sloppy rsync
 # https://github.com/RsyncProject/rsync/issues/915
->=net-misc/rsync-3.4.2
+~net-misc/rsync-3.4.3
+
+# Avoid bugged btrfs-progs
+# https://github.com/kdave/btrfs-progs/issues/1135
+~sys-fs/btrfs-progs-7.0
