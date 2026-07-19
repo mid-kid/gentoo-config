@@ -4,4 +4,4 @@
 www-client/w3m
 
 # net-misc/yt-dlp
-dev-lang/quickjs-ng
+dev-libs/quickjs-ng
