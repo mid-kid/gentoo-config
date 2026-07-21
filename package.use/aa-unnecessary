@@ -119,7 +119,6 @@ sys-libs/libblockdev -cryptsetup
 x11-base/xwayland -libei
 app-admin/testdisk -gui
 x11-wm/xpra -client -gtk3 -clipboard -crypt -cups -opengl -sound -trayicon -lz4
-kde-frameworks/kauth -policykit
 dev-python/pyside6 -concurrent -network -qml -sql -xml
 net-misc/freerdp -ffmpeg
 kde-frameworks/kwallet minimal
