@@ -1,6 +1,7 @@
 # Prefer using dependencies from the system
 dev-lang/rust system-llvm
 www-client/firefox system-png system-pipewire
+net-libs/nodejs system-icu
 
 # Allow rust to be bootstapped without rust-bin
 dev-lang/rust mrustc-bootstrap
