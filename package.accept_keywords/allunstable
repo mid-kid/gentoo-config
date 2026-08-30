@@ -26,6 +26,8 @@ dev-build/automake-vanilla
 media-gfx/krita
 sys-fs/genimage
 app-portage/kuroo
+dev-util/sdl-jstest
+dev-build/tinycmmc
 
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrok

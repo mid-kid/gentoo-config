@@ -17,14 +17,17 @@ EGIT_CLONE_TYPE="shallow"
 __FLAGS_OPTIM_BASE="-O3 -w"
 __FLAGS_OPTIM_LTO="-flto -fuse-linker-plugin"
 __FLAGS_OPTIM_PARALLEL="-flto=$__NPROC"  # --param=lto-max-streaming-parallelism=$__NPROC" (deprecated, WPA stage now supports jobserver)
+__FLAGS_OPTIM_GC="-ffunction-sections -fdata-sections"
+__FLAGS_LINK_GC="-Wl,--gc-sections"
 __FLAGS_OPTIM_MORE="-fgraphite-identity -floop-nest-optimize -fdevirtualize-at-ltrans -fipa-pta -fno-semantic-interposition"
-__FLAGS_COMMON="$__FLAGS_OPTIM_BASE $__MARCH_FLAGS $__FLAGS_OPTIM_LTO $__FLAGS_OPTIM_PARALLEL $__FLAGS_OPTIM_MORE"
+__FLAGS_COMMON="$__MARCH_FLAGS $__FLAGS_OPTIM_BASE $__FLAGS_OPTIM_LTO $__FLAGS_OPTIM_PARALLEL $__FLAGS_OPTIM_GC $__FLAGS_OPTIM_MORE"
 __FLAGS_RUST_LTO="-Clinker-plugin-lto -Clinker=$CHOST-clang -Clink-arg=-fuse-ld=lld"
-RUSTFLAGS="$RUSTFLAGS -Copt-level=3 -Ctarget-cpu=$__MARCH $__FLAGS_RUST_LTO"
 CFLAGS="$CFLAGS $__FLAGS_COMMON"
 CXXFLAGS="$CXXFLAGS $__FLAGS_COMMON"
 FCFLAGS="$FCFLAGS $__FLAGS_COMMON"
 FFLAGS="$FFLAGS $__FLAGS_COMMON"
+LDFLAGS="$LDFLAGS $__FLAGS_LINK_GC"
+RUSTFLAGS="$RUSTFLAGS -Copt-level=3 -Ctarget-cpu=$__MARCH $__FLAGS_RUST_LTO"
 
 __USE_LANGS="-cxx -perl -ruby -python -vala"
 __USE_CODECS="-a52 -aac -cdda -dts -mad -mp3 -mpeg -xvid -cdr -dvdr -dvd"
@@ -33,6 +36,7 @@ __USE_SOFTWARE="-networkmanager -systemd -gpm -cryptsetup -bluetooth -spell -sdl
 __USE_GUI="-wayland -qt5 -qt6 -gtk4" # -gui -gtk -gtk2 -gtk3 -wxwidgets  # Common frontends
 USE="$__USE_LANGS $__USE_CODECS $__USE_FORMATS $__USE_SOFTWARE $__USE_GUI -branding -telemetry -cet dist-kernel modules-compress lto pgo vaapi io-uring v4l fontconfig vim-syntax zsh-completion"
 BOOTSTRAP_USE="$BOOTSTRAP_USE -zstd -cet"
+
 INSTALL_MASK="/etc/apparmor.d /etc/systemd /lib/systemd /usr/lib/systemd"
 ACCEPT_LICENSE="-* @FREE"
 L10N="ca es-ES es en-GB en-US en"
