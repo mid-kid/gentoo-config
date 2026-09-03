@@ -31,3 +31,6 @@ llvm-core/lldb LLVM_TARGETS: -AMDGPU -NVPTX -BPF
 # Doing this breaks the default VIDEO_CARDS setting,
 # the user will have to re-enable it if their video card requires.
 media-libs/mesa -llvm
+
+# Try to avoid rust
+dev-vcs/git -rust

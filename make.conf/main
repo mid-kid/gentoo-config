@@ -2,7 +2,7 @@ PORTDIR="/usr/portage"
 DISTDIR="/usr/portage/distfiles"
 PKGDIR="/usr/portage/packages"
 
-LC_MESSAGES=C
+LC_MESSAGES=C.UTF-8
 BINPKG_COMPRESS="bzip2"
 PORTAGE_BZIP2_COMMAND="lbzip2"
 EMERGE_DEFAULT_OPTS="$EMERGE_DEFAULT_OPTS --keep-going --with-bdeps=y --binpkg-respect-use=n --binpkg-changed-deps=n"

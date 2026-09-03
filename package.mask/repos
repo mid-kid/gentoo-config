@@ -1,3 +1,4 @@
 */*::guru
-*/*::src_prepare-overlay
 */*::pf4public
+*/*::mv
+*/*::nix-guix

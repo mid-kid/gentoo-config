@@ -13,3 +13,4 @@ dev-python/pyclip wayland
 media-libs/libva wayland
 kde-frameworks/kwindowsystem wayland
 dev-qt/qtbase wayland
+app-emulation/virtualbox wayland

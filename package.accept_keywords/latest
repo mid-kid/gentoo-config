@@ -1,5 +1,6 @@
 # I want the latest version, no matter what
 www-client/firefox:esr  # Useless to delay
+www-client/firefox-l10n:0/esr
 
 app-eselect/eselect-wine
 app-emulation/wine-staging

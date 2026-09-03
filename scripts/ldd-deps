@@ -1,0 +1,2 @@
+#!/bin/sh
+qlist -e "$1" | xargs ldd 2> /dev/null | sed -n -e 's/.*=> \([^ ]*\).*/\1/p' | sort | uniq | xargs qfile | cut -d ':' -f 1 | sort | uniq
