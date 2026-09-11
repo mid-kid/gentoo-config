@@ -28,6 +28,12 @@ sys-fs/genimage
 app-portage/kuroo
 dev-util/sdl-jstest
 dev-build/tinycmmc
+www-apps/jellyfin-bin
+net-libs/libbloom
+net-libs/libcork
+net-libs/libcorkipset
+net-proxy/shadowsocks-libev
+app-crypt/hashcat
 
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrok
