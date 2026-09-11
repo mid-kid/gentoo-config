@@ -5,21 +5,21 @@ set -e
 # important pacakges are upgraded first, regardless of what portage thinks.
 
 has_update() {
-	emerge -p1 --update-if-installed "$@" | grep -q '^\['
+	emerge -p1U --update-if-installed "$@" | grep -q '^\['
 }
 pre_update() {
 	echo "Checking updates for $@..."
 	updated=false
 	has_update "$@" || return 0
 	updated=true
-	emerge --ask=n -1 --update-if-installed "$@"
+	emerge --ask=n -1U --update-if-installed "$@"
 }
 
 # Apply package moves
 emerge -pqnO sys-apps/baselayout
 
 # Upgrade portage
-smart-live-rebuild -q -f sys-apps/portage -- --ask=n
+smart-live-rebuild -q -f sys-apps/portage -- --ask=n --selective=n -U
 pre_update \
 	sys-apps/sandbox \
 	sys-apps/portage
