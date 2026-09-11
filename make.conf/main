@@ -33,7 +33,7 @@ __USE_LANGS="-cxx -perl -ruby -python -vala"
 __USE_CODECS="-a52 -aac -cdda -dts -mad -mp3 -mpeg -xvid -cdr -dvdr -dvd"
 __USE_FORMATS="-mng -tiff -webp -avif -zstd -svg -pdf"
 __USE_SOFTWARE="-networkmanager -systemd -gpm -cryptsetup -bluetooth -spell -sdl -btrfs -ldap -pulseaudio -pipewire -screencast"
-__USE_GUI="-wayland -qt5 -qt6 -gtk4" # -gui -gtk -gtk2 -gtk3 -wxwidgets  # Common frontends
+__USE_GUI="-qt5 -gtk4" # -gui -gtk -gtk2 -gtk3 -wxwidgets  # Common frontends
 USE="$__USE_LANGS $__USE_CODECS $__USE_FORMATS $__USE_SOFTWARE $__USE_GUI -branding -telemetry -cet dist-kernel modules-compress lto pgo vaapi io-uring v4l fontconfig vim-syntax zsh-completion"
 BOOTSTRAP_USE="$BOOTSTRAP_USE -zstd -cet"
 

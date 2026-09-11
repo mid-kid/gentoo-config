@@ -1,0 +1,11 @@
+# System
+sys-apps/smartmontools daemon  # Have a daemon to tell me about drive issues
+
+# Headless mpv
+media-video/mpv -X
+media-libs/mesa -X
+
+# Headless qbittorrent
+dev-qt/qtbase -X -gui -widgets -libinput
+dev-qt/qttools -widgets -assistant
+net-p2p/qbittorrent -gui -dbus webui  # headless setup

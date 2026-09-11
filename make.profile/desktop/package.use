@@ -1,0 +1,5 @@
+# System
+app-crypt/pinentry qt6  # Install a GUI prompt for pinentry
+
+# Tools
+media-libs/libv4l qt6  # Install GUIs for testing

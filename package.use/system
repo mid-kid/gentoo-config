@@ -12,7 +12,6 @@ sys-auth/seatd -server  # Using elogind as server
 net-wireless/wpa_supplicant tkip  # Compatibility with old routers
 app-alternatives/sh -* dash  # Faster POSIX-compatible shell than bash
 media-libs/freetype harfbuzz  # Recommended by x11-libs/pango ebuild
-app-crypt/pinentry qt6  # Install a GUI prompt for pinentry
 app-arch/7zip symlink  # Use this version instead of p7zip
 media-video/ffmpegthumbnailer gnome  # Actually install the thumbnailer service
 xfce-base/tumbler ffmpeg pdf  # Install additional thumbnailers
