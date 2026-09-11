@@ -9,17 +9,19 @@ regardless of the default launch option.
 
 --- qbittorrent-5.1.2.orig/src/app/application.cpp
 +++ qbittorrent-5.1.2/src/app/application.cpp
-@@ -180,6 +180,9 @@
+@@ -180,6 +180,11 @@
          if (params.skipDialog.has_value())
              result.append(bindParamValue(PARAM_SKIPDIALOG, (*params.skipDialog ? u"1" : u"0")));
  
++#ifndef DISABLE_GUI
 +        if (params.startInTray)
 +            result.append(QLatin1String("@startInTray"));
++#endif
 +
          result += params.torrentSources;
  
          return result.join(PARAMS_SEPARATOR);
-@@ -239,6 +242,10 @@
+@@ -239,6 +244,10 @@
                  continue;
              }
  
@@ -30,7 +32,7 @@ regardless of the default launch option.
              parsedParams.torrentSources.append(param.toString());
          }
  
-@@ -928,13 +935,14 @@
+@@ -928,13 +937,14 @@
  
          disconnect(m_desktopIntegration, &DesktopIntegration::activationRequested, this, &Application::createStartupProgressDialog);
  #ifndef Q_OS_MACOS
