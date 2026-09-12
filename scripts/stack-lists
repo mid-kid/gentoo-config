@@ -1,0 +1,3 @@
+#!/usr/bin/env python3
+import sys,portage
+print(*portage.util.stack_lists((portage.util.grabfile("%s/%s"%(x,sys.argv[1]))for x in portage.settings.profiles),incremental=1),sep='\n')

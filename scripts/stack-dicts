@@ -1,0 +1,3 @@
+#!/usr/bin/env python3
+import sys,portage
+print(*("%s %s"%(k,' '.join(v))for k,v in portage.util.stack_dictlist((portage.util.grabdict_package("%s/%s"%(x,sys.argv[1]))for x in portage.settings.profiles),incremental=1).items()),sep='\n')
