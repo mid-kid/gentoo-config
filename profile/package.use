@@ -8,6 +8,7 @@ dev-lang/rust mrustc-bootstrap
 
 # Avoid rust in a few places
 dev-python/charset-normalizer -native-extensions  # pulled into @system by dev-build/cmake USE=doc
+dev-vcs/git -rust  # Won't be relevant for a while
 
 # I don't use clang to build 32-bit software
 # See profiles/arch/amd64/package.use
@@ -31,6 +32,3 @@ llvm-core/lldb LLVM_TARGETS: -AMDGPU -NVPTX -BPF
 # Doing this breaks the default VIDEO_CARDS setting,
 # the user will have to re-enable it if their video card requires.
 media-libs/mesa -llvm
-
-# Try to avoid rust
-dev-vcs/git -rust
