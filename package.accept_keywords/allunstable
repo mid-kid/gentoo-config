@@ -34,6 +34,7 @@ net-libs/libcork
 net-libs/libcorkipset
 net-proxy/shadowsocks-libev
 app-crypt/hashcat
+dev-util/cargo-vendor-filterer
 
 sys-firmware/sigrok-firmware-fx2lafw
 sci-libs/libsigrok
