@@ -8,7 +8,6 @@ media-sound/alsa-utils -libsamplerate
 media-video/mpv -uchardet
 net-analyzer/wireshark -gtk
 net-libs/webkit-gtk -geolocation -libnotify -gstreamer -egl -webgl -seccomp
-sys-apps/smartmontools -daemon
 xfce-base/xfce4-power-manager -panel-plugin
 media-sound/audacity -lv2 -midi -soundtouch
 dev-python/twisted -crypt
