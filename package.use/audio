@@ -7,6 +7,7 @@ x11-misc/polybar pulseaudio  # Better device hotplugging
 # Terrible crackling with the ALSA backend
 media-sound/qsynth pulseaudio
 media-sound/fluidsynth pulseaudio
+dev-qt/qtmultimedia pulseaudio  # crackling in mGBA
 
 # ALSA problems when used with pulseaudio plugin
 www-client/firefox pulseaudio  # ALSA backend breaks websites (https://bugs.gentoo.org/716840)

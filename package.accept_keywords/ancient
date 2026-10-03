@@ -1,7 +1,5 @@
 # Unmasking specific versions when older ones are too old
 <sys-apps/openrc-0.66  # navi-desu is doing big things
 <sys-power/tlp-1.11  # Way new system
-~x11-misc/sddm-0.21.0_p20251101
-~gui-apps/sddm-gentoo-config-0
-<dev-libs/nss-3.127
 <sys-apps/firejail-0.9.81
+<sys-fs/eudev-3.2.16

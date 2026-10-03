@@ -32,8 +32,10 @@ dev-lang/deno-bin
 #>=gnome-base/librsvg-2.41
 #>=x11-themes/adwaita-icon-theme-4
 
+# Mirror package.provided to have better errors when higher versions are pulled in
+virtual/tmpfiles
+virtual/secret-service
+
 # Try to avoid systemd-utils...
 sys-apps/systemd-utils
-sys-apps/systemd-tmpfiles
-sys-fs/udev
 >=sys-auth/elogind-255.18::gentoo  # Worked around by ebuild in ::without-systemd repo
