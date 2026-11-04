@@ -55,7 +55,7 @@ kde-frameworks/sonnet -hunspell
 x11-libs/agg -gpc
 media-plugins/frei0r-plugins -facedetect -scale0tilt
 app-i18n/fcitx -enchant
-app-editors/vim -crypt -sound
+app-editors/vim -crypt -sound -pango
 app-editors/gvim -crypt -sound
 sys-apps/man-db -manpager
 media-libs/mlt -gtk
@@ -138,3 +138,4 @@ dev-python/pyside -concurrent -dbus -gui -network -opengl -printsupport -qml -sq
 dev-python/pyqt6 -dbus -gui -network -printsupport -sql -widgets -xml -qml
 sci-libs/vtk -cgns -netcdf -rendering -truetype -views minimal
 media-libs/sdl2-mixer -fluidsynth -midi -mod -modplug
+net-misc/wget -psl

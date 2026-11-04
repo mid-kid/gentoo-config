@@ -1,0 +1,17 @@
+Disable "open this link" confirmation box
+
+This is one of those trends in security that ends up being annoying and nothing
+else.
+
+--- tdesktop-7.3.3-full.orig/Telegram/SourceFiles/core/click_handler_types.cpp
++++ tdesktop-7.3.3-full/Telegram/SourceFiles/core/click_handler_types.cpp
+@@ -193,8 +193,7 @@
+ [[nodiscard]] bool HiddenUrlRequiresConfirmation(
+ 		const QUrl &url,
+ 		const ClickHandlerContext &my) {
+-	return !HostInDomains(url.host(), WhitelistedDomains(my))
+-		|| IsTelegramShortLinkHost(url);
++	return false;
+ }
+ 
+ [[nodiscard]] bool IsWebAuthTokenPart(QStringView part) {
