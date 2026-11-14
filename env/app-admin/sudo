@@ -1,0 +1,6 @@
+declare -F post_pkg_preinst > /dev/null || post_pkg_preinst() { env-post_pkg_preinst; }
+env-post_pkg_preinst() {
+	elog '/etc/portage/env: Enable sudo for "wheel" user by default'
+	sed -e '/^## Uncomment to allow members of group wheel to execute any command$/{n;s/^# //}' \
+		-i "$ED/etc/sudoers" || die
+}
