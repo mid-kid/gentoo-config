@@ -1,5 +1,5 @@
 sys-apps/openrc sysv-utils  # Replace sys-apps/sysvinit
-sys-fs/eudev rule-generator  # Generate 70-persistent-net.rules
+sys-fs/eudev -predictable-ifnames rule-generator  # Alternative to predictable network names
 app-admin/sysklogd logrotate  # Install logrotate files
 app-admin/sudo offensive  # Scream at me mommy
 media-video/ffmpeg openssl vpx opus x264 x265  # Common formats
