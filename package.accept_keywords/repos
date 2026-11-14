@@ -16,3 +16,4 @@ net-dialup/tio::guru
 media-sound/tenacity::guru
 dev-python/internetarchive::guru
 dev-python/pillow-heif::guru
+sys-fs/eudev::without-systemd
