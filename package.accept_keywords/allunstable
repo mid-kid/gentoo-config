@@ -45,3 +45,7 @@ sci-electronics/sigrok-cli
 
 app-misc/piper
 dev-libs/libratbag
+
+app-editors/vim-classic-core
+app-editors/vim-classic
+app-editors/gvim-classic
