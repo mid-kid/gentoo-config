@@ -1,0 +1,37 @@
+# Minimum set of abi_x86 libraries for proprietary software/games
+
+# Required by steam:
+# - libGL.so.1
+media-libs/libglvnd abi_x86_32
+# - libdrm.so.2
+x11-libs/libdrm abi_x86_32
+# - libGLX_mesa.so.0
+media-libs/mesa abi_x86_32
+
+# Dependencies
+app-arch/bzip2 abi_x86_32
+app-arch/xz-utils abi_x86_32
+dev-libs/elfutils abi_x86_32
+dev-libs/expat abi_x86_32
+dev-libs/icu abi_x86_32
+dev-libs/libffi abi_x86_32
+dev-libs/libxml2 abi_x86_32
+dev-libs/wayland abi_x86_32
+dev-util/spirv-tools abi_x86_32
+llvm-core/llvm abi_x86_32
+media-libs/libdisplay-info abi_x86_32
+media-libs/libva abi_x86_32
+sys-libs/zlib-ng abi_x86_32
+virtual/libelf abi_x86_32
+virtual/zlib abi_x86_32
+x11-libs/libX11 abi_x86_32
+x11-libs/libXau abi_x86_32
+x11-libs/libXdmcp abi_x86_32
+x11-libs/libXext abi_x86_32
+x11-libs/libXfixes abi_x86_32
+x11-libs/libXrandr abi_x86_32
+x11-libs/libXrender abi_x86_32
+x11-libs/libXxf86vm abi_x86_32
+x11-libs/libxcb abi_x86_32
+x11-libs/libxshmfence abi_x86_32
+x11-libs/xcb-util-keysyms abi_x86_32
