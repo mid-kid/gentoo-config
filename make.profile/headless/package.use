@@ -1,6 +1,9 @@
 # System
 sys-apps/smartmontools daemon  # Have a daemon to tell me about drive issues
 
+# Headless java
+dev-java/openjdk headless-awt
+
 # Headless mpv
 media-video/mpv -X
 media-libs/mesa -X
@@ -9,3 +12,6 @@ media-libs/mesa -X
 dev-qt/qtbase -X -gui -widgets -libinput
 dev-qt/qttools -widgets -assistant
 net-p2p/qbittorrent -gui -dbus webui  # headless setup
+
+# More
+custom/romvault -gui
