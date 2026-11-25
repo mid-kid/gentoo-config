@@ -1,0 +1,6 @@
+# OpenRC user services require either elogind or sys-auth/pam_xdg.
+# Power button handling requires either elogind or sys-power/acpid.
+# Since elogind handles both, as well as inhibition from programs in the
+# current active seat, and I need it for desktop anyway, let's just use it to
+# provide these features in headless as well.
+USE="elogind"
