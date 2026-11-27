@@ -1,0 +1,41 @@
+Slight optimizations
+
+This patch used to be more substantial, but most of the optimizations got
+applied to portage proper, in one way or another.
+
+--- proj_portage.orig/bin/phase-functions.sh
++++ proj_portage/bin/phase-functions.sh
+@@ -262,6 +262,7 @@
+ 	local prior_depth
+ 
+ 	if declare -F "$1" >/dev/null; then
++		___EBUILD_UPDATE_ENV=1
+ 		# Count from zero while the phase function runs, so as to detect
+ 		# whether it calls ebegin without also calling eend.
+ 		prior_depth=${___state[ebegin-depth]}
+@@ -1079,6 +1080,7 @@
+ 
+ 	__source_all_bashrcs
+ 
++	___EBUILD_UPDATE_ENV=0
+ 	case ${1} in
+ 	nofetch)
+ 		__ebuild_phase_with_hooks pkg_nofetch
+@@ -1095,7 +1097,7 @@
+ 			__ebuild_phase_with_hooks pkg_${1}
+ 			set +x
+ 		fi
+-		if [[ -n ${PORTAGE_UPDATE_ENV} ]] ; then
++		if [[ ${___EBUILD_UPDATE_ENV} = 1 && -n ${PORTAGE_UPDATE_ENV} ]] ; then
+ 			# Update environment.bz2 in case installation phases
+ 			# need to pass some variables to uninstallation phases.
+ 			# Use safe cwd, avoiding unsafe import for bug #469338.
+@@ -1208,7 +1210,7 @@
+ 	esac
+ 
+ 	# Save the env only for relevant phases.
+-	if [[ $1 != @(clean|help|info|nofetch) ]]; then
++	if [[ ${___EBUILD_UPDATE_ENV} = 1 && $1 != @(clean|help|info|nofetch) ]]; then
+ 		umask 002
+ 
+ 		# Use safe cwd, avoiding unsafe import for bug #469338.

@@ -1,0 +1,16 @@
+Store build and install directory sizes in package metadata
+
+These stats are interesting to aggregate across packages, without having to
+parse build logs, which really weren't made to be kept like this.
+
+--- proj_portage.orig/bin/phase-functions.sh
++++ proj_portage/bin/phase-functions.sh
+@@ -732,6 +732,8 @@
+ 		}
+ 		einfo "Final size of build directory: ${ size "${nsz}" "${isz}"; }"
+ 		einfo "Final size of installed tree:  ${ size "${isz}" "${nsz}"; }"
++		printf '%s\n' "${nsz}" > "${PORTAGE_BUILDDIR}"/build-info/NSIZE
++		printf '%s\n' "${isz}" > "${PORTAGE_BUILDDIR}"/build-info/ISIZE
+ 	)
+ 	__vecho
+ 
