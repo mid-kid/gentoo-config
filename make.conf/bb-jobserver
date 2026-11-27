@@ -2,3 +2,6 @@
 FEATURES="$FEATURES jobserver-token"
 NINJAOPTS="-l$__LPROC"  # If left empty, the -jN from MAKEOPTS would be passed
 MAKEFLAGS="-l$__LPROC --jobserver-auth=fifo:/dev/steve"
+
+# Running emerge with jobserver support in a fresh chroot:
+# MAKEFLAGS=--jobserver-auth=fifo:/dev/steve SANDBOX_WRITE=/dev/steve FEATURES=jobserver-token emerge -j ...
