@@ -1,0 +1,2 @@
+# Allow more parallelism when using --jobs
+FEATURES="$FEATURES parallel-install"
